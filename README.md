@@ -8,6 +8,6 @@
 # Commands
 
 ```shell
-_ rm -rf /root/.cache && _ nixos-rebuild switch --flake 'git+https://git.frsqr.xyz/averyanalex/nixos.git?ref=main'
+_ rm -rf /root/.cache && _ nixos-rebuild switch --flake github:averyanalex/nixcfg
 nix flake update --commit-lock-file
 ```
