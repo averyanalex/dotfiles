@@ -1,11 +1,13 @@
-{ modulesPath, ... }:
+{ inputs, modulesPath, ... }:
 
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../hardware/physical.nix
-    ../../hardware/sdboot.nix
-  ];
+  ] ++ (with inputs.self.nixosModules.hardware; [
+    physical
+    sdboot
+    cpu.intel
+  ]);
 
   # Storage
   boot.initrd.availableKernelModules = [
@@ -23,9 +25,4 @@
     "dm-mirror"
   ];
   services.lvm.boot.thin.enable = true;
-
-  # Intel
-  boot.kernelModules = [ "kvm-intel" ];
-  hardware.enableRedistributableFirmware = true;
-  hardware.cpu.intel.updateMicrocode = true;
 }

@@ -1,12 +1,14 @@
-{ modulesPath, ... }:
+{ inputs, modulesPath, ... }:
 
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../hardware/physical.nix
-    ../../hardware/amdgpu.nix
-    ../../hardware/sdboot.nix
-  ];
+  ] ++ (with inputs.self.nixosModules.hardware; [
+    physical
+    sdboot
+    cpu.amd
+    gpu.amd
+  ]);
 
   # Storage
   boot.initrd.availableKernelModules = [
@@ -19,12 +21,6 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-
-  # AMD
-  boot.kernelModules = [ "kvm-amd" ];
-  hardware.enableRedistributableFirmware = true;
-  hardware.cpu.amd.updateMicrocode = true;
-  powerManagement.cpuFreqGovernor = "schedutil";
 
   # Screen
   boot.kernelParams = [

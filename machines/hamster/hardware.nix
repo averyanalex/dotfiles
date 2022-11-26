@@ -1,12 +1,14 @@
-{ modulesPath, ... }:
+{ inputs, modulesPath, ... }:
 
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../hardware/physical.nix
-    ../../hardware/intelgpu.nix
-    ../../hardware/sdboot.nix
-  ];
+  ] ++ (with inputs.self.nixosModules.hardware; [
+    physical
+    sdboot
+    cpu.intel
+    gpu.intel
+  ]);
 
   # Storage
   boot.initrd.availableKernelModules = [
@@ -24,10 +26,5 @@
   hardware.sensor.iio.enable = true;
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
-
-  # Intel
-  boot.kernelModules = [ "kvm-intel" ];
-  hardware.enableRedistributableFirmware = true;
-  hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "powersave";
 }

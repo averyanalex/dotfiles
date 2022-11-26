@@ -45,11 +45,11 @@
                 value = builtins.listToAttrs (findModules (dir + "/${name}"));
               }])
           (builtins.readDir dir)));
-
     in
     {
       nixosModules.modules = builtins.listToAttrs (findModules ./modules);
       nixosModules.profiles = builtins.listToAttrs (findModules ./profiles);
+      nixosModules.hardware = builtins.listToAttrs (findModules ./hardware);
       nixosModules.roles = import ./roles;
 
       nixosConfigurations = with nixpkgs.lib;
