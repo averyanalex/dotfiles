@@ -6,7 +6,7 @@ let
   hamster = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN/Mu9oGr3VFS+GMBNPASaoMyiMO1G8T4fUKjJJpy30";
   desktops = [ alligator hamster ];
 
-  hawk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBXZJp34uKHduri917u3WDWnt8LRc+2phCDIV0AhdBrQ";
+  hawk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGNROiWZEvzjR6TVoeVrVoUI2Vsx3wmJSb9QojvdLK0e";
   whale = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtyxNV8IPSMHudJrMbemcK82LosU9tdNDV2rhf0Z9ps";
   servers = [ hawk whale ];
 
