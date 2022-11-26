@@ -1,6 +1,5 @@
 { inputs, ... }: {
   imports = (with inputs.self.nixosModules.modules; [
-    nebula-averyan
     persist
   ]) ++ (with inputs.self.nixosModules.profiles;
     with shell; [
@@ -20,7 +19,6 @@
       dns
       home
       locale
-      nebula-averyan
       nix
       nur
       persist
