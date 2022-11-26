@@ -90,6 +90,7 @@ in
       mkdir -p /mnt-root/nix
       mount --bind /mnt-root${cfg.persistRoot}/nix /mnt-root/nix
       chmod 755 /mnt-root
+      mkdir -p /mnt-root${cfg.persistRoot}/etc/ssh
     '';
   };
 }
