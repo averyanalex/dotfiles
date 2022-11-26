@@ -1,0 +1,5 @@
+pipeline:
+  test:
+    image: nixpkgs/nix-flakes:nixos-22.05
+    commands:
+      - nix flake check
