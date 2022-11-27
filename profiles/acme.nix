@@ -21,4 +21,6 @@
       };
     };
   };
+
+  persist.state.dirs = [{ directory = "/var/lib/acme"; user = "acme"; group = "acme"; mode = "u=rwx,g=rx,o=rx"; }];
 }
