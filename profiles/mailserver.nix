@@ -27,6 +27,29 @@
 
     dkimKeyBits = 2048;
 
+    mailboxes = {
+      Trash = {
+        auto = "create";
+        specialUse = "Trash";
+      };
+      Archive = {
+        auto = "create";
+        specialUse = "Archive";
+      };
+      Junk = {
+        auto = "subscribe";
+        specialUse = "Junk";
+      };
+      Drafts = {
+        auto = "subscribe";
+        specialUse = "Drafts";
+      };
+      Sent = {
+        auto = "subscribe";
+        specialUse = "Sent";
+      };
+    };
+
     loginAccounts = {
       "alex@averyan.ru" = {
         hashedPasswordFile = config.age.secrets.mail-alex.path;
