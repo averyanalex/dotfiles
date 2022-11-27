@@ -14,6 +14,7 @@ let
 in
 {
   "secrets/passwords/alex.age".publicKeys = users ++ systems;
+  "secrets/mail/alex.age".publicKeys = users ++ [ hawk ];
 
   "secrets/creds/cloudflare.age".publicKeys = users ++ [ hawk ];
 

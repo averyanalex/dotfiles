@@ -26,7 +26,15 @@
     keyFile = config.security.acme.certs."averyan.ru".directory + "/key.pem";
 
     dkimKeyBits = 2048;
+
+    loginAccounts = {
+      "alex@averyan.ru" = {
+        hashedPasswordFile = config.age.secrets.mail-alex.path;
+      };
+    };
   };
+
+  age.secrets.mail-alex.file = ../secrets/mail/alex.age;
 
   persist.state.dirs = [
     { directory = "/var/dkim"; user = "opendkim"; group = "opendkim"; mode = "u=rwx,g=rx,o=rx"; }
