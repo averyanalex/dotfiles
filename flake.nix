@@ -17,6 +17,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.05";
+      inputs.nixpkgs-22_05.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     prismlauncher = {
       url = "github:PrismLauncher/PrismLauncher";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

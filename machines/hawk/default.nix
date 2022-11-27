@@ -4,8 +4,10 @@
   imports = [
     inputs.self.nixosModules.roles.server
     inputs.self.nixosModules.hardware.aeza
-    inputs.self.nixosModules.profiles.acme
     ./mounts.nix
+
+    inputs.self.nixosModules.profiles.acme
+    inputs.self.nixosModules.profiles.mailserver
   ];
 
   system.stateVersion = "22.05";
