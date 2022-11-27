@@ -17,6 +17,7 @@
       agenix
       apparmor
       boot
+      dhcp
       dns
       home
       locale
