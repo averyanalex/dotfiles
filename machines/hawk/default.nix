@@ -4,6 +4,7 @@
   imports = [
     inputs.self.nixosModules.roles.server
     inputs.self.nixosModules.hardware.aeza
+    inputs.self.nixosModules.profiles.acme
     ./mounts.nix
   ];
 
