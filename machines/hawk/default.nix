@@ -6,8 +6,8 @@
     inputs.self.nixosModules.hardware.aeza
     ./mounts.nix
 
-    inputs.self.nixosModules.profiles.acme
-    inputs.self.nixosModules.profiles.mailserver
+    inputs.self.nixosModules.profiles.server.acme
+    inputs.self.nixosModules.profiles.server.mail
   ];
 
   system.stateVersion = "22.05";
