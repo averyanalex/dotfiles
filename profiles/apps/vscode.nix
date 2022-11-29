@@ -11,50 +11,46 @@
       package = pkgs.unstable.vscodium;
       mutableExtensionsDir = false;
       extensions = with pkgs.unstable.vscode-extensions; [
-        serayuzgur.crates
-        jnoortheen.nix-ide
         bradlc.vscode-tailwindcss
-        editorconfig.editorconfig
         dbaeumer.vscode-eslint
+        editorconfig.editorconfig
         esbenp.prettier-vscode
+        gruntfuggly.todo-tree
+        jnoortheen.nix-ide
         ms-python.python
         ms-toolsai.jupyter
+        serayuzgur.crates
+        tyriar.sort-lines
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "svelte-vscode";
           publisher = "svelte";
-          version = "105.20.0";
-          sha256 = "+vYNgKVuknPROKTMMHugc9VrvYZ7GONr5SgYsb7l5rs=";
-        }
-        {
-          name = "vscode-todo-highlight";
-          publisher = "wayou";
-          version = "1.0.5";
-          sha256 = "CQVtMdt/fZcNIbH/KybJixnLqCsz5iF1U0k+GfL65Ok=";
+          version = "106.2.0";
+          sha256 = "ULLDfiYU7mAneth22/F4PJ9Q70Dq1gsJglb920WriBI=";
         }
         {
           name = "gitlab-workflow";
           publisher = "GitLab";
-          version = "3.47.2";
-          sha256 = "VeL3yvfaNIHUPaZHDxSE8pbdh4c93uMjhSMv2PWR6ts=";
+          version = "3.57.1";
+          sha256 = "zdhhH8ebSq6e+Y9kL+v0Br3lao0ZSEbXxCK9pw2tSFM=";
         }
         {
           name = "even-better-toml";
           publisher = "tamasfe";
-          version = "0.18.1";
-          sha256 = "dTFIlNp3VUxS7r7g8ZwsEMeT5QSCS3kHN/LPtsHWrZ8=";
+          version = "0.19.0";
+          sha256 = "MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU=";
         }
         {
           name = "rust-analyzer";
           publisher = "rust-lang";
-          version = "0.4.1181";
-          sha256 = "9uAwNQ/LyewhwJ19IMnD4bnpRW5kN470hnnJNI3awEU=";
+          version = "0.4.1302";
+          sha256 = "QfnQV0hTdcghdIB3LWcoHiQ56LjMo4dmO09AjxtjEzE=";
         }
         {
           name = "direnv";
           publisher = "mkhl";
-          version = "0.6.1";
-          sha256 = "5/Tqpn/7byl+z2ATflgKV1+rhdqj+XMEZNbGwDmGwLQ=";
+          version = "0.10.1";
+          sha256 = "Da9Anme6eoKLlkdYaeLFDXx0aQgrtepuUnw2jEPXCVU=";
         }
         {
           name = "autodocstring";
@@ -66,7 +62,7 @@
       userSettings = {
         "nix.enableLanguageServer" = true;
         "svelte.enable-ts-plugin" = true;
-        "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+        "rust-analyzer.server.path" = "${pkgs.unstable.rust-analyzer}/bin/rust-analyzer";
 
         "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
 
@@ -74,12 +70,14 @@
           "strings" = true;
         };
 
+        "sortLines.filterBlankLines" = true;
+
         "files.autoSave" = "afterDelay";
         "diffEditor.ignoreTrimWhitespace" = false;
 
+        "git.autofetch" = true;
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
-        "git.autofetch" = true;
 
         "terminal.integrated.fontFamily" = "MesloLGS NF";
       };

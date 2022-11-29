@@ -6,6 +6,7 @@
     with shell; [
       gpg
       zsh
+
       direnv
       exa
       fzf
