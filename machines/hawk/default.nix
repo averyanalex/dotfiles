@@ -7,6 +7,7 @@
     ./mounts.nix
 
     inputs.self.nixosModules.profiles.server.acme
+    inputs.self.nixosModules.profiles.server.blog
     inputs.self.nixosModules.profiles.server.mail
     inputs.self.nixosModules.profiles.server.nginx
   ];

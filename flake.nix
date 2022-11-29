@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence.url = "github:nix-community/impermanence";
+
+    nur.url = "github:nix-community/NUR";
+
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.05";
       inputs.nixpkgs-22_05.follows = "nixpkgs";
@@ -28,9 +32,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
-
-    nur.url = "github:nix-community/NUR";
+    averyanalex-blog.url = "github:averyanalex/blog";
   };
 
   outputs = { self, nixpkgs, flake-utils, agenix, ... }@inputs:
