@@ -57,7 +57,7 @@
     };
   };
 
-  age.secrets.mail-alex.file = ../secrets/mail/alex.age;
+  age.secrets.mail-alex.file = ../../secrets/mail/alex.age;
 
   persist.state.dirs = [
     { directory = "/var/dkim"; user = "opendkim"; group = "opendkim"; mode = "u=rwx,g=rx,o=rx"; }
