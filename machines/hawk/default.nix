@@ -8,6 +8,7 @@
 
     inputs.self.nixosModules.profiles.server.acme
     inputs.self.nixosModules.profiles.server.mail
+    inputs.self.nixosModules.profiles.server.nginx
   ];
 
   system.stateVersion = "22.05";
