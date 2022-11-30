@@ -25,6 +25,7 @@
     ]) ++ [
       sway
 
+      adb
       autologin
       flatpak
       kernel
