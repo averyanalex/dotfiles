@@ -29,6 +29,7 @@
       autologin
       flatpak
       kernel
+      mail
       music
       nebula-frsqr
       pipewire

@@ -13,7 +13,10 @@ let
   systems = desktops ++ servers;
 in
 {
+  "secrets/accounts/mail.age".publicKeys = users ++ desktops;
+
   "secrets/passwords/alex.age".publicKeys = users ++ systems;
+
   "secrets/mail/alex.age".publicKeys = users ++ [ hawk ];
 
   "secrets/creds/cloudflare.age".publicKeys = users ++ [ hawk ];
