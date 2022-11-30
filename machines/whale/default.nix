@@ -9,6 +9,7 @@ in
     inputs.self.nixosModules.roles.server
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.server.pgsql
+    inputs.self.nixosModules.profiles.server.qbit
     ./hardware.nix
     ./mounts.nix
   ];
