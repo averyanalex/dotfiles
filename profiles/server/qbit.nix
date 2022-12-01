@@ -14,5 +14,5 @@
     };
   };
 
-  persist.state.homeDirs = [ ".config/qBittorrent" ];
+  persist.state.homeDirs = [ ".config/qBittorrent" ".local/share/qBittorrent" ];
 }
