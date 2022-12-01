@@ -102,21 +102,6 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
-      "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -193,31 +178,6 @@
         "ref": "nixos-22.05",
         "repo": "nixos-mailserver",
         "type": "gitlab"
-      }
-    },
-    "nix-on-droid": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1658777837,
-        "narHash": "sha256-12rIm639nXldGgyc1uPbF/oz2jTrpgl8zvqxrIq+Jek=",
-        "owner": "t184256",
-        "repo": "nix-on-droid",
-        "rev": "d49fd3a0c874d34a3c3f33fa73cd7a364a1332e3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "t184256",
-        "ref": "release-22.05",
-        "repo": "nix-on-droid",
-        "type": "github"
       }
     },
     "nixpkgs": {
@@ -314,7 +274,6 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "mailserver": "mailserver",
-        "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",

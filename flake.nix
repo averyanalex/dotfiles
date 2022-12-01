@@ -17,12 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-on-droid = {
-      url = "github:t184256/nix-on-droid/release-22.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     impermanence.url = "github:nix-community/impermanence";
 
     nur.url = "github:nix-community/NUR";
@@ -41,7 +35,7 @@
     averyanalex-blog.url = "github:averyanalex/blog";
   };
 
-  outputs = { self, nixpkgs, flake-utils, agenix, nix-on-droid, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, agenix, ... }@inputs:
     let
       findModules = dir:
         builtins.concatLists (builtins.attrValues (builtins.mapAttrs
@@ -84,11 +78,6 @@
             };
         in
         genAttrs hosts mkHost;
-
-      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-        config = ./nod;
-        system = "aarch64-linux";
-      };
     } // flake-utils.lib.eachSystem (with flake-utils.lib.system; [ x86_64-linux aarch64-linux ])
       (system:
         let
