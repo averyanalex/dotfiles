@@ -43,4 +43,6 @@
       };
     };
   };
+
+  persist.state.homeDirs = [ ".thunderbird" ];
 }
