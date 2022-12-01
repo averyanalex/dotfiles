@@ -21,4 +21,7 @@
       ];
     };
   };
+
+  persist.state.homeDirs = [{ directory = ".gnupg"; mode = "u=rwx,g=,o="; }];
 }
+ 

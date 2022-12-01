@@ -17,28 +17,30 @@
 
       imap = {
         host = "hawk.averyan.ru";
+        port = 993;
       };
       smtp = {
         host = "hawk.averyan.ru";
+        port = 465;
       };
 
       gpg = {
-        key = "6AF4D168E4B6C49A";
+        key = "3C23C7BD99452036";
         signByDefault = true;
       };
 
-      # thunderbird.enable = true;
+      thunderbird.enable = true;
     };
 
-    # programs.thunderbird = {
-    #   enable = true;
-    #   profiles.main = {
-    #     name = "Main";
-    #     isDefault = true;
-    #   };
-    #   settings = {
-    #     "privacy.donottrackheader.enabled" = true;
-    #   };
-    # };
+    programs.thunderbird = {
+      enable = true;
+      profiles.default = {
+        isDefault = true;
+        withExternalGnupg = true;
+      };
+      settings = {
+        "privacy.donottrackheader.enabled" = true;
+      };
+    };
   };
 }

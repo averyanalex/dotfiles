@@ -8,7 +8,6 @@
         "Documents"
         "projects"
         ".ssh"
-        ".gnupg"
       ];
     };
     cache.homeDirs = [ ".cache" ];

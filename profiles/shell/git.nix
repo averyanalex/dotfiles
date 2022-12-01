@@ -8,7 +8,7 @@
 
     signing = {
       signByDefault = true;
-      key = "6AF4D168E4B6C49A";
+      key = "3C23C7BD99452036";
     };
 
     extraConfig = {
