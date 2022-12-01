@@ -2,7 +2,7 @@
   description = "AveryanAlex's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -13,7 +13,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -22,8 +22,8 @@
     nur.url = "github:nix-community/NUR";
 
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.05";
-      inputs.nixpkgs-22_05.follows = "nixpkgs";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      inputs.nixpkgs-22_11.follows = "nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 

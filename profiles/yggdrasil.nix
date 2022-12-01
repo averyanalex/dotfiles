@@ -5,7 +5,7 @@
     group = "wheel";
     # package = pkgs.unstable.yggdrasil;
     persistentKeys = true;
-    config = {
+    settings = {
       Peers = [
         "tls://ygg.averyan.ru:8362"
       ];

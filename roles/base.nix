@@ -26,8 +26,10 @@
       nix
       nur
       persist
+      polkit
       ssh-server
       sudo
+      unsecure
       unstable
       userdirs
       users
