@@ -9,6 +9,7 @@ in
     inputs.self.nixosModules.roles.server
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.server.pgsql
+    inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
     ./hardware.nix
     ./mounts.nix
@@ -119,6 +120,7 @@ in
         table ip nat {
           chain prerouting {
             type nat hook prerouting priority dstnat; policy accept;
+            ip daddr 10.5.3.20 tcp dport 9041 dnat to 192.168.12.20
           }
 
           chain postrouting {
