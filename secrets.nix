@@ -10,7 +10,10 @@ let
   whale = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtyxNV8IPSMHudJrMbemcK82LosU9tdNDV2rhf0Z9ps";
   servers = [ hawk whale ];
 
-  systems = desktops ++ servers;
+  cpmdesk-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjkfDuT/ilCXUHDBiVh4sxnYVmDSJzrYuj5DcD2HlbX";
+  cpmdesks = [ cpmdesk-1 ];
+
+  systems = desktops ++ servers ++ cpmdesks;
 in
 {
   "secrets/accounts/mail.age".publicKeys = users ++ desktops;
@@ -32,6 +35,8 @@ in
   "secrets/nebula/hawk-key.age".publicKeys = users ++ [ hawk ];
   "secrets/nebula/whale-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/whale-key.age".publicKeys = users ++ [ whale ];
+  "secrets/nebula/cpmdesk-1-crt.age".publicKeys = users ++ systems;
+  "secrets/nebula/cpmdesk-1-key.age".publicKeys = users ++ [ cpmdesk-1 ];
 
   "secrets/nebula-frsqr/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula-frsqr/whale-crt.age".publicKeys = users ++ systems;
