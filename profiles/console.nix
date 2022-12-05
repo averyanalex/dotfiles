@@ -1,6 +1,7 @@
 {
   console = {
-    font = "Lat2-Terminus16";
+    earlySetup = true;
+    font = "cyr-sun16";
     keyMap = "us";
   };
 }
