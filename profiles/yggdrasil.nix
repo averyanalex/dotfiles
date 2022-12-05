@@ -1,21 +1,15 @@
 { lib, pkgs, ... }:
 {
-  services.yggdrasil = {
+  services.av-yggdrasil = {
     enable = true;
-    group = "wheel";
-    # persistentKeys = true;
+    persistentKeys = true;
+    keysPath = "/persist/etc/yggdrasil/keys.json";
     settings = {
       Peers = [
         "tls://ygg.averyan.ru:8362"
       ];
       IfName = "ygg0";
     };
+    denyDhcpcdInterfaces = [ "ygg0" ];
   };
-
-  systemd.services.yggdrasil = {
-    wants = [ "systemd-tmpfiles-setup.service" ];
-    after = [ "systemd-tmpfiles-setup.service" ];
-  };
-
-  # persist.state.dirs = [ "/var/lib/yggdrasil" ];
 }

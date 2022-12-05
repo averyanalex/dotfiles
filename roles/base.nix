@@ -2,6 +2,7 @@
   imports = (with inputs.self.nixosModules.modules; [
     nebula-averyan
     persist
+    yggdrasil
   ]) ++ (with inputs.self.nixosModules.profiles;
     with shell; [
       gpg
