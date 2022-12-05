@@ -36,6 +36,7 @@
       unstable
       userdirs
       users
+      vmvariant
       xdg
       yggdrasil
     ]);
