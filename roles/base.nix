@@ -19,10 +19,11 @@
       agenix
       apparmor
       boot
+      console
       dhcp
       dns
+      enloc
       home
-      locale
       nebula-averyan
       nix
       nur
@@ -30,6 +31,7 @@
       polkit
       ssh-server
       sudo
+      timezone
       unsecure
       unstable
       userdirs
