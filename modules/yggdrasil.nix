@@ -138,7 +138,7 @@ in
 
         preStart =
           (if settingsProvided || configFileProvided || cfg.persistentKeys then
-            ''mkdir --mode=700 /run/yggdrasil
+            ''mkdir --mode=700 -p /run/yggdrasil
             echo ''
 
             + (lib.optionalString settingsProvided
