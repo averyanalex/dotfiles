@@ -5,16 +5,19 @@
     enable = true;
     permitRootLogin = "no";
     passwordAuthentication = false;
+    hostKeys = [
+      {
+        bits = 4096;
+        path = "/persist/etc/ssh/ssh_host_rsa_key";
+        type = "rsa";
+      }
+      {
+        path = "/persist/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+    ];
   };
 
   environment.systemPackages = [ pkgs.mosh ];
   networking.firewall.allowedUDPPortRanges = [{ from = 60000; to = 61000; }];
-
-  persist.state.dirs = [ "/etc/ssh" ];
-
-  # hack for agenix
-  fileSystems."/etc/ssh" = {
-    depends = [ "/persist" ];
-    neededForBoot = true;
-  };
 }
