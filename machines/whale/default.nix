@@ -11,6 +11,7 @@ in
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
+    inputs.self.nixosModules.profiles.tanksrv
     ./hardware.nix
     ./mounts.nix
   ];
@@ -81,6 +82,8 @@ in
 
             iifname lo counter accept comment "accept any localhost traffic"
             tcp dport 22 counter accept comment "ssh"
+            iifname "nebula.averyan" tcp dport 2049 counter accept comment "nfs tcp"
+            iifname "nebula.averyan" udp dport 2049 counter accept comment "nfs udp"
             iifname "nebula.frsqr" tcp dport 9100 counter accept comment "node exporter"
             udp dport 60000-61000 counter accept comment "mosh"
 

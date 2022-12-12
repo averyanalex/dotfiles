@@ -8,7 +8,7 @@
     mountConfig = {
       Options = "noatime";
     };
-    what = "10.5.3.30:/tank";
+    what = "10.5.3.20:/tank";
     where = "/tank";
     after = [ "nebula@averyan.service" ];
     wants = [ "nebula@averyan.service" ];
