@@ -15,6 +15,7 @@
     gc = {
       automatic = true;
       dates = "04:15";
+      options = "--delete-older-than 7d";
     };
 
     daemonIOSchedClass = "best-effort";
