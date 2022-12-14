@@ -33,6 +33,7 @@
       music
       nebula-frsqr
       pipewire
+      podman
       sync
       tank
       waydroid
