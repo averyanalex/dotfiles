@@ -10,12 +10,12 @@ in
     home.packages = [ prismlauncher ];
   };
 
-  services.syncthing.folders."PolyMC" = {
-    id = "polymc";
-    path = "/home/alex/.local/share/PolyMC";
+  services.syncthing.folders."PrismLauncher" = {
+    id = "prismlauncher";
+    path = "/home/alex/.local/share/PrismLauncher";
     ignorePerms = false;
     devices = [ "hamster" "alligator" ];
   };
 
-  persist.state.homeDirs = [ ".local/share/PolyMC" ];
+  persist.state.homeDirs = [ ".local/share/PrismLauncher" ];
 }
