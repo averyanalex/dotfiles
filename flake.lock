@@ -27,11 +27,11 @@
         "stack": "stack"
       },
       "locked": {
-        "lastModified": 1671107790,
-        "narHash": "sha256-dXUD7zHdkVlQYj4dHPPyqV3s9uVfN0lLrKgqLX9wEQE=",
+        "lastModified": 1671131086,
+        "narHash": "sha256-sW0gNLbiFaQs4WWpqhDGNdvX/jcOSSnkMkVVKzXveB0=",
         "owner": "averyanalex",
         "repo": "blog",
-        "rev": "7524c85539380c3df64fa8e3d889031face665dd",
+        "rev": "5e03eb3d9167d183130ee2efbe4e4175540954da",
         "type": "github"
       },
       "original": {
@@ -199,11 +199,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1670929434,
-        "narHash": "sha256-n5UBO6XBV4h3TB7FYu2yAuNQMEYOrQyKeODUwKe06ow=",
+        "lastModified": 1671021324,
+        "narHash": "sha256-MDB6TncBzBCvAgQmjNn14VIaO5wdbxExp8NGP990Udk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1710ed1f6f8ceb75cf7d1cf55ee0cc21760e1c7a",
+        "rev": "62433a4892603c523840a67e50b6631c37adb928",
         "type": "github"
       },
       "original": {
@@ -254,11 +254,11 @@
         "tomlplusplus": "tomlplusplus"
       },
       "locked": {
-        "lastModified": 1671056121,
-        "narHash": "sha256-nB9Zu/PfMpVvXMNRzY2AxtiVuKzQHJ6fmCmucF1ZnXE=",
+        "lastModified": 1671119728,
+        "narHash": "sha256-2mdrva0hYbvsTIpTJu3nnov1psi3cFPGb0eRKsCFDMM=",
         "owner": "PrismLauncher",
         "repo": "PrismLauncher",
-        "rev": "d193ed9eebb392b259edb88a227dce4cee773df6",
+        "rev": "fdac978c842ed3a2ddec61603011abb881305a3a",
         "type": "github"
       },
       "original": {
