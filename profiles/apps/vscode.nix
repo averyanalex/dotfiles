@@ -20,6 +20,7 @@
         ms-python.python
         ms-toolsai.jupyter
         serayuzgur.crates
+        stkb.rewrap
         tyriar.sort-lines
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
