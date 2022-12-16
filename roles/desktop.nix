@@ -26,6 +26,7 @@
       sway
 
       adb
+      arduino
       autologin
       flatpak
       kernel
