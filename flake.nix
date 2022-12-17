@@ -88,6 +88,7 @@
             buildInputs = [
               agenix.defaultPackage.${system}
               pkgs.nebula
+              pkgs.wireguard-tools
             ];
           };
         });
