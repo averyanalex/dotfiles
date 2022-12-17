@@ -18,6 +18,7 @@
     ] ++ [
       agenix
       apparmor
+      autoupgrade
       boot
       console
       dhcp
