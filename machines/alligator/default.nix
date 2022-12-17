@@ -11,7 +11,7 @@
   system.stateVersion = "22.05";
 
   networking = {
-    firewall.enable = false;
+    firewall.allowedTCPPorts = [ 25565 ];
 
     defaultGateway = {
       address = "192.168.3.1";

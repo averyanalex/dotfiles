@@ -25,6 +25,7 @@
       enloc
       home
       nebula-averyan
+      nftables
       nix
       nur
       persist

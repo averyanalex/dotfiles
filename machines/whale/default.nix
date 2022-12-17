@@ -64,74 +64,12 @@ in
   networking = {
     hostName = "whale";
 
-    firewall.enable = false;
-    nftables = {
-      enable = true;
-      ruleset = ''
-        table inet filter {
-          chain output {
-            type filter hook output priority 100;
-            accept
-          }
-
-          chain input {
-            type filter hook input priority 0;
-
-            ct state invalid counter drop comment "drop invalid packets"
-            ct state { established, related } counter accept comment "accept traffic originated from us"
-
-            iifname lo counter accept comment "accept any localhost traffic"
-            tcp dport 22 counter accept comment "ssh"
-            iifname "nebula.averyan" tcp dport 2049 counter accept comment "nfs tcp"
-            iifname "nebula.averyan" udp dport 2049 counter accept comment "nfs udp"
-            iifname "nebula.frsqr" tcp dport 9100 counter accept comment "node exporter"
-            udp dport 60000-61000 counter accept comment "mosh"
-
-            ip6 nexthdr icmpv6 icmpv6 type {
-              destination-unreachable,
-              packet-too-big,
-              time-exceeded,
-              parameter-problem,
-              nd-router-advert,
-              nd-neighbor-solicit,
-              nd-neighbor-advert
-            } counter accept comment "icmpv6"
-            ip protocol icmp icmp type {
-              destination-unreachable,
-              router-advertisement,
-              time-exceeded,
-              parameter-problem
-            } counter accept comment "icmpv4"
-
-            ip6 nexthdr icmpv6 icmpv6 type echo-request counter accept comment "pingv6"
-            ip protocol icmp icmp type echo-request counter accept comment "pingv4"
-
-            counter drop
-          }
-
-          chain forward {
-            type filter hook forward priority 0;
-
-            iifname { "${lan}", "vm0" } oifname "${wan}" counter accept comment "allow LAN to WAN"
-            iifname "${wan}" oifname { "${lan}", "vm0" } ct state { established, related } counter accept comment "allow established back to LAN"
-
-            # ct status dnat counter accept comment "allow dnat forwarding"
-            counter drop
-          }
-        }
-
-        table ip nat {
-          chain prerouting {
-            type nat hook prerouting priority dstnat; policy accept;
-            ip daddr 10.5.3.20 tcp dport 9041 dnat to 192.168.12.20
-          }
-
-          chain postrouting {
-            type nat hook postrouting priority srcnat; policy accept;
-            oifname "${wan}" masquerade
-          }
-        }
-      '';
+    nft-firewall = {
+      extraFilterForwardRules = [
+        ''iifname { "${lan}", "vm0" } oifname "${wan}" counter accept comment "allow LAN to WAN"''
+        ''iifname "${wan}" oifname { "${lan}", "vm0" } ct state { established, related } counter accept comment "allow established back to LAN"''
+      ];
+      extraNatPostroutingRules = [ ''oifname "${wan}" masquerade'' ];
     };
 
     bridges = {
