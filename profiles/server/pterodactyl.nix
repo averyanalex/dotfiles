@@ -125,7 +125,7 @@
             environmentFiles = [ "/run/panel.env" ];
           };
           wings = {
-            image = "ghcr.io/pterodactyl/wings:v1.11.0";
+            image = "ghcr.io/averyanalex/wings:v1.11.0-np";
             volumes = [
               "/var/run/docker.sock:/var/run/docker.sock"
               "/var/lib/docker/containers/:/var/lib/docker/containers/"
