@@ -186,6 +186,8 @@ in
         chain forward {
           type filter hook forward priority 0;
 
+          ct status dnat counter accept comment "allow dnat forwarding"
+
           ${concatStringsSep "\n" nft-cfg.extraFilterForwardRules}
 
           counter drop

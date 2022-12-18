@@ -38,6 +38,10 @@
         "iifname wg0 oifname ens3 counter accept"
         "iifname ens3 oifname wg0 ct state { established, related } counter accept"
       ];
+      extraNatPreroutingRules = [
+        "ip daddr 185.112.83.99 tcp dport 25000-25100 dnat to 10.8.7.80"
+        "ip daddr 185.112.83.99 udp dport 25000-25100 dnat to 10.8.7.80"
+      ];
       extraNatPostroutingRules = [ "oifname ens3 masquerade" ];
     };
 
@@ -50,9 +54,14 @@
         privateKeyFile = config.age.secrets.wg-key.path;
         peers = [
           {
-            # POCOFT
+            # Pocoft
             publicKey = "9vFNcLY6iWyHToTduhYD5m5Kj7v4RfERqC0pIWphsgU=";
             allowedIPs = [ "10.8.7.2/32" ];
+          }
+          {
+            # Pterodactyl (Whale)
+            publicKey = "yZxLSiGRW5kqk3qT4Yvei732+i2UWLA4fS/H6AJbPVY=";
+            allowedIPs = [ "10.8.7.80/32" ];
           }
         ];
       };

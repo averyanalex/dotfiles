@@ -26,6 +26,7 @@ in
   "secrets/creds/cloudflare.age".publicKeys = users ++ [ hawk ];
 
   "secrets/wireguard/hawk.age".publicKeys = users ++ [ hawk ];
+  "secrets/wireguard/pterodactyl.age".publicKeys = users ++ [ whale ];
 
   "secrets/nebula/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/ca-key.age".publicKeys = users;
