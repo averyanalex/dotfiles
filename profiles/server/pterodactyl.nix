@@ -57,6 +57,7 @@
           address = "10.8.7.1";
           interface = "wg-pterodactyl";
         };
+        firewall.enable = false;
       };
 
       virtualisation.docker = {
