@@ -27,6 +27,17 @@
       chown 84:84 /persist/ptero/mysql
       chmod 700 /persist/ptero/mysql
 
+      mkdir -p /persist/ptero/wings
+      chown 988:988 /persist/ptero/wings
+      chmod 700 /persist/ptero/wings
+
+      mkdir -p /persist/ptero/wings-configs
+      chown 988:988 /persist/ptero/wings-configs
+      chmod 700 /persist/ptero/wings-configs
+
+      mkdir -p /persist/ptero/docker
+      chmod 710 /persist/ptero/docker
+
       mkdir -p /persist/ptero/panel
     '';
   };
@@ -50,6 +61,18 @@
       };
       "/srv/pterodactyl/" = {
         hostPath = "/persist/ptero/panel";
+        isReadOnly = false;
+      };
+      "/var/lib/pterodactyl/" = {
+        hostPath = "/persist/ptero/wings";
+        isReadOnly = false;
+      };
+      "/etc/pterodactyl/" = {
+        hostPath = "/persist/ptero/wings-configs";
+        isReadOnly = false;
+      };
+      "/var/lib/docker/" = {
+        hostPath = "/persist/ptero/docker";
         isReadOnly = false;
       };
       "/run/panel.env".hostPath = config.age.secrets.pterodactyl-panel-passwords.path;
@@ -100,6 +123,24 @@
               DB_USERNAME = "panel";
             };
             environmentFiles = [ "/run/panel.env" ];
+          };
+          wings = {
+            image = "ghcr.io/pterodactyl/wings:v1.11.0";
+            volumes = [
+              "/var/run/docker.sock:/var/run/docker.sock"
+              "/var/lib/docker/containers/:/var/lib/docker/containers/"
+              "/etc/pterodactyl/:/etc/pterodactyl/"
+              "/var/lib/pterodactyl/:/var/lib/pterodactyl/"
+              "/var/log/pterodactyl/:/var/log/pterodactyl/"
+              "/tmp/pterodactyl/:/tmp/pterodactyl/"
+            ];
+            extraOptions = [ "--network=host" ];
+            environment = {
+              TZ = "Europe/Moscow";
+              WINGS_UID = "988";
+              WINGS_GID = "988";
+              WINGS_USERNAME = "pterodactyl";
+            };
           };
         };
       };

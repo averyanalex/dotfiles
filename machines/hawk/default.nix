@@ -36,6 +36,15 @@
     http3 = true;
   };
 
+  services.nginx.virtualHosts."whale-ptero.averyan.ru" = {
+    locations."/".proxyPass = "http://10.8.7.80:443";
+    locations."/".proxyWebsockets = true;
+    useACMEHost = "averyan.ru";
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+
   networking = {
     defaultGateway = {
       address = "10.0.0.1";
@@ -49,6 +58,7 @@
       ];
       extraNatPreroutingRules = [
         "ip daddr 185.112.83.99 tcp dport 25000-25100 dnat to 10.8.7.80"
+        "ip daddr 185.112.83.99 tcp dport 2022 dnat to 10.8.7.80"
         "ip daddr 185.112.83.99 udp dport 25000-25100 dnat to 10.8.7.80"
       ];
       extraNatPostroutingRules = [ "oifname ens3 masquerade" ];
