@@ -45,6 +45,11 @@ in
       persist = {
         enable = mkEnableOption "tmpfs root with opt-in state";
 
+        tmpfsSize = mkOption {
+          type = str;
+          default = "4G";
+        };
+
         persistRoot = mkOption {
           type = path;
           default = "/persist";
@@ -78,7 +83,7 @@ in
 
     fileSystems."/" = {
       device = "none";
-      options = [ "defaults" "size=4G" "mode=755" ];
+      options = [ "defaults" "size=${cfg.tmpfsSize}" "mode=755" ];
       fsType = "tmpfs";
     };
 

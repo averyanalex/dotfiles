@@ -10,6 +10,8 @@
 
   system.stateVersion = "22.05";
 
+  persist.tmpfsSize = "10G";
+
   networking = {
     firewall.allowedTCPPorts = [ 25565 ];
 
