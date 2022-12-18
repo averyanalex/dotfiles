@@ -27,6 +27,15 @@
     "net.ipv6.conf.default.forwarding" = false;
   };
 
+  services.nginx.virtualHosts."ptero.averyan.ru" = {
+    locations."/".proxyPass = "http://10.8.7.80:80";
+    locations."/".proxyWebsockets = true;
+    useACMEHost = "averyan.ru";
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+
   networking = {
     defaultGateway = {
       address = "10.0.0.1";
