@@ -5,6 +5,8 @@
     package = pkgs.nginxQuic;
     additionalModules = [ pkgs.nginxModules.brotli ];
 
+    clientMaxBodySize = "4G";
+
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
     recommendedGzipSettings = true;
