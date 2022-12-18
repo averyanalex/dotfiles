@@ -52,7 +52,7 @@
     privateNetwork = true;
     interfaces = [ "wg-pterodactyl" ];
 
-    extraFlags = [ "--system-call-filter=@keyring" "--system-call-filter=bpf" ];
+    extraFlags = [ "--system-call-filter=@keyring" "--system-call-filter=bpf" "--system-call-filter=@privileged" ];
 
     bindMounts = {
       "/var/lib/mysql/" = {
