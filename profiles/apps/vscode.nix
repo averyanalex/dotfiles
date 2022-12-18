@@ -8,9 +8,9 @@
 
     programs.vscode = {
       enable = true;
-      package = pkgs.unstable.vscodium;
+      package = pkgs.vscodium;
       mutableExtensionsDir = false;
-      extensions = with pkgs.unstable.vscode-extensions; [
+      extensions = with pkgs.vscode-extensions; [
         bradlc.vscode-tailwindcss
         dbaeumer.vscode-eslint
         editorconfig.editorconfig
