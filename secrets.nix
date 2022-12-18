@@ -25,6 +25,9 @@ in
 
   "secrets/creds/cloudflare.age".publicKeys = users ++ [ hawk ];
 
+  "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [ whale ];
+  "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [ whale ];
+
   "secrets/wireguard/hawk.age".publicKeys = users ++ [ hawk ];
   "secrets/wireguard/pterodactyl.age".publicKeys = users ++ [ whale ];
 
