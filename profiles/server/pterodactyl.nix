@@ -162,6 +162,11 @@
       services.mysql = {
         enable = true;
         package = pkgs.mariadb;
+        settings = {
+          mysqld = {
+            max_connections = 512;
+          };
+        };
         ensureDatabases = [ "panel" ];
         ensureUsers = [{
           name = "panel";
