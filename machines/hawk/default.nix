@@ -87,6 +87,16 @@
             publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
             allowedIPs = [ "10.8.7.240/32" ];
           }
+          {
+            # Kriger
+            publicKey = "qxkQlt1Q9lHq+d48J9nkqTTC+Dzs2LHD+GycsSKDyyE=";
+            allowedIPs = [ "10.8.7.241/32" ];
+          }
+          {
+            # Ivanov
+            publicKey = "bqkblOYoMi69RAIvJTy/zhovdUR+2O7JVaXoUqBXM2I=";
+            allowedIPs = [ "10.8.7.242/32" ];
+          }
         ];
       };
     };
