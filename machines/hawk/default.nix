@@ -82,6 +82,11 @@
             publicKey = "yZxLSiGRW5kqk3qT4Yvei732+i2UWLA4fS/H6AJbPVY=";
             allowedIPs = [ "10.8.7.80/32" ];
           }
+          {
+            # Vsevolod
+            publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
+            allowedIPs = [ "10.8.7.240/32" ];
+          }
         ];
       };
     };
