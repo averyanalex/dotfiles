@@ -33,6 +33,8 @@
     };
 
     averyanalex-blog.url = "github:averyanalex/blog";
+
+    firesquare-servers.url = "github:fire-square/servers";
   };
 
   outputs = { self, nixpkgs, flake-utils, agenix, ... }@inputs:

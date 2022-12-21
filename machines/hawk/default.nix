@@ -83,6 +83,11 @@
             allowedIPs = [ "10.8.7.80/32" ];
           }
           {
+            # Firesquare (Whale)
+            publicKey = "fwxaU8/D7awGaEcDuDVqssk7lkUoNuAsv3vR132XRlQ=";
+            allowedIPs = [ "10.8.7.81/32" ];
+          }
+          {
             # Vsevolod
             publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
             allowedIPs = [ "10.8.7.240/32" ];
