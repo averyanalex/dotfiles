@@ -97,6 +97,11 @@
             publicKey = "bqkblOYoMi69RAIvJTy/zhovdUR+2O7JVaXoUqBXM2I=";
             allowedIPs = [ "10.8.7.242/32" ];
           }
+          {
+            # Tihonov
+            publicKey = "mi4FUaRyD2yIbVtX1jC7cY7XXg6rUELcpAUyN+N7lU0=";
+            allowedIPs = [ "10.8.7.243/32" ];
+          }
         ];
       };
     };
