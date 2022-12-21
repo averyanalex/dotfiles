@@ -61,6 +61,22 @@ in
     '';
   };
 
+  age.secrets.wg-key-frsqr.file = ../../secrets/wireguard/whale-frsqr.age;
+  networking.wireguard.interfaces = {
+    wg-frsqr = {
+      ips = [ "10.100.0.4/32" ];
+      privateKeyFile = config.age.secrets.wg-key-frsqr.path;
+      peers = [
+        {
+          publicKey = "k8XDvqLf9eZzVkY0NpAU3TXgisDAsOOtg+wImiootA8=";
+          allowedIPs = [ "10.100.0.0/24" ];
+          endpoint = "rat.frsqr.xyz:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
+
   networking = {
     hostName = "whale";
 

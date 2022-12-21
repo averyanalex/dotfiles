@@ -30,6 +30,7 @@ in
 
   "secrets/wireguard/hawk.age".publicKeys = users ++ [ hawk ];
   "secrets/wireguard/pterodactyl.age".publicKeys = users ++ [ whale ];
+  "secrets/wireguard/whale-frsqr.age".publicKeys = users ++ [ whale ];
 
   "secrets/nebula/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/ca-key.age".publicKeys = users;
