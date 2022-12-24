@@ -7,12 +7,15 @@ in
 {
   imports = [
     inputs.self.nixosModules.roles.server
-    inputs.self.nixosModules.profiles.libvirt
+
     inputs.self.nixosModules.profiles.server.firesquare
+    inputs.self.nixosModules.profiles.server.ipfs
     inputs.self.nixosModules.profiles.server.ipfs-cluster
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
+
+    inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.tanksrv
     ./hardware.nix
     ./mounts.nix
@@ -26,6 +29,8 @@ in
     enable = true;
     memoryPercent = 25;
   };
+
+  services.kubo.dataDir = "/hdd/ipfs";
 
   # Monitoring
   services.prometheus.exporters.node.enabledCollectors = [ "zoneinfo" ];
