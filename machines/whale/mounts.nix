@@ -10,6 +10,12 @@
     fsType = "vfat";
   };
 
+  fileSystems."/hdd" = {
+    device = "/dev/whale/storage";
+    fsType = "ext4";
+    options = [ "discard" ];
+  };
+
   fileSystems."/tank" = {
     device = "/dev/whale/tank";
     fsType = "ext4";
