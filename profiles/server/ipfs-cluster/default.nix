@@ -32,6 +32,8 @@ in
     };
   };
 
+  persist.state.dirs = [{ directory = "/var/lib/ipfs-cluster"; user = "ipfs-cluster"; group = "ipfs-cluster"; mode = "u=rwx,g=rx,o=rx"; }];
+
   users = {
     users."ipfs-cluster" = {
       isSystemUser = true;
