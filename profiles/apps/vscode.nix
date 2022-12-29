@@ -14,6 +14,7 @@
         bradlc.vscode-tailwindcss
         dbaeumer.vscode-eslint
         editorconfig.editorconfig
+        editorconfig.editorconfig
         esbenp.prettier-vscode
         gruntfuggly.todo-tree
         jnoortheen.nix-ide
