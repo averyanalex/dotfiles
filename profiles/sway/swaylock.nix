@@ -19,7 +19,7 @@ let
       "$@"
   '';
   idlehandler = pkgs.writeShellScript "sway-idlehandler" ''
-    swayidle -w timeout 300 '${fancylock} --grace 60'
+    swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") ''timeout 300 '${fancylock} --grace 60''} timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
   '';
 in
 {
