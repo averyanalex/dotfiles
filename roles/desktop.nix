@@ -36,6 +36,7 @@
       ntfs
       pipewire
       podman
+      printing
       sync
       tank
       waydroid
