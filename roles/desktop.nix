@@ -33,6 +33,7 @@
       mail
       music
       nebula-frsqr
+      ntfs
       pipewire
       podman
       sync
