@@ -9,8 +9,6 @@ in
     inputs.self.nixosModules.roles.server
 
     inputs.self.nixosModules.profiles.server.firesquare
-    inputs.self.nixosModules.profiles.server.ipfs
-    inputs.self.nixosModules.profiles.server.ipfs-cluster
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
