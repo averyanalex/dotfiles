@@ -16,6 +16,7 @@ in
     inputs.self.nixosModules.profiles.server.qbit
 
     inputs.self.nixosModules.profiles.libvirt
+    inputs.self.nixosModules.profiles.podman
     inputs.self.nixosModules.profiles.tanksrv
     ./hardware.nix
     ./mounts.nix

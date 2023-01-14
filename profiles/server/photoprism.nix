@@ -2,14 +2,27 @@
 {
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
 
+  systemd.services."podman-photoprism" = {
+    wants = [ "setup-photoprism-dirs.service" ];
+    after = [ "setup-photoprism-dirs.service" ];
+  };
+
+  systemd.services.setup-photoprism-dirs = {
+    script = ''
+      mkdir -p /persist/var/lib/photoprism
+      chown 1000:100 /persist/var/lib/photoprism
+      chmod 700 /persist/var/lib/photoprism
+    '';
+  };
+
   virtualisation.oci-containers = {
-    backend = "podman";
     containers = {
       photoprism = {
         image = "photoprism/photoprism:221118-jammy";
         volumes = [
-          "/srv/pterodactyl/var/:/app/var/"
-          "/srv/pterodactyl/logs/:/app/storage/logs"
+          "/tank/Галерея:/photoprism/originals"
+          "/tank/Импорт:/photoprism/import"
+          "/persist/var/lib/photoprism:/photoprism/storage"
         ];
         extraOptions = [ "--network=host" ];
         environment = {
