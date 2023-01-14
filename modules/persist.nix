@@ -19,7 +19,7 @@ in
   options =
     let
       inherit (lib) mkOption mkEnableOption;
-      inherit (lib.types) path listOf either str attrs;
+      inherit (lib.types) path listOf either str attrs bool;
 
       common = {
         dirs = mkOption {
@@ -44,6 +44,11 @@ in
     {
       persist = {
         enable = mkEnableOption "tmpfs root with opt-in state";
+
+        hideMounts = mkOption {
+          type = bool;
+          default = false;
+        };
 
         tmpfsSize = mkOption {
           type = str;
@@ -72,6 +77,7 @@ in
 
   config = mkIf cfg.enable {
     environment.persistence.${cfg.persistRoot} = {
+      hideMounts = cfg.hideMounts;
       directories = allSystemDirs;
       files = allSystemFiles;
 
