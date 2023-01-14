@@ -11,6 +11,7 @@ in
     inputs.self.nixosModules.profiles.server.firesquare
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.pgsql
+    inputs.self.nixosModules.profiles.server.photoprism
     inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
 
