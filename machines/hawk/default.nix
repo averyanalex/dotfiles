@@ -27,8 +27,19 @@
     "net.ipv6.conf.default.forwarding" = false;
   };
 
+  # TODO: refactor nginx
+
   services.nginx.virtualHosts."ptero.averyan.ru" = {
     locations."/".proxyPass = "http://10.8.7.80:80";
+    locations."/".proxyWebsockets = true;
+    useACMEHost = "averyan.ru";
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+
+  services.nginx.virtualHosts."prism.averyan.ru" = {
+    locations."/".proxyPass = "http://10.5.3.20:2342";
     locations."/".proxyWebsockets = true;
     useACMEHost = "averyan.ru";
     forceSSL = true;

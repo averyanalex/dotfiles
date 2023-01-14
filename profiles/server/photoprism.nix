@@ -15,6 +15,8 @@
     '';
   };
 
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 2342 ];
+
   virtualisation.oci-containers = {
     containers = {
       photoprism = {
