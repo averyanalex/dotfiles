@@ -69,6 +69,7 @@
       ];
       extraNatPreroutingRules = [
         "ip daddr 185.112.83.99 tcp dport 25000-25100 dnat to 10.8.7.80"
+        "ip daddr 185.112.83.99 tcp dport 25565 dnat to 10.8.7.81"
         "ip daddr 185.112.83.99 tcp dport 2022 dnat to 10.8.7.80"
         "ip daddr 185.112.83.99 udp dport 25000-25100 dnat to 10.8.7.80"
       ];
