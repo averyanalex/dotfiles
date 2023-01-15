@@ -28,6 +28,7 @@
       adb
       arduino
       autologin
+      filemanager
       flatpak
       kernel
       mail
