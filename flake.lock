@@ -66,11 +66,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1673783129,
-        "narHash": "sha256-EjqYe64pDCX7zxeT3Ck9wwVVJ1K9tZlaW4y7++lmuqw=",
+        "lastModified": 1673783307,
+        "narHash": "sha256-6a/7KuGeLbuvOiq9Bel9oS4/TFH4DCAZ5KMxxsGcB1w=",
         "owner": "fire-square",
         "repo": "servers",
-        "rev": "e29259e564ffa555d379ac20fbf42014fabd2b31",
+        "rev": "bbe552c03c391a56c14718775b44f0a1b60f7d0e",
         "type": "github"
       },
       "original": {
