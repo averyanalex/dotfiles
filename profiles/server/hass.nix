@@ -19,6 +19,7 @@ in
       # Components required to complete the onboarding
       "met"
       "radio_browser"
+      "esphome"
     ];
     extraPackages = python3Packages: with python3Packages; [
       psycopg2
