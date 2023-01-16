@@ -21,8 +21,8 @@ in
       "radio_browser"
     ];
     extraPackages = python3Packages: with python3Packages; [
-      securetar
       psycopg2
+      securetar
     ];
     config = {
       # Includes dependencies for a basic setup
@@ -37,6 +37,22 @@ in
     };
   };
 
+  virtualisation.oci-containers = {
+    containers = {
+      esphome = {
+        image = "esphome/esphome:2022.12";
+        volumes = [
+          "/etc/localtime:/etc/localtime:ro"
+          "/var/lib/esphome:/config"
+        ];
+        extraOptions = [ "--network=host" "--privileged" ];
+        environment = {
+          ESPHOME_DASHBOARD_USE_PING = "true";
+        };
+      };
+    };
+  };
+
   services.postgresql = {
     ensureDatabases = [ "hass" ];
     ensureUsers = [{
@@ -47,7 +63,10 @@ in
     }];
   };
 
-  persist.state.dirs = [{ directory = "/var/lib/hass"; user = "hass"; group = "hass"; mode = "u=rwx,g=,o="; }];
+  persist.state.dirs = [
+    { directory = "/var/lib/hass"; user = "hass"; group = "hass"; mode = "u=rwx,g=,o="; }
+    { directory = "/var/lib/esphome"; mode = "u=rwx,g=,o="; }
+  ];
 
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 8123 ];
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 8123 6052 ];
 }
