@@ -44,6 +44,24 @@ in
           scan_interval = 15;
         }
       ];
+      switch = [
+        {
+          platform = "template";
+          switches.pc = {
+            unique_id = "pc";
+            friendly_name = "PC";
+            value_template = "{{ is_state('binary_sensor.pc_status', 'on') }}";
+            turn_on = {
+              service = "button.press";
+              target.entity_id = "button.press_pc_power_button";
+            };
+            turn_off = {
+              service = "button.press";
+              target.entity_id = "button.press_pc_power_button";
+            };
+          };
+        }
+      ];
       recorder.db_url = "postgresql://@/hass";
     };
   };
