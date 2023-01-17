@@ -34,6 +34,12 @@ in
         trusted_proxies = [ "10.5.3.12" ];
         use_x_forwarded_for = true;
       };
+      switch = [
+        {
+          platform = "wake_on_lan";
+          mac = "24:4b:fe:47:cb:3f";
+        }
+      ];
       recorder.db_url = "postgresql://@/hass";
     };
   };
