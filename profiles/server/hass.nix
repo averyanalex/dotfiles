@@ -35,6 +35,15 @@ in
         trusted_proxies = [ "10.5.3.12" ];
         use_x_forwarded_for = true;
       };
+      binary_sensor = [
+        {
+          platform = "ping";
+          host = "192.168.3.60";
+          name = "PC Status";
+          count = 3;
+          scan_interval = 15;
+        }
+      ];
       recorder.db_url = "postgresql://@/hass";
     };
   };
