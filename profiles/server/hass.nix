@@ -17,9 +17,10 @@ in
     enable = true;
     extraComponents = [
       # Components required to complete the onboarding
+      "esphome"
       "met"
       "radio_browser"
-      "esphome"
+      "roomba"
     ];
     extraPackages = python3Packages: with python3Packages; [
       psycopg2
