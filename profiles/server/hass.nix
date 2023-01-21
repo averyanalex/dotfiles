@@ -77,6 +77,7 @@ in
         extraOptions = [ "--network=host" "--privileged" ];
         environment = {
           ESPHOME_DASHBOARD_USE_PING = "true";
+          TZ = "Europe/Moscow";
         };
       };
     };
