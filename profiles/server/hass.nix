@@ -36,7 +36,6 @@ in
           platform = "ping";
           host = "192.168.3.60";
           name = "PC Status";
-          unique_id = "pc_status";
           count = 2;
           scan_interval = 5;
         }
