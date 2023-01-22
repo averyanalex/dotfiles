@@ -13,6 +13,7 @@
       firefox
       kdenlive
       obs
+      octave
       office
       open
       openboard
