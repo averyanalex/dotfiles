@@ -16,10 +16,8 @@ in
   services.home-assistant = {
     enable = true;
     extraComponents = [
-      # Components required to complete the onboarding
       "esphome"
       "met"
-      "radio_browser"
       "roomba"
     ];
     extraPackages = python3Packages: with python3Packages; [
@@ -27,8 +25,6 @@ in
       securetar
     ];
     config = {
-      # Includes dependencies for a basic setup
-      # https://www.home-assistant.io/integrations/default_config/
       default_config = { };
       http = {
         server_host = "10.5.3.20";
@@ -63,6 +59,9 @@ in
         }
       ];
       recorder.db_url = "postgresql://@/hass";
+      automation = "!include automations.yaml";
+      scene = "!include scenes.yaml";
+      script = "!include scripts.yaml";
     };
   };
 
