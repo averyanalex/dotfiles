@@ -48,14 +48,28 @@ in
             friendly_name = "PC";
             value_template = "{{ is_state('binary_sensor.pc_status', 'on') }}";
             availability_template = "{{ not is_state('button.press_pc_power_button', 'unavailable') }}";
-            turn_on = {
-              service = "button.press";
-              target.entity_id = "button.press_pc_power_button";
-            };
-            turn_off = {
-              service = "button.press";
-              target.entity_id = "button.press_pc_power_button";
-            };
+            turn_on = [
+              {
+                condition = "state";
+                entity_id = "binary_sensor.pc_status";
+                state = "off";
+              }
+              {
+                service = "button.press";
+                target.entity_id = "button.press_pc_power_button";
+              }
+            ];
+            turn_off = [
+              {
+                condition = "state";
+                entity_id = "binary_sensor.pc_status";
+                state = "on";
+              }
+              {
+                service = "button.press";
+                target.entity_id = "button.press_pc_power_button";
+              }
+            ];
           };
         }
       ];
