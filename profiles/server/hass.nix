@@ -36,8 +36,9 @@ in
           platform = "ping";
           host = "192.168.3.60";
           name = "PC Status";
-          count = 3;
-          scan_interval = 15;
+          unique_id = "pc_status";
+          count = 2;
+          scan_interval = 5;
         }
       ];
       switch = [
@@ -47,6 +48,7 @@ in
             unique_id = "pc";
             friendly_name = "PC";
             value_template = "{{ is_state('binary_sensor.pc_status', 'on') }}";
+            availability_template = "{{ not is_state('button.press_pc_power_button', 'unavailable') }}";
             turn_on = {
               service = "button.press";
               target.entity_id = "button.press_pc_power_button";
