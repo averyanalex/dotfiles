@@ -131,6 +131,11 @@
             publicKey = "mi4FUaRyD2yIbVtX1jC7cY7XXg6rUELcpAUyN+N7lU0=";
             allowedIPs = [ "10.8.7.243/32" ];
           }
+          {
+            # Despectdr
+            publicKey = "/BRUH/MivTgVsGeTINUQ5pZDtX8nzrEv1vy+wNJE0Ws=";
+            allowedIPs = [ "10.8.7.244/32" ];
+          }
         ];
       };
     };
