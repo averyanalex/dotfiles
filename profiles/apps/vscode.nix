@@ -17,6 +17,7 @@
         editorconfig.editorconfig
         esbenp.prettier-vscode
         gruntfuggly.todo-tree
+        james-yu.latex-workshop
         jnoortheen.nix-ide
         ms-python.python
         ms-toolsai.jupyter
