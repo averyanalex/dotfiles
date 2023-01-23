@@ -24,6 +24,7 @@ in
   "secrets/mail/alex.age".publicKeys = users ++ [ hawk ];
 
   "secrets/creds/cloudflare.age".publicKeys = users ++ [ hawk ];
+  "secrets/creds/firesquare.age".publicKeys = users ++ [ whale ];
   "secrets/creds/ipfs-cluster.age".publicKeys = users ++ [ whale ];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [ whale ];

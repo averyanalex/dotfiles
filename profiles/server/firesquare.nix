@@ -19,10 +19,20 @@ in
     };
   };
 
-  systemd.services."container@firesquare" = {
-    wants = [ "wireguard-wg-firesquare.target" ];
-    after = [ "wireguard-wg-firesquare.target" ];
+  systemd.services.setup-firesquare-dirs = {
+    script = ''
+      mkdir -p /persist/firesquare/mysql
+      chown 84:84 /persist/firesquare/mysql
+      chmod 700 /persist/firesquare/mysql
+    '';
   };
+
+  systemd.services."container@firesquare" = {
+    wants = [ "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
+    after = [ "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
+  };
+
+  age.secrets.firesquare-passwords.file = ../../secrets/creds/firesquare.age;
 
   containers.firesquare = {
     autoStart = true;
@@ -30,6 +40,14 @@ in
 
     privateNetwork = true;
     interfaces = [ "wg-firesquare" ];
+
+    bindMounts = {
+      "/var/lib/mysql/" = {
+        hostPath = "/persist/firesquare/mysql";
+        isReadOnly = false;
+      };
+      "/run/passwords.env".hostPath = config.age.secrets.firesquare-passwords.path;
+    };
 
     config = {
       imports = [ firesquare-module ];
