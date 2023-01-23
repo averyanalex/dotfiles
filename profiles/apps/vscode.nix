@@ -83,6 +83,8 @@
         "git.enableSmartCommit" = true;
 
         "terminal.integrated.fontFamily" = "MesloLGS NF";
+
+        "editor.unicodeHighlight.allowedLocales".ru = true;
       };
     };
   };
