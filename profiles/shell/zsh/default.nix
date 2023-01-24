@@ -33,8 +33,8 @@
       shellAliases = {
         ip = "ip --color=auto";
 
-        # nixupd = ''sudo rm -rf /root/.cache && sudo nixos-rebuild switch --flake "github:averyanalex/nixos"'';
-        tnixupd = "sudo nixos-rebuild switch --flake .";
+        upd = "sudo rm -rf /root/.cache && sudo nixos-rebuild switch --flake github:averyanalex/nixcfg";
+        lupd = "sudo nixos-rebuild switch --flake .";
       };
 
       oh-my-zsh = {
