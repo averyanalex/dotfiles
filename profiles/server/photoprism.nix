@@ -3,8 +3,8 @@
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
 
   systemd.services."podman-photoprism" = {
-    wants = [ "setup-photoprism-dirs.service" ];
-    after = [ "setup-photoprism-dirs.service" ];
+    wants = [ "setup-photoprism-dirs.service" "mysql.service" ];
+    after = [ "setup-photoprism-dirs.service" "mysql.service" ];
   };
 
   systemd.services.setup-photoprism-dirs = {
@@ -13,6 +13,7 @@
       chown 1000:100 /persist/var/lib/photoprism
       chmod 700 /persist/var/lib/photoprism
     '';
+    serviceConfig.RemainAfterExit = true;
   };
 
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 2342 ];
