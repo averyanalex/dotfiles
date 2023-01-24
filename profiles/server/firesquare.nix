@@ -29,8 +29,8 @@ in
   };
 
   systemd.services."container@firesquare" = {
-    wants = [ "wireguard-wg-firesquare.service" "setup-firesquare-dirs.service" ];
-    after = [ "wireguard-wg-firesquare.service" "setup-firesquare-dirs.service" ];
+    wants = [ "wireguard-wg-firesquare.service" "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
+    after = [ "wireguard-wg-firesquare.service" "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
   };
 
   age.secrets.firesquare-passwords.file = ../../secrets/creds/firesquare.age;

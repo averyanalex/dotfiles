@@ -17,8 +17,8 @@
   };
 
   systemd.services."container@pterodactyl" = {
-    wants = [ "wireguard-wg-pterodactyl.service" "setup-pterodactyl-dirs.service" ];
-    after = [ "wireguard-wg-pterodactyl.service" "setup-pterodactyl-dirs.service" ];
+    wants = [ "wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service" ];
+    after = [ "wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service" ];
   };
 
   systemd.services.setup-pterodactyl-dirs = {
