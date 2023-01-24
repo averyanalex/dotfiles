@@ -25,11 +25,12 @@ in
       chown 84:84 /persist/firesquare/mysql
       chmod 700 /persist/firesquare/mysql
     '';
+    serviceConfig.RemainAfterExit = true;
   };
 
   systemd.services."container@firesquare" = {
-    wants = [ "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
-    after = [ "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
+    wants = [ "wireguard-wg-firesquare.service" "setup-firesquare-dirs.service" ];
+    after = [ "wireguard-wg-firesquare.service" "setup-firesquare-dirs.service" ];
   };
 
   age.secrets.firesquare-passwords.file = ../../secrets/creds/firesquare.age;

@@ -17,8 +17,8 @@
   };
 
   systemd.services."container@pterodactyl" = {
-    wants = [ "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service" ];
-    after = [ "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service" ];
+    wants = [ "wireguard-wg-pterodactyl.service" "setup-pterodactyl-dirs.service" ];
+    after = [ "wireguard-wg-pterodactyl.service" "setup-pterodactyl-dirs.service" ];
   };
 
   systemd.services.setup-pterodactyl-dirs = {
@@ -40,6 +40,7 @@
 
       mkdir -p /persist/ptero/panel
     '';
+    serviceConfig.RemainAfterExit = true;
   };
 
   age.secrets.pterodactyl-panel-passwords.file = ../../secrets/intpass/pterodactyl-panel.age;
