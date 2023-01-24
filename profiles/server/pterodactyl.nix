@@ -93,7 +93,10 @@
           interface = "wg-pterodactyl";
         };
         firewall.enable = false;
+        useHostResolvConf = false;
+        nameservers = [ "9.9.9.9" "8.8.8.8" "1.1.1.1" "77.88.8.8" ];
       };
+      services.resolved.enable = true;
 
       virtualisation.oci-containers = {
         backend = "docker";

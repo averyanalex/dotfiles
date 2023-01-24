@@ -66,11 +66,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674571003,
-        "narHash": "sha256-EHuaMbk1smSN3KwoSI5HQalf2SBlPLnwN0zZWbzgYho=",
+        "lastModified": 1674573290,
+        "narHash": "sha256-lXAP5y3J4JdwNdDdWlEGl8CEtNAdBl2ilWoK4DcPFoI=",
         "owner": "fire-square",
         "repo": "servers",
-        "rev": "6dd561dcaf283e076054f3e43855f2b477a5809f",
+        "rev": "8cb0a056d86a45ffd62e90ebb4a0dc7333b45d33",
         "type": "github"
       },
       "original": {
@@ -342,11 +342,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674514732,
+        "lastModified": 1674573926,
         "narHash": "sha256-iWjr4ofBa6+A9GzuOGXaoQWW6r58JrfSwwY1rCqHtMY=",
         "owner": "PrismLauncher",
         "repo": "PrismLauncher",
-        "rev": "16477a8f6c1fc646208b41b76598ce8e7a60369e",
+        "rev": "6eb36fb053a45ebea48cb7d9be44b4859de7ec9e",
         "type": "github"
       },
       "original": {
