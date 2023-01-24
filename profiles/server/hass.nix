@@ -97,6 +97,8 @@ in
     };
   };
 
+  systemd.services."podman-esphome".after = [ "network.target" ];
+
   services.postgresql = {
     ensureDatabases = [ "hass" ];
     ensureUsers = [{
