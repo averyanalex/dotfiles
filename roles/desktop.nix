@@ -39,6 +39,7 @@
       pipewire
       podman
       printing
+      sdr
       sync
       tank
       waydroid
