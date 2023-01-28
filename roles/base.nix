@@ -34,6 +34,7 @@
       ssh-server
       sudo
       timezone
+      unfree
       unsecure
       unstable
       userdirs

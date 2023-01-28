@@ -21,6 +21,7 @@
         jnoortheen.nix-ide
         ms-python.python
         ms-toolsai.jupyter
+        ms-vscode.cpptools
         serayuzgur.crates
         stkb.rewrap
         tyriar.sort-lines
@@ -61,11 +62,19 @@
           version = "0.6.1";
           sha256 = "NI0cbjsZPW8n6qRTRKoqznSDhLZRUguP7Sa/d0feeoc=";
         }
+        {
+          name = "platformio-ide";
+          publisher = "platformio";
+          version = "2.99.4";
+          sha256 = "xkvzmSW/sxalRmdIhfwkGqACWJpiZ/xD79k8cm4LhSU=";
+        }
       ];
       userSettings = {
         "nix.enableLanguageServer" = true;
         "svelte.enable-ts-plugin" = true;
+
         "rust-analyzer.server.path" = "${pkgs.unstable.rust-analyzer}/bin/rust-analyzer";
+        # "platformio-ide.useBuiltinPIOCore" = false;
 
         "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
 
