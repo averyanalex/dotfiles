@@ -2,14 +2,15 @@
   persist = {
     state = {
       homeDirs = [
+        ".ssh"
+        "Documents"
         "Downloads"
         "Music"
+        "Notes"
         "Pictures"
-        "Documents"
         "projects"
-        ".ssh"
       ];
     };
-    cache.homeDirs = [ ".cache" ];
+    cache.homeDirs = [ ".cache" ".cargo" ];
   };
 }

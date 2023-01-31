@@ -39,8 +39,9 @@ in
       pocoft.id = "T5HBUVC-EU6A5BT-W4VFH3R-YBIYBCF-DLLKHVU-QDZC7YS-XGBFNPP-SSZSBA2";
     };
     folders = {
-      "Music" = commonFolder "Music" // { devices = allDevices ++ [ "pocoft" ]; };
       "Documents" = commonFolder "Documents";
+      "Music" = commonFolder "Music" // { devices = allDevices ++ [ "pocoft" ]; };
+      "Notes" = commonFolder "Notes" // { devices = allDevices ++ [ "pocoft" ]; };
       "Pictures" = commonFolder "Pictures" // { devices = allDevices ++ [ "pocoft" ]; };
     };
   };
