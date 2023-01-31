@@ -88,7 +88,7 @@
         {
           devShells.default = pkgs.mkShell {
             buildInputs = [
-              agenix.defaultPackage.${system}
+              agenix.packages.${system}.agenix
               pkgs.nebula
               pkgs.wireguard-tools
             ];

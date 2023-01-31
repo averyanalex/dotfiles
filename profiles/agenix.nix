@@ -2,6 +2,6 @@
 
 {
   imports = [
-    inputs.agenix.nixosModule
+    inputs.agenix.nixosModules.age
   ];
 }
