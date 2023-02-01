@@ -12,6 +12,7 @@
 
       firefox
       kdenlive
+      notes
       obs
       octave
       office
