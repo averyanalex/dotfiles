@@ -12,10 +12,11 @@
     };
 
     extraConfig = {
-      init.defaultBranch = "main";
       core.editor = "micro";
-      tag.gpgsign = true;
+      init.defaultBranch = "main";
       pull.rebase = true;
+      push.autoSetupRemote = true;
+      tag.gpgsign = true;
     };
   };
 }
