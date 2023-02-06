@@ -33,6 +33,8 @@ in
     memoryPercent = 25;
   };
 
+  persist.tmpfsSize = "16G";
+
   services.kubo.dataDir = "/hdd/ipfs";
 
   # Monitoring
