@@ -3,7 +3,6 @@
     ./base.nix
   ] ++ (with inputs.self.nixosModules.modules; [
     nebula-frsqr
-    waydroid
   ]) ++ (with inputs.self.nixosModules.profiles;
     with apps; [
       d3.cura
@@ -43,6 +42,5 @@
       sdr
       sync
       tank
-      waydroid
     ]);
 }
