@@ -32,6 +32,7 @@
       filemanager
       flatpak
       kernel
+      light
       mail
       music
       nebula-frsqr
