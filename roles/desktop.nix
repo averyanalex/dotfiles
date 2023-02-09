@@ -31,6 +31,7 @@
       autologin
       filemanager
       flatpak
+      fonts
       kernel
       light
       mail
