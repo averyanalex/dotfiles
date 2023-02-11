@@ -11,62 +11,56 @@
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
       extensions = with pkgs.vscode-extensions; [
+        # JavaScript
         bradlc.vscode-tailwindcss
         dbaeumer.vscode-eslint
-        editorconfig.editorconfig
-        editorconfig.editorconfig
         esbenp.prettier-vscode
-        gruntfuggly.todo-tree
-        james-yu.latex-workshop
-        jnoortheen.nix-ide
+        svelte.svelte-vscode
+
+        # Python
         ms-python.python
         ms-toolsai.jupyter
-        ms-vscode.cpptools
+        njpwerner.autodocstring
+
+        # Rust
         serayuzgur.crates
+
+        # Tools
+        editorconfig.editorconfig
+        gruntfuggly.todo-tree
         stkb.rewrap
         tyriar.sort-lines
+
+        # Other langs
+        james-yu.latex-workshop
+        jnoortheen.nix-ide
+        mkhl.direnv
+        ms-vscode.cpptools
+        tamasfe.even-better-toml
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "svelte-vscode";
-          publisher = "svelte";
-          version = "106.2.0";
-          sha256 = "ULLDfiYU7mAneth22/F4PJ9Q70Dq1gsJglb920WriBI=";
-        }
-        {
-          name = "gitlab-workflow";
-          publisher = "GitLab";
-          version = "3.57.1";
-          sha256 = "zdhhH8ebSq6e+Y9kL+v0Br3lao0ZSEbXxCK9pw2tSFM=";
-        }
-        {
-          name = "even-better-toml";
-          publisher = "tamasfe";
-          version = "0.19.0";
-          sha256 = "MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU=";
-        }
         {
           name = "rust-analyzer";
           publisher = "rust-lang";
-          version = "0.4.1302";
-          sha256 = "+lzku5m+k9CK1kILjICq3yoKeqtnL2VwDV9b3H3L0hY=";
-        }
-        {
-          name = "direnv";
-          publisher = "mkhl";
-          version = "0.10.1";
-          sha256 = "Da9Anme6eoKLlkdYaeLFDXx0aQgrtepuUnw2jEPXCVU=";
-        }
-        {
-          name = "autodocstring";
-          publisher = "njpwerner";
-          version = "0.6.1";
-          sha256 = "NI0cbjsZPW8n6qRTRKoqznSDhLZRUguP7Sa/d0feeoc=";
+          version = "0.4.1399";
+          sha256 = "2KxgMIFofrXyZmoW6OO4wpvggDBu2lO9sxptioHCytw=";
         }
         {
           name = "platformio-ide";
           publisher = "platformio";
-          version = "2.99.4";
-          sha256 = "xkvzmSW/sxalRmdIhfwkGqACWJpiZ/xD79k8cm4LhSU=";
+          version = "3.0.0";
+          sha256 = "+0haTk/xbPoustJVE81tI9X8gcfiamx8nZBm7kGGY6c=";
+        }
+        {
+          name = "vscode-yaml";
+          publisher = "redhat";
+          version = "1.11.10112022";
+          sha256 = "/ZD3LOf6d5dJJW7eGZgkrf4hj1CXZJNI0u06Bnmyo0Q=";
+        }
+        {
+          name = "sqltools";
+          publisher = "mtxr";
+          version = "0.27.1";
+          sha256 = "5XhPaxwr0yvIX0wSKDiDm+1iG947s84ULaWpxfpRcAU=";
         }
       ];
       userSettings = {
