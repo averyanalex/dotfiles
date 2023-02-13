@@ -16,6 +16,7 @@ in
   services.home-assistant = {
     enable = true;
     extraComponents = [
+      "airvisual"
       "esphome"
       "met"
       "roomba"
