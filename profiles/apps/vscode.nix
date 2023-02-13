@@ -62,6 +62,12 @@
           version = "0.27.1";
           sha256 = "5XhPaxwr0yvIX0wSKDiDm+1iG947s84ULaWpxfpRcAU=";
         }
+        {
+          name = "sqltools-driver-pg";
+          publisher = "mtxr";
+          version = "0.5.1";
+          sha256 = "TZ5KMjSafdJozKuUL6IatHyChk/b4b27JcuOe1Qtnyw=";
+        }
       ];
       userSettings = {
         "nix.enableLanguageServer" = true;
