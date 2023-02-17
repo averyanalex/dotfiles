@@ -71,29 +71,30 @@
       ];
       userSettings = {
         "nix.enableLanguageServer" = true;
-        "svelte.enable-ts-plugin" = true;
 
         "rust-analyzer.server.path" = "${pkgs.unstable.rust-analyzer}/bin/rust-analyzer";
         # "platformio-ide.useBuiltinPIOCore" = false;
 
         "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
+        "svelte.enable-ts-plugin" = true;
 
         "editor.quickSuggestions" = {
           "strings" = true;
         };
 
-        "sortLines.filterBlankLines" = true;
-
-        "files.autoSave" = "afterDelay";
+        # VCS
         "diffEditor.ignoreTrimWhitespace" = false;
-
         "git.autofetch" = true;
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
 
         "terminal.integrated.fontFamily" = "MesloLGS NF";
 
+        # Other
         "editor.unicodeHighlight.allowedLocales".ru = true;
+        "files.autoSave" = "afterDelay";
+        "redhat.telemetry.enabled" = false;
+        "sortLines.filterBlankLines" = true;
       };
     };
   };
