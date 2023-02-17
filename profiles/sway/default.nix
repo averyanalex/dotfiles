@@ -66,10 +66,10 @@
             "XF86MonBrightnessDown" = "exec light -U 10";
             "XF86MonBrightnessUp" = "exec light -A 10";
 
-            "Print" = ''exec grim -g "$(slurp -d)" - | tee ~/Pictures/Screenshots/$(date --rfc-3339=seconds).png | wl-copy -t image/png'';
-            "Shift+Print" = ''exec grim - | tee ~/Pictures/Screenshots/$(date --rfc-3339=seconds).png | wl-copy -t image/png'';
+            "Print" = ''exec grim -g "$(slurp -d)" - | tee "Pictures/Screenshots/$(date --rfc-3339=seconds).png" | wl-copy -t image/png'';
+            "Shift+Print" = ''exec grim - | tee "Pictures/Screenshots/$(date --rfc-3339=seconds).png" | wl-copy -t image/png'';
             # TODO: screenshot focused window
-            # "Mod1+Print" = ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.sway}/bin/swaymsg -t get_tree | ${pkgs.jq}/bin/jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | tee ~/Pictures/Screenshots/$(date --rfc-3339=seconds).png | wl-copy -t image/png'';
+            # "Mod1+Print" = ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.sway}/bin/swaymsg -t get_tree | ${pkgs.jq}/bin/jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | tee "Pictures/Screenshots/$(date --rfc-3339=seconds).png" | wl-copy -t image/png'';
             # TODO: setup flameshot
           };
         terminal = "alacritty";
