@@ -1,6 +1,10 @@
 { config, ... }:
 {
-  age.secrets.radicale-password.file = ../../secrets/accounts/radicale.age;
+  age.secrets.radicale-password = {
+    file = ../../secrets/accounts/radicale.age;
+    owner = "radicale";
+    group = "radicale";
+  };
   services.radicale = {
     enable = true;
     settings = {
