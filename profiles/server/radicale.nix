@@ -12,5 +12,6 @@
       };
     };
   };
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 5232 ];
   persist.state.dirs = [{ directory = "/var/lib/radicale/collections"; user = "radicale"; group = "radicale"; mode = "u=rwx,g=rx,o="; }];
 }
