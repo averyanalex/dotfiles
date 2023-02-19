@@ -33,6 +33,9 @@
     locations."/".proxyPass = "http://10.8.7.80:80";
     locations."/".proxyWebsockets = true;
     useACMEHost = "averyan.ru";
+    extraConfig = ''
+      proxy_buffering off;
+    '';
     forceSSL = true;
     kTLS = true;
     http3 = true;
@@ -42,6 +45,9 @@
     locations."/".proxyPass = "http://10.5.3.20:2342";
     locations."/".proxyWebsockets = true;
     useACMEHost = "averyan.ru";
+    extraConfig = ''
+      proxy_buffering off;
+    '';
     forceSSL = true;
     kTLS = true;
     http3 = true;
@@ -59,10 +65,25 @@
     http3 = true;
   };
 
+  services.nginx.virtualHosts."dav.averyan.ru" = {
+    locations."/".proxyPass = "http://10.5.3.20:5232";
+    locations."/".proxyWebsockets = true;
+    useACMEHost = "averyan.ru";
+    extraConfig = ''
+      proxy_buffering off;
+    '';
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+
   services.nginx.virtualHosts."whale-ptero.averyan.ru" = {
     locations."/".proxyPass = "http://10.8.7.80:443";
     locations."/".proxyWebsockets = true;
     useACMEHost = "averyan.ru";
+    extraConfig = ''
+      proxy_buffering off;
+    '';
     forceSSL = true;
     kTLS = true;
     http3 = true;
