@@ -18,6 +18,7 @@ in
 {
   "secrets/accounts/mail.age".publicKeys = users ++ desktops;
   "secrets/accounts/deluge.age".publicKeys = users ++ [ whale ];
+  "secrets/accounts/radicale.age".publicKeys = users ++ desktops ++ [ whale ];
 
   "secrets/passwords/alex.age".publicKeys = users ++ systems;
 

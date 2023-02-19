@@ -16,6 +16,7 @@ in
     inputs.self.nixosModules.profiles.server.photoprism
     inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
+    inputs.self.nixosModules.profiles.server.radicale
 
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.podman
