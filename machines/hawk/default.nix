@@ -101,6 +101,8 @@
     http3 = true;
   };
 
+  services.prometheus.exporters.wireguard.enable = true;
+
   networking = {
     defaultGateway = {
       address = "10.0.0.1";
@@ -121,7 +123,10 @@
       extraNatPostroutingRules = [ "oifname ens3 masquerade" ];
     };
 
-    firewall.allowedUDPPorts = [ 51820 ];
+    firewall = {
+      allowedUDPPorts = [ 51820 ];
+      interfaces."nebula.averyan".allowedTCPPorts = [ 9586 ];
+    };
 
     wireguard.interfaces = {
       wg0 = {

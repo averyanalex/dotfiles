@@ -83,6 +83,15 @@
           ];
         }];
       }
+      {
+        job_name = "wireguard";
+        scrape_interval = "1m";
+        static_configs = [{
+          targets = [
+            "hawk:9586"
+          ];
+        }];
+      }
     ];
   };
 
