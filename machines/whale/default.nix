@@ -8,21 +8,23 @@ in
   imports = [
     inputs.self.nixosModules.roles.server
 
-    inputs.self.nixosModules.profiles.server.firesquare
     inputs.self.nixosModules.profiles.server.hass
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.pgsql
-    inputs.self.nixosModules.profiles.server.photoprism
-    inputs.self.nixosModules.profiles.server.pterodactyl
     inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.radicale
 
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.podman
-    inputs.self.nixosModules.profiles.tanksrv
+
     ./hardware.nix
     ./mounts.nix
+
+    ./firesquare.nix
+    ./photoprism.nix
+    ./pterodactyl.nix
+    ./tanksrv.nix
   ];
 
   system.stateVersion = "22.05";
