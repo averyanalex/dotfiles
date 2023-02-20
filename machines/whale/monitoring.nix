@@ -74,6 +74,15 @@
           ];
         }];
       }
+      {
+        job_name = "postgres";
+        scrape_interval = "1m";
+        static_configs = [{
+          targets = [
+            "whale:9187"
+          ];
+        }];
+      }
     ];
   };
 
