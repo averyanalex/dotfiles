@@ -25,6 +25,7 @@
       dns
       enloc
       home
+      monitoring
       nebula-averyan
       nftables
       nix
