@@ -22,6 +22,7 @@ in
     ./mounts.nix
 
     ./firesquare.nix
+    ./monitoring.nix
     ./photoprism.nix
     ./pterodactyl.nix
     ./tanksrv.nix

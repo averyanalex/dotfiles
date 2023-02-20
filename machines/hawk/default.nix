@@ -89,6 +89,18 @@
     http3 = true;
   };
 
+  services.nginx.virtualHosts."grafana.averyan.ru" = {
+    locations."/".proxyPass = "http://whale:3729";
+    locations."/".proxyWebsockets = true;
+    useACMEHost = "averyan.ru";
+    extraConfig = ''
+      proxy_buffering off;
+    '';
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+
   networking = {
     defaultGateway = {
       address = "10.0.0.1";
