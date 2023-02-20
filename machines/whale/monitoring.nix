@@ -67,4 +67,9 @@
       }
     ];
   };
+
+  persist.state.dirs = [
+    { directory = "/var/lib/prometheus2"; user = "prometheus"; group = "prometheus"; mode = "u=rwx,g=,o="; }
+    { directory = "/var/lib/grafana"; user = "grafana"; group = "grafana"; mode = "u=rwx,g=,o="; }
+  ];
 }
