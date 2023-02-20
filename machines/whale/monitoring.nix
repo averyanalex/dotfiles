@@ -65,6 +65,15 @@
           ];
         }];
       }
+      {
+        job_name = "nginx";
+        scrape_interval = "1m";
+        static_configs = [{
+          targets = [
+            "hawk:9113"
+          ];
+        }];
+      }
     ];
   };
 
