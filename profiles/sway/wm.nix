@@ -19,17 +19,6 @@
       gnome.gnome-keyring
       gcr
 
-      # fonts
-      dejavu_fonts
-      freefont_ttf
-      gyre-fonts
-      liberation_ttf
-      unifont
-      noto-fonts-emoji
-      noto-fonts-cjk
-      meslo-lgs-nf
-      jetbrains-mono
-
       # volume control
       pulseaudio
     ];
