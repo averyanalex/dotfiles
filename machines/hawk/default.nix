@@ -174,6 +174,11 @@
             publicKey = "/BRUH/MivTgVsGeTINUQ5pZDtX8nzrEv1vy+wNJE0Ws=";
             allowedIPs = [ "10.8.7.244/32" ];
           }
+          {
+            # Khrustaleva
+            publicKey = "fZS0Loc8VTcARnokFwR4pgTiP+warZLa2IYHefiD8ho=";
+            allowedIPs = [ "10.8.7.245/32" ];
+          }
         ];
       };
     };
