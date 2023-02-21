@@ -98,7 +98,7 @@ in
     };
   };
 
-  systemd.services."podman-esphome".after = [ "network.target" ];
+  systemd.services."podman-esphome".serviceConfig.RestartSec = "10s";
 
   services.postgresql = {
     ensureDatabases = [ "hass" ];

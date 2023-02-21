@@ -3,8 +3,9 @@
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
 
   systemd.services."podman-photoprism" = {
-    wants = [ "setup-photoprism-dirs.service" "mysql.service" "network.target" ];
-    after = [ "setup-photoprism-dirs.service" "mysql.service" "network.target" ];
+    wants = [ "setup-photoprism-dirs.service" "mysql.service" ];
+    after = [ "setup-photoprism-dirs.service" "mysql.service" ];
+    serviceConfig.RestartSec = "10s";
   };
 
   systemd.services.setup-photoprism-dirs = {
