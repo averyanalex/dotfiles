@@ -23,9 +23,9 @@
       console
       dhcp
       dns
-      enloc
       home
       hosts
+      locale
       monitoring
       nebula-averyan
       nftables
