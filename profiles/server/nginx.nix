@@ -7,10 +7,10 @@
 
     clientMaxBodySize = "4G";
 
-    recommendedOptimisation = true;
-    recommendedTlsSettings = true;
     recommendedGzipSettings = true;
+    recommendedOptimisation = true;
     recommendedProxySettings = true;
+    recommendedTlsSettings = true;
 
     statusPage = true;
   };

@@ -4,6 +4,7 @@ let
     locations."/".proxyWebsockets = true;
     extraConfig = ''
       proxy_buffering off;
+      brotli on;
     '';
     forceSSL = true;
     kTLS = true;
