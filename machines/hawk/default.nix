@@ -1,5 +1,18 @@
 { inputs, config, ... }:
-
+let
+  commonNginxHost = {
+    locations."/".proxyWebsockets = true;
+    extraConfig = ''
+      proxy_buffering off;
+    '';
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+  commonAveryanHost = commonNginxHost // {
+    useACMEHost = "averyan.ru";
+  };
+in
 {
   imports = [
     inputs.self.nixosModules.roles.server
@@ -29,88 +42,30 @@
 
   # TODO: refactor nginx
 
-  services.nginx.virtualHosts."ptero.averyan.ru" = {
-    locations."/".proxyPass = "http://10.8.7.80:80";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
-  };
+  services.nginx.virtualHosts = {
+    "prism.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://whale:2342";
+    };
+    "home.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://whale:8123";
+    };
+    "dav.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://whale:5232";
+    };
 
-  services.nginx.virtualHosts."prism.averyan.ru" = {
-    locations."/".proxyPass = "http://10.5.3.20:2342";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
-  };
+    "bw.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://whale:8222";
+    };
+    "grafana.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://whale:3729";
+    };
 
-  services.nginx.virtualHosts."home.averyan.ru" = {
-    locations."/".proxyPass = "http://10.5.3.20:8123";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
-  };
-
-  services.nginx.virtualHosts."dav.averyan.ru" = {
-    locations."/".proxyPass = "http://10.5.3.20:5232";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
-  };
-
-  services.nginx.virtualHosts."whale-ptero.averyan.ru" = {
-    locations."/".proxyPass = "http://10.8.7.80:443";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
-  };
-
-  services.nginx.virtualHosts."grafana.averyan.ru" = {
-    locations."/".proxyPass = "http://whale:3729";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
-  };
-
-  services.nginx.virtualHosts."bw.averyan.ru" = {
-    locations."/".proxyPass = "http://whale:8222";
-    locations."/".proxyWebsockets = true;
-    useACMEHost = "averyan.ru";
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    kTLS = true;
-    http3 = true;
+    "ptero.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://10.8.7.80:80";
+    };
+    "whale-ptero.averyan.ru" = commonAveryanHost // {
+      locations."/".proxyPass = "http://10.8.7.80:443";
+    };
   };
 
   services.prometheus.exporters.wireguard.enable = true;
