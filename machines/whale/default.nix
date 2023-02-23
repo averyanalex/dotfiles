@@ -14,6 +14,7 @@ in
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.radicale
+    inputs.self.nixosModules.profiles.server.vaultwarden
 
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.podman

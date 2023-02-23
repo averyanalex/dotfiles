@@ -101,6 +101,18 @@
     http3 = true;
   };
 
+  services.nginx.virtualHosts."bw.averyan.ru" = {
+    locations."/".proxyPass = "http://whale:8222";
+    locations."/".proxyWebsockets = true;
+    useACMEHost = "averyan.ru";
+    extraConfig = ''
+      proxy_buffering off;
+    '';
+    forceSSL = true;
+    kTLS = true;
+    http3 = true;
+  };
+
   services.prometheus.exporters.wireguard.enable = true;
 
   networking = {
@@ -125,7 +137,7 @@
 
     firewall = {
       allowedUDPPorts = [ 51820 ];
-      interfaces."nebula.averyan".allowedTCPPorts = [ 9586 ];
+      interfaces."nebula.averyan".allowedTCPPorts = [ 9586 ]; # wg exporter
     };
 
     wireguard.interfaces = {
