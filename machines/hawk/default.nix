@@ -8,7 +8,7 @@ let
     '';
     forceSSL = true;
     kTLS = true;
-    http3 = true;
+    # http3 = true;
   };
   commonAveryanHost = commonNginxHost // {
     useACMEHost = "averyan.ru";
