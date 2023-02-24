@@ -50,14 +50,14 @@ in
 
     # TODO: recommendedBrotliSettings = true;
     additionalModules = [ pkgs.nginxModules.brotli ];
-    appendHttpConfig = ''
-      brotli on;
-      brotli_static on;
-      brotli_comp_level 5;
-      brotli_window 512k;
-      brotli_min_length 256;
-      brotli_types ${lib.concatStringsSep " " compressMimeTypes};
-    '';
+    # appendHttpConfig = ''
+    #   brotli on;
+    #   brotli_static on;
+    #   brotli_comp_level 5;
+    #   brotli_window 512k;
+    #   brotli_min_length 256;
+    #   brotli_types ${lib.concatStringsSep " " compressMimeTypes};
+    # '';
 
     statusPage = true;
   };
