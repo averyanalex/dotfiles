@@ -31,6 +31,7 @@ in
         server_host = "10.5.3.20";
         trusted_proxies = [ "10.5.3.12" ];
         use_x_forwarded_for = true;
+        base_url = "https://home.averyan.ru";
       };
       binary_sensor = [
         {
