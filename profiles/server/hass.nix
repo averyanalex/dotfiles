@@ -85,7 +85,7 @@ in
   virtualisation.oci-containers = {
     containers = {
       esphome = {
-        image = "esphome/esphome:2023.2.3";
+        image = "esphome/esphome:2023.2.4";
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
           "/var/lib/esphome:/config"
