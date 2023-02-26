@@ -3,11 +3,14 @@
 {
   home-manager.users.alex = {
     home.packages = with pkgs; [
-      unstable.xdg-ninja
+      xdg-ninja
       ncdu
       killall
       btop
       htop
+
+      usbutils
+      pciutils
 
       unzip
     ];
