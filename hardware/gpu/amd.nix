@@ -6,20 +6,20 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    # driSupport32Bit = true;
     extraPackages = with pkgs; [
-      unstable.rocm-opencl-icd
-      unstable.rocm-opencl-runtime
-      unstable.rocm-runtime
-
-      amdvlk
-      # driversi686Linux.amdvlk
+      rocm-opencl-icd
+      rocm-opencl-runtime
+      rocm-runtime
     ];
   };
 
   environment.systemPackages = with pkgs; [
     rocm-smi
     radeontop
-    unstable.rocminfo
+    rocminfo
+  ];
+
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
   ];
 }
