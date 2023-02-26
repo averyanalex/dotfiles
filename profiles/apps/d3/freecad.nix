@@ -3,7 +3,8 @@
 {
   home-manager.users.alex = {
     home.packages = with pkgs; [
-      freecad
+      unstable.freecad
+      blender
       gmsh
       calculix
       elmerfem
