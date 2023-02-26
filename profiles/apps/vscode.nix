@@ -44,12 +44,12 @@
           version = "0.4.1399";
           sha256 = "2KxgMIFofrXyZmoW6OO4wpvggDBu2lO9sxptioHCytw=";
         }
-        {
-          name = "platformio-ide";
-          publisher = "platformio";
-          version = "3.0.0";
-          sha256 = "+0haTk/xbPoustJVE81tI9X8gcfiamx8nZBm7kGGY6c=";
-        }
+        # {
+        #   name = "platformio-ide";
+        #   publisher = "platformio";
+        #   version = "3.0.0";
+        #   sha256 = "+0haTk/xbPoustJVE81tI9X8gcfiamx8nZBm7kGGY6c=";
+        # }
         {
           name = "vscode-yaml";
           publisher = "redhat";
