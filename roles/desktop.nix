@@ -27,8 +27,8 @@
       sway
 
       adb
-      arduino
       autologin
+      embedded
       filemanager
       flatpak
       fonts
