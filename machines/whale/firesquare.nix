@@ -29,7 +29,7 @@ in
   };
 
   systemd.services."container@firesquare" = {
-    wants = [ "wireguard-wg-firesquare.service" "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
+    requires = [ "wireguard-wg-firesquare.service" "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
     after = [ "wireguard-wg-firesquare.service" "wireguard-wg-firesquare.target" "setup-firesquare-dirs.service" ];
   };
 

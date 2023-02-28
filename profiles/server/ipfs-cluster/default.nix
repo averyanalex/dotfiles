@@ -7,7 +7,7 @@ in
 
   systemd.services.ipfs-cluster = {
     path = [ pkgs.ipfs-cluster ];
-    wants = [ "ipfs.service" ];
+    requires = [ "ipfs.service" ];
     after = [ "ipfs.service" ];
     wantedBy = [ "multi-user.target" ];
     preStart = ''

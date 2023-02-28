@@ -82,6 +82,11 @@ in
     };
   };
 
+  systemd.services.home-assistant = {
+    requires = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
+  };
+
   virtualisation.oci-containers = {
     containers = {
       esphome = {

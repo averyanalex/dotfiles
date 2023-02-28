@@ -29,6 +29,11 @@
     };
   };
 
+  systemd.services.grafana = {
+    requires = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
+  };
+
   services.postgresql = {
     ensureDatabases = [ "grafana" ];
     ensureUsers = [{

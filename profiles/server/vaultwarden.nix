@@ -16,6 +16,11 @@
   persist.state.dirs = [{ directory = "/var/lib/bitwarden_rs"; user = "vaultwarden"; group = "vaultwarden"; mode = "u=rwx,g=,o="; }];
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 8222 ];
 
+  systemd.services.vaultwarden = {
+    requires = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
+  };
+
   services.postgresql = {
     ensureDatabases = [ "vaultwarden" ];
     ensureUsers = [{
