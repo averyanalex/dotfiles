@@ -133,6 +133,11 @@ in
             publicKey = "fZS0Loc8VTcARnokFwR4pgTiP+warZLa2IYHefiD8ho=";
             allowedIPs = [ "10.8.7.245/32" ];
           }
+          {
+            # Kazakova
+            publicKey = "eoofp8UhHTo9SAgSDQmBKrqeF2me1goHIunWWE4Og1c=";
+            allowedIPs = [ "10.8.7.246/32" ];
+          }
         ];
       };
     };
