@@ -18,6 +18,7 @@ in
 
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.podman
+    inputs.self.nixosModules.profiles.networkd
 
     ./hardware.nix
     ./mounts.nix
@@ -47,36 +48,61 @@ in
 
   # Networking
   boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = true;
     "net.ipv4.conf.all.forwarding" = true;
     "net.ipv4.conf.default.forwarding" = true;
-
-    "net.ipv6.conf.all.accept_ra" = 0;
-    "net.ipv6.conf.default.accept_ra" = 0;
-
     "net.ipv6.conf.all.forwarding" = true;
     "net.ipv6.conf.default.forwarding" = true;
   };
 
-  services.dhcpd4 = {
-    enable = true;
-    interfaces = [ "${lan}" "vm0" ];
-    extraConfig = ''
-      option domain-name-servers 8.8.8.8, 1.1.1.1;
-      option subnet-mask 255.255.255.0;
-      subnet 192.168.3.0 netmask 255.255.255.0 {
-        option broadcast-address 192.168.3.255;
-        option routers 192.168.3.1;
-        interface ${lan};
-        range 192.168.3.100 192.168.3.199;
-      }
-      subnet 192.168.12.0 netmask 255.255.255.0 {
-        option broadcast-address 192.168.12.255;
-        option routers 192.168.12.1;
-        interface vm0;
-        range 192.168.12.100 192.168.12.199;
-      }
-    '';
+  systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
+
+  systemd.network.networks = {
+    "40-${wan}" = {
+      name = "${wan}";
+      networkConfig = {
+        LinkLocalAddressing = "ipv6";
+        IPv6AcceptRA = true;
+        DHCP = "yes";
+      };
+      ipv6AcceptRAConfig = {
+        DHCPv6Client = "always";
+        UseAutonomousPrefix = false;
+      };
+    };
+
+    "40-${lan}" = {
+      name = "${lan}";
+      networkConfig = {
+        IPv6AcceptRA = false;
+        IPv6SendRA = true;
+        DHCPPrefixDelegation = true;
+
+        DHCPServer = true;
+      };
+      dhcpPrefixDelegationConfig.UplinkInterface = "${wan}";
+      dhcpServerConfig = {
+        PoolOffset = 100;
+        PoolSize = 50;
+        EmitDNS = true;
+        DNS = "9.9.9.9";
+      };
+    };
+
+    "40-vm0" = {
+      networkConfig = {
+        IPv6AcceptRA = false;
+        ConfigureWithoutCarrier = true;
+      };
+      dhcpServerConfig = {
+        PoolOffset = 100;
+        PoolSize = 50;
+        DNS = "9.9.9.9";
+      };
+    };
   };
+
+  networking.firewall.allowedUDPPorts = [ 67 546 ];
 
   age.secrets.wg-key-frsqr.file = ../../secrets/wireguard/whale-frsqr.age;
   networking.wireguard.interfaces = {
@@ -127,7 +153,6 @@ in
           }];
         };
       };
-      "${wan}".useDHCP = true;
     };
   };
 }

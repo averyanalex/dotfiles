@@ -12,6 +12,8 @@
       usbutils
       pciutils
 
+      traceroute
+
       unzip
     ];
   };

@@ -178,6 +178,9 @@ in
             }accept
           ''}
 
+          icmp type {echo-reply, destination-unreachable, source-quench, redirect, time-exceeded, parameter-problem, timestamp-request, timestamp-reply, info-request, info-reply, address-mask-request, address-mask-reply, router-advertisement, router-solicitation} accept
+          icmpv6 type {destination-unreachable, packet-too-big, time-exceeded, echo-reply, mld-listener-query, mld-listener-report, mld-listener-reduction, nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect, parameter-problem, router-renumbering} accept
+
           ${concatStringsSep "\n" nft-cfg.extraFilterInputRules}
 
           counter drop
