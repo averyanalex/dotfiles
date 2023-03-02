@@ -8,6 +8,7 @@
       killall
       btop
       htop
+      smartmontools
 
       usbutils
       pciutils
