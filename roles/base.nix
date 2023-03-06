@@ -34,6 +34,7 @@
       nur
       persist
       polkit
+      qemu
       ssh-server
       sudo
       timezone
