@@ -58,10 +58,10 @@ in
       address = "10.0.0.1";
       interface = "ens3";
     };
-    defaultGateway6 = {
-      address = "2a0e:d606:0:1af::1";
-      interface = "ens3";
-    };
+    # defaultGateway6 = {
+    #   address = "2a0e:d606:0:1af::1";
+    #   interface = "ens3";
+    # };
 
     nft-firewall = {
       extraFilterForwardRules = [
@@ -150,14 +150,14 @@ in
             prefixLength = 32;
           }];
         };
-        ipv6 = {
-          addresses = [
-            {
-              address = "2a0e:d606:0:1af::a";
-              prefixLength = 64;
-            }
-          ];
-        };
+        # ipv6 = {
+        #   addresses = [
+        #     {
+        #       address = "2a0e:d606:0:1af::a";
+        #       prefixLength = 64;
+        #     }
+        #   ];
+        # };
       };
     };
   };
