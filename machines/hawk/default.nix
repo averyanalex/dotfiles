@@ -142,6 +142,8 @@ in
       };
     };
 
+    nebula-averyan.isLighthouse = true;
+
     interfaces = {
       ens3 = {
         ipv4 = {
