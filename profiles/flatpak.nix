@@ -10,4 +10,5 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   persist.state.dirs = [ "/var/lib/flatpak" ];
+  persist.state.homeDirs = [ ".var/app" ];
 }
