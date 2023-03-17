@@ -27,13 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    prismlauncher = {
-      url = "github:PrismLauncher/PrismLauncher";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
+    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     averyanalex-blog.url = "github:averyanalex/blog";
-
     firesquare-servers.url = "github:fire-square/servers";
   };
 
