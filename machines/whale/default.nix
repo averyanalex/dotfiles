@@ -96,7 +96,7 @@ in
       };
       dhcpServerConfig = {
         PoolOffset = 100;
-        PoolSize = 50;
+        PoolSize = 100;
         DNS = "9.9.9.9";
       };
     };
