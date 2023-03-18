@@ -10,6 +10,13 @@
     ./mounts.nix
   ];
 
+  nixpkgs.localSystem = {
+    gcc.arch = "znver3";
+    gcc.tune = "znver3";
+    system = "x86_64-linux";
+  };
+  nix.settings.system-features = [ "gccarch-znver3" ];
+
   system.stateVersion = "22.05";
 
   persist.tmpfsSize = "10G";
