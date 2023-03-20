@@ -8,6 +8,7 @@ in
   imports = [
     inputs.self.nixosModules.roles.server
 
+    inputs.self.nixosModules.profiles.server.cpmbot
     inputs.self.nixosModules.profiles.server.hass
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql

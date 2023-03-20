@@ -29,6 +29,7 @@
 
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     averyanalex-blog.url = "github:averyanalex/blog";
+    cpmbot.url = "github:averyanalex/cpmbot";
     firesquare-servers.url = "github:fire-square/servers";
   };
 
