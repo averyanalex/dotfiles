@@ -20,6 +20,7 @@ in
       "esphome"
       "met"
       "roomba"
+      "zha"
     ];
     extraPackages = python3Packages: with python3Packages; [
       psycopg2
@@ -86,6 +87,8 @@ in
     requires = [ "postgresql.service" ];
     after = [ "postgresql.service" ];
   };
+
+  users.users.hass.extraGroups = [ "dialout" ];
 
   virtualisation.oci-containers = {
     containers = {
