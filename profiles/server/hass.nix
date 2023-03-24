@@ -20,6 +20,7 @@ in
       "esphome"
       "met"
       "roomba"
+      "utility_meter"
       "zha"
     ];
     extraPackages = python3Packages: with python3Packages; [
