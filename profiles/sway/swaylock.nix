@@ -3,6 +3,7 @@
 let
   fancylock = pkgs.writeShellScript "sway-fancylock" ''
     swaylock \
+      --daemonize
       --screenshots \
       --clock \
       --indicator \
@@ -19,7 +20,7 @@ let
       "$@"
   '';
   idlehandler = pkgs.writeShellScript "sway-idlehandler" ''
-    swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") "timeout 300 '${fancylock} --grace 70'"} timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+    swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") "timeout 300 '${fancylock} --grace 70' before-sleep '${fancylock}'"} timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
   '';
 in
 {
