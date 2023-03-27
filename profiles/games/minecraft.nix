@@ -1,13 +1,7 @@
-{ inputs, pkgs, ... }:
-let
-  # prismlauncher = inputs.prismlauncher.packages.x86_64-linux.prismlauncher.overrideAttrs (final: prev: {
-  prismlauncher = pkgs.prismlauncher.overrideAttrs (final: prev: {
-    buildInputs = prev.buildInputs ++ [ pkgs.unstable.mangohud ];
-  });
-in
+{ pkgs, ... }:
 {
   home-manager.users.alex = {
-    home.packages = [ prismlauncher ];
+    home.packages = [ pkgs.unstable.prismlauncher ];
   };
 
   services.syncthing.folders."PrismLauncher" = {
