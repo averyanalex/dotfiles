@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
-
 let
-  prismlauncher = inputs.prismlauncher.packages.x86_64-linux.prismlauncher.overrideAttrs (final: prev: {
+  # prismlauncher = inputs.prismlauncher.packages.x86_64-linux.prismlauncher.overrideAttrs (final: prev: {
+  prismlauncher = pkgs.prismlauncher.overrideAttrs (final: prev: {
     buildInputs = prev.buildInputs ++ [ pkgs.unstable.mangohud ];
   });
 in

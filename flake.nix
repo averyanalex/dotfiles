@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
+    # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     averyanalex-blog.url = "github:averyanalex/blog";
     cpmbot.url = "github:averyanalex/cpmbot";
     firesquare-servers.url = "github:fire-square/servers";
