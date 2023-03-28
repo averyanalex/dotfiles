@@ -22,9 +22,19 @@
     ] ++ (with games; [
       minecraft
       xonotic
+    ]) ++ (with gui; [
+      # sway
+      hyprland
+      rofi
+      clipboard
+      swaylock
+      swww
+      swayosd
+      swaync
+      portals
+      waybar
+      wm
     ]) ++ [
-      sway
-
       adb
       autologin
       embedded

@@ -1,5 +1,4 @@
 { lib, config, pkgs, ... }:
-
 let
   fancylock = pkgs.writeShellScript "sway-fancylock" ''
     swaylock \
@@ -19,29 +18,30 @@ let
       --fade-in 1.5 \
       "$@"
   '';
-  idlehandler = pkgs.writeShellScript "sway-idlehandler" ''
+  idlehandler = pkgs.writeShellScriptBin "sway-idlehandler" ''
     swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") "timeout 300 '${fancylock} --grace 70' before-sleep '${fancylock}'"} timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
   '';
 in
 {
   home-manager.users.alex = {
     home.packages = with pkgs; [
+      idlehandler
       swayidle
       swaylock-effects
     ];
 
-    wayland.windowManager.sway = {
-      config.keybindings =
-        let
-          mod = config.home-manager.users.alex.wayland.windowManager.sway.config.modifier;
-        in
-        lib.mkOptionDefault {
-          # "${mod}+L" = "${fancylock}";
-        };
-      extraConfig = ''
-        exec ${idlehandler}
-      '';
-    };
+    # wayland.windowManager.sway = {
+    #   config.keybindings =
+    #     let
+    #       mod = config.home-manager.users.alex.wayland.windowManager.sway.config.modifier;
+    #     in
+    #     lib.mkOptionDefault {
+    #       # "${mod}+L" = "${fancylock}";
+    #     };
+    #   extraConfig = ''
+    #     exec ${idlehandler}
+    #   '';
+    # };
   };
 
   security.pam.services.swaylock = { };

@@ -27,6 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     averyanalex-blog.url = "github:averyanalex/blog";
     cpmbot.url = "github:averyanalex/cpmbot";

@@ -2,16 +2,13 @@
 
 {
   imports = [
+    ./rofi.nix
     ./swaylock.nix
+    ./waybar.nix
     ./wm.nix
   ];
 
   home-manager.users.alex = {
-    home.packages = with pkgs; [
-      swayidle
-      swaylock-effects
-    ];
-
     programs.bash.enable = true;
     programs.bash.profileExtra = ''
       if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
@@ -80,13 +77,6 @@
         # polkit
         exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
 
-        # vnc
-        # exec ${pkgs.unstable.wayvnc}/bin/wayvnc --gpu
-
-        # clipboard
-        # exec clipman restore
-        # exec wl-paste -t text --watch clipman store
-
         # STYLING
         gaps inner 5
         gaps outer 5
@@ -97,41 +87,7 @@
         for_window [shell="x_wayland"] title_format "%class - %title"
 
         exec waybar
-
-        # AUTOSTART
-        # exec telegram-desktop -startintray
-        # exec element-desktop --hidden
       '';
-    };
-
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-      plugins = [ pkgs.rofi-emoji ];
-      terminal = "alacritty";
-      extraConfig = {
-        modi = "drun,run,emoji,ssh";
-        show-icons = true;
-      };
-    };
-
-    programs.waybar = {
-      enable = true;
-      # settings = {
-      #   mainBar = {
-      #     "network" = {
-      #       interval = 10;
-      #       format = "{ifname}";
-      #       format-wifi = "{essid} ({signalStrength}%)";
-      #       format-ethernet = "{ifname}";
-      #       format-disconnected = "SUS";
-      #       tooltip-format = "{ifname}";
-      #       tooltip-format-wifi = "{essid} ({signalStrength}%)";
-      #       tooltip-format-ethernet = "{ifname}";
-      #       tooltip-format-disconnected = "Disconnected";
-      #     };
-      #   };
-      # };
     };
   };
 }
