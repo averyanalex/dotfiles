@@ -1,9 +1,15 @@
+{ inputs, config, ... }:
+# let
+#   colorscheme = config.home-manager.users.alex.colorScheme;
+# in
 {
   imports = [
     ./hpr.nix
   ];
 
   home-manager.users.alex = {
+    # colorScheme = inputs.nix-colors.colorSchemes.paraiso;
+
     programs.bash.enable = true;
     programs.bash.profileExtra = ''
       if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
@@ -26,6 +32,7 @@
           col.active_border=0x66ee1111
           col.inactive_border=0x66333333
           resize_on_border=1
+          hover_icon_on_border=0
         }
 
         decoration {

@@ -23,15 +23,18 @@
       minecraft
       xonotic
     ]) ++ (with gui; [
+      # nix-colors
+      # stylix
       # sway
-      hyprland
-      rofi
       clipboard
-      swaylock
-      swww
-      swayosd
-      swaync
+      eww
+      hyprland
       portals
+      rofi
+      swaylock
+      swaync
+      swayosd
+      swww
       waybar
       wm
     ]) ++ [

@@ -27,7 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # nix-colors.url = "github:misterio77/nix-colors";
+
+    # stylix.url = "github:danth/stylix/release-22.11";
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprwm-contrib.url = "github:hyprwm/contrib";
 
     # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     averyanalex-blog.url = "github:averyanalex/blog";

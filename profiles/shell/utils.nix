@@ -16,6 +16,8 @@
       traceroute
 
       unzip
+
+      rmlint
     ];
   };
 }
