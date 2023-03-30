@@ -31,6 +31,9 @@
       mode = "3440x1440@144Hz";
       adaptive_sync = "off";
     };
+    wayland.windowManager.hyprland.extraConfig = ''
+      monitor=DP-1,3440x1440@144,0x0,1
+    '';
   };
   boot.loader.systemd-boot.consoleMode = "max";
   hardware.video.hidpi.enable = true;
