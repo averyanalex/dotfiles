@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, config, ... }:
 {
   home-manager.users.alex = {
     home.packages = [
@@ -98,7 +98,7 @@
         modules-right = [
           "pulseaudio"
           "backlight"
-          "upower"
+          (lib.optionalString (config.networking.hostName != "alligator") "upower")
           "network"
           "clock"
         ];
