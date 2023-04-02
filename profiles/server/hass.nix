@@ -17,6 +17,7 @@ in
     enable = true;
     extraComponents = [
       "airvisual"
+      "co2signal"
       "esphome"
       "met"
       "roomba"
