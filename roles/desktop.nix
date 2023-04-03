@@ -10,6 +10,7 @@
 
       firefox
       kdenlive
+      mpv
       notes
       obs
       octave
