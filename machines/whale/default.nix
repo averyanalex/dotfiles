@@ -18,8 +18,9 @@ in
     inputs.self.nixosModules.profiles.server.vaultwarden
 
     inputs.self.nixosModules.profiles.libvirt
-    inputs.self.nixosModules.profiles.podman
     inputs.self.nixosModules.profiles.networkd
+    inputs.self.nixosModules.profiles.podman
+    inputs.self.nixosModules.profiles.remote-builder-host
 
     ./hardware.nix
     ./mounts.nix
