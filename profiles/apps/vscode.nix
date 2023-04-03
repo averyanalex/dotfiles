@@ -2,10 +2,6 @@
 
 {
   home-manager.users.alex = {
-    home.packages = with pkgs; [
-      rnix-lsp
-    ];
-
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
@@ -71,6 +67,7 @@
       ];
       userSettings = {
         "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "${pkgs.nil}/bin/nil";
 
         "rust-analyzer.server.path" = "${pkgs.unstable.rust-analyzer}/bin/rust-analyzer";
         # "platformio-ide.useBuiltinPIOCore" = false;
