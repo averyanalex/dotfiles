@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    inputs.self.nixosModules.profiles.remote-builder-client
     inputs.self.nixosModules.roles.server
     inputs.self.nixosModules.hardware.aeza
     ./mounts.nix

@@ -2,9 +2,10 @@
 
 {
   imports = [
-    inputs.self.nixosModules.roles.desktop
-    inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.bluetooth
+    inputs.self.nixosModules.profiles.netman
+    inputs.self.nixosModules.profiles.remote-builder-client
+    inputs.self.nixosModules.roles.desktop
     ./hardware.nix
     ./mounts.nix
   ];
