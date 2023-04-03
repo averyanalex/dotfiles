@@ -64,6 +64,10 @@
           bind=SUPER,V,togglesplit,
         }
 
+        misc {
+          vrr=2
+        }
+
         bind=SUPER,Q,killactive,
         bind=SUPER,F,fullscreen,0
         bind=SUPERSHIFT,E,exit,
