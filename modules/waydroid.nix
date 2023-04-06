@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.virtualisation.averyan-waydroid;
   kernelPackages = config.boot.kernelPackages;
   waydroidGbinderConf = pkgs.writeText "waydroid.conf" ''
@@ -16,10 +17,7 @@ let
     /dev/vndbinder = aidl2
     /dev/hwbinder = hidl
   '';
-
-in
-{
-
+in {
   options.virtualisation.averyan-waydroid = {
     enable = mkEnableOption "Waydroid";
 
@@ -43,24 +41,25 @@ in
       (isEnabled "ASHMEM")
     ];
 
-    /* NOTE: we always enable this flag even if CONFIG_PSI_DEFAULT_DISABLED is not on
-      as reading the kernel config is not always possible and on kernels where it's
-      already on it will be no-op
+    /*
+     NOTE: we always enable this flag even if CONFIG_PSI_DEFAULT_DISABLED is not on
+    as reading the kernel config is not always possible and on kernels where it's
+    already on it will be no-op
     */
-    boot.kernelParams = [ "psi=1" ];
+    boot.kernelParams = ["psi=1"];
 
     environment.etc."gbinder.d/waydroid.conf".source = waydroidGbinderConf;
 
-    environment.systemPackages = [ cfg.package ];
+    environment.systemPackages = [cfg.package];
 
-    networking.firewall.trustedInterfaces = [ "waydroid0" ];
+    networking.firewall.trustedInterfaces = ["waydroid0"];
 
     virtualisation.lxc.enable = true;
 
     systemd.services.waydroid-container = {
       description = "Waydroid Container";
 
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
 
       unitConfig = {
         ConditionPathExists = "/var/lib/waydroid/lxc/waydroid";
@@ -77,5 +76,4 @@ in
       "d /var/lib/misc 0755 root root -" # for dnsmasq.leases
     ];
   };
-
 }

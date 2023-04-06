@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   virtualisation.podman = {
     enable = true;
     defaultNetwork.dnsname.enable = true;
@@ -13,6 +12,16 @@
     ];
   };
 
-  persist.state.homeDirs = [{ directory = ".local/share/containers"; mode = "u=rwx,g=,o="; }];
-  persist.state.dirs = [{ directory = "/root/.local/share/containers"; mode = "u=rwx,g=,o="; }];
+  persist.state.homeDirs = [
+    {
+      directory = ".local/share/containers";
+      mode = "u=rwx,g=,o=";
+    }
+  ];
+  persist.state.dirs = [
+    {
+      directory = "/root/.local/share/containers";
+      mode = "u=rwx,g=,o=";
+    }
+  ];
 }

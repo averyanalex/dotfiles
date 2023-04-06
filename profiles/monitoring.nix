@@ -1,5 +1,8 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   services.prometheus.exporters.node = {
     enable = true;
     enabledCollectors = [
@@ -13,5 +16,5 @@
     ];
   };
 
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 9100 ];
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [9100];
 }

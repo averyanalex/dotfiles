@@ -2,7 +2,7 @@
   fileSystems."/persist" = {
     device = "/dev/hamster/data";
     fsType = "ext4";
-    options = [ "discard" ];
+    options = ["discard"];
   };
 
   fileSystems."/boot" = {
@@ -10,8 +10,10 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{
-    device = "/dev/hamster/swap";
-    discardPolicy = "both";
-  }];
+  swapDevices = [
+    {
+      device = "/dev/hamster/swap";
+      discardPolicy = "both";
+    }
+  ];
 }

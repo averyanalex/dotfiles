@@ -1,9 +1,12 @@
-{ inputs, ... }: {
-  imports = [
-    ./base.nix
-  ] ++ (with inputs.self.nixosModules.modules; [
-  ]) ++ (with inputs.self.nixosModules.profiles; [
-  ]);
+{inputs, ...}: {
+  imports =
+    [
+      ./base.nix
+    ]
+    ++ (with inputs.self.nixosModules.modules; [
+      ])
+    ++ (with inputs.self.nixosModules.profiles; [
+      ]);
 
   systemd = {
     enableEmergencyMode = false;

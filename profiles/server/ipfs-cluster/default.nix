@@ -1,15 +1,18 @@
-{ pkgs, lib, config, ... }:
-let
-  service = (lib.importJSON ./service.json);
-in
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  service = lib.importJSON ./service.json;
+in {
   age.secrets.credentials-ipfs-cluster.file = ../../../secrets/creds/ipfs-cluster.age;
 
   systemd.services.ipfs-cluster = {
-    path = [ pkgs.ipfs-cluster ];
-    requires = [ "ipfs.service" ];
-    after = [ "ipfs.service" ];
-    wantedBy = [ "multi-user.target" ];
+    path = [pkgs.ipfs-cluster];
+    requires = ["ipfs.service"];
+    after = ["ipfs.service"];
+    wantedBy = ["multi-user.target"];
     preStart = ''
       if [ ! -f "identity.json" ]; then
         ipfs-cluster-service --config . init -f
@@ -32,7 +35,14 @@ in
     };
   };
 
-  persist.state.dirs = [{ directory = "/var/lib/ipfs-cluster"; user = "ipfs-cluster"; group = "ipfs-cluster"; mode = "u=rwx,g=rx,o=rx"; }];
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/ipfs-cluster";
+      user = "ipfs-cluster";
+      group = "ipfs-cluster";
+      mode = "u=rwx,g=rx,o=rx";
+    }
+  ];
 
   users = {
     users."ipfs-cluster" = {
@@ -43,10 +53,10 @@ in
       group = "ipfs-cluster";
     };
 
-    groups."ipfs-cluster" = { };
+    groups."ipfs-cluster" = {};
   };
 
-  environment.systemPackages = [ pkgs.ipfs-cluster ];
+  environment.systemPackages = [pkgs.ipfs-cluster];
 
   # networking.firewall.allowedTCPPorts = [ 9094 9096 ];
   # networking.firewall.allowedUDPPorts = [ 9096 ];

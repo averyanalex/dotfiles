@@ -1,20 +1,23 @@
-{ config, lib, pkgs, ... }:
-with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.services.av-yggdrasil;
-  settingsProvided = cfg.settings != { };
+  settingsProvided = cfg.settings != {};
   configFileProvided = cfg.configFile != null;
 
-  format = pkgs.formats.json { };
-in
-{
+  format = pkgs.formats.json {};
+in {
   options = with types; {
     services.av-yggdrasil = {
       enable = mkEnableOption (lib.mdDoc "the yggdrasil system service");
 
       settings = mkOption {
         type = format.type;
-        default = { };
+        default = {};
         example = {
           Peers = [
             "tcp://aa.bb.cc.dd:eeeee"
@@ -76,8 +79,8 @@ in
 
       denyDhcpcdInterfaces = mkOption {
         type = listOf str;
-        default = [ ];
-        example = [ "tap*" ];
+        default = [];
+        example = ["tap*"];
         description = lib.mdDoc ''
           Disable the DHCP client for any interface whose name matches
           any of the shell glob patterns in this list.  Use this
@@ -110,13 +113,15 @@ in
   };
 
   config = mkIf cfg.enable (
-    let binYggdrasil = cfg.package + "/bin/yggdrasil";
-    in
-    {
-      assertions = [{
-        assertion = config.networking.enableIPv6;
-        message = "networking.enableIPv6 must be true for yggdrasil to work";
-      }];
+    let
+      binYggdrasil = cfg.package + "/bin/yggdrasil";
+    in {
+      assertions = [
+        {
+          assertion = config.networking.enableIPv6;
+          message = "networking.enableIPv6 must be true for yggdrasil to work";
+        }
+      ];
 
       system.activationScripts.yggdrasil = mkIf cfg.persistentKeys ''
         if [ ! -e ${cfg.keysPath} ]
@@ -131,37 +136,38 @@ in
 
       systemd.services.yggdrasil = {
         description = "Yggdrasil Network Service";
-        after = [ "network-pre.target" ];
-        wants = [ "network.target" ];
-        before = [ "network.target" ];
-        wantedBy = [ "multi-user.target" ];
+        after = ["network-pre.target"];
+        wants = ["network.target"];
+        before = ["network.target"];
+        wantedBy = ["multi-user.target"];
 
         preStart =
-          (if settingsProvided || configFileProvided || cfg.persistentKeys then
-            ''mkdir --mode=700 -p /run/yggdrasil
-            echo ''
-
-            + (lib.optionalString settingsProvided
-              "'${builtins.toJSON cfg.settings}'")
-            + (lib.optionalString configFileProvided "$(cat ${cfg.configFile})")
-            + (lib.optionalString cfg.persistentKeys "$(cat ${cfg.keysPath})")
-            + " | ${pkgs.jq}/bin/jq -s add | ${binYggdrasil} -normaliseconf -useconf"
-          else
-            "${binYggdrasil} -genconf") + " > /run/yggdrasil/yggdrasil.conf";
+          (
+            if settingsProvided || configFileProvided || cfg.persistentKeys
+            then
+              ''                mkdir --mode=700 -p /run/yggdrasil
+                            echo ''
+              + (lib.optionalString settingsProvided
+                "'${builtins.toJSON cfg.settings}'")
+              + (lib.optionalString configFileProvided "$(cat ${cfg.configFile})")
+              + (lib.optionalString cfg.persistentKeys "$(cat ${cfg.keysPath})")
+              + " | ${pkgs.jq}/bin/jq -s add | ${binYggdrasil} -normaliseconf -useconf"
+            else "${binYggdrasil} -genconf"
+          )
+          + " > /run/yggdrasil/yggdrasil.conf";
 
         serviceConfig = {
-          ExecStart =
-            "${binYggdrasil} -useconffile /run/yggdrasil/yggdrasil.conf";
+          ExecStart = "${binYggdrasil} -useconffile /run/yggdrasil/yggdrasil.conf";
           ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
           Restart = "always";
         };
       };
 
       networking.dhcpcd.denyInterfaces = cfg.denyDhcpcdInterfaces;
-      networking.firewall.allowedUDPPorts = mkIf cfg.openMulticastPort [ 9001 ];
+      networking.firewall.allowedUDPPorts = mkIf cfg.openMulticastPort [9001];
 
       # Make yggdrasilctl available on the command line.
-      environment.systemPackages = [ cfg.package ];
+      environment.systemPackages = [cfg.package];
     }
   );
 }

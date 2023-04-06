@@ -13,21 +13,30 @@
   users.users.vaultwarden.uid = 993;
   users.groups.vaultwarden.gid = 989;
 
-  persist.state.dirs = [{ directory = "/var/lib/bitwarden_rs"; user = "vaultwarden"; group = "vaultwarden"; mode = "u=rwx,g=,o="; }];
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 8222 ];
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/bitwarden_rs";
+      user = "vaultwarden";
+      group = "vaultwarden";
+      mode = "u=rwx,g=,o=";
+    }
+  ];
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8222];
 
   systemd.services.vaultwarden = {
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
   };
 
   services.postgresql = {
-    ensureDatabases = [ "vaultwarden" ];
-    ensureUsers = [{
-      name = "vaultwarden";
-      ensurePermissions = {
-        "DATABASE vaultwarden" = "ALL PRIVILEGES";
-      };
-    }];
+    ensureDatabases = ["vaultwarden"];
+    ensureUsers = [
+      {
+        name = "vaultwarden";
+        ensurePermissions = {
+          "DATABASE vaultwarden" = "ALL PRIVILEGES";
+        };
+      }
+    ];
   };
 }

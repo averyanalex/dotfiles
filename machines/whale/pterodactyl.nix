@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   age.secrets.wg-key-pterodactyl.file = ../../secrets/wireguard/pterodactyl.age;
   networking.wireguard.interfaces = {
     wg-pterodactyl = {
@@ -8,7 +11,7 @@
       peers = [
         {
           publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
-          allowedIPs = [ "0.0.0.0/0" ];
+          allowedIPs = ["0.0.0.0/0"];
           endpoint = "hawk.averyan.ru:51820";
           persistentKeepalive = 15;
         }
@@ -17,8 +20,8 @@
   };
 
   systemd.services."container@pterodactyl" = {
-    requires = [ "wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service" ];
-    after = [ "wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service" ];
+    requires = ["wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service"];
+    after = ["wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service"];
   };
 
   systemd.services.setup-pterodactyl-dirs = {
@@ -51,9 +54,9 @@
     ephemeral = true;
 
     privateNetwork = true;
-    interfaces = [ "wg-pterodactyl" ];
+    interfaces = ["wg-pterodactyl"];
 
-    extraFlags = [ "--system-call-filter=@keyring" "--system-call-filter=bpf" ];
+    extraFlags = ["--system-call-filter=@keyring" "--system-call-filter=bpf"];
 
     bindMounts = {
       "/var/lib/mysql/" = {
@@ -80,21 +83,27 @@
       "/run/redis-pass".hostPath = config.age.secrets.pterodactyl-redis-password.path;
     };
 
-    config = { config, pkgs, ... }: {
+    config = {
+      config,
+      pkgs,
+      ...
+    }: {
       system.stateVersion = "22.11";
 
       networking = {
-        interfaces.wg-pterodactyl.ipv4.addresses = [{
-          address = "10.8.7.80";
-          prefixLength = 32;
-        }];
+        interfaces.wg-pterodactyl.ipv4.addresses = [
+          {
+            address = "10.8.7.80";
+            prefixLength = 32;
+          }
+        ];
         defaultGateway = {
           address = "10.8.7.1";
           interface = "wg-pterodactyl";
         };
         firewall.enable = false;
         useHostResolvConf = false;
-        nameservers = [ "9.9.9.9" "8.8.8.8" "1.1.1.1" "77.88.8.8" ];
+        nameservers = ["9.9.9.9" "8.8.8.8" "1.1.1.1" "77.88.8.8"];
       };
       services.resolved.enable = true;
 
@@ -107,7 +116,7 @@
               "/srv/pterodactyl/var/:/app/var/"
               "/srv/pterodactyl/logs/:/app/storage/logs"
             ];
-            extraOptions = [ "--network=host" ];
+            extraOptions = ["--network=host"];
             environment = {
               APP_URL = "https://ptero.averyan.ru";
               APP_TIMEZONE = "Europe/Moscow";
@@ -126,7 +135,7 @@
               DB_DATABASE = "panel";
               DB_USERNAME = "panel";
             };
-            environmentFiles = [ "/run/panel.env" ];
+            environmentFiles = ["/run/panel.env"];
           };
           wings = {
             image = "ghcr.io/averyanalex/wings:v1.11.0-np";
@@ -138,7 +147,7 @@
               "/var/log/pterodactyl/:/var/log/pterodactyl/"
               "/tmp/pterodactyl/:/tmp/pterodactyl/"
             ];
-            extraOptions = [ "--network=host" ];
+            extraOptions = ["--network=host"];
             environment = {
               TZ = "Europe/Moscow";
               WINGS_UID = "988";
@@ -153,7 +162,7 @@
         enable = true;
         autoPrune = {
           enable = true;
-          flags = [ "--all" ];
+          flags = ["--all"];
         };
       };
 
@@ -171,13 +180,15 @@
             max_connections = 512;
           };
         };
-        ensureDatabases = [ "panel" ];
-        ensureUsers = [{
-          name = "panel";
-          ensurePermissions = {
-            "panel.*" = "ALL PRIVILEGES";
-          };
-        }];
+        ensureDatabases = ["panel"];
+        ensureUsers = [
+          {
+            name = "panel";
+            ensurePermissions = {
+              "panel.*" = "ALL PRIVILEGES";
+            };
+          }
+        ];
       };
     };
   };

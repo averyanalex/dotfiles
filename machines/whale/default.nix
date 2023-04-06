@@ -1,10 +1,12 @@
-{ inputs, config, ... }:
-let
+{
+  inputs,
+  config,
+  ...
+}: let
   wan = "enp6s0";
   physLan = "enp5s0";
   lan = "lan0";
-in
-{
+in {
   imports = [
     inputs.self.nixosModules.roles.server
 
@@ -46,7 +48,7 @@ in
   services.kubo.dataDir = "/hdd/ipfs";
 
   # Monitoring
-  services.prometheus.exporters.node.enabledCollectors = [ "zoneinfo" ];
+  services.prometheus.exporters.node.enabledCollectors = ["zoneinfo"];
 
   # Networking
   boot.kernel.sysctl = {
@@ -104,17 +106,17 @@ in
     };
   };
 
-  networking.firewall.allowedUDPPorts = [ 67 546 ];
+  networking.firewall.allowedUDPPorts = [67 546];
 
   age.secrets.wg-key-frsqr.file = ../../secrets/wireguard/whale-frsqr.age;
   networking.wireguard.interfaces = {
     wg-frsqr = {
-      ips = [ "10.100.0.4/32" ];
+      ips = ["10.100.0.4/32"];
       privateKeyFile = config.age.secrets.wg-key-frsqr.path;
       peers = [
         {
           publicKey = "k8XDvqLf9eZzVkY0NpAU3TXgisDAsOOtg+wImiootA8=";
-          allowedIPs = [ "10.100.0.0/24" ];
+          allowedIPs = ["10.100.0.0/24"];
           endpoint = "rat.frsqr.xyz:51820";
           persistentKeepalive = 25;
         }
@@ -130,29 +132,33 @@ in
         ''iifname { "${lan}", "vm0" } oifname "${wan}" counter accept comment "allow LAN to WAN"''
         ''iifname "${wan}" oifname { "${lan}", "vm0" } ct state { established, related } counter accept comment "allow established back to LAN"''
       ];
-      extraNatPostroutingRules = [ ''oifname "${wan}" masquerade'' ];
+      extraNatPostroutingRules = [''oifname "${wan}" masquerade''];
     };
 
     bridges = {
-      ${lan}.interfaces = [ "${physLan}" ];
-      vm0.interfaces = [ ];
+      ${lan}.interfaces = ["${physLan}"];
+      vm0.interfaces = [];
     };
 
     interfaces = {
       "${lan}" = {
         ipv4 = {
-          addresses = [{
-            address = "192.168.3.1";
-            prefixLength = 24;
-          }];
+          addresses = [
+            {
+              address = "192.168.3.1";
+              prefixLength = 24;
+            }
+          ];
         };
       };
       vm0 = {
         ipv4 = {
-          addresses = [{
-            address = "192.168.12.1";
-            prefixLength = 24;
-          }];
+          addresses = [
+            {
+              address = "192.168.12.1";
+              prefixLength = 24;
+            }
+          ];
         };
       };
     };

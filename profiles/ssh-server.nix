@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
@@ -18,6 +16,11 @@
     ];
   };
 
-  environment.systemPackages = [ pkgs.mosh ];
-  networking.firewall.allowedUDPPortRanges = [{ from = 60000; to = 61000; }];
+  environment.systemPackages = [pkgs.mosh];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 60000;
+      to = 61000;
+    }
+  ];
 }

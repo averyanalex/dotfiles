@@ -2,7 +2,7 @@
   fileSystems."/persist" = {
     device = "/dev/whale/data";
     fsType = "ext4";
-    options = [ "discard" ];
+    options = ["discard"];
   };
 
   fileSystems."/boot" = {
@@ -13,18 +13,18 @@
   fileSystems."/hdd" = {
     device = "/dev/whale/storage";
     fsType = "ext4";
-    options = [ "discard" ];
+    options = ["discard"];
   };
 
   fileSystems."/tank" = {
     device = "/dev/whale/tank";
     fsType = "ext4";
-    options = [ "discard" ];
+    options = ["discard"];
   };
 
   fileSystems."/tank/dwnl" = {
     device = "/dev/whale/dwnl";
     fsType = "ext4";
-    options = [ "discard" ];
+    options = ["discard"];
   };
 }

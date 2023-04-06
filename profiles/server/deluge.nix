@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   services.deluge = {
     enable = true;
     user = "alex";
@@ -26,5 +25,12 @@
   #   symlink = false;
   # };
 
-  persist.state.dirs = [{ directory = "/var/lib/deluge"; user = "alex"; group = "users"; mode = "u=rwx,g=rwx,o="; }];
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/deluge";
+      user = "alex";
+      group = "users";
+      mode = "u=rwx,g=rwx,o=";
+    }
+  ];
 }

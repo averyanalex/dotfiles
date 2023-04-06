@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home-manager.users.alex = {
-    home.packages = [ pkgs.unstable.tdesktop ];
+    home.packages = [pkgs.unstable.tdesktop];
   };
 
-  persist.state.homeDirs = [ ".local/share/TelegramDesktop" ];
+  persist.state.homeDirs = [".local/share/TelegramDesktop"];
 }

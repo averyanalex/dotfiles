@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   set-random-wallpaper = pkgs.writeShellScriptBin "set-random-wallpaper" ''
     export SWWW_TRANSITION_FPS=60
     export SWWW_TRANSITION_STEP=90 # 2
@@ -15,10 +14,9 @@ let
     	sleep 300
     done
   '';
-in
-{
+in {
   home-manager.users.alex = {
-    home.packages = [ pkgs.unstable.swww set-random-wallpaper wallpaper-randomizer ];
+    home.packages = [pkgs.unstable.swww set-random-wallpaper wallpaper-randomizer];
     wayland.windowManager.hyprland.extraConfig = ''
       exec-once=swww init
       exec-once=wallpaper-randomizer

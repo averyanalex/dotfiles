@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home-manager.users.alex = {
     home.packages = with pkgs; [
       joplin-desktop

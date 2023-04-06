@@ -1,6 +1,8 @@
-{ config, inputs, ... }:
-
 {
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.self.nixosModules.roles.desktop
     inputs.self.nixosModules.profiles.bluetooth
@@ -22,7 +24,7 @@
   persist.tmpfsSize = "10G";
 
   networking = {
-    firewall.allowedTCPPorts = [ 25565 ];
+    firewall.allowedTCPPorts = [25565];
 
     # defaultGateway = {
     #   address = "192.168.3.1";

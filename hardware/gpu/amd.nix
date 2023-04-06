@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  boot.initrd.kernelModules = [ "amdgpu" ];
+{pkgs, ...}: {
+  boot.initrd.kernelModules = ["amdgpu"];
 
   hardware.opengl = {
     enable = true;

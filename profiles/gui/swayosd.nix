@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   home-manager.users.alex = {
     home.packages = [
       (pkgs.rustPlatform.buildRustPackage
@@ -16,8 +19,8 @@
 
           cargoSha256 = "hXKAoXnTJAzFcWSEpqrythXPunt3lcrySXB13R7hSzM=";
 
-          nativeBuildInputs = with pkgs; [ pkg-config ];
-          buildInputs = with pkgs; [ glib atk gtk3 gtk-layer-shell pulseaudio ];
+          nativeBuildInputs = with pkgs; [pkg-config];
+          buildInputs = with pkgs; [glib atk gtk3 gtk-layer-shell pulseaudio];
 
           meta = with lib; {
             description = "A GTK based on screen display for keyboard shortcuts like caps-lock and volume";

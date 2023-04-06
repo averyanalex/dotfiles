@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   systemd.services.qbittorrent = {
-    after = [ "network.target" ];
+    after = ["network.target"];
     description = "Qbittorrent Web";
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.qbittorrent-nox ];
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.qbittorrent-nox];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --webui-port=8173
@@ -14,5 +13,5 @@
     };
   };
 
-  persist.state.homeDirs = [ ".config/qBittorrent" ".local/share/qBittorrent" ];
+  persist.state.homeDirs = [".config/qBittorrent" ".local/share/qBittorrent"];
 }

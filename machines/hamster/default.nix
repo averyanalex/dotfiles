@@ -1,6 +1,8 @@
-{ config, inputs, ... }:
-
 {
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.self.nixosModules.profiles.bluetooth
     inputs.self.nixosModules.profiles.netman

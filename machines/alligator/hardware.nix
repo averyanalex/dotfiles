@@ -1,14 +1,18 @@
-{ inputs, modulesPath, ... }:
-
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ] ++ (with inputs.self.nixosModules.hardware; [
-    physical
-    sdboot
-    cpu.amd
-    gpu.amd
-  ]);
+  inputs,
+  modulesPath,
+  ...
+}: {
+  imports =
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+    ]
+    ++ (with inputs.self.nixosModules.hardware; [
+      physical
+      sdboot
+      cpu.amd
+      gpu.amd
+    ]);
 
   # Storage
   boot.initrd.availableKernelModules = [
@@ -20,7 +24,7 @@
     "uas"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = ["dm-snapshot"];
 
   # Screen
   boot.kernelParams = [

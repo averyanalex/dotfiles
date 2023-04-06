@@ -1,5 +1,10 @@
-{ inputs, pkgs, lib, config, ... }:
 {
+  inputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   home-manager.users.alex = {
     home.packages = [
       inputs.hyprwm-contrib.packages.${pkgs.hostPlatform.system}.grimblast
@@ -80,80 +85,82 @@
             color:      rgba(238, 46, 36, 1);
         }
       '';
-      settings = [{
-        height = 30;
-        layer = "top";
-        # position = "bottom";
-        tray = { spacing = 10; };
-        modules-left = [
-          "tray"
-          "mpd"
-          "wlr/workspaces"
-        ];
-        modules-center = [
-          "cpu"
-          "memory"
-          "disk"
-        ];
-        modules-right = [
-          "pulseaudio"
-          "backlight"
-          (lib.optionalString (config.networking.hostName != "alligator") "upower")
-          "network"
-          "clock"
-        ];
-        clock = {
-          format = "{:%H:%M}";
-          format-alt = "{:%d.%m.%Y}";
-          tooltip-format = "{:%H:%M | %d.%m.%Y}";
-        };
-        cpu = {
-          format = "{usage}% ";
-          tooltip = false;
-        };
-        memory = { format = "{}% "; };
-        # disk = {
-        #   format = "{percentage_free}% 🖴";
-        #   path = "/persist";
-        # };
-        network = {
-          format-wifi = "{essid} ({signalStrength}%) ";
-          format-ethernet = "{ipaddr}/{cidr} ";
-          tooltip-format = "{ifname} via {gwaddr} ";
-          format-linked = "{ifname} (No IP) ";
-          format-disconnected = "Disconnected ⚠";
-          format-alt = "{ifname}: {ipaddr}/{cidr}";
-        };
-        pulseaudio = {
-          format = "{volume}% {icon} {format_source}";
-          format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
-          format-source = "{volume}% ";
-          format-source-muted = "";
-          format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
-            default = [ "" "" "" ];
+      settings = [
+        {
+          height = 30;
+          layer = "top";
+          # position = "bottom";
+          tray = {spacing = 10;};
+          modules-left = [
+            "tray"
+            "mpd"
+            "wlr/workspaces"
+          ];
+          modules-center = [
+            "cpu"
+            "memory"
+            "disk"
+          ];
+          modules-right = [
+            "pulseaudio"
+            "backlight"
+            (lib.optionalString (config.networking.hostName != "alligator") "upower")
+            "network"
+            "clock"
+          ];
+          clock = {
+            format = "{:%H:%M}";
+            format-alt = "{:%d.%m.%Y}";
+            tooltip-format = "{:%H:%M | %d.%m.%Y}";
           };
-          on-click = "pavucontrol";
-        };
-        temperature = {
-          critical-threshold = 80;
-          format = "{temperatureC}°C {icon}";
-          format-icons = [ "" "" "" ];
-        };
-        "wlr/workspaces" = {
-          "format" = "{icon}";
-          "on-scroll-up" = "hyprctl dispatch workspace e+1";
-          "on-scroll-down" = "hyprctl dispatch workspace e-1";
-          "on-click" = "activate";
-        };
-      }];
+          cpu = {
+            format = "{usage}% ";
+            tooltip = false;
+          };
+          memory = {format = "{}% ";};
+          # disk = {
+          #   format = "{percentage_free}% 🖴";
+          #   path = "/persist";
+          # };
+          network = {
+            format-wifi = "{essid} ({signalStrength}%) ";
+            format-ethernet = "{ipaddr}/{cidr} ";
+            tooltip-format = "{ifname} via {gwaddr} ";
+            format-linked = "{ifname} (No IP) ";
+            format-disconnected = "Disconnected ⚠";
+            format-alt = "{ifname}: {ipaddr}/{cidr}";
+          };
+          pulseaudio = {
+            format = "{volume}% {icon} {format_source}";
+            format-bluetooth = "{volume}% {icon} {format_source}";
+            format-bluetooth-muted = " {icon} {format_source}";
+            format-muted = " {format_source}";
+            format-source = "{volume}% ";
+            format-source-muted = "";
+            format-icons = {
+              headphone = "";
+              hands-free = "";
+              headset = "";
+              phone = "";
+              portable = "";
+              car = "";
+              default = ["" "" ""];
+            };
+            on-click = "pavucontrol";
+          };
+          temperature = {
+            critical-threshold = 80;
+            format = "{temperatureC}°C {icon}";
+            format-icons = ["" "" ""];
+          };
+          "wlr/workspaces" = {
+            "format" = "{icon}";
+            "on-scroll-up" = "hyprctl dispatch workspace e+1";
+            "on-scroll-down" = "hyprctl dispatch workspace e-1";
+            "on-click" = "activate";
+          };
+        }
+      ];
       # settings = [{
       #   modules-left = [
       #     "tray"

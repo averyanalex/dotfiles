@@ -1,11 +1,12 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.networking.nebula-averyan;
-in
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.networking.nebula-averyan;
+in {
   options = {
     networking.nebula-averyan = {
       enable = mkOption {
@@ -21,15 +22,27 @@ in
       firewall = {
         outbound = mkOption {
           type = types.listOf types.attrs;
-          default = [{ port = "any"; proto = "any"; host = "any"; }];
+          default = [
+            {
+              port = "any";
+              proto = "any";
+              host = "any";
+            }
+          ];
           description = "Firewall rules for outbound traffic.";
-          example = [ ];
+          example = [];
         };
         inbound = mkOption {
           type = types.listOf types.attrs;
-          default = [{ port = "any"; proto = "any"; host = "any"; }];
+          default = [
+            {
+              port = "any";
+              proto = "any";
+              host = "any";
+            }
+          ];
           description = "Firewall rules for inbound traffic.";
-          example = [ ];
+          example = [];
         };
       };
     };
@@ -50,7 +63,7 @@ in
       listen.port = 4243;
       isLighthouse = cfg.isLighthouse;
 
-      lighthouses = mkIf (!cfg.isLighthouse) [ "10.5.3.12" ];
+      lighthouses = mkIf (!cfg.isLighthouse) ["10.5.3.12"];
       staticHostMap = {
         "10.5.3.12" = [
           "185.112.83.99:4243"
@@ -69,7 +82,7 @@ in
         };
         relay = {
           am_relay = cfg.isLighthouse;
-          relays = mkIf (!cfg.isLighthouse) [ "10.5.3.12" ];
+          relays = mkIf (!cfg.isLighthouse) ["10.5.3.12"];
         };
       };
 

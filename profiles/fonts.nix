@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
@@ -11,7 +14,7 @@
       noto-fonts-extra
     ];
     fontconfig.defaultFonts = {
-      monospace = [ "MesloLGS NF" ];
+      monospace = ["MesloLGS NF"];
     };
   };
 }

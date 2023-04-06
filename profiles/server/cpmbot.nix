@@ -1,10 +1,13 @@
-{ config, inputs, ... }:
 {
+  config,
+  inputs,
+  ...
+}: {
   age.secrets.cpmbot.file = ../../secrets/creds/cpmbot.age;
 
   systemd.services.cpmbot = {
-    after = [ "network.target" ];
-    path = [ inputs.cpmbot.packages.x86_64-linux.default ];
+    after = ["network.target"];
+    path = [inputs.cpmbot.packages.x86_64-linux.default];
     serviceConfig = {
       User = "cpmbot";
       Group = "cpmbot";
@@ -19,10 +22,17 @@
       StateDirectoryMode = "0700";
       Restart = "always";
     };
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
   };
 
-  persist.state.dirs = [{ directory = "/var/lib/cpmbot"; user = "cpmbot"; group = "cpmbot"; mode = "u=rwx,g=,o="; }];
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/cpmbot";
+      user = "cpmbot";
+      group = "cpmbot";
+      mode = "u=rwx,g=,o=";
+    }
+  ];
 
   users = {
     users.cpmbot = {

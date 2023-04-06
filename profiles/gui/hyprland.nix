@@ -1,4 +1,8 @@
-{ inputs, config, ... }:
+{
+  inputs,
+  config,
+  ...
+}:
 # let
 #   colorscheme = config.home-manager.users.alex.colorScheme;
 # in

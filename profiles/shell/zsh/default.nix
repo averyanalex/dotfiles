@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home-manager.users.alex = {
     # Autostart zsh in interactive non-tty sessions
     programs.bash.enable = true;
@@ -61,6 +64,6 @@
     };
   };
 
-  environment.pathsToLink = [ "/share/zsh" ];
-  persist.state.homeDirs = [ ".local/state/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
+  persist.state.homeDirs = [".local/state/zsh"];
 }

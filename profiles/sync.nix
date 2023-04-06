@@ -1,7 +1,9 @@
-{ lib, config, ... }:
-
-let
-  allDevices = [ "hamster" "alligator" ];
+{
+  lib,
+  config,
+  ...
+}: let
+  allDevices = ["hamster" "alligator"];
   commonFolder = name: {
     label = name;
     id = lib.strings.toLower name;
@@ -9,8 +11,7 @@ let
     ignorePerms = false;
     devices = allDevices;
   };
-in
-{
+in {
   services.syncthing = {
     enable = true;
 
@@ -40,11 +41,11 @@ in
     };
     folders = {
       "Documents" = commonFolder "Documents";
-      "Music" = commonFolder "Music" // { devices = allDevices ++ [ "pocoft" ]; };
-      "Notes" = commonFolder "Notes" // { devices = allDevices ++ [ "pocoft" ]; };
-      "Pictures" = commonFolder "Pictures" // { devices = allDevices ++ [ "pocoft" ]; };
+      "Music" = commonFolder "Music" // {devices = allDevices ++ ["pocoft"];};
+      "Notes" = commonFolder "Notes" // {devices = allDevices ++ ["pocoft"];};
+      "Pictures" = commonFolder "Pictures" // {devices = allDevices ++ ["pocoft"];};
     };
   };
 
-  persist.state.homeDirs = [ ".config/syncthing" ];
+  persist.state.homeDirs = [".config/syncthing"];
 }

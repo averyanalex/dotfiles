@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home-manager.users.alex = {
     home.packages = with pkgs; [
       # screenshots

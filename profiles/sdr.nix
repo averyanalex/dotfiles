@@ -1,7 +1,6 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   hardware.rtl-sdr.enable = true;
-  users.users.alex.extraGroups = [ "plugdev" ];
+  users.users.alex.extraGroups = ["plugdev"];
   home-manager.users.alex = {
     home.packages = with pkgs; [
       gqrx

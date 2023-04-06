@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   age.secrets.creds-cloudflare.file = ../../secrets/creds/cloudflare.age;
 
   security.acme = {
@@ -14,13 +12,20 @@
 
     certs = {
       "averyan.ru" = {
-        extraDomainNames = [ "*.averyan.ru" ];
+        extraDomainNames = ["*.averyan.ru"];
       };
       "memefinder.ru" = {
-        extraDomainNames = [ "*.memefinder.ru" ];
+        extraDomainNames = ["*.memefinder.ru"];
       };
     };
   };
 
-  persist.state.dirs = [{ directory = "/var/lib/acme"; user = "acme"; group = "acme"; mode = "u=rwx,g=rx,o=rx"; }];
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/acme";
+      user = "acme";
+      group = "acme";
+      mode = "u=rwx,g=rx,o=rx";
+    }
+  ];
 }

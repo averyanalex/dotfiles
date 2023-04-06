@@ -6,8 +6,8 @@
       keep-outputs = true;
       keep-derivations = true;
 
-      allowed-users = [ "root" "@users" ];
-      trusted-users = [ "root" "@wheel" ];
+      allowed-users = ["root" "@users"];
+      trusted-users = ["root" "@wheel"];
 
       builders-use-substitutes = true;
       connect-timeout = 5;

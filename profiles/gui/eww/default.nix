@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home-manager.users.alex = {
     programs.eww = {
       enable = true;

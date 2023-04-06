@@ -8,5 +8,5 @@
     };
   };
 
-  persist.state.homeDirs = [ ".local/share/direnv" ];
+  persist.state.homeDirs = [".local/share/direnv"];
 }

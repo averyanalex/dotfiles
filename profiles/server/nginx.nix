@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   compressMimeTypes = [
     "application/atom+xml"
     "application/geo+json"
@@ -34,8 +37,7 @@ let
     "text/x-component"
     "text/xml"
   ];
-in
-{
+in {
   services.nginx = {
     enable = true;
     package = pkgs.nginxQuic;
@@ -49,7 +51,7 @@ in
     recommendedGzipSettings = true;
 
     # TODO: recommendedBrotliSettings = true;
-    additionalModules = [ pkgs.nginxModules.brotli ];
+    additionalModules = [pkgs.nginxModules.brotli];
     appendHttpConfig = ''
       brotli on;
       brotli_static on;
@@ -62,12 +64,12 @@ in
     statusPage = true;
   };
 
-  users.users.nginx.extraGroups = [ "acme" ];
+  users.users.nginx.extraGroups = ["acme"];
 
   networking.firewall = {
-    allowedTCPPorts = [ 80 443 ];
-    allowedUDPPorts = [ 443 ];
-    interfaces."nebula.averyan".allowedTCPPorts = [ 9113 ];
+    allowedTCPPorts = [80 443];
+    allowedUDPPorts = [443];
+    interfaces."nebula.averyan".allowedTCPPorts = [9113];
   };
 
   services.prometheus.exporters.nginx.enable = true;

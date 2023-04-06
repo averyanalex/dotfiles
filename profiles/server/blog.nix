@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   services.nginx.virtualHosts."averyan.ru" = {
     root = inputs.averyanalex-blog.packages.x86_64-linux.blog;
     useACMEHost = "averyan.ru";

@@ -1,10 +1,9 @@
-{ config, ... }:
-{
+{config, ...}: {
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
 
   systemd.services."podman-photoprism" = {
-    requires = [ "setup-photoprism-dirs.service" "mysql.service" ];
-    after = [ "setup-photoprism-dirs.service" "mysql.service" ];
+    requires = ["setup-photoprism-dirs.service" "mysql.service"];
+    after = ["setup-photoprism-dirs.service" "mysql.service"];
     serviceConfig.RestartSec = "10s";
   };
 
@@ -17,7 +16,7 @@
     serviceConfig.RemainAfterExit = true;
   };
 
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 2342 ];
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [2342];
 
   virtualisation.oci-containers = {
     containers = {
@@ -28,7 +27,7 @@
           "/tank/Импорт:/photoprism/import"
           "/persist/var/lib/photoprism:/photoprism/storage"
         ];
-        extraOptions = [ "--network=host" ];
+        extraOptions = ["--network=host"];
         environment = {
           PHOTOPRISM_ADMIN_USER = "admin";
           PHOTOPRISM_AUTH_MODE = "password";
@@ -66,18 +65,20 @@
           PHOTOPRISM_GID = "100";
           # PHOTOPRISM_UMASK: 0000
         };
-        environmentFiles = [ config.age.secrets.photoprism.path ];
+        environmentFiles = [config.age.secrets.photoprism.path];
       };
     };
   };
 
   services.mysql = {
-    ensureDatabases = [ "photoprism" ];
-    ensureUsers = [{
-      name = "photoprism";
-      ensurePermissions = {
-        "photoprism.*" = "ALL PRIVILEGES";
-      };
-    }];
+    ensureDatabases = ["photoprism"];
+    ensureUsers = [
+      {
+        name = "photoprism";
+        ensurePermissions = {
+          "photoprism.*" = "ALL PRIVILEGES";
+        };
+      }
+    ];
   };
 }

@@ -8,5 +8,5 @@
     programs.zsh.shellAliases.cd = "z";
   };
 
-  persist.state.homeDirs = [ ".local/share/zoxide" ];
+  persist.state.homeDirs = [".local/share/zoxide"];
 }

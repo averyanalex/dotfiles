@@ -1,11 +1,9 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   overlay-hass = final: prev: {
     home-assistant = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.home-assistant;
   };
-in
-{
-  nixpkgs.overlays = [ overlay-hass ];
+in {
+  nixpkgs.overlays = [overlay-hass];
   disabledModules = [
     "services/home-automation/home-assistant.nix"
   ];
@@ -24,16 +22,17 @@ in
       "utility_meter"
       "zha"
     ];
-    extraPackages = python3Packages: with python3Packages; [
-      aiogithubapi
-      psycopg2
-      securetar
-    ];
+    extraPackages = python3Packages:
+      with python3Packages; [
+        aiogithubapi
+        psycopg2
+        securetar
+      ];
     config = {
-      default_config = { };
+      default_config = {};
       http = {
         server_host = "10.5.3.20";
-        trusted_proxies = [ "10.5.3.12" ];
+        trusted_proxies = ["10.5.3.12"];
         use_x_forwarded_for = true;
       };
       binary_sensor = [
@@ -86,11 +85,11 @@ in
   };
 
   systemd.services.home-assistant = {
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
   };
 
-  users.users.hass.extraGroups = [ "dialout" ];
+  users.users.hass.extraGroups = ["dialout"];
 
   virtualisation.oci-containers = {
     containers = {
@@ -100,7 +99,7 @@ in
           "/etc/localtime:/etc/localtime:ro"
           "/var/lib/esphome:/config"
         ];
-        extraOptions = [ "--network=host" "--privileged" ];
+        extraOptions = ["--network=host" "--privileged"];
         environment = {
           ESPHOME_DASHBOARD_USE_PING = "true";
           TZ = "Europe/Moscow";
@@ -112,19 +111,29 @@ in
   systemd.services."podman-esphome".serviceConfig.RestartSec = "10s";
 
   services.postgresql = {
-    ensureDatabases = [ "hass" ];
-    ensureUsers = [{
-      name = "hass";
-      ensurePermissions = {
-        "DATABASE hass" = "ALL PRIVILEGES";
-      };
-    }];
+    ensureDatabases = ["hass"];
+    ensureUsers = [
+      {
+        name = "hass";
+        ensurePermissions = {
+          "DATABASE hass" = "ALL PRIVILEGES";
+        };
+      }
+    ];
   };
 
   persist.state.dirs = [
-    { directory = "/var/lib/hass"; user = "hass"; group = "hass"; mode = "u=rwx,g=,o="; }
-    { directory = "/var/lib/esphome"; mode = "u=rwx,g=,o="; }
+    {
+      directory = "/var/lib/hass";
+      user = "hass";
+      group = "hass";
+      mode = "u=rwx,g=,o=";
+    }
+    {
+      directory = "/var/lib/esphome";
+      mode = "u=rwx,g=,o=";
+    }
   ];
 
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ 8123 6052 ];
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8123 6052];
 }

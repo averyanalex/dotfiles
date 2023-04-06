@@ -1,5 +1,8 @@
-{ inputs, config, ... }:
-let
+{
+  inputs,
+  config,
+  ...
+}: let
   makeAveryanHost = proxyPass: {
     locations."/".proxyPass = proxyPass;
     locations."/".proxyWebsockets = true;
@@ -10,8 +13,7 @@ let
     forceSSL = true;
     kTLS = true;
   };
-in
-{
+in {
   imports = [
     inputs.self.nixosModules.profiles.remote-builder-client
     inputs.self.nixosModules.roles.server
@@ -75,69 +77,69 @@ in
         "ip daddr 185.112.83.99 tcp dport 2022 dnat to 10.8.7.80"
         "ip daddr 185.112.83.99 udp dport 25000-25100 dnat to 10.8.7.80"
       ];
-      extraNatPostroutingRules = [ "oifname ens3 masquerade" ];
+      extraNatPostroutingRules = ["oifname ens3 masquerade"];
     };
 
     firewall = {
-      allowedUDPPorts = [ 51820 ];
-      interfaces."nebula.averyan".allowedTCPPorts = [ 9586 ]; # wg exporter
+      allowedUDPPorts = [51820];
+      interfaces."nebula.averyan".allowedTCPPorts = [9586]; # wg exporter
     };
 
     wireguard.interfaces = {
       wg0 = {
-        ips = [ "10.8.7.1/24" ];
+        ips = ["10.8.7.1/24"];
         listenPort = 51820;
         privateKeyFile = config.age.secrets.wg-key.path;
         peers = [
           {
             # Pocoft
             publicKey = "9vFNcLY6iWyHToTduhYD5m5Kj7v4RfERqC0pIWphsgU=";
-            allowedIPs = [ "10.8.7.2/32" ];
+            allowedIPs = ["10.8.7.2/32"];
           }
           {
             # Pterodactyl (Whale)
             publicKey = "yZxLSiGRW5kqk3qT4Yvei732+i2UWLA4fS/H6AJbPVY=";
-            allowedIPs = [ "10.8.7.80/32" ];
+            allowedIPs = ["10.8.7.80/32"];
           }
           {
             # Firesquare (Whale)
             publicKey = "fwxaU8/D7awGaEcDuDVqssk7lkUoNuAsv3vR132XRlQ=";
-            allowedIPs = [ "10.8.7.81/32" ];
+            allowedIPs = ["10.8.7.81/32"];
           }
           {
             # Vsevolod
             publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
-            allowedIPs = [ "10.8.7.240/32" ];
+            allowedIPs = ["10.8.7.240/32"];
           }
           {
             # Kriger
             publicKey = "qxkQlt1Q9lHq+d48J9nkqTTC+Dzs2LHD+GycsSKDyyE=";
-            allowedIPs = [ "10.8.7.241/32" ];
+            allowedIPs = ["10.8.7.241/32"];
           }
           {
             # Ivanov
             publicKey = "bqkblOYoMi69RAIvJTy/zhovdUR+2O7JVaXoUqBXM2I=";
-            allowedIPs = [ "10.8.7.242/32" ];
+            allowedIPs = ["10.8.7.242/32"];
           }
           {
             # Tihonov
             publicKey = "mi4FUaRyD2yIbVtX1jC7cY7XXg6rUELcpAUyN+N7lU0=";
-            allowedIPs = [ "10.8.7.243/32" ];
+            allowedIPs = ["10.8.7.243/32"];
           }
           {
             # Despectdr
             publicKey = "/BRUH/MivTgVsGeTINUQ5pZDtX8nzrEv1vy+wNJE0Ws=";
-            allowedIPs = [ "10.8.7.244/32" ];
+            allowedIPs = ["10.8.7.244/32"];
           }
           {
             # Khrustaleva
             publicKey = "fZS0Loc8VTcARnokFwR4pgTiP+warZLa2IYHefiD8ho=";
-            allowedIPs = [ "10.8.7.245/32" ];
+            allowedIPs = ["10.8.7.245/32"];
           }
           {
             # Kazakova
             publicKey = "eoofp8UhHTo9SAgSDQmBKrqeF2me1goHIunWWE4Og1c=";
-            allowedIPs = [ "10.8.7.246/32" ];
+            allowedIPs = ["10.8.7.246/32"];
           }
         ];
       };
@@ -148,10 +150,12 @@ in
     interfaces = {
       ens3 = {
         ipv4 = {
-          addresses = [{
-            address = "185.112.83.99";
-            prefixLength = 32;
-          }];
+          addresses = [
+            {
+              address = "185.112.83.99";
+              prefixLength = 32;
+            }
+          ];
         };
         # ipv6 = {
         #   addresses = [

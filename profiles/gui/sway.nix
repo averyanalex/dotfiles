@@ -1,6 +1,9 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./rofi.nix
     ./swaylock.nix
@@ -40,11 +43,10 @@
             dwt = "disabled";
           };
         };
-        bars = [ ];
-        keybindings =
-          let
-            cfg = config.home-manager.users.alex.wayland.windowManager.sway.config;
-          in
+        bars = [];
+        keybindings = let
+          cfg = config.home-manager.users.alex.wayland.windowManager.sway.config;
+        in
           lib.mkOptionDefault {
             "${cfg.modifier}+q" = "kill";
 

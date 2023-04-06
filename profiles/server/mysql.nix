@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
@@ -10,5 +9,12 @@
     };
   };
 
-  persist.state.dirs = [{ directory = "/var/lib/mysql"; user = "mysql"; group = "mysql"; mode = "u=rwx,g=,o="; }];
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/mysql";
+      user = "mysql";
+      group = "mysql";
+      mode = "u=rwx,g=,o=";
+    }
+  ];
 }

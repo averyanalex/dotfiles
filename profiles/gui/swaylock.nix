@@ -1,5 +1,9 @@
-{ lib, config, pkgs, ... }:
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   # fancylock = pkgs.writeShellScript "sway-fancylock" ''
   #   swaylock \
   #     --daemonize
@@ -21,8 +25,7 @@ let
   idlehandler = pkgs.writeShellScriptBin "sway-idlehandler" ''
     swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") "timeout 300 'swaylock --grace 70' before-sleep 'swaylock'"} timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
   '';
-in
-{
+in {
   home-manager.users.alex = {
     home.packages = with pkgs; [
       idlehandler
@@ -44,5 +47,5 @@ in
     # };
   };
 
-  security.pam.services.swaylock = { };
+  security.pam.services.swaylock = {};
 }

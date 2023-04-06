@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home-manager.users.alex = {
     xdg.mimeApps = {
       enable = true;

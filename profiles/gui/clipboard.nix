@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   home-manager.users.alex = {
     home.packages = [
       pkgs.unstable.cliphist
@@ -18,7 +21,7 @@
           cargoSha256 = "nXug69YhYBuSiM6lQi0Ic4bv44SriXT/ZvvJzHxiKsw=";
 
           # nativeBuildInputs = with pkgs; [ pkg-config ];
-          buildInputs = with pkgs; [ wayland ];
+          buildInputs = with pkgs; [wayland];
 
           meta = with lib; {
             description = "A clipboard monitor for Wayland";
