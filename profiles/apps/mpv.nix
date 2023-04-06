@@ -1,7 +1,8 @@
-{
+{pkgs, ...}: {
   home-manager.users.alex = {
     programs.mpv = {
       enable = true;
+      package = pkgs.unstable.mpv;
       config = {
         profile = "gpu-hq";
         ytdl-format = "bestvideo+bestaudio";
