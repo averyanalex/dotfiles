@@ -31,4 +31,6 @@
     daemonIOSchedPriority = 7;
     daemonCPUSchedPolicy = "batch";
   };
+
+  environment.sessionVariables.NIX_REMOTE = "daemon";
 }
