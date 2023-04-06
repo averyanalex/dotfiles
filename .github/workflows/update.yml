@@ -10,7 +10,7 @@ jobs:
     name: Update flake.lock
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v18
         with:
