@@ -1,4 +1,5 @@
 {
   networking.useNetworkd = true;
-  systemd.network.wait-online.enable = false;
+  # TODO: uncomment after 23.05 release
+  # systemd.network.wait-online.enable = false;
 }
