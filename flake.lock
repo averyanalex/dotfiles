@@ -30,11 +30,11 @@
         "stack": "stack"
       },
       "locked": {
-        "lastModified": 1680548877,
-        "narHash": "sha256-mgyy0K+2g786k0yCzzfSIshZAIUh3tG5HsW5xAS3fSQ=",
+        "lastModified": 1680879353,
+        "narHash": "sha256-mrJILflGzdTVKlk73f3UpQKfYHSwzmrv8hMCrSOHKGk=",
         "owner": "averyanalex",
         "repo": "blog",
-        "rev": "ec54f85896eec1f9ada903ae92dd17bbb765a423",
+        "rev": "67822793e559528fea9416ba866330386c0ae724",
         "type": "github"
       },
       "original": {

@@ -1,18 +1,21 @@
 {
   config,
   inputs,
+  pkgs,
   ...
-}: {
+}: let
+  cpmbot-pkg = inputs.cpmbot.packages.${pkgs.hostPlatform.system}.default;
+in {
   age.secrets.cpmbot.file = ../../secrets/creds/cpmbot.age;
 
   systemd.services.cpmbot = {
     after = ["network.target"];
-    path = [inputs.cpmbot.packages.x86_64-linux.default];
+    path = [cpmbot-pkg];
     serviceConfig = {
       User = "cpmbot";
       Group = "cpmbot";
       EnvironmentFile = config.age.secrets.cpmbot.path;
-      ExecStart = "${inputs.cpmbot.packages.x86_64-linux.default}/bin/cpmbot";
+      ExecStart = "${cpmbot-pkg}/bin/cpmbot";
       PrivateTmp = "true";
       PrivateDevices = "true";
       ProtectHome = "true";
