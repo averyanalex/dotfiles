@@ -30,13 +30,29 @@
     # nix-colors.url = "github:misterio77/nix-colors";
 
     # stylix.url = "github:danth/stylix/release-22.11";
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprwm-contrib.url = "github:hyprwm/contrib";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    hyprwm-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
-    averyanalex-blog.url = "github:averyanalex/blog";
-    cpmbot.url = "github:averyanalex/cpmbot";
-    firesquare-servers.url = "github:fire-square/servers";
+    averyanalex-blog = {
+      url = "github:averyanalex/blog";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    cpmbot = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:averyanalex/cpmbot";
+    };
+    firesquare-servers = {
+      url = "github:fire-square/servers";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
