@@ -8,6 +8,16 @@
     services.mpd = {
       enable = true;
       musicDirectory = "/home/alex/Music";
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "pipewire"
+        }
+      '';
+    };
+
+    programs.ncmpcpp = {
+      enable = true;
     };
   };
 }
