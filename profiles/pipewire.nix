@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   security.rtkit.enable = true;
 
   hardware.pulseaudio.enable = false;
@@ -7,5 +7,9 @@
     alsa.enable = true;
     # alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  home-manager.users.alex = {
+    home.packages = [pkgs.helvum];
   };
 }

@@ -14,10 +14,7 @@
 
       log-lines = 25;
 
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = ["nix-command" "flakes"];
     };
 
     gc = {
@@ -33,4 +30,7 @@
   };
 
   environment.sessionVariables.NIX_REMOTE = "daemon";
+
+  systemd.services.nix-daemon = {environment.TMPDIR = "/nix/tmp";};
+  systemd.tmpfiles.rules = ["d /nix/tmp 0755 root root 1d"];
 }

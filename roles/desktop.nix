@@ -12,6 +12,7 @@
           d3.freecad
           d3.openscad
 
+          alacritty
           firefox
           kdenlive
           mpv

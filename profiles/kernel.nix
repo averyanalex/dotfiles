@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
+  boot.kernelPackages = pkgs.unstable.linuxKernel.packages.linux_zen;
 }

@@ -22,13 +22,6 @@
 
     fonts.fontconfig.enable = true;
 
-    programs.alacritty = {
-      enable = true;
-      settings = {
-        font.normal.family = "MesloLGS NF";
-      };
-    };
-
     services.gpg-agent.pinentryFlavor = "gnome3";
 
     services.gnome-keyring.enable = true;

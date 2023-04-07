@@ -8,14 +8,18 @@
       htop
       smartmontools
 
-      usbutils
-      pciutils
+      usbutils # lsusb
+      pciutils # lspci
 
       traceroute
 
       unzip
 
-      rmlint
+      rmlint # find dupes
+
+      neofetch
+
+      ripgrep # fast grep
     ];
   };
 }

@@ -50,5 +50,6 @@
           vmvariant
           xdg
           yggdrasil
+          zram
         ]);
 }

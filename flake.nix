@@ -27,19 +27,16 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # nix-colors.url = "github:misterio77/nix-colors";
-
-    # stylix.url = "github:danth/stylix/release-22.11";
+    # TODO: unpin when xwayland build will be fixed
     hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:hyprwm/Hyprland/a43b18ae265e83cb2e5968b46e5bc2b9f666f81f";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     averyanalex-blog = {
       url = "github:averyanalex/blog";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -53,6 +50,10 @@
       url = "github:fire-square/servers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
+    # stylix.url = "github:danth/stylix/release-22.11";
+    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
