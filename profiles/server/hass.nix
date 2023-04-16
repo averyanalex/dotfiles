@@ -27,6 +27,7 @@ in {
         aiogithubapi
         psycopg2
         securetar
+        ulid-transform
       ];
     config = {
       default_config = {};
