@@ -1,3 +1,5 @@
+[![Nix Flake Check](https://github.com/averyanalex/nixcfg/actions/workflows/check.yml/badge.svg)](https://github.com/averyanalex/nixcfg/actions/workflows/check.yml)
+
 # Nebula
 
 - Hawk 10.5.3.12
