@@ -26,6 +26,7 @@
           console
           dhcp
           dns
+          filesystems
           home
           hosts
           locale

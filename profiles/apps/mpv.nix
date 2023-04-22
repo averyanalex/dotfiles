@@ -9,9 +9,8 @@
       };
       profiles = {
         gpu-hq = {
-          scale = "ewa_lanczossharp";
-          cscale = "ewa_lanczossharp";
           hwdec = "vaapi";
+          vo = "gpu-next";
           video-sync = "display-resample";
           interpolation = true;
           tscale = "oversample";
