@@ -1,6 +1,14 @@
-{pkgs, ...}: {
-  programs.nix-ld.enable = true;
-  environment.variables = {
-    NIX_LD = "${pkgs.glibc}/lib/ld-linux-x86-64.so.2";
+{inputs, ...}: let
+  overlay-nixld = final: prev: {
+    nix-ld = inputs.nix-ld.packages.${prev.system}.nix-ld;
   };
+in {
+  nixpkgs.overlays = [overlay-nixld];
+  disabledModules = [
+    "programs/nix-ld.nix"
+  ];
+  imports = [
+    (inputs.nixpkgs-unstable + "/nixos/modules/programs/nix-ld.nix")
+    inputs.nix-ld.nixosModules.nix-ld
+  ];
 }
