@@ -49,12 +49,14 @@
     cpmbot = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.flake-utils.follows = "flake-utils";
-      url = "github:averyanalex/cpmbot";
+      url = "git+ssh://git@github.com/DeSpecTDr/cpm_bot.git";
     };
     firesquare-servers = {
       url = "github:fire-square/servers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    deploy-rs.url = "github:serokell/deploy-rs";
 
     # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
     # stylix.url = "github:danth/stylix/release-22.11";
@@ -66,6 +68,7 @@
     nixpkgs,
     flake-utils,
     agenix,
+    deploy-rs,
     ...
   } @ inputs: let
     findModules = dir:
@@ -101,6 +104,26 @@
       nixosModules.hardware = builtins.listToAttrs (findModules ./hardware);
       nixosModules.roles = import ./roles;
 
+      deploy = {
+        # remoteBuild = true;
+        sshUser = "alex";
+        user = "root";
+        autoRollback = false;
+        magicRollback = false;
+        nodes = {
+          whale = {
+            hostname = "whale";
+            profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.whale;
+          };
+          hawk = {
+            hostname = "hawk";
+            profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
+          };
+        };
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
       nixosConfigurations = with nixpkgs.lib; let
         hosts = builtins.attrNames (builtins.readDir ./machines);
 
@@ -125,6 +148,7 @@
       devShells.default = pkgs.mkShell {
         buildInputs = [
           agenix.packages.${system}.agenix
+          deploy-rs.packages.${system}.deploy-rs
           pkgs.alejandra
           pkgs.nebula
           pkgs.wireguard-tools

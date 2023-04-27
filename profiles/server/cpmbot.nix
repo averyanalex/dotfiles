@@ -11,6 +11,10 @@ in {
   systemd.services.cpmbot = {
     after = ["network.target"];
     path = [cpmbot-pkg];
+    environment = {
+      RUST_LOG = "debug";
+      DATABASE_URL = "postgresql:///cpmbot";
+    };
     serviceConfig = {
       User = "cpmbot";
       Group = "cpmbot";
@@ -20,33 +24,29 @@ in {
       PrivateDevices = "true";
       ProtectHome = "true";
       ProtectSystem = "strict";
-      WorkingDirectory = "/var/lib/cpmbot";
-      StateDirectory = "cpmbot";
-      StateDirectoryMode = "0700";
       Restart = "always";
     };
     wantedBy = ["multi-user.target"];
   };
 
-  persist.state.dirs = [
-    {
-      directory = "/var/lib/cpmbot";
-      user = "cpmbot";
-      group = "cpmbot";
-      mode = "u=rwx,g=,o=";
-    }
-  ];
+  services.postgresql = {
+    ensureDatabases = ["cpmbot"];
+    ensureUsers = [
+      {
+        name = "cpmbot";
+        ensurePermissions = {
+          "DATABASE cpmbot" = "ALL PRIVILEGES";
+        };
+      }
+    ];
+  };
 
   users = {
     users.cpmbot = {
-      uid = 994;
       isSystemUser = true;
       description = "CPM Bot";
-      home = "/var/lib/cpmbot";
-      createHome = true;
       group = "cpmbot";
     };
-
-    groups.cpmbot.gid = 990;
+    groups.cpmbot = {};
   };
 }
