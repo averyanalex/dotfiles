@@ -12,6 +12,15 @@
     ./mounts.nix
   ];
 
+  services.tlp = {
+    enable = true;
+    settings = {
+      STOP_CHARGE_THRESH_BAT0 = 1;
+      # START_CHARGE_THRESH_BAT0 = 50;
+      # STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+  };
+
   services.logind.extraConfig = ''
     HandlePowerKey=hibernate
     HandleLidSwitch=suspend
