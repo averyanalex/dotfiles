@@ -12,6 +12,7 @@ in {
 
     inputs.self.nixosModules.profiles.server.cpmbot
     inputs.self.nixosModules.profiles.server.hass
+    inputs.self.nixosModules.profiles.server.hydra
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.pgsql

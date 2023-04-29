@@ -49,6 +49,7 @@ in {
     "grafana.averyan.ru" = makeAveryanHost "http://whale:3729";
     "home.averyan.ru" = makeAveryanHost "http://whale:8123";
     "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
+    "hydra.averyan.ru" = makeAveryanHost "http://whale:2875";
 
     "ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:80";
     "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:443";
