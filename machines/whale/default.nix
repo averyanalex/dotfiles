@@ -11,6 +11,7 @@ in {
     inputs.self.nixosModules.roles.server
 
     inputs.self.nixosModules.profiles.server.cpmbot
+    inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
     inputs.self.nixosModules.profiles.server.hydra
     inputs.self.nixosModules.profiles.server.mqtt

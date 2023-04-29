@@ -9,7 +9,8 @@ in {
   age.secrets.cpmbot.file = ../../secrets/creds/cpmbot.age;
 
   systemd.services.cpmbot = {
-    after = ["network.target"];
+    after = ["network-online.target" "postgresql.service"];
+    requires = ["postgresql.service"];
     path = [cpmbot-pkg];
     environment = {
       RUST_LOG = "debug";
@@ -20,11 +21,30 @@ in {
       Group = "cpmbot";
       EnvironmentFile = config.age.secrets.cpmbot.path;
       ExecStart = "${cpmbot-pkg}/bin/cpmbot";
-      PrivateTmp = "true";
-      PrivateDevices = "true";
-      ProtectHome = "true";
-      ProtectSystem = "strict";
       Restart = "always";
+
+      # Capabilities
+      CapabilityBoundingSet = "";
+      # Security
+      NoNewPrivileges = true;
+      # Sandboxing
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      PrivateUsers = true;
+      ProtectHostname = true;
+      ProtectClock = true;
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      RestrictAddressFamilies = [ "AF_UNIX AF_INET AF_INET6" ];
+      LockPersonality = true;
+      MemoryDenyWriteExecute = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      PrivateMounts = true;
     };
     wantedBy = ["multi-user.target"];
   };

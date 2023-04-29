@@ -46,10 +46,11 @@ in {
   services.nginx.virtualHosts = {
     "bw.averyan.ru" = makeAveryanHost "http://whale:8222";
     "dav.averyan.ru" = makeAveryanHost "http://whale:5232";
+    "git.averyan.ru" = makeAveryanHost "http://whale:3816";
     "grafana.averyan.ru" = makeAveryanHost "http://whale:3729";
     "home.averyan.ru" = makeAveryanHost "http://whale:8123";
-    "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
     "hydra.averyan.ru" = makeAveryanHost "http://whale:2875";
+    "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
 
     "ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:80";
     "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:443";

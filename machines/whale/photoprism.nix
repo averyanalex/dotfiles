@@ -3,8 +3,7 @@
 
   systemd.services."podman-photoprism" = {
     requires = ["setup-photoprism-dirs.service" "mysql.service"];
-    after = ["setup-photoprism-dirs.service" "mysql.service"];
-    serviceConfig.RestartSec = "10s";
+    after = ["network-online.target" "setup-photoprism-dirs.service" "mysql.service"];
   };
 
   systemd.services.setup-photoprism-dirs = {
