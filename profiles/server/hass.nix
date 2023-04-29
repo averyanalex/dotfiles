@@ -28,6 +28,8 @@ in {
         psycopg2
         securetar
         ulid-transform
+        google-api-python-client
+        protobuf
       ];
     config = {
       default_config = {};
