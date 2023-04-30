@@ -72,10 +72,10 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1682880555,
-        "narHash": "sha256-dIYiclZEk7tjR5aSKykMcHtHjkm+s6jhTxuS3MnSQGI=",
+        "lastModified": 1682880696,
+        "narHash": "sha256-pdtvh9zSUUFqhauDJfRQkhDdppabFOkVCdLeZtXBnm4=",
         "ref": "refs/heads/main",
-        "rev": "8e5234e3392b6d0cf97b708c2effc85b5d429cbd",
+        "rev": "061003813f0171504f9f3fef36bb3c80abfbc7bd",
         "revCount": 19,
         "type": "git",
         "url": "ssh://git@github.com/DeSpecTDr/cpm_bot.git"
