@@ -72,11 +72,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1682838697,
-        "narHash": "sha256-spSVp6aHMh0d7PmMJFhc4Swcjp8fx/LPz5aWI1FrgVg=",
+        "lastModified": 1682880555,
+        "narHash": "sha256-dIYiclZEk7tjR5aSKykMcHtHjkm+s6jhTxuS3MnSQGI=",
         "ref": "refs/heads/main",
-        "rev": "b276ea390cbfe0f6fb5932f01195fa026616743d",
-        "revCount": 18,
+        "rev": "8e5234e3392b6d0cf97b708c2effc85b5d429cbd",
+        "revCount": 19,
         "type": "git",
         "url": "ssh://git@github.com/DeSpecTDr/cpm_bot.git"
       },
@@ -389,11 +389,11 @@
     "matetech-engine": {
       "flake": false,
       "locked": {
-        "lastModified": 1682838585,
-        "narHash": "sha256-WlLH2LL6l0FBuC2LehyEAGYnNnYUodzwbFdXgbn/s80=",
+        "lastModified": 1682879231,
+        "narHash": "sha256-jI/m4VlPtf6W4WT2d83oH3merFH4AQFslpHLWu6bJ0Y=",
         "ref": "refs/heads/main",
-        "rev": "0d1aa0030fcba4be7e099a70e857593ed58966fe",
-        "revCount": 15,
+        "rev": "573f95b82c72e1dbc565b8b2b339a9fcffb70a4a",
+        "revCount": 16,
         "type": "git",
         "url": "ssh://git@github.com/averyanalex/matetech-engine.git"
       },
@@ -464,11 +464,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1682692304,
-        "narHash": "sha256-9/lyXN2BpHw+1xE+D2ySBSLMCHWqiWu5tPHBMRDib8M=",
+        "lastModified": 1682786779,
+        "narHash": "sha256-m7QFzPS/CE8hbkbIVK4UStihAQMtczr0vSpOgETOM1g=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "937a9d1ee7b1351d8c55fff6611a8edf6e7c1c37",
+        "rev": "08e4dc3a907a6dfec8bb3bbf1540d8abbffea22b",
         "type": "github"
       },
       "original": {
@@ -528,11 +528,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1682820334,
-        "narHash": "sha256-dE9vVSJZei3fqZDTbDYU35/N7XCpHoEPdS8LBid1tb4=",
+        "lastModified": 1682879890,
+        "narHash": "sha256-gnNDKsgsLX0dxumLDTuFylSRVvscErxRa0425gUk5Xk=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "119de5f27fc96b9dc56406050b764b9a1016a061",
+        "rev": "57e8229760e718f670cd7b359b509246e6d734ab",
         "type": "github"
       },
       "original": {
