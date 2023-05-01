@@ -72,17 +72,17 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1682880696,
-        "narHash": "sha256-pdtvh9zSUUFqhauDJfRQkhDdppabFOkVCdLeZtXBnm4=",
+        "lastModified": 1682967598,
+        "narHash": "sha256-QpbaKL9F0PrwXZJlh0FkwW8n3crQJEk1CKbZP0TSwuc=",
         "ref": "refs/heads/main",
-        "rev": "061003813f0171504f9f3fef36bb3c80abfbc7bd",
-        "revCount": 19,
+        "rev": "81f5e7d59069587865e44a10cec8884d4d1ea304",
+        "revCount": 20,
         "type": "git",
-        "url": "ssh://git@github.com/DeSpecTDr/cpm_bot.git"
+        "url": "ssh://git@github.com/cpmbot/bot.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/DeSpecTDr/cpm_bot.git"
+        "url": "ssh://git@github.com/cpmbot/bot.git"
       }
     },
     "darwin": {
@@ -389,17 +389,17 @@
     "matetech-engine": {
       "flake": false,
       "locked": {
-        "lastModified": 1682879231,
-        "narHash": "sha256-jI/m4VlPtf6W4WT2d83oH3merFH4AQFslpHLWu6bJ0Y=",
+        "lastModified": 1682967425,
+        "narHash": "sha256-o9BvQJNHIscDbqK7tjWwrOZCWL1whFZK6xZnH3rQjUc=",
         "ref": "refs/heads/main",
-        "rev": "573f95b82c72e1dbc565b8b2b339a9fcffb70a4a",
-        "revCount": 16,
+        "rev": "a17a9482c6a1fc01449e1ae0c2933a826c50a1dd",
+        "revCount": 17,
         "type": "git",
-        "url": "ssh://git@github.com/averyanalex/matetech-engine.git"
+        "url": "ssh://git@github.com/cpmbot/engine.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/averyanalex/matetech-engine.git"
+        "url": "ssh://git@github.com/cpmbot/engine.git"
       }
     },
     "mineflake": {

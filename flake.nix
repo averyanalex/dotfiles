@@ -49,7 +49,7 @@
     cpmbot = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.flake-utils.follows = "flake-utils";
-      url = "git+ssh://git@github.com/DeSpecTDr/cpm_bot.git";
+      url = "git+ssh://git@github.com/cpmbot/bot.git";
     };
     firesquare-servers = {
       url = "github:fire-square/servers";
