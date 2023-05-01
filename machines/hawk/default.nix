@@ -143,6 +143,11 @@ in {
             publicKey = "eoofp8UhHTo9SAgSDQmBKrqeF2me1goHIunWWE4Og1c=";
             allowedIPs = ["10.8.7.246/32"];
           }
+          {
+            # Karaseva
+            publicKey = "dBmTwssDWdv+kQfnDl1sMdF7P6+E3szdJPud34tWq1k=";
+            allowedIPs = ["10.8.7.247/32"];
+          }
         ];
       };
     };
