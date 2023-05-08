@@ -60,7 +60,7 @@
           require ["fileinto"];
 
           if header :contains ["Chat-Version"] [""] {
-            fileinto :create "DeltaChat";
+            fileinto "DeltaChat";
             stop;
           }
         '';
