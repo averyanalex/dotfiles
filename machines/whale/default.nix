@@ -17,7 +17,7 @@ in {
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.pgsql
-    inputs.self.nixosModules.profiles.server.qbit
+    # inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.radicale
     inputs.self.nixosModules.profiles.server.vaultwarden
 
@@ -29,7 +29,7 @@ in {
     ./hardware.nix
     ./mounts.nix
 
-    ./firesquare.nix
+    # ./firesquare.nix
     ./monitoring.nix
     ./photoprism.nix
     ./pterodactyl.nix

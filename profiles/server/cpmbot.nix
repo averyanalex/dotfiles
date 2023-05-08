@@ -13,7 +13,6 @@ in {
     requires = ["postgresql.service"];
     path = [cpmbot-pkg];
     environment = {
-      RUST_LOG = "debug";
       DATABASE_URL = "postgresql:///cpmbot";
     };
     serviceConfig = {

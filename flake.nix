@@ -49,7 +49,7 @@
     cpmbot = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.flake-utils.follows = "flake-utils";
-      url = "git+ssh://git@github.com/cpmbot/bot.git";
+      url = "github:cpmbot/bot";
     };
     firesquare-servers = {
       url = "github:fire-square/servers";
@@ -105,7 +105,7 @@
       nixosModules.roles = import ./roles;
 
       deploy = {
-        # remoteBuild = true;
+        remoteBuild = true;
         sshUser = "alex";
         user = "root";
         autoRollback = false;

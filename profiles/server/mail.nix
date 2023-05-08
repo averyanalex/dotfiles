@@ -56,6 +56,14 @@
     loginAccounts = {
       "alex@averyan.ru" = {
         hashedPasswordFile = config.age.secrets.mail-alex.path;
+        sieveScript = ''
+          require ["fileinto"];
+
+          if header :contains ["Chat-Version"] [""] {
+            fileinto :create "DeltaChat";
+            stop;
+          }
+        '';
       };
     };
   };

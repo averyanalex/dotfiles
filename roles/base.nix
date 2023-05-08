@@ -30,6 +30,7 @@
           home
           hosts
           locale
+          logs
           monitoring
           nebula-averyan
           nftables
