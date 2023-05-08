@@ -20,7 +20,7 @@
   virtualisation.oci-containers = {
     containers = {
       photoprism = {
-        image = "photoprism/photoprism:221118-jammy";
+        image = "photoprism/photoprism:230506";
         volumes = [
           "/tank/Галерея:/photoprism/originals"
           "/tank/Импорт:/photoprism/import"
