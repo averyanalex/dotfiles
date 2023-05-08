@@ -21,6 +21,7 @@ in {
   "secrets/passwords/alex.age".publicKeys = users ++ systems;
 
   "secrets/mail/alex.age".publicKeys = users ++ [hawk];
+  "secrets/mail/sonya8128.age".publicKeys = users ++ [hawk];
 
   "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk];
   "secrets/creds/firesquare.age".publicKeys = users ++ [whale];

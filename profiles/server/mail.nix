@@ -65,10 +65,22 @@
           }
         '';
       };
+      "sonya8128@averyan.ru" = {
+        hashedPasswordFile = config.age.secrets.mail-sonya8128.path;
+        sieveScript = ''
+          require ["fileinto"];
+
+          if header :contains ["Chat-Version"] [""] {
+            fileinto "DeltaChat";
+            stop;
+          }
+        '';
+      };
     };
   };
 
   age.secrets.mail-alex.file = ../../secrets/mail/alex.age;
+  age.secrets.mail-sonya8128.file = ../../secrets/mail/sonya8128.age;
 
   persist.state.dirs = [
     {
