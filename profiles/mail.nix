@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   age.secrets.account-mail = {
     file = ../secrets/accounts/mail.age;
     owner = "alex";
@@ -41,7 +45,11 @@
         "privacy.donottrackheader.enabled" = true;
       };
     };
+
+    home.packages = with pkgs; [
+      unstable.deltachat-desktop
+    ];
   };
 
-  persist.state.homeDirs = [".thunderbird"];
+  persist.state.homeDirs = [".thunderbird" ".config/DeltaChat"];
 }
