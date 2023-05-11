@@ -34,11 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # TODO: unpin when xwayland build will be fixed
-    hyprland = {
-      url = "github:hyprwm/Hyprland/a43b18ae265e83cb2e5968b46e5bc2b9f666f81f";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    hyprland.url = "github:hyprwm/Hyprland";
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
