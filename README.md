@@ -4,6 +4,7 @@
 
 - Hawk 10.5.3.12
 - Whale 10.5.3.20
+- Lizard 10.5.3.40
 - Hamster 10.5.3.100
 - Alligator 10.5.3.101
 
@@ -12,6 +13,11 @@
 ```shell
 _ rm -rf /root/.cache && _ nixos-rebuild switch --flake github:averyanalex/nixcfg
 nix flake update --commit-lock-file
+
+EDITOR=cat agenix -e secrets/nebula/ca-crt.age > ca.crt
+EDITOR=cat agenix -e secrets/nebula/ca-key.age > ca.key
+nebula-cert sign -name lizard -ip 10.5.3.40/24
+nix build .#nixosConfigurations.rpi-image.config.system.build.sdImage
 ```
 
 # What I use:
@@ -19,6 +25,7 @@ nix flake update --commit-lock-file
 ## Shell
 
 <!-- - [Zsh](https://www.zsh.org/) -->
+
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
 
 ## Desktop

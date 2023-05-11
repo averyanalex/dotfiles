@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     agenix = {
@@ -66,6 +68,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     flake-utils,
     agenix,
     deploy-rs,
@@ -99,10 +102,10 @@
         (builtins.readDir dir)));
   in
     {
+      nixosModules.hardware = builtins.listToAttrs (findModules ./hardware);
       nixosModules.modules = builtins.listToAttrs (findModules ./modules);
       nixosModules.profiles = builtins.listToAttrs (findModules ./profiles);
-      nixosModules.hardware = builtins.listToAttrs (findModules ./hardware);
-      nixosModules.roles = import ./roles;
+      nixosModules.roles = builtins.listToAttrs (findModules ./roles);
 
       deploy = {
         remoteBuild = true;
@@ -119,27 +122,46 @@
             hostname = "hawk";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
           };
+          # ferret = {
+          #   hostname = "192.168.3.130";
+          #   profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ferret;
+          # };
         };
       };
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
-      nixosConfigurations = with nixpkgs.lib; let
-        hosts = builtins.attrNames (builtins.readDir ./machines);
+      nixosConfigurations =
+        (with nixpkgs.lib; let
+          hosts = builtins.attrNames (builtins.readDir ./machines);
 
-        mkHost = name: let
-          system = builtins.readFile (./machines + "/${name}/system.txt");
+          mkHost = name: let
+            system = builtins.readFile (./machines + "/${name}/system.txt");
+          in
+            nixosSystem {
+              inherit system;
+              modules = [
+                (import (./machines + "/${name}"))
+                {networking.hostName = name;}
+              ];
+              specialArgs = {inherit inputs;};
+            };
         in
-          nixosSystem {
-            inherit system;
+          genAttrs hosts mkHost)
+        // {
+          rpi-image = nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
             modules = [
-              (import (./machines + "/${name}"))
-              {networking.hostName = name;}
+              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
+              ({...}: {
+                config = {
+                  sdImage.compressImage = false;
+                  boot.kernelPackages = nixpkgs-unstable.legacyPackages.aarch64-linux.linuxKernel.packages.linux_6_1;
+                };
+              })
             ];
-            specialArgs = {inherit inputs;};
           };
-      in
-        genAttrs hosts mkHost;
+        };
     }
     // flake-utils.lib.eachSystem (with flake-utils.lib.system; [x86_64-linux aarch64-linux])
     (system: let

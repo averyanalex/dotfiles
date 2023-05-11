@@ -6,11 +6,15 @@ let
   hamster = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN/Mu9oGr3VFS+GMBNPASaoMyiMO1G8T4fUKjJJpy30";
   desktops = [alligator hamster];
 
+  ferret = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJCrSdgjm9hxyFMCVCW+SzgF7AThC+fZy8RBQoFqCWT2";
+  family = [ferret];
+
   hawk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGNROiWZEvzjR6TVoeVrVoUI2Vsx3wmJSb9QojvdLK0e";
   whale = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtyxNV8IPSMHudJrMbemcK82LosU9tdNDV2rhf0Z9ps";
-  servers = [hawk whale];
+  lizard = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFLroMtpKorkWcMPK7xAO7kiqT1VXoO4xKZH5+G2YJW";
+  servers = [hawk whale lizard];
 
-  systems = desktops ++ servers;
+  systems = desktops ++ family ++ servers;
 in {
   "secrets/remote-builder-ssh-key.age".publicKeys = users ++ systems;
 
@@ -19,6 +23,7 @@ in {
   "secrets/accounts/radicale.age".publicKeys = users ++ desktops ++ [whale];
 
   "secrets/passwords/alex.age".publicKeys = users ++ systems;
+  "secrets/passwords/olga.age".publicKeys = users ++ systems;
 
   "secrets/mail/alex.age".publicKeys = users ++ [hawk];
   "secrets/mail/sonya8128.age".publicKeys = users ++ [hawk];
@@ -47,6 +52,8 @@ in {
   "secrets/nebula/hawk-key.age".publicKeys = users ++ [hawk];
   "secrets/nebula/whale-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/whale-key.age".publicKeys = users ++ [whale];
+  "secrets/nebula/lizard-crt.age".publicKeys = users ++ systems;
+  "secrets/nebula/lizard-key.age".publicKeys = users ++ [lizard];
 
   "secrets/nebula-frsqr/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula-frsqr/whale-crt.age".publicKeys = users ++ systems;
