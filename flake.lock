@@ -72,11 +72,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1683699058,
-        "narHash": "sha256-AUpgUz+OqFr8x8U4sRBVK6L1jKTDRv7oyDDPWJYCxuY=",
+        "lastModified": 1683706747,
+        "narHash": "sha256-hv60q/kdaQztvnrKu3ZB3PhWOECDdyuNQWWPprjnlJQ=",
         "owner": "cpmbot",
         "repo": "bot",
-        "rev": "f3e7fc39e52aa24a8575e3c3cdb0b4a17bc267f4",
+        "rev": "996719bde07ef845613c49c4827e721ad3048890",
         "type": "github"
       },
       "original": {
@@ -389,11 +389,11 @@
     "matetech-engine": {
       "flake": false,
       "locked": {
-        "lastModified": 1683698885,
-        "narHash": "sha256-xugx+ho/bwGcMNGn91gnRwsc1Ke8klGiQXLfcC2R0Z0=",
+        "lastModified": 1683706730,
+        "narHash": "sha256-a3XIFO0P9jB7MXWIdM2ancLIDpvhsQzm4/q2mytcLQw=",
         "ref": "refs/heads/main",
-        "rev": "91d02306be37e2ad9685512b3df19875bfeb27f7",
-        "revCount": 18,
+        "rev": "1ece51e86491e68969834543984d286d84def028",
+        "revCount": 21,
         "type": "git",
         "url": "ssh://git@github.com/cpmbot/engine.git"
       },
