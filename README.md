@@ -17,7 +17,7 @@ nix flake update --commit-lock-file
 EDITOR=cat agenix -e secrets/nebula/ca-crt.age > ca.crt
 EDITOR=cat agenix -e secrets/nebula/ca-key.age > ca.key
 nebula-cert sign -name lizard -ip 10.5.3.40/24
-nix build .#nixosConfigurations.rpi-image.config.system.build.sdImage
+nix build .#nixosConfigurations.rpi-image.config.system.build.sdImage --builders ""
 ```
 
 # What I use:

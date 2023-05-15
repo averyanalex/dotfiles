@@ -48,6 +48,7 @@ in {
     };
     folders = {
       "Documents" = commonFolder "Documents";
+      "projects" = commonFolder "projects";
       "Music" = commonFolder "Music" // {devices = allDevices ++ ["pocoft"];};
       "Notes" = commonFolder "Notes" // {devices = allDevices ++ ["pocoft"];};
       "Pictures" = commonFolder "Pictures" // {devices = allDevices ++ ["pocoft"];};

@@ -8,7 +8,7 @@
 
     inputs.self.nixosModules.profiles.bluetooth
     inputs.self.nixosModules.profiles.netman
-    inputs.self.nixosModules.profiles.remote-builder-client
+    # inputs.self.nixosModules.profiles.remote-builder-client
 
     inputs.self.nixosModules.hardware.thinkbook
 

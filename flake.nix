@@ -152,6 +152,7 @@
               ({...}: {
                 config = {
                   sdImage.compressImage = false;
+                  system.stateVersion = "22.11";
                   boot.kernelPackages = nixpkgs-unstable.legacyPackages.aarch64-linux.linuxKernel.packages.linux_6_1;
                 };
               })
