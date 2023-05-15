@@ -25,6 +25,7 @@ in {
     inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.podman
     inputs.self.nixosModules.profiles.remote-builder-host
+    inputs.self.nixosModules.profiles.sync
 
     ./hardware.nix
     ./mounts.nix
@@ -43,6 +44,7 @@ in {
   persist.tmpfsSize = "16G";
 
   services.kubo.dataDir = "/hdd/ipfs";
+  services.syncthing.dataDir = "/tank/sync";
 
   # Monitoring
   services.prometheus.exporters.node.enabledCollectors = ["zoneinfo"];
