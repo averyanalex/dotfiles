@@ -8,16 +8,16 @@
       (pkgs.rustPlatform.buildRustPackage
         rec {
           pname = "swayosd";
-          version = "875c943e9a6c9ae2cc2dbb7cbee8812f689db665";
+          version = "5c2176ae6a01a18fdc2b0f5d5f593737b5765914";
 
           src = pkgs.fetchFromGitHub {
-            owner = "averyanalex";
+            owner = "ErikReider";
             repo = pname;
             rev = version;
-            sha256 = "szpy4NIMw6S/HqhoLH1LEx9yohFQXmtbz9XJd47P9XM=";
+            hash = "sha256-rh42J6LWgNPOWYLaIwocU1JtQnA5P1jocN3ywVOfYoc=";
           };
 
-          cargoSha256 = "hXKAoXnTJAzFcWSEpqrythXPunt3lcrySXB13R7hSzM=";
+          cargoSha256 = "f/MaNADm/jkEqofd5ixQBcsPr3mjt4qTMRrr0A0J5sI=";
 
           nativeBuildInputs = with pkgs; [pkg-config];
           buildInputs = with pkgs; [glib atk gtk3 gtk-layer-shell pulseaudio];
@@ -26,12 +26,11 @@
             description = "A GTK based on screen display for keyboard shortcuts like caps-lock and volume";
             homepage = "https://github.com/ErikReider/SwayOSD";
             license = licenses.gpl3;
-            # maintainers = with maintainers; [ doronbehar ];
           };
         })
     ];
     wayland.windowManager.hyprland.extraConfig = ''
-      exec-once=swayosd
+      exec-once=swayosd --max-volume 150
       bindle=, XF86AudioRaiseVolume, exec, swayosd --output-volume raise
       bindle=, XF86AudioLowerVolume, exec, swayosd --output-volume lower
 
