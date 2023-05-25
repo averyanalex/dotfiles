@@ -1,15 +1,17 @@
 {
   services.gitea = {
     enable = true;
-    rootUrl = "https://git.averyan.ru/";
     settings = {
+      server = {
+        ROOT_URL = "https://git.averyan.ru/";
+        HTTP_PORT = 3816;
+        DOMAIN = "git.averyan.ru";
+        SSH_PORT = 7322;
+      };
       service.DISABLE_REGISTRATION = true;
       session.COOKIE_SECURE = true;
-      server.SSH_PORT = 7322;
     };
     lfs.enable = true;
-    httpPort = 3816;
-    domain = "git.averyan.ru";
     database = {
       type = "postgres";
       createDatabase = true;

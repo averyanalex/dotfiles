@@ -49,9 +49,20 @@ in {
   };
 
   config = mkIf cfg.enable {
-    age.secrets.nebula-averyan-ca.file = ../secrets/nebula/ca-crt.age;
-    age.secrets.nebula-averyan-key.file = ../secrets/nebula + "/${config.networking.hostName}-key.age";
-    age.secrets.nebula-averyan-crt.file = ../secrets/nebula + "/${config.networking.hostName}-crt.age";
+    users.users.nebula-averyan.uid = 864;
+
+    age.secrets.nebula-averyan-ca = {
+      file = ../secrets/nebula/ca-crt.age;
+      owner = "nebula-averyan";
+    };
+    age.secrets.nebula-averyan-key = {
+      file = ../secrets/nebula + "/${config.networking.hostName}-key.age";
+      owner = "nebula-averyan";
+    };
+    age.secrets.nebula-averyan-crt = {
+      file = ../secrets/nebula + "/${config.networking.hostName}-crt.age";
+      owner = "nebula-averyan";
+    };
 
     services.nebula.networks.averyan = {
       package = pkgs.unstable.nebula;

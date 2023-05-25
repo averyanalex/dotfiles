@@ -2,7 +2,7 @@
   description = "AveryanAlex's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -15,7 +15,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager"; # release-23.05
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -29,12 +29,12 @@
     nur.url = "github:nix-community/NUR";
 
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
-      inputs.nixpkgs-22_11.follows = "nixpkgs";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
+      inputs.nixpkgs-23_05.follows = "nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/a43b18ae265e83cb2e5968b46e5bc2b9f666f81f";
+    hyprland.url = "github:hyprwm/Hyprland"; # a43b18ae265e83cb2e5968b46e5bc2b9f666f81f
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -55,10 +55,6 @@
     };
 
     deploy-rs.url = "github:serokell/deploy-rs";
-
-    # prismlauncher.url = "github:PrismLauncher/PrismLauncher";
-    # stylix.url = "github:danth/stylix/release-22.11";
-    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
@@ -152,7 +148,7 @@
               ({...}: {
                 config = {
                   sdImage.compressImage = false;
-                  system.stateVersion = "22.11";
+                  system.stateVersion = "23.05";
                   boot.kernelPackages = nixpkgs-unstable.legacyPackages.aarch64-linux.linuxKernel.packages.linux_6_1;
                 };
               })

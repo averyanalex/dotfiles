@@ -1,9 +1,4 @@
-{
-  inputs,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hpr.nix
   ];
@@ -14,8 +9,6 @@
   };
 
   home-manager.users.alex = {
-    # colorScheme = inputs.nix-colors.colorSchemes.paraiso;
-
     programs.bash.enable = true;
     programs.bash.profileExtra = ''
       if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then

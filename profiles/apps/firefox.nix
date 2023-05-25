@@ -5,21 +5,20 @@
     };
     programs.firefox = {
       enable = true;
-      # package = pkgs.firefox-wayland;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        bitwarden
-        # canvasblocker
-        # cookies-txt
-        # copy-selection-as-markdown
-        decentraleyes
-        # i-dont-care-about-cookies
-        # ipfs-companion
-        # temporary-containers
-        ublock-origin
-      ];
       profiles = {
         default = {
           isDefault = true;
+          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            bitwarden
+            # canvasblocker
+            # cookies-txt
+            # copy-selection-as-markdown
+            decentraleyes
+            # i-dont-care-about-cookies
+            # ipfs-companion
+            # temporary-containers
+            ublock-origin
+          ];
           settings = {
             "media.ffmpeg.vaapi.enabled" = true;
 

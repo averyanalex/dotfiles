@@ -34,7 +34,6 @@
           nebula-averyan
           nftables
           nix
-          nixld
           nur
           persist
           polkit

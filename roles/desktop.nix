@@ -57,7 +57,7 @@
           light
           mail
           music
-          nebula-frsqr
+          nixld
           pipewire
           podman
           printing

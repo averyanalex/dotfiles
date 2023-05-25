@@ -40,5 +40,4 @@
     '';
   };
   boot.loader.systemd-boot.consoleMode = "max";
-  hardware.video.hidpi.enable = true;
 }
