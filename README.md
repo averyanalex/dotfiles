@@ -1,4 +1,14 @@
-[![Nix Flake Check](https://github.com/averyanalex/nixcfg/actions/workflows/check.yml/badge.svg)](https://github.com/averyanalex/nixcfg/actions/workflows/check.yml)
+# Welcome to AveryanAlex's NixOS configuration!
+
+# Machines
+
+## Whale
+
+Home server. 64 GB DDR4 2133 MHz, 4 channels; 1x Intel Xeon E5-2696v3; 500 Gb Samsung 970 EVO Plus, 8 TB WD Red.
+
+## Alligator
+
+Main PC. 32 GB DDR4 3200 MHz, 2 channels; AMD Ryzen 7 5800X; Radeon RX 6800 XT; 500 Gb Samsung 970 EVO Plus, 1 TB WD Blue.
 
 # Nebula
 
