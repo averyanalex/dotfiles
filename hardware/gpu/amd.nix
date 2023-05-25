@@ -1,6 +1,4 @@
 {pkgs, ...}: {
-  boot.initrd.kernelModules = ["amdgpu"];
-
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -8,6 +6,7 @@
       rocm-opencl-icd
       rocm-opencl-runtime
       rocm-runtime
+      amdvlk
     ];
   };
 

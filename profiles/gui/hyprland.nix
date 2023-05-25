@@ -1,11 +1,9 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }:
-# let
-#   colorscheme = config.home-manager.users.alex.colorScheme;
-# in
 {
   imports = [
     ./hpr.nix
@@ -114,6 +112,7 @@
         exec-once=sway-idlehandler
         exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        exec-once=${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       '';
     };
   };
