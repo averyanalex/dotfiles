@@ -8,6 +8,7 @@
     inputs.self.nixosModules.profiles.bluetooth
     inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.openrgb
+    inputs.self.nixosModules.profiles.persist-yggdrasil
     ./hardware.nix
     ./mounts.nix
   ];

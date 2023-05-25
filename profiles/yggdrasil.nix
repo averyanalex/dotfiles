@@ -4,10 +4,8 @@
   pkgs,
   ...
 }: {
-  services.av-yggdrasil = {
+  services.yggdrasil = {
     enable = true;
-    persistentKeys = true;
-    keysPath = "/persist/etc/yggdrasil/keys.json";
     settings = {
       Listen = ["tls://[::]:8362"];
       Peers = lib.mkIf (config.networking.hostName != "hawk") [
