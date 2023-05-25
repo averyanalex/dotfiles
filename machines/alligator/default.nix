@@ -4,11 +4,12 @@
   ...
 }: {
   imports = [
-    inputs.self.nixosModules.roles.desktop
     inputs.self.nixosModules.profiles.bluetooth
+    inputs.self.nixosModules.profiles.corectrl
     inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.openrgb
     inputs.self.nixosModules.profiles.persist-yggdrasil
+    inputs.self.nixosModules.roles.desktop
     ./hardware.nix
     ./mounts.nix
   ];
