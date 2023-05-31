@@ -32,6 +32,7 @@ in {
     ./mounts.nix
 
     # ./firesquare.nix
+    ./hass.nix
     ./monitoring.nix
     ./photoprism.nix
     ./pterodactyl.nix
