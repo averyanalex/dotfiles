@@ -1,9 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.self.nixosModules.roles.server
     inputs.self.nixosModules.profiles.netman
@@ -12,7 +7,7 @@
     ./mounts.nix
   ];
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 
   networking = {
     hostName = "lizard";

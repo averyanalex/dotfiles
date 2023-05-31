@@ -1,17 +1,7 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  modulesPath,
-  ...
-}: {
-  imports =
-    [
-      # inputs.nixos-hardware.nixosModules.raspberry-pi-4
-    ]
-    ++ (with inputs.self.nixosModules.hardware; [
-      physical
-    ]);
+{inputs, ...}: {
+  imports = with inputs.self.nixosModules.hardware; [
+    physical
+  ];
 
   boot.initrd.availableKernelModules = [
     "usbhid"
@@ -26,6 +16,4 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-
-  boot.kernelPackages = pkgs.unstable.linuxKernel.packages.linux_6_1;
 }

@@ -1,8 +1,4 @@
-{
-  config,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.self.nixosModules.roles.desktop
 
@@ -26,16 +22,15 @@
 
   services.logind.extraConfig = ''
     HandlePowerKey=hibernate
-    HandleLidSwitch=suspend
-    HandleLidSwitchExternalPower=ignore
+    HandleLidSwitch=suspend-then-hibernate
   '';
   # TODO: setup suspend-then-hibernate after systemd regression will be fixed
   # HandleLidSwitch=suspend-then-hibernate
 
-  # systemd.sleep.extraConfig = ''
-  #   HibernateDelaySec=120s
-  #   SuspendEstimationSec=60s
-  # '';
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+    SuspendEstimationSec=15m
+  '';
 
   system.stateVersion = "22.05";
 }

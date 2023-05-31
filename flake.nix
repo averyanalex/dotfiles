@@ -114,6 +114,10 @@
             hostname = "hawk";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
           };
+          lizard = {
+            hostname = "lizard";
+            profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
+          };
           # ferret = {
           #   hostname = "192.168.3.130";
           #   profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ferret;

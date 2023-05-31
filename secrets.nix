@@ -11,7 +11,7 @@ let
 
   hawk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGNROiWZEvzjR6TVoeVrVoUI2Vsx3wmJSb9QojvdLK0e";
   whale = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtyxNV8IPSMHudJrMbemcK82LosU9tdNDV2rhf0Z9ps";
-  lizard = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFLroMtpKorkWcMPK7xAO7kiqT1VXoO4xKZH5+G2YJW";
+  lizard = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEkmHS0r9G9Qgsponr/XayqOXB28eR+eUiYtBA+x5vTK";
   servers = [hawk whale lizard];
 
   systems = desktops ++ family ++ servers;
@@ -43,6 +43,7 @@ in {
   "secrets/wireguard/whale-frsqr.age".publicKeys = users ++ [whale];
 
   "secrets/yggdrasil/alligator.age".publicKeys = users ++ [alligator];
+  "secrets/yggdrasil/whale.age".publicKeys = users ++ [whale];
 
   "secrets/nebula/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/ca-key.age".publicKeys = users;

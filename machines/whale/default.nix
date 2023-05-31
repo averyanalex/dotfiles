@@ -10,6 +10,7 @@ in {
   imports = [
     inputs.self.nixosModules.roles.server
 
+    # inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.cpmbot
     inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
@@ -17,12 +18,12 @@ in {
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.pgsql
-    # inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.radicale
     inputs.self.nixosModules.profiles.server.vaultwarden
 
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.networkd
+    inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.profiles.podman
     inputs.self.nixosModules.profiles.remote-builder-host
     inputs.self.nixosModules.profiles.sync
@@ -35,6 +36,7 @@ in {
     ./photoprism.nix
     ./pterodactyl.nix
     ./tanksrv.nix
+    ./yacy.nix
   ];
 
   system.stateVersion = "22.05";
@@ -103,6 +105,13 @@ in {
         DNS = "9.9.9.9";
       };
     };
+
+    "40-yggbr0" = {
+      networkConfig = {
+        IPv6AcceptRA = false;
+        ConfigureWithoutCarrier = true;
+      };
+    };
   };
 
   networking.firewall.allowedUDPPorts = [67 546];
@@ -130,6 +139,9 @@ in {
       extraFilterForwardRules = [
         ''iifname { "${lan}", "vm0" } oifname "${wan}" counter accept comment "allow LAN to WAN"''
         ''iifname "${wan}" oifname { "${lan}", "vm0" } ct state { established, related } counter accept comment "allow established back to LAN"''
+        ''iifname "yggbr0" oifname "ygg0" counter accept comment "allow YGGBR to YGG"''
+        ''iifname "ygg0" oifname "yggbr0" counter accept''
+        # ''iifname "ygg0" oifname "yggbr0" ct state { established, related } counter accept comment "allow established back to YGGBR0"''
       ];
       extraNatPostroutingRules = [''oifname "${wan}" masquerade''];
     };
@@ -137,6 +149,7 @@ in {
     bridges = {
       ${lan}.interfaces = ["${physLan}"];
       vm0.interfaces = [];
+      yggbr0.interfaces = [];
     };
 
     interfaces = {
@@ -160,6 +173,12 @@ in {
           ];
         };
       };
+      yggbr0.ipv6.addresses = [
+        {
+          address = "317:7b20:ee43:21d3::1";
+          prefixLength = 64;
+        }
+      ];
     };
   };
 }

@@ -50,13 +50,26 @@ in {
     "grafana.averyan.ru" = makeAveryanHost "http://whale:3729";
     "home.averyan.ru" = makeAveryanHost "http://whale:8123";
     "hydra.averyan.ru" = makeAveryanHost "http://whale:2875";
+    "olsearch.averyan.ru" = makeAveryanHost "http://whale:8739";
     "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
+    "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
 
     "ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:80";
     "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:443";
   };
 
   services.prometheus.exporters.wireguard.enable = true;
+
+  services.yggdrasil.settings.Peers = [
+    "tcp://45.95.202.21:12403"
+    "tcp://77.37.218.131:12402"
+    "tcp://gutsche.tech:8888"
+    "tls://178.20.45.32:65535"
+    "tls://45.147.198.155:6010"
+    "tls://45.147.200.202:443"
+    "tls://94.103.82.150:8080"
+    "tls://box.paulll.cc:13338"
+  ];
 
   networking = {
     defaultGateway = {

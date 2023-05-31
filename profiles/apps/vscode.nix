@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   home-manager.users.alex = {
     programs.vscode = {
       enable = true;
@@ -42,8 +37,8 @@
           {
             name = "rust-analyzer";
             publisher = "rust-lang";
-            version = "0.4.1399";
-            sha256 = "2KxgMIFofrXyZmoW6OO4wpvggDBu2lO9sxptioHCytw=";
+            version = "0.4.1529";
+            sha256 = "g/P0BezlbXae0oMoD9okvfOBcDZoFdmopIF/uVntf8U=";
           }
           # {
           #   name = "platformio-ide";
