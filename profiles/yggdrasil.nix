@@ -11,9 +11,12 @@
         "tls://ygg.averyan.ru:8362"
       ];
       IfName = "ygg0";
+      MulticastInterfaces = [{
+        Port = 9001;
+      }];
     };
     denyDhcpcdInterfaces = ["ygg0"];
   };
 
-  networking.firewall.allowedTCPPorts = [8362];
+  networking.firewall.allowedTCPPorts = [8362 9001];
 }
