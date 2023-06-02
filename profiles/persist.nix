@@ -10,6 +10,12 @@
       directory = "/var/tmp";
       mode = "1777";
     }
+    {
+      directory = "/var/lib/systemd/timesync";
+      mode = "u=rwx,g=rx,o=rx";
+      user = "systemd-timesync";
+      group = "systemd-timesync";
+    }
   ];
 
   services.openssh.hostKeys = [
