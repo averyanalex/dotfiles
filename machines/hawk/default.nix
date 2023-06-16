@@ -108,11 +108,6 @@ in {
         privateKeyFile = config.age.secrets.wg-key.path;
         peers = [
           {
-            # Pocoft
-            publicKey = "9vFNcLY6iWyHToTduhYD5m5Kj7v4RfERqC0pIWphsgU=";
-            allowedIPs = ["10.8.7.2/32"];
-          }
-          {
             # Pterodactyl (Whale)
             publicKey = "yZxLSiGRW5kqk3qT4Yvei732+i2UWLA4fS/H6AJbPVY=";
             allowedIPs = ["10.8.7.80/32"];
@@ -161,6 +156,11 @@ in {
             # Karaseva
             publicKey = "dBmTwssDWdv+kQfnDl1sMdF7P6+E3szdJPud34tWq1k=";
             allowedIPs = ["10.8.7.247/32"];
+          }
+          {
+            # Swan
+            publicKey = "nQ5xDVQnHI9nPDXW79z7Ks5FHE0o0bqxA5ZKzh9dgEU=";
+            allowedIPs = ["10.8.7.248/32"];
           }
         ];
       };
