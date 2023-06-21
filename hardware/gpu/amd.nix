@@ -6,7 +6,7 @@
       rocm-opencl-icd
       rocm-opencl-runtime
       rocm-runtime
-      amdvlk
+      # amdvlk
     ];
   };
 
