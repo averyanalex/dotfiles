@@ -26,6 +26,7 @@ in {
     inputs.self.nixosModules.profiles.server.nginx
     inputs.self.nixosModules.profiles.server.ntfy-sh
     inputs.self.nixosModules.profiles.server.searx
+    inputs.self.nixosModules.profiles.server.uptime-kuma
   ];
 
   system.stateVersion = "22.05";
@@ -57,6 +58,7 @@ in {
     "olsearch.averyan.ru" = makeAveryanHost "http://whale:8739";
     "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
     "search.averyan.ru" = makeAveryanHost "http://127.0.0.1:8278";
+    "status.averyan.ru" = makeAveryanHost "http://127.0.0.1:3001";
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
 
     "ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:80";
