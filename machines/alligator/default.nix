@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.self.nixosModules.profiles.bluetooth
     inputs.self.nixosModules.profiles.corectrl
