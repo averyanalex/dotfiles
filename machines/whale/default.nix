@@ -1,6 +1,6 @@
 {
   inputs,
-  config,
+  # config,
   ...
 }: let
   wan = "enp6s0";
@@ -11,7 +11,8 @@ in {
     inputs.self.nixosModules.roles.server
 
     # inputs.self.nixosModules.profiles.server.qbit
-    inputs.self.nixosModules.profiles.server.cpmbot
+    # inputs.self.nixosModules.profiles.server.cpmbot
+    inputs.self.nixosModules.profiles.server.bvilove
     inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
     inputs.self.nixosModules.profiles.server.hydra
@@ -117,25 +118,23 @@ in {
 
   networking.firewall.allowedUDPPorts = [67 546];
 
-  age.secrets.wg-key-frsqr.file = ../../secrets/wireguard/whale-frsqr.age;
-  networking.wireguard.interfaces = {
-    wg-frsqr = {
-      ips = ["10.100.0.4/32"];
-      privateKeyFile = config.age.secrets.wg-key-frsqr.path;
-      peers = [
-        {
-          publicKey = "k8XDvqLf9eZzVkY0NpAU3TXgisDAsOOtg+wImiootA8=";
-          allowedIPs = ["10.100.0.0/24"];
-          endpoint = "rat.frsqr.xyz:51820";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
-  };
+  # age.secrets.wg-key-frsqr.file = ../../secrets/wireguard/whale-frsqr.age;
+  # networking.wireguard.interfaces = {
+  #   wg-frsqr = {
+  #     ips = ["10.100.0.4/32"];
+  #     privateKeyFile = config.age.secrets.wg-key-frsqr.path;
+  #     peers = [
+  #       {
+  #         publicKey = "k8XDvqLf9eZzVkY0NpAU3TXgisDAsOOtg+wImiootA8=";
+  #         allowedIPs = ["10.100.0.0/24"];
+  #         endpoint = "rat.frsqr.xyz:51820";
+  #         persistentKeepalive = 25;
+  #       }
+  #     ];
+  #   };
+  # };
 
   networking = {
-    hostName = "whale";
-
     nft-firewall = {
       extraFilterForwardRules = [
         ''iifname { "${lan}", "vm0" } oifname "${wan}" counter accept comment "allow LAN to WAN"''

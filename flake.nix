@@ -15,7 +15,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager"; # release-23.05
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,7 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland"; # a43b18ae265e83cb2e5968b46e5bc2b9f666f81f
+    hyprland.url = "github:hyprwm/Hyprland";
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -48,6 +48,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.flake-utils.follows = "flake-utils";
       url = "github:cpmbot/bot";
+    };
+    bvilovebot = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:bvilove/bot/legacy";
     };
     firesquare-servers = {
       url = "github:fire-square/servers";
@@ -114,10 +119,10 @@
             hostname = "hawk";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
           };
-          lizard = {
-            hostname = "lizard";
-            profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
-          };
+          # lizard = {
+          # hostname = "lizard";
+          # profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
+          # };
           # ferret = {
           #   hostname = "192.168.3.130";
           #   profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ferret;

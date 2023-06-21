@@ -23,6 +23,7 @@
   services.logind.extraConfig = ''
     HandlePowerKey=hibernate
     HandleLidSwitch=suspend-then-hibernate
+    HandleLidSwitchExternalPower=ignore
   '';
   # TODO: setup suspend-then-hibernate after systemd regression will be fixed
   # HandleLidSwitch=suspend-then-hibernate

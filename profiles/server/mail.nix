@@ -24,7 +24,7 @@
 
     useFsLayout = true;
 
-    certificateScheme = 1;
+    certificateScheme = "manual";
     certificateFile = config.security.acme.certs."averyan.ru".directory + "/fullchain.pem";
     keyFile = config.security.acme.certs."averyan.ru".directory + "/key.pem";
 

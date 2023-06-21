@@ -13,6 +13,7 @@
           d3.openscad
 
           alacritty
+          discord
           firefox
           kdenlive
           mpv

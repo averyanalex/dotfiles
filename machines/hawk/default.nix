@@ -24,6 +24,7 @@ in {
     inputs.self.nixosModules.profiles.server.blog
     inputs.self.nixosModules.profiles.server.mail
     inputs.self.nixosModules.profiles.server.nginx
+    inputs.self.nixosModules.profiles.server.ntfy-sh
   ];
 
   system.stateVersion = "22.05";
@@ -45,12 +46,13 @@ in {
 
   services.nginx.virtualHosts = {
     "bw.averyan.ru" = makeAveryanHost "http://whale:8222";
+    "dacha.averyan.ru" = makeAveryanHost "http://lizard:8123";
     "dav.averyan.ru" = makeAveryanHost "http://whale:5232";
     "git.averyan.ru" = makeAveryanHost "http://whale:3816";
     "grafana.averyan.ru" = makeAveryanHost "http://whale:3729";
     "home.averyan.ru" = makeAveryanHost "http://whale:8123";
-    "dacha.averyan.ru" = makeAveryanHost "http://lizard:8123";
     "hydra.averyan.ru" = makeAveryanHost "http://whale:2875";
+    "ntfy.averyan.ru" = makeAveryanHost "http://127.0.0.1:8163";
     "olsearch.averyan.ru" = makeAveryanHost "http://whale:8739";
     "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";

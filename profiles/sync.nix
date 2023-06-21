@@ -44,14 +44,14 @@ in {
         ];
         id = "KF5NLPI-Z57MSPV-XZZXORA-QYVY5VR-GF2FHPW-EX3IUYS-MD5Z2S4-BMC6PAV";
       };
-      pocoft.id = "F64A53F-CVTTAY6-EQSAMYG-A6MYGAM-RP5G5JX-SJYOZUO-Q5DN6GE-GBJAYQK";
+      swan.id = "FWQQRL3-WDYB5XH-PE37M37-6LKVMCC-DTGU3TF-IXNPJFZ-IVYPESK-GOGWTAB";
     };
     folders = {
       "Documents" = commonFolder "Documents";
       "projects" = commonFolder "projects";
-      "Music" = commonFolder "Music" // {devices = allDevices ++ ["pocoft"];};
-      "Notes" = commonFolder "Notes" // {devices = allDevices ++ ["pocoft"];};
-      "Pictures" = commonFolder "Pictures" // {devices = allDevices ++ ["pocoft"];};
+      "Music" = commonFolder "Music" // {devices = allDevices ++ ["swan"];};
+      "Notes" = commonFolder "Notes" // {devices = allDevices ++ ["swan"];};
+      "Pictures" = commonFolder "Pictures" // {devices = allDevices ++ ["swan"];};
     };
   };
 

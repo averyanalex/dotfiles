@@ -10,6 +10,7 @@
       gthumb # images
       evince # documents
       f3d # 3d
+      gimp
     ];
   };
 }

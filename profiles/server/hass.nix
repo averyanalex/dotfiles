@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  # lib,
+  ...
+}: let
   overlay-hass = final: prev: {
     home-assistant = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.home-assistant;
   };
@@ -19,6 +23,7 @@ in {
       "esphome"
       "met"
       "roomba"
+      "samsungtv"
       "utility_meter"
       "zha"
     ];
@@ -30,6 +35,7 @@ in {
         ulid-transform
         google-api-python-client
         protobuf
+        # getmac
       ];
     config = {
       default_config = {};
@@ -48,6 +54,17 @@ in {
     requires = ["postgresql.service"];
     after = ["postgresql.service"];
   };
+
+  # users = {
+  #   users.esphome = {
+  #     isSystemUser = true;
+  #     description = "ESPHome";
+  #     home = "/var/lib/esphome";
+  #     group = "esphome";
+  #     uid = 782;
+  #   };
+  #   groups.esphome.gid = 782;
+  # };
 
   users.users.hass.extraGroups = ["dialout"];
 
@@ -68,6 +85,17 @@ in {
     };
   };
   systemd.services."podman-esphome".after = ["network-online.target"];
+  # services.esphome = {
+  #   enable = true;
+  #   address = "0.0.0.0";
+  # };
+  # systemd.services.esphome.serviceConfig = {
+  #   DynamicUser = lib.mkForce false;
+  #   NoNewPrivileges = true;
+  #   PrivateTmp = true;
+  #   RemoveIPC = true;
+  #   RestrictSUIDSGID = true;
+  # };
 
   services.postgresql = {
     ensureDatabases = ["hass"];
@@ -90,7 +118,9 @@ in {
     }
     {
       directory = "/var/lib/esphome";
-      mode = "u=rwx,g=,o=";
+      user = "esphome";
+      group = "esphome";
+      mode = "0750";
     }
   ];
 

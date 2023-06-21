@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   home-manager.users.alex = {
     home.packages = with pkgs; [
       # screenshots
@@ -21,9 +16,9 @@
     ];
 
     fonts.fontconfig.enable = true;
-
     services.gpg-agent.pinentryFlavor = "gnome3";
-
     services.gnome-keyring.enable = true;
   };
+
+  programs.dconf.enable = true;
 }

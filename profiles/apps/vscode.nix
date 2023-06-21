@@ -70,6 +70,7 @@
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
 
         "rust-analyzer.server.path" = "${pkgs.unstable.rust-analyzer}/bin/rust-analyzer";
+        "rust-analyzer.check.command" = "clippy";
         # "platformio-ide.useBuiltinPIOCore" = false;
 
         "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";

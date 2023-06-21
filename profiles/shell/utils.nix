@@ -1,25 +1,21 @@
 {pkgs, ...}: {
   home-manager.users.alex = {
     home.packages = with pkgs; [
-      xdg-ninja
-      ncdu
-      killall
-      btop
-      htop
-      smartmontools
-
+      xdg-ninja # clean home dir
+      ncdu # disk usage analyze
+      killall # kill all processes by name
+      btop # beautiful cpu, net, disk monitor
+      htop # simple cpu monitor
+      smartmontools # SMART data reader
       usbutils # lsusb
       pciutils # lspci
-
-      traceroute
-
-      unzip
-
+      traceroute # show route trace to host
+      unzip # unarchive zip
       rmlint # find dupes
-
-      neofetch
-
+      neofetch # I am hacker
       ripgrep # fast grep
+      iotop # disk usage monitor
+      nmap # open ports analyzer
     ];
   };
 }

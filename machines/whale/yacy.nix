@@ -56,6 +56,7 @@ in {
       pkgs,
       ...
     }: {
+      system.stateVersion = "23.05";
       networking = {
         firewall.enable = false;
         interfaces.eth0.ipv6 = {

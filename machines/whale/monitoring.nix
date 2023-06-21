@@ -25,6 +25,13 @@
           type = "prometheus";
           url = "http://localhost:9090/";
         }
+        {
+          name = "BVI Love";
+          type = "postgres";
+          database = "bvilove";
+          user = "grafana";
+          url = "/run/postgresql";
+        }
       ];
     };
   };
@@ -41,6 +48,7 @@
         name = "grafana";
         ensurePermissions = {
           "DATABASE grafana" = "ALL PRIVILEGES";
+          "DATABASE bvilove" = "ALL PRIVILEGES";
         };
       }
     ];

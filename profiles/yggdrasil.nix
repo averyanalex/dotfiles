@@ -5,15 +5,18 @@
 }: {
   services.yggdrasil = {
     enable = true;
+    openMulticastPort = true;
     settings = {
       Listen = ["tls://[::]:8362"];
       Peers = lib.mkIf (config.networking.hostName != "hawk") [
         "tls://ygg.averyan.ru:8362"
       ];
       IfName = "ygg0";
-      MulticastInterfaces = [{
-        Port = 9001;
-      }];
+      MulticastInterfaces = [
+        {
+          Port = 9001;
+        }
+      ];
     };
     denyDhcpcdInterfaces = ["ygg0"];
   };
