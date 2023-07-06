@@ -20,5 +20,7 @@
     services.gnome-keyring.enable = true;
   };
 
+  persist.state.homeDirs = [".local/share/keyrings"];
+
   programs.dconf.enable = true;
 }
