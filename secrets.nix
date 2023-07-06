@@ -29,6 +29,7 @@ in {
   "secrets/mail/sonya8128.age".publicKeys = users ++ [hawk];
 
   "secrets/creds/bvilove.age".publicKeys = users ++ [whale];
+  "secrets/creds/kluckva.age".publicKeys = users ++ [whale];
   "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk];
   "secrets/creds/cpmbot.age".publicKeys = users ++ [whale];
   "secrets/creds/firesquare.age".publicKeys = users ++ [whale];

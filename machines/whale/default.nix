@@ -16,6 +16,7 @@ in {
     inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
     inputs.self.nixosModules.profiles.server.hydra
+    inputs.self.nixosModules.profiles.server.kluckva
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.pgsql

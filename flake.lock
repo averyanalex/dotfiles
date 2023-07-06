@@ -437,6 +437,47 @@
         "type": "github"
       }
     },
+    "import-cargo_4": {
+      "locked": {
+        "lastModified": 1594305518,
+        "narHash": "sha256-frtArgN42rSaEcEOYWg8sVPMUK+Zgch3c+wejcpX3DY=",
+        "owner": "edolstra",
+        "repo": "import-cargo",
+        "rev": "25d40be4a73d40a2572e0cc233b83253554f06c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "import-cargo",
+        "type": "github"
+      }
+    },
+    "infinitytgadminsbot": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "import-cargo": "import-cargo_4",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "rust-overlay": "rust-overlay_3"
+      },
+      "locked": {
+        "lastModified": 1688403344,
+        "narHash": "sha256-PrY5yEm982NHA1QiNfNZNRO5WSfDapaKCJKym/LY7cU=",
+        "owner": "averyanalex",
+        "repo": "infinity-tg-admins-bot",
+        "rev": "61cc72116c6df73c1404ed44861dbea0151f4b81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "averyanalex",
+        "ref": "61cc721",
+        "repo": "infinity-tg-admins-bot",
+        "type": "github"
+      }
+    },
     "mailserver": {
       "inputs": {
         "blobs": "blobs",
@@ -662,6 +703,7 @@
         "hyprland": "hyprland",
         "hyprwm-contrib": "hyprwm-contrib",
         "impermanence": "impermanence",
+        "infinitytgadminsbot": "infinitytgadminsbot",
         "mailserver": "mailserver",
         "nix-ld": "nix-ld",
         "nixos-hardware": "nixos-hardware",
@@ -706,6 +748,31 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "74e44edb87aeed50798f5b81795ebad250d4a0c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_3": {
+      "inputs": {
+        "flake-utils": [
+          "infinitytgadminsbot",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "infinitytgadminsbot",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1688351637,
+        "narHash": "sha256-CLTufJ29VxNOIZ8UTg0lepsn3X03AmopmaLTTeHDCL4=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "f9b92316727af9e6c7fee4a761242f7f46880329",
         "type": "github"
       },
       "original": {

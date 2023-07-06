@@ -54,6 +54,11 @@
       inputs.flake-utils.follows = "flake-utils";
       url = "github:bvilove/bot/legacy";
     };
+    infinitytgadminsbot = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:averyanalex/infinity-tg-admins-bot/61cc721";
+    };
     firesquare-servers = {
       url = "github:fire-square/servers";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -119,10 +124,10 @@
             hostname = "hawk";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
           };
-          # lizard = {
-          # hostname = "lizard";
-          # profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
-          # };
+          lizard = {
+            hostname = "lizard";
+            profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
+          };
           # ferret = {
           #   hostname = "192.168.3.130";
           #   profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ferret;
