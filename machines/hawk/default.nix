@@ -168,6 +168,11 @@ in {
             publicKey = "nQ5xDVQnHI9nPDXW79z7Ks5FHE0o0bqxA5ZKzh9dgEU=";
             allowedIPs = ["10.8.7.248/32"];
           }
+          {
+            # Poplik
+            publicKey = "s4xNXZAq83WzDbIA9w4Ori9MrPuA8lsYKYRldfcrrHc=";
+            allowedIPs = ["10.8.7.249/32"];
+          }
         ];
       };
     };
