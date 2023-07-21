@@ -48,6 +48,7 @@ in {
 
   "secrets/yggdrasil/alligator.age".publicKeys = users ++ [alligator];
   "secrets/yggdrasil/whale.age".publicKeys = users ++ [whale];
+  "secrets/yggdrasil/hawk.age".publicKeys = users ++ [hawk];
 
   "secrets/nebula/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/ca-key.age".publicKeys = users;
