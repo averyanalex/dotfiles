@@ -157,8 +157,8 @@ in {
       interface = "ens3";
     };
     # defaultGateway6 = {
-    #   address = "2a0e:d606:0:1af::1";
-    #   interface = "ens3";
+    # address = "2a12:5940:d011::1";
+    # interface = "ens3";
     # };
 
     nft-firewall = {
@@ -258,12 +258,12 @@ in {
           ];
         };
         # ipv6 = {
-        #   addresses = [
-        #     {
-        #       address = "2a0e:d606:0:1af::a";
-        #       prefixLength = 64;
-        #     }
-        #   ];
+        # addresses = [
+        # {
+        # address = "2a12:5940:d011::a";
+        # prefixLength = 48;
+        # }
+        # ];
         # };
       };
     };

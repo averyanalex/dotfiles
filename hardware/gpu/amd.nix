@@ -5,11 +5,11 @@
     # TODO: normal mesa
     package = pkgs.unstable.mesa.drivers;
 
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs.unstable; [
       rocm-opencl-icd
       rocm-opencl-runtime
       rocm-runtime
-      # amdvlk
+      amdvlk
     ];
   };
 

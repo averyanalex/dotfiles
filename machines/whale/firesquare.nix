@@ -1,7 +1,6 @@
 {
   inputs,
   config,
-  pkgs,
   ...
 }: let
   firesquare-module = inputs.firesquare-servers.nixosModules.default;

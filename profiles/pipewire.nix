@@ -10,6 +10,6 @@
   };
 
   home-manager.users.alex = {
-    home.packages = [pkgs.helvum];
+    home.packages = [pkgs.helvum pkgs.easyeffects];
   };
 }

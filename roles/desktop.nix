@@ -16,6 +16,7 @@
           discord
           firefox
           kdenlive
+          matrix
           mpv
           notes
           obs

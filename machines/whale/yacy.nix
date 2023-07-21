@@ -2,8 +2,8 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "yacy/yacy_search_server";
     finalImageTag = "latest";
-    imageDigest = "sha256:678ed9b2702c9f20349417d766ec6d2286e40742edc4f0fb683af6c0d7bd8a83";
-    sha256 = "QhM0wyuVRye61137FhcOka8gP0NcfuPkwN4unBy6SEE=";
+    imageDigest = "sha256:73519c8ac903129a6fb80b509df897b02bfdee0a5db1b178fde8729bf579b202";
+    sha256 = "eVi4JegDdnMcSws7hVRNOROlr4R/gQ7R7H0WYR7Pb9Y=";
   };
 in {
   systemd.tmpfiles.rules = [
