@@ -1,6 +1,6 @@
 {
   inputs,
-  # config,
+  config,
   ...
 }: let
   wan = "enp6s0";
@@ -23,7 +23,7 @@ in {
     inputs.self.nixosModules.profiles.server.radicale
     inputs.self.nixosModules.profiles.server.vaultwarden
 
-    inputs.self.nixosModules.profiles.libvirt
+    # inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.profiles.podman
@@ -54,7 +54,9 @@ in {
   # Monitoring
   services.prometheus.exporters.node.enabledCollectors = ["zoneinfo"];
 
-  # Networking
+  # NETWORKING
+
+  # Enable forwarding
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = true;
     "net.ipv4.conf.all.forwarding" = true;
@@ -97,60 +99,103 @@ in {
       };
     };
 
-    "40-vm0" = {
+    # "40-vm0" = {
+    #   networkConfig = {
+    #     IPv6AcceptRA = false;
+    #     ConfigureWithoutCarrier = true;
+    #   };
+    #   dhcpServerConfig = {
+    #     PoolOffset = 100;
+    #     PoolSize = 100;
+    #     DNS = "9.9.9.9";
+    #   };
+    # };
+
+    "40-yggbr" = {
       networkConfig = {
         IPv6AcceptRA = false;
         ConfigureWithoutCarrier = true;
-      };
-      dhcpServerConfig = {
-        PoolOffset = 100;
-        PoolSize = 100;
-        DNS = "9.9.9.9";
       };
     };
 
-    "40-yggbr0" = {
+    "40-wgav" = {
+      # routes = [
+      #   {
+      #     routeConfig = {
+      #       Destination = "::/0";
+      #       Type = "unreachable";
+      #       Table = 700;
+      #     };
+      #   }
+      # ];
+      # routingPolicyRules = [
+      # {
+      #   routingPolicyRuleConfig = {
+      #     FirewallMark = 700;
+      #     Table = 700;
+      #   };
+      # }
+      # {
+      #   routingPolicyRuleConfig = {
+      #     User = "alex";
+      #     Table = 700;
+      #   };
+      # }
+      # ];
+    };
+    "40-wgavbr" = {
       networkConfig = {
         IPv6AcceptRA = false;
         ConfigureWithoutCarrier = true;
       };
+      routingPolicyRules = [
+        {
+          routingPolicyRuleConfig = {
+            IncomingInterface = "wgavbr";
+            Table = 700;
+          };
+        }
+      ];
     };
   };
 
   networking.firewall.allowedUDPPorts = [67 546];
 
-  # age.secrets.wg-key-frsqr.file = ../../secrets/wireguard/whale-frsqr.age;
-  # networking.wireguard.interfaces = {
-  #   wg-frsqr = {
-  #     ips = ["10.100.0.4/32"];
-  #     privateKeyFile = config.age.secrets.wg-key-frsqr.path;
-  #     peers = [
-  #       {
-  #         publicKey = "k8XDvqLf9eZzVkY0NpAU3TXgisDAsOOtg+wImiootA8=";
-  #         allowedIPs = ["10.100.0.0/24"];
-  #         endpoint = "rat.frsqr.xyz:51820";
-  #         persistentKeepalive = 25;
-  #       }
-  #     ];
-  #   };
-  # };
+  age.secrets.wg-key-averyan.file = ../../secrets/wireguard/whale.age;
+  networking.wireguard.interfaces = {
+    wgav = {
+      allowedIPsAsRoutes = false;
+      privateKeyFile = config.age.secrets.wg-key-averyan.path;
+      peers = [
+        {
+          publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
+          allowedIPs = ["0.0.0.0/0"];
+          endpoint = "hawk.averyan.ru:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
 
   networking = {
     nft-firewall = {
       extraFilterForwardRules = [
-        ''iifname { "${lan}", "vm0" } oifname "${wan}" counter accept comment "allow LAN to WAN"''
-        ''iifname "${wan}" oifname { "${lan}", "vm0" } ct state { established, related } counter accept comment "allow established back to LAN"''
-        ''iifname "yggbr0" oifname "ygg0" counter accept comment "allow YGGBR to YGG"''
-        ''iifname "ygg0" oifname "yggbr0" counter accept''
-        # ''iifname "ygg0" oifname "yggbr0" ct state { established, related } counter accept comment "allow established back to YGGBR0"''
+        ''iifname { "${lan}" } oifname "${wan}" counter accept comment "allow LAN to WAN"'' # vm0
+        ''iifname "${wan}" oifname { "${lan}" } ct state { established, related } counter accept comment "allow established back to LAN"'' # vm0
+        ''iifname "yggbr" oifname "ygg0" counter accept comment "allow YGGBR to YGG"''
+        ''iifname "ygg0" oifname "yggbr" counter accept''
+        ''iifname "wgavbr" oifname "wgav" counter accept''
+        ''iifname "wgav" oifname "wgavbr" counter accept''
       ];
       extraNatPostroutingRules = [''oifname "${wan}" masquerade''];
+      # extraMangleOutputRules = [''skuid 1000 counter mark set 701''];
     };
 
     bridges = {
       ${lan}.interfaces = ["${physLan}"];
-      vm0.interfaces = [];
-      yggbr0.interfaces = [];
+      # vm0.interfaces = [];
+      yggbr.interfaces = [];
+      wgavbr.interfaces = [];
     };
 
     interfaces = {
@@ -164,22 +209,66 @@ in {
           ];
         };
       };
-      vm0 = {
+      # vm0 = {
+      #   ipv4 = {
+      #     addresses = [
+      #       {
+      #         address = "192.168.12.1";
+      #         prefixLength = 24;
+      #       }
+      #     ];
+      #   };
+      # };
+      yggbr.ipv6.addresses = [
+        {
+          address = "30a:5fad::1";
+          prefixLength = 64;
+        }
+      ];
+      wgavbr = {
         ipv4 = {
           addresses = [
             {
-              address = "192.168.12.1";
+              address = "10.8.8.1";
               prefixLength = 24;
+            }
+          ];
+          routes = [
+            {
+              address = "10.8.8.0";
+              prefixLength = 24;
+              options.table = "700";
             }
           ];
         };
       };
-      yggbr0.ipv6.addresses = [
-        {
-          address = "317:7b20:ee43:21d3::1";
-          prefixLength = 64;
-        }
-      ];
+      wgav = {
+        ipv4 = {
+          addresses = [
+            {
+              address = "10.8.8.2";
+              prefixLength = 32;
+            }
+          ];
+          routes = [
+            {
+              address = "10.8.7.0";
+              prefixLength = 24;
+            }
+            {
+              address = "10.8.7.0";
+              prefixLength = 24;
+              options.table = "700";
+            }
+            {
+              address = "0.0.0.0";
+              prefixLength = 0;
+              via = "10.8.7.1";
+              options.table = "700";
+            }
+          ];
+        };
+      };
     };
   };
 }

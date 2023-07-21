@@ -61,8 +61,8 @@ in {
     "status.averyan.ru" = makeAveryanHost "http://127.0.0.1:3001";
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
 
-    "ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:80";
-    "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.7.80:443";
+    "ptero.averyan.ru" = makeAveryanHost "http://10.8.8.100:80";
+    "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.8.100:443";
   };
 
   services.prometheus.exporters.wireguard.enable = true;
@@ -94,10 +94,10 @@ in {
         "iifname ens3 oifname wg0 ct state { established, related } counter accept"
       ];
       extraNatPreroutingRules = [
-        "ip daddr 185.112.83.99 tcp dport 25000-25100 dnat to 10.8.7.80"
-        "ip daddr 185.112.83.99 tcp dport 25565 dnat to 10.8.7.81"
-        "ip daddr 185.112.83.99 tcp dport 2022 dnat to 10.8.7.80"
-        "ip daddr 185.112.83.99 udp dport 25000-25100 dnat to 10.8.7.80"
+        "ip daddr 185.112.83.99 tcp dport 25000-25100 dnat to 10.8.8.100"
+        # "ip daddr 185.112.83.99 tcp dport 25565 dnat to 10.8.7.81"
+        "ip daddr 185.112.83.99 tcp dport 2022 dnat to 10.8.8.100"
+        "ip daddr 185.112.83.99 udp dport 25000-25100 dnat to 10.8.8.100"
       ];
       extraNatPostroutingRules = ["oifname ens3 masquerade"];
     };
@@ -114,14 +114,9 @@ in {
         privateKeyFile = config.age.secrets.wg-key.path;
         peers = [
           {
-            # Pterodactyl (Whale)
-            publicKey = "yZxLSiGRW5kqk3qT4Yvei732+i2UWLA4fS/H6AJbPVY=";
-            allowedIPs = ["10.8.7.80/32"];
-          }
-          {
-            # Firesquare (Whale)
-            publicKey = "fwxaU8/D7awGaEcDuDVqssk7lkUoNuAsv3vR132XRlQ=";
-            allowedIPs = ["10.8.7.81/32"];
+            # Whale
+            publicKey = "nt2xC/cl5opg4g5fUkvqKuUKORXLS/qGCikx7F0FBRQ=";
+            allowedIPs = ["10.8.8.0/24"];
           }
           {
             # Vsevolod

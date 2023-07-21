@@ -41,6 +41,7 @@ in {
   "secrets/intpass/photoprism.age".publicKeys = users ++ [whale];
 
   "secrets/wireguard/hawk.age".publicKeys = users ++ [hawk];
+  "secrets/wireguard/whale.age".publicKeys = users ++ [whale];
   "secrets/wireguard/pterodactyl.age".publicKeys = users ++ [whale];
   "secrets/wireguard/firesquare.age".publicKeys = users ++ [whale];
   "secrets/wireguard/whale-frsqr.age".publicKeys = users ++ [whale];

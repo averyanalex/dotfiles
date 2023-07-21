@@ -35,12 +35,12 @@ in {
 
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8739 8627];
 
-  containers.yacy = {
+  containers.yacy-ygg = {
     autoStart = true;
     ephemeral = true;
 
     privateNetwork = true;
-    hostBridge = "yggbr0";
+    hostBridge = "yggbr";
 
     extraFlags = ["--system-call-filter=@keyring" "--system-call-filter=bpf"];
 
@@ -62,7 +62,7 @@ in {
         interfaces.eth0.ipv6 = {
           addresses = [
             {
-              address = "317:7b20:ee43:21d3::5";
+              address = "30a:5fad::e";
               prefixLength = 64;
             }
           ];
@@ -70,11 +70,13 @@ in {
             {
               address = "200::";
               prefixLength = 7;
-              via = "317:7b20:ee43:21d3::1";
+              via = "30a:5fad::1";
             }
           ];
         };
       };
+
+      boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 1;
 
       virtualisation.oci-containers = {
         containers = {

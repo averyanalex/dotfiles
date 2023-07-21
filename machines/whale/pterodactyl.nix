@@ -1,29 +1,10 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  age.secrets.wg-key-pterodactyl.file = ../../secrets/wireguard/pterodactyl.age;
-  networking.wireguard.interfaces = {
-    wg-pterodactyl = {
-      allowedIPsAsRoutes = false;
-      privateKeyFile = config.age.secrets.wg-key-pterodactyl.path;
-      peers = [
-        {
-          publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
-          allowedIPs = ["0.0.0.0/0"];
-          endpoint = "hawk.averyan.ru:51820";
-          persistentKeepalive = 15;
-        }
-      ];
-    };
-  };
-
+{config, ...}: {
   systemd.services."container@pterodactyl" = {
-    requires = ["wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service"];
-    after = ["wireguard-wg-pterodactyl.service" "wireguard-wg-pterodactyl.target" "setup-pterodactyl-dirs.service"];
+    requires = ["setup-pterodactyl-dirs.service"];
+    after = ["setup-pterodactyl-dirs.service"];
   };
 
+  # TODO: systemd-tmpfiles
   systemd.services.setup-pterodactyl-dirs = {
     script = ''
       mkdir -p /persist/ptero/mysql
@@ -54,7 +35,8 @@
     ephemeral = true;
 
     privateNetwork = true;
-    interfaces = ["wg-pterodactyl"];
+    hostBridge = "wgavbr";
+    localAddress = "10.8.8.100/24";
 
     extraFlags = ["--system-call-filter=@keyring" "--system-call-filter=bpf"];
 
@@ -91,15 +73,9 @@
       system.stateVersion = "22.11";
 
       networking = {
-        interfaces.wg-pterodactyl.ipv4.addresses = [
-          {
-            address = "10.8.7.80";
-            prefixLength = 32;
-          }
-        ];
         defaultGateway = {
-          address = "10.8.7.1";
-          interface = "wg-pterodactyl";
+          address = "10.8.8.1";
+          interface = "eth0";
         };
         firewall.enable = false;
         useHostResolvConf = false;
