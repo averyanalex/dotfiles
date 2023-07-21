@@ -74,7 +74,7 @@ in {
         type = types.listOf types.str;
         default = [];
         example = [];
-        description = lib.mdDoc "Additional rules in output chain.";
+        description = lib.mdDoc "Additional rules in filter output chain.";
       };
 
       extraFilterInputRules = mkOption {
@@ -89,6 +89,13 @@ in {
         default = [];
         example = ["iifname lan0 oifname wan0 counter accept"];
         description = lib.mdDoc "Additional rules in forward chain.";
+      };
+
+      extraMangleOutputRules = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        example = [];
+        description = lib.mdDoc "Additional rules in mangle output chain.";
       };
 
       extraNatPreroutingRules = mkOption {
@@ -216,6 +223,14 @@ in {
           ${concatStringsSep "\n" nft-cfg.extraFilterForwardRules}
 
           counter drop
+        }
+      }
+
+      table inet mangle {
+        chain output {
+          type route hook output priority mangle;
+
+          ${concatStringsSep "\n" nft-cfg.extraMangleOutputRules}
         }
       }
 
