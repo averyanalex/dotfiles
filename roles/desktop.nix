@@ -25,6 +25,7 @@
           openboard
           telegram
           tex
+          tor-browser
           vscode
         ]
         ++ (with games; [

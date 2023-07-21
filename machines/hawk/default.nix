@@ -29,6 +29,8 @@ in {
 
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.profiles.remote-builder-client
+
+    ./tor.nix
   ];
 
   system.stateVersion = "22.05";

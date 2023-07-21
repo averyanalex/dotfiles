@@ -117,6 +117,17 @@
           }
         ];
       }
+      {
+        job_name = "tor";
+        scrape_interval = "1m";
+        static_configs = [
+          {
+            targets = [
+              "hawk:9130"
+            ];
+          }
+        ];
+      }
     ];
   };
 
