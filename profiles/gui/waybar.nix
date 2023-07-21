@@ -13,76 +13,123 @@
       enable = true;
       package = inputs.hyprland.packages.${pkgs.hostPlatform.system}.waybar-hyprland;
       style = ''
-        * {
-            border:        none;
-            border-radius: 0;
-            font-family:   Sans;
-            font-size:     15px;
-            box-shadow:    none;
-            text-shadow:   none;
-            transition-duration: 0s;
+        #waybar {
+            font-family: "Fira Sans SemiBold";
+            font-size: 13px;
         }
 
-        window {
-            color:      rgba(217, 216, 216, 1);
-            background: rgba(35, 31, 32, 0.00);
+        #window {
+            padding: 0 10px;
+        }
+
+        window#waybar {
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            text-shadow: none;
+            transition-duration: 0s;
+            color: rgba(217, 216, 216, 1);
+            background: rgba(0, 0, 0, 0.87);
         }
 
         window#waybar.solo {
-            color:      rgba(217, 216, 216, 1);
-            background: rgba(35, 31, 32, 0.85);
+            background: rgb(35, 31, 32);
+            font-size: 15px;
         }
 
         #workspaces {
-            margin: 0 5px;
+            margin: 0 2px;
         }
 
         #workspaces button {
-            padding:    0 5px;
-            color:      rgba(217, 216, 216, 0.4);
+            padding: 0 2px;
+            color: rgba(217, 216, 216, 0.4);
+            /* border: 3px solid rgba(217, 216, 216, 0);
+            border-radius: 10px; */
         }
 
         #workspaces button.visible {
-            color:      rgba(217, 216, 216, 1);
+            color: rgba(217, 216, 216, 1);
         }
 
         #workspaces button.focused {
             border-top: 3px solid rgba(217, 216, 216, 1);
-            border-bottom: 3px solid rgba(217, 216, 216, 0);
+            border-bottom: 3px solid rgba(217, 216, 216, 1);
         }
 
         #workspaces button.urgent {
-            color:      rgba(238, 46, 36, 1);
+            background-color: #943432;
+            color: white;
         }
 
-        #mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail {
-            margin:     0px 6px 0px 10px;
-            min-width:  25px;
+        #workspaces button:hover {
+            box-shadow: inherit;
+            border-color: #d1be8b;
+            color: #888888;
         }
 
-        #clock {
-            margin:     0px 16px 0px 10px;
-            min-width:  140px;
+        /* Repeat style here to ensure properties are overwritten as there's no !important and button:hover above resets the colour */
+
+        #workspaces button.focused {
+            color: white;
+        }
+
+        #pulseaudio {
+            /* font-size: 26px; */
+        }
+
+        #custom-cpu_speed {
+            min-width: 82px;
+        }
+
+        #custom-recorder {
+        	font-size: 18px;
+        	margin: 2px 7px 0px 7px;
+        	color:#c9545d;
+        }
+
+        #tray,
+        #clock,
+        #mode,
+        #battery,
+        #temperature,
+        #cpu,
+        #memory,
+        #network,
+        #pulseaudio,
+        #idle_inhibitor,
+        #language,
+        #backlight,
+        #custom-storage,
+        #custom-cpu_speed,
+        #custom-powermenu,
+        #custom-spotify,
+        #custom-weather,
+        #custom-mail,
+        #custom-media {
+            margin: 0px 0px 0px 10px;
+            padding: 0 5px;
+            /* border-top: 3px solid rgba(217, 216, 216, 0.5); */
         }
 
         #battery.warning {
-           color:       rgba(255, 210, 4, 1);
+            color: rgba(255, 210, 4, 1);
         }
 
         #battery.critical {
-            color:      rgba(238, 46, 36, 1);
+            color: rgba(238, 46, 36, 1);
         }
 
         #battery.charging {
-            color:      rgba(217, 216, 216, 1);
+            color: rgba(217, 216, 216, 1);
         }
 
         #custom-storage.warning {
-            color:      rgba(255, 210, 4, 1);
+            color: rgba(255, 210, 4, 1);
         }
 
         #custom-storage.critical {
-            color:      rgba(238, 46, 36, 1);
+            color: rgba(238, 46, 36, 1);
         }
       '';
       settings = [
@@ -93,7 +140,7 @@
           tray = {spacing = 10;};
           modules-left = [
             "tray"
-            "mpd"
+            # "mpd"
             "wlr/workspaces"
           ];
           modules-center = [
