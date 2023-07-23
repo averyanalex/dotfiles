@@ -24,6 +24,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     impermanence.url = "github:nix-community/impermanence";
 
     nur.url = "github:nix-community/NUR";
