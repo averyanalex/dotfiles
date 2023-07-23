@@ -33,8 +33,7 @@ in {
       };
       whale = {
         addresses = [
-          "tcp://192.168.3.1:22000"
-          "tcp://10.5.3.20:22000"
+          "tcp://whale.averyan.ru:22000"
         ];
         id = "CWES2IK-GJ5F2CI-4SXANKJ-5WOZKF7-5LBDF4U-2J7JSAJ-S3SSVN7-K5E3DAY";
       };

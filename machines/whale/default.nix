@@ -6,12 +6,25 @@
   wan = "enp6s0";
   physLan = "enp5s0";
   lan = "lan0";
+
+  makeAveryanHost = proxyPass: {
+    locations."/".proxyPass = proxyPass;
+    locations."/".proxyWebsockets = true;
+    extraConfig = ''
+      proxy_buffering off;
+    '';
+    useACMEHost = "averyan.ru";
+    forceSSL = true;
+    kTLS = true;
+  };
 in {
   imports = [
     inputs.self.nixosModules.roles.server
 
     # inputs.self.nixosModules.profiles.server.qbit
     # inputs.self.nixosModules.profiles.server.cpmbot
+    inputs.self.nixosModules.profiles.server.acme
+    inputs.self.nixosModules.profiles.server.blog
     inputs.self.nixosModules.profiles.server.bvilove
     inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
@@ -19,8 +32,11 @@ in {
     inputs.self.nixosModules.profiles.server.kluckva
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
+    inputs.self.nixosModules.profiles.server.nginx
+    inputs.self.nixosModules.profiles.server.ntfy-sh
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.radicale
+    inputs.self.nixosModules.profiles.server.searx
     inputs.self.nixosModules.profiles.server.vaultwarden
 
     # inputs.self.nixosModules.profiles.libvirt
@@ -63,6 +79,24 @@ in {
     "net.ipv4.conf.default.forwarding" = true;
     "net.ipv6.conf.all.forwarding" = true;
     "net.ipv6.conf.default.forwarding" = true;
+  };
+
+  services.nginx.virtualHosts = {
+    "bw.averyan.ru" = makeAveryanHost "http://whale:8222";
+    "dacha.averyan.ru" = makeAveryanHost "http://lizard:8123";
+    "dav.averyan.ru" = makeAveryanHost "http://whale:5232";
+    "git.averyan.ru" = makeAveryanHost "http://whale:3816";
+    "grafana.averyan.ru" = makeAveryanHost "http://whale:3729";
+    "home.averyan.ru" = makeAveryanHost "http://whale:8123";
+    "hydra.averyan.ru" = makeAveryanHost "http://whale:2875";
+    "ntfy.averyan.ru" = makeAveryanHost "http://127.0.0.1:8163";
+    "olsearch.averyan.ru" = makeAveryanHost "http://whale:8739";
+    "prism.averyan.ru" = makeAveryanHost "http://whale:2342";
+    "search.averyan.ru" = makeAveryanHost "http://127.0.0.1:8278";
+    "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
+
+    "ptero.averyan.ru" = makeAveryanHost "http://10.8.8.100:80";
+    "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.8.100:443";
   };
 
   systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";

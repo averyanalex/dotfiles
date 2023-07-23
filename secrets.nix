@@ -30,11 +30,11 @@ in {
 
   "secrets/creds/bvilove.age".publicKeys = users ++ [whale];
   "secrets/creds/kluckva.age".publicKeys = users ++ [whale];
-  "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk];
+  "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk whale];
   "secrets/creds/cpmbot.age".publicKeys = users ++ [whale];
   "secrets/creds/firesquare.age".publicKeys = users ++ [whale];
   "secrets/creds/ipfs-cluster.age".publicKeys = users ++ [whale];
-  "secrets/creds/searx.age".publicKeys = users ++ [hawk];
+  "secrets/creds/searx.age".publicKeys = users ++ [hawk whale];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [whale];
   "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [whale];
