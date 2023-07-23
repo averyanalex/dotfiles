@@ -14,11 +14,15 @@
     	sleep 300
     done
   '';
+  init-swww-with-wallpaper = pkgs.writeShellScriptBin "init-swww-with-wallpaper" ''
+    swww init
+    ${set-random-wallpaper}/bin/set-random-wallpaper
+  '';
 in {
   home-manager.users.alex = {
-    home.packages = [pkgs.unstable.swww set-random-wallpaper wallpaper-randomizer];
+    home.packages = [pkgs.unstable.swww set-random-wallpaper init-swww-with-wallpaper wallpaper-randomizer];
     wayland.windowManager.hyprland.extraConfig = ''
-      exec-once=swww init
+      exec-once=init-swww-with-wallpaper
       exec-once=wallpaper-randomizer
     '';
   };
