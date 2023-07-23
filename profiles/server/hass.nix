@@ -1,11 +1,28 @@
 {
   inputs,
-  # lib,
+  pkgs,
   ...
 }: let
   overlay-hass = final: prev: {
     home-assistant = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.home-assistant;
   };
+
+  dockerImageAMD64 = pkgs.dockerTools.pullImage {
+    imageName = "esphome/esphome";
+    finalImageTag = "latest";
+    imageDigest = "sha256:22faae0272e006ba9d8513f204e50a18b1f266cd0223fc62c33ceb8e32e1deaa";
+    sha256 = "Ule/u7S8N5ZUB4PthWEVKwMj4HtDoTT9rw8sGZLseO4=";
+  };
+  dockerImageARM64 = pkgs.dockerTools.pullImage {
+    imageName = "esphome/esphome";
+    finalImageTag = "latest";
+    imageDigest = "sha256:cdf16d15cb7f2b3b7ab6294d548a0b57d3d5f3ffaedf0aa8480f88d1052f4836";
+    sha256 = "aV14JegDdnMcSws7hVRNOROlr4R/gQ7R7H0WYR7Pb9Y=";
+  };
+  dockerImage =
+    if pkgs.hostPlatform.system == "aarch64-linux"
+    then dockerImageARM64
+    else dockerImageAMD64;
 in {
   nixpkgs.overlays = [overlay-hass];
   disabledModules = [
@@ -47,6 +64,17 @@ in {
       automation = "!include automations.yaml";
       scene = "!include scenes.yaml";
       script = "!include scripts.yaml";
+      notify = [
+        {
+          name = "ntfy";
+          platform = "rest";
+          method = "POST_JSON";
+          data.topic = "!secret ntfy_topic";
+          title_param_name = "title";
+          message_param_name = "message";
+          resource = "https://ntfy.averyan.ru";
+        }
+      ];
     };
   };
 
@@ -71,7 +99,8 @@ in {
   virtualisation.oci-containers = {
     containers = {
       esphome = {
-        image = "esphome/esphome:2023.6";
+        image = "esphome/esphome";
+        imageFile = dockerImage;
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
           "/var/lib/esphome:/config"

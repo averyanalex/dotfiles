@@ -1,26 +1,31 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: let
+  dockerImage = pkgs.dockerTools.pullImage {
+    imageName = "photoprism/photoprism";
+    finalImageTag = "latest";
+    imageDigest = "sha256:523ead1dd226a2f30c8fc333aea553a18681f20ee20167e003de1151d0b82edf";
+    sha256 = "QrsDnVnF1FmMvREcw3RygWkVGsE6KKGz+vVceMdiExU=";
+  };
+in {
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
 
   systemd.services."podman-photoprism" = {
-    requires = ["setup-photoprism-dirs.service" "mysql.service"];
-    after = ["network-online.target" "setup-photoprism-dirs.service" "mysql.service"];
+    requires = ["mysql.service"];
+    after = ["mysql.service"];
   };
 
-  systemd.services.setup-photoprism-dirs = {
-    script = ''
-      mkdir -p /persist/var/lib/photoprism
-      chown 1000:100 /persist/var/lib/photoprism
-      chmod 700 /persist/var/lib/photoprism
-    '';
-    serviceConfig.RemainAfterExit = true;
-  };
+  systemd.tmpfiles.rules = ["d /persist/var/lib/photoprism 700 1000 100 - -"];
 
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [2342];
 
   virtualisation.oci-containers = {
     containers = {
       photoprism = {
-        image = "photoprism/photoprism:230506";
+        image = "photoprism/photoprism";
+        imageFile = dockerImage;
         volumes = [
           "/tank/Галерея:/photoprism/originals"
           "/tank/Импорт:/photoprism/import"
