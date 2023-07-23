@@ -15,6 +15,7 @@ Main PC. 32 GB DDR4 3200 MHz, 2 channels; AMD Ryzen 7 5800X; Radeon RX 6800 XT; 
 - Hawk 10.5.3.12
 - Whale 10.5.3.20
 - Lizard 10.5.3.40
+- Diamond 10.5.3.80
 - Hamster 10.5.3.100
 - Alligator 10.5.3.101
 
