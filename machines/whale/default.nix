@@ -69,15 +69,20 @@ in {
 
   systemd.network.networks = {
     "40-${wan}" = {
+      # gateway = ["95.165.96.1"];
       name = "${wan}";
+      # routes = [
+      #   {
+      #     routeConfig = {
+      #       Destination = "95.165.96.1";
+      #       Source = "95.165.105.90";
+      #     };
+      #   }
+      # ];
       networkConfig = {
-        LinkLocalAddressing = "ipv6";
-        IPv6AcceptRA = true;
         DHCP = "yes";
-      };
-      ipv6AcceptRAConfig = {
-        DHCPv6Client = "always";
-        UseAutonomousPrefix = false;
+        LinkLocalAddressing = "no";
+        IPv6AcceptRA = false;
       };
     };
 
@@ -85,12 +90,8 @@ in {
       name = "${lan}";
       networkConfig = {
         IPv6AcceptRA = false;
-        IPv6SendRA = true;
-        DHCPPrefixDelegation = true;
-
         DHCPServer = true;
       };
-      dhcpPrefixDelegationConfig.UplinkInterface = "${wan}";
       dhcpServerConfig = {
         PoolOffset = 100;
         PoolSize = 50;
@@ -98,18 +99,6 @@ in {
         DNS = "9.9.9.9";
       };
     };
-
-    # "40-vm0" = {
-    #   networkConfig = {
-    #     IPv6AcceptRA = false;
-    #     ConfigureWithoutCarrier = true;
-    #   };
-    #   dhcpServerConfig = {
-    #     PoolOffset = 100;
-    #     PoolSize = 100;
-    #     DNS = "9.9.9.9";
-    #   };
-    # };
 
     "40-yggbr" = {
       networkConfig = {
@@ -193,12 +182,21 @@ in {
 
     bridges = {
       ${lan}.interfaces = ["${physLan}"];
-      # vm0.interfaces = [];
       yggbr.interfaces = [];
       wgavbr.interfaces = [];
     };
 
     interfaces = {
+      # "${wan}" = {
+      #   ipv4 = {
+      #     addresses = [
+      #       {
+      #         address = "95.165.105.90";
+      #         prefixLength = 20;
+      #       }
+      #     ];
+      #   };
+      # };
       "${lan}" = {
         ipv4 = {
           addresses = [
@@ -209,16 +207,6 @@ in {
           ];
         };
       };
-      # vm0 = {
-      #   ipv4 = {
-      #     addresses = [
-      #       {
-      #         address = "192.168.12.1";
-      #         prefixLength = 24;
-      #       }
-      #     ];
-      #   };
-      # };
       yggbr.ipv6.addresses = [
         {
           address = "30a:5fad::1";
