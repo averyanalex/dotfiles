@@ -95,8 +95,9 @@ in {
     "search.averyan.ru" = makeAveryanHost "http://127.0.0.1:8278";
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
 
-    "ptero.averyan.ru" = makeAveryanHost "http://10.8.8.100:80";
-    "whale-ptero.averyan.ru" = makeAveryanHost "http://10.8.8.100:443";
+    "ptero.averyan.ru" = makeAveryanHost "http://192.168.12.50:80";
+    "whale-ptero.averyan.ru" = makeAveryanHost "http://192.168.12.50:443";
+    "diamond-ptero.averyan.ru" = makeAveryanHost "http://diamond:443";
   };
 
   systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
@@ -124,6 +125,20 @@ in {
       name = "${lan}";
       networkConfig = {
         IPv6AcceptRA = false;
+        DHCPServer = true;
+      };
+      dhcpServerConfig = {
+        PoolOffset = 100;
+        PoolSize = 50;
+        EmitDNS = true;
+        DNS = "9.9.9.9";
+      };
+    };
+
+    "40-vms" = {
+      networkConfig = {
+        IPv6AcceptRA = false;
+        ConfigureWithoutCarrier = true;
         DHCPServer = true;
       };
       dhcpServerConfig = {
@@ -203,8 +218,8 @@ in {
   networking = {
     nft-firewall = {
       extraFilterForwardRules = [
-        ''iifname { "${lan}" } oifname "${wan}" counter accept comment "allow LAN to WAN"'' # vm0
-        ''iifname "${wan}" oifname { "${lan}" } ct state { established, related } counter accept comment "allow established back to LAN"'' # vm0
+        ''iifname { "${lan}", "vms" } oifname "${wan}" counter accept comment "allow LAN to WAN"''
+        ''iifname "${wan}" oifname { "${lan}", "vms" } ct state { established, related } counter accept comment "allow established back to LAN"''
         ''iifname "yggbr" oifname "ygg0" counter accept comment "allow YGGBR to YGG"''
         ''iifname "ygg0" oifname "yggbr" counter accept''
         ''iifname "wgavbr" oifname "wgav" counter accept''
@@ -216,6 +231,7 @@ in {
 
     bridges = {
       ${lan}.interfaces = ["${physLan}"];
+      vms.interfaces = [];
       yggbr.interfaces = [];
       wgavbr.interfaces = [];
     };
@@ -236,6 +252,16 @@ in {
           addresses = [
             {
               address = "192.168.3.1";
+              prefixLength = 24;
+            }
+          ];
+        };
+      };
+      vms = {
+        ipv4 = {
+          addresses = [
+            {
+              address = "192.168.12.1";
               prefixLength = 24;
             }
           ];

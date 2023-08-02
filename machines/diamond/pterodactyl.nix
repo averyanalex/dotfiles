@@ -1,15 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
-  panelDockerImage = pkgs.dockerTools.pullImage {
-    imageName = "ghcr.io/pterodactyl/panel";
-    finalImageTag = "latest";
-    imageDigest = "sha256:5f5c5dc8f63da867b7d50ecf4a2d2124b979e93b5bd4be4b8558221d50f01419";
-    sha256 = "LFWKxI4B26FomRvVdW3pNFVPb7oeR9YlgCUS9rt4HpE=";
-  };
-
+{pkgs, ...}: let
   wingsDockerImage = pkgs.dockerTools.pullImage {
     imageName = "ghcr.io/pterodactyl/wings";
     finalImageTag = "latest";
@@ -20,14 +9,9 @@ in {
   systemd.tmpfiles.rules = [
     "d /persist/ptero/podman 700 0 0 - -"
     "d /persist/ptero/docker 710 0 0 - -"
-    "d /persist/ptero/panel 700 0 0 - -"
-    "d /persist/ptero/mysql 700 84 84 - -"
     "d /persist/ptero/wings 700 988 988 - -"
     "d /persist/ptero/wings-configs 700 988 988 - -"
   ];
-
-  age.secrets.pterodactyl-panel-passwords.file = ../../secrets/intpass/pterodactyl-panel.age;
-  age.secrets.pterodactyl-redis-password.file = ../../secrets/intpass/pterodactyl-redis.age;
 
   containers.pterodactyl = {
     autoStart = true;
@@ -40,14 +24,6 @@ in {
     extraFlags = ["--system-call-filter=@keyring" "--system-call-filter=bpf"];
 
     bindMounts = {
-      "/var/lib/mysql/" = {
-        hostPath = "/persist/ptero/mysql";
-        isReadOnly = false;
-      };
-      "/srv/pterodactyl/" = {
-        hostPath = "/persist/ptero/panel";
-        isReadOnly = false;
-      };
       "/var/lib/pterodactyl/" = {
         hostPath = "/persist/ptero/wings";
         isReadOnly = false;
@@ -64,8 +40,6 @@ in {
         hostPath = "/persist/ptero/podman";
         isReadOnly = false;
       };
-      "/run/panel.env".hostPath = config.age.secrets.pterodactyl-panel-passwords.path;
-      "/run/redis-pass".hostPath = config.age.secrets.pterodactyl-redis-password.path;
     };
 
     config = {
@@ -92,34 +66,6 @@ in {
 
       virtualisation.oci-containers = {
         containers = {
-          panel = {
-            image = "ghcr.io/pterodactyl/panel";
-            imageFile = panelDockerImage;
-            volumes = [
-              "/srv/pterodactyl/var/:/app/var/"
-              "/srv/pterodactyl/logs/:/app/storage/logs"
-            ];
-            extraOptions = ["--network=host"];
-            environment = {
-              APP_URL = "https://ptero.averyan.ru";
-              APP_TIMEZONE = "Europe/Moscow";
-              APP_SERVICE_AUTHOR = "alex@averyan.ru";
-              APP_ENV = "production";
-              APP_ENVIRONMENT_ONLY = "false";
-
-              CACHE_DRIVER = "redis";
-              SESSION_DRIVER = "redis";
-              QUEUE_DRIVER = "redis";
-              REDIS_HOST = "127.0.0.1";
-              REDIS_PORT = "6379";
-
-              DB_HOST = "127.0.0.1";
-              DB_PORT = "3306";
-              DB_DATABASE = "panel";
-              DB_USERNAME = "panel";
-            };
-            environmentFiles = ["/run/panel.env"];
-          };
           wings = {
             # image = "ghcr.io/averyanalex/wings:v1.11.0-np";
             image = "ghcr.io/pterodactyl/wings";
@@ -146,31 +92,6 @@ in {
         autoPrune = {
           enable = true;
         };
-      };
-
-      services.redis.servers.panel = {
-        enable = true;
-        port = 6379;
-        requirePassFile = "/run/redis-pass";
-      };
-
-      services.mysql = {
-        enable = true;
-        package = pkgs.mariadb;
-        settings = {
-          mysqld = {
-            max_connections = 512;
-          };
-        };
-        ensureDatabases = ["panel"];
-        ensureUsers = [
-          {
-            name = "panel";
-            ensurePermissions = {
-              "panel.*" = "ALL PRIVILEGES";
-            };
-          }
-        ];
       };
     };
   };
