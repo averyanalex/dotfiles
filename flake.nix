@@ -9,8 +9,8 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    agenix = {
-      url = "github:ryantm/agenix";
+    ragenix = {
+      url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -74,7 +74,7 @@
     nixpkgs,
     nixpkgs-unstable,
     flake-utils,
-    agenix,
+    ragenix,
     deploy-rs,
     ...
   } @ inputs: let
@@ -126,10 +126,14 @@
             hostname = "hawk";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
           };
-          lizard = {
-            hostname = "lizard";
-            profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
+          falcon = {
+            hostname = "falcon";
+            profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.falcon;
           };
+          # lizard = {
+          # hostname = "lizard";
+          # profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
+          # };
           diamond = {
             hostname = "diamond";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.diamond;
@@ -182,7 +186,7 @@
     in {
       devShells.default = pkgs.mkShell {
         buildInputs = [
-          agenix.packages.${system}.agenix
+          ragenix.packages.${system}.ragenix
           deploy-rs.packages.${system}.deploy-rs
           pkgs.alejandra
           pkgs.nebula

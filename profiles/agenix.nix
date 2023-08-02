@@ -1,5 +1,5 @@
 {inputs, ...}: {
   imports = [
-    inputs.agenix.nixosModules.age
+    inputs.ragenix.nixosModules.age
   ];
 }
