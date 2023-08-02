@@ -3,6 +3,13 @@
   pkgs,
   ...
 }: {
+  age.secrets.account-wakatime = {
+    file = ../../secrets/accounts/wakatime.age;
+    owner = "alex";
+    group = "users";
+    path = "/home/alex/.wakatime.cfg";
+  };
+
   home-manager.users.alex = {
     programs.vscode = {
       enable = true;

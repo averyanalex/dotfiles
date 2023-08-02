@@ -21,6 +21,7 @@ in {
   "secrets/remote-builder-ssh-key.age".publicKeys = users ++ systems;
 
   "secrets/accounts/mail.age".publicKeys = users ++ desktops;
+  "secrets/accounts/wakatime.age".publicKeys = users ++ desktops;
   "secrets/accounts/deluge.age".publicKeys = users ++ [whale];
   "secrets/accounts/radicale.age".publicKeys = users ++ desktops ++ [whale];
 
