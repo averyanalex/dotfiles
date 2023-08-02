@@ -17,7 +17,7 @@
     imageName = "esphome/esphome";
     finalImageTag = "latest";
     imageDigest = "sha256:cdf16d15cb7f2b3b7ab6294d548a0b57d3d5f3ffaedf0aa8480f88d1052f4836";
-    sha256 = "aV14JegDdnMcSws7hVRNOROlr4R/gQ7R7H0WYR7Pb9Y=";
+    sha256 = "4aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
   };
   dockerImage =
     if pkgs.hostPlatform.system == "aarch64-linux"
