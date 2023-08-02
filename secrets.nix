@@ -10,10 +10,11 @@ let
   family = [ferret];
 
   hawk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGNROiWZEvzjR6TVoeVrVoUI2Vsx3wmJSb9QojvdLK0e";
+  falcon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPo6ltlqcLgX/QsU06PnBMvwbs1OTxIuuouseVYbZL7S";
   whale = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtyxNV8IPSMHudJrMbemcK82LosU9tdNDV2rhf0Z9ps";
   lizard = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEkmHS0r9G9Qgsponr/XayqOXB28eR+eUiYtBA+x5vTK";
   diamond = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKI3lWpGU0TE74z0STnC1WuUAUNlMYipvUChSaJ/k0pw";
-  servers = [hawk whale lizard diamond];
+  servers = [hawk falcon whale lizard diamond];
 
   systems = desktops ++ family ++ servers;
 in {
@@ -65,6 +66,8 @@ in {
   "secrets/nebula/lizard-key.age".publicKeys = users ++ [lizard];
   "secrets/nebula/diamond-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/diamond-key.age".publicKeys = users ++ [diamond];
+  "secrets/nebula/falcon-crt.age".publicKeys = users ++ systems;
+  "secrets/nebula/falcon-key.age".publicKeys = users ++ [falcon];
 
   "secrets/nebula-frsqr/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula-frsqr/whale-crt.age".publicKeys = users ++ systems;

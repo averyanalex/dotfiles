@@ -13,6 +13,7 @@ Main PC. 32 GB DDR4 3200 MHz, 2 channels; AMD Ryzen 7 5800X; Radeon RX 6800 XT; 
 # Nebula
 
 - Hawk 10.5.3.12
+- Falcon 10.5.3.15
 - Whale 10.5.3.20
 - Lizard 10.5.3.40
 - Diamond 10.5.3.80
