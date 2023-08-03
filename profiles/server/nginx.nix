@@ -11,6 +11,7 @@
 
     recommendedGzipSettings = true;
     recommendedBrotliSettings = true;
+    recommendedZstdSettings = true;
 
     statusPage = true;
   };
