@@ -15,6 +15,7 @@
     '';
     useACMEHost = "averyan.ru";
     forceSSL = true;
+    quic = true;
     kTLS = true;
   };
 in {
