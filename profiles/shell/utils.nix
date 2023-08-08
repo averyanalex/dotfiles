@@ -16,6 +16,9 @@
       ripgrep # fast grep
       iotop # disk usage monitor
       nmap # open ports analyzer
+      stress # cpu stress test
+      screen # run in background
+      hashcat # password cracking
     ];
   };
 }

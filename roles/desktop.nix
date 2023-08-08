@@ -9,25 +9,11 @@
     ++ (with inputs.self.nixosModules.profiles;
       with apps;
         [
-          d3.freecad
-          d3.openscad
-
           alacritty
-          discord
           firefox
-          kdenlive
-          matrix
           mpv
-          notes
-          obs
-          octave
-          office
-          open
-          openboard
-          telegram
-          tex
-          tor-browser
           vscode
+          misc
         ]
         ++ (with games; [
           minecraft
