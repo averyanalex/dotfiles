@@ -3,8 +3,8 @@
   config,
   ...
 }: let
-  wan = "enp6s0";
-  physLan = "enp5s0";
+  wan = "enp5s0"; # with gpu: enp6s0
+  physLan = "enp4s0"; # with gpu: enp5s0
   lan = "lan0";
 
   makeAveryanHost = proxyPass: {
