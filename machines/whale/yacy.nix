@@ -8,32 +8,32 @@
 in {
   systemd.tmpfiles.rules = [
     "d /hdd/yacy-ygg 755 115 121 - -"
-    "d /hdd/yacy-olymp 755 115 121 - -"
-    "d /hdd/yacy-freeworld 755 115 121 - -"
+    # "d /hdd/yacy-olymp 755 115 121 - -"
+    # "d /hdd/yacy-freeworld 755 115 121 - -"
   ];
 
-  virtualisation.oci-containers = {
-    containers = {
-      yacy-olymp = {
-        image = "yacy/yacy_search_server";
-        imageFile = dockerImage;
-        volumes = [
-          "/hdd/yacy-olymp/:/opt/yacy_search_server/DATA/"
-        ];
-        extraOptions = ["--network=host"];
-      };
-      yacy-freeworld = {
-        image = "yacy/yacy_search_server";
-        imageFile = dockerImage;
-        volumes = [
-          "/hdd/yacy-freeworld/:/opt/yacy_search_server/DATA/"
-        ];
-        extraOptions = ["--network=host"];
-      };
-    };
-  };
+  # virtualisation.oci-containers = {
+  #   containers = {
+  #     yacy-olymp = {
+  #       image = "yacy/yacy_search_server";
+  #       imageFile = dockerImage;
+  #       volumes = [
+  #         "/hdd/yacy-olymp/:/opt/yacy_search_server/DATA/"
+  #       ];
+  #       extraOptions = ["--network=host"];
+  #     };
+  #     yacy-freeworld = {
+  #       image = "yacy/yacy_search_server";
+  #       imageFile = dockerImage;
+  #       volumes = [
+  #         "/hdd/yacy-freeworld/:/opt/yacy_search_server/DATA/"
+  #       ];
+  #       extraOptions = ["--network=host"];
+  #     };
+  #   };
+  # };
 
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8739 8627];
+  # networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8739 8627];
 
   containers.yacy-ygg = {
     autoStart = true;
