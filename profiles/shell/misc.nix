@@ -19,6 +19,11 @@
       stress # cpu stress test
       screen # run in background
       hashcat # password cracking
+      micro # simple text editor
     ];
+
+    home.sessionVariables = {
+      EDITOR = "micro";
+    };
   };
 }

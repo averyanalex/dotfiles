@@ -14,9 +14,8 @@
           exa
           fzf
           git
-          micro
-          utils
           zoxide
+          misc
         ]
         ++ [
           agenix
