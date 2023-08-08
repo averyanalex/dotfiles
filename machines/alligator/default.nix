@@ -11,6 +11,9 @@
     inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.roles.desktop
+
+    ./miner.nix
+
     ./hardware.nix
     ./mounts.nix
   ];
