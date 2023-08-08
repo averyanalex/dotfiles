@@ -241,6 +241,11 @@ in {
             publicKey = "s4xNXZAq83WzDbIA9w4Ori9MrPuA8lsYKYRldfcrrHc=";
             allowedIPs = ["10.8.7.249/32"];
           }
+          {
+            # Alligator
+            publicKey = "FtRuoT3cvVFGq4DGbBNMSEYDvhygFvMDAHWEnSUgfjo=";
+            allowedIPs = ["10.8.7.250/32"];
+          }
         ];
       };
     };

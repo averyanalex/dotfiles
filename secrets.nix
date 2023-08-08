@@ -45,6 +45,7 @@ in {
 
   "secrets/wireguard/hawk.age".publicKeys = users ++ [hawk];
   "secrets/wireguard/whale.age".publicKeys = users ++ [whale];
+  "secrets/wireguard/alligator.age".publicKeys = users ++ [alligator];
   "secrets/wireguard/pterodactyl.age".publicKeys = users ++ [whale];
   "secrets/wireguard/firesquare.age".publicKeys = users ++ [whale];
   "secrets/wireguard/whale-frsqr.age".publicKeys = users ++ [whale];

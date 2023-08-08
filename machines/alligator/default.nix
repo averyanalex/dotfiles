@@ -1,9 +1,14 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  ...
+}: {
   imports = [
     inputs.self.nixosModules.profiles.bluetooth
     inputs.self.nixosModules.profiles.corectrl
     inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.openrgb
+    inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.roles.desktop
     ./hardware.nix
@@ -17,12 +22,84 @@
   # };
   # nix.settings.system-features = [ "gccarch-znver3" ];
 
+  systemd.network.networks = {
+    "40-wgav" = {
+      routes = [
+        {
+          routeConfig = {
+            Destination = "::/0";
+            Type = "unreachable";
+            Table = 700;
+          };
+        }
+      ];
+      routingPolicyRules = [
+        {
+          routingPolicyRuleConfig = {
+            FirewallMark = 700;
+            Table = 700;
+          };
+        }
+        # {
+        #   routingPolicyRuleConfig = {
+        #     User = "alex";
+        #     Table = 700;
+        #   };
+        # }
+      ];
+    };
+  };
+
+  age.secrets.wg-key-averyan.file = ../../secrets/wireguard/alligator.age;
+  networking.wireguard.interfaces = {
+    wgav = {
+      allowedIPsAsRoutes = false;
+      privateKeyFile = config.age.secrets.wg-key-averyan.path;
+      peers = [
+        {
+          publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
+          allowedIPs = ["0.0.0.0/0"];
+          endpoint = "hawk.averyan.ru:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
+
   system.stateVersion = "22.05";
 
   persist.tmpfsSize = "10G";
 
   networking = {
     firewall.allowedTCPPorts = [25565];
+
+    interfaces.wgav = {
+      ipv4 = {
+        addresses = [
+          {
+            address = "10.8.7.250";
+            prefixLength = 32;
+          }
+        ];
+        routes = [
+          {
+            address = "10.8.7.0";
+            prefixLength = 24;
+          }
+          {
+            address = "10.8.7.0";
+            prefixLength = 24;
+            options.table = "700";
+          }
+          {
+            address = "0.0.0.0";
+            prefixLength = 0;
+            via = "10.8.7.1";
+            options.table = "700";
+          }
+        ];
+      };
+    };
 
     # defaultGateway = {
     #   address = "192.168.3.1";
