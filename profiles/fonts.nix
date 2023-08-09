@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
+    enableDefaultPackages = true;
+    packages = with pkgs; [
       corefonts # Proprietary: Times New Roman, etc
       jetbrains-mono
       meslo-lgs-nf

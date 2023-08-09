@@ -2,9 +2,9 @@
   home-manager.users.alex = {
     home.packages = with pkgs; [
       # Communication
-      unstable.schildichat-desktop # electron matrix client
-      unstable.webcord-vencord # discord client
-      unstable.telegram-desktop # telegram client
+      schildichat-desktop # electron matrix client
+      webcord-vencord # discord client
+      telegram-desktop # telegram client
 
       # Creativity
       libsForQt5.kdenlive # video editor
@@ -42,7 +42,7 @@
       elmerfem
 
       # Etc
-      unstable.tor-browser-bundle-bin # anonymous browsing
+      tor-browser-bundle-bin # anonymous browsing
       libreoffice-fresh # office
       octaveFull # math software
     ];

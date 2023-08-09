@@ -33,7 +33,7 @@
       sudo
       timezone
       unfree
-      unstable
+      stable
       zram
     ]);
 }

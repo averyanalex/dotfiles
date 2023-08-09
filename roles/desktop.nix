@@ -25,7 +25,7 @@
           # sway
           clipboard
           eww
-          hyprland
+          sway
           portals
           rofi
           swaylock

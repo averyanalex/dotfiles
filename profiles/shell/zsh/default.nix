@@ -29,8 +29,9 @@
 
       enableAutosuggestions = true;
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
       autocd = true;
+
+      syntaxHighlighting.enable = true;
 
       shellAliases = {
         ip = "ip --color=auto";

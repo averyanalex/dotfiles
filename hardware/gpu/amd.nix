@@ -2,10 +2,8 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    # TODO: normal mesa
-    package = pkgs.unstable.mesa.drivers;
 
-    extraPackages = with pkgs.unstable; [
+    extraPackages = with pkgs; [
       rocm-opencl-icd
       rocm-opencl-runtime
       rocm-runtime

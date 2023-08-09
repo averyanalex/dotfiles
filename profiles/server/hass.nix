@@ -3,9 +3,9 @@
   pkgs,
   ...
 }: let
-  overlay-hass = final: prev: {
-    home-assistant = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.home-assistant;
-  };
+  # overlay-hass = final: prev: {
+  #   home-assistant = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.home-assistant;
+  # };
 
   dockerImageAMD64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
@@ -24,13 +24,13 @@
     then dockerImageARM64
     else dockerImageAMD64;
 in {
-  nixpkgs.overlays = [overlay-hass];
-  disabledModules = [
-    "services/home-automation/home-assistant.nix"
-  ];
-  imports = [
-    (inputs.nixpkgs-unstable + "/nixos/modules/services/home-automation/home-assistant.nix")
-  ];
+  # nixpkgs.overlays = [overlay-hass];
+  # disabledModules = [
+  #   "services/home-automation/home-assistant.nix"
+  # ];
+  # imports = [
+  #   (inputs.nixpkgs-unstable + "/nixos/modules/services/home-automation/home-assistant.nix")
+  # ];
 
   services.home-assistant = {
     enable = true;

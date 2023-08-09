@@ -47,7 +47,7 @@
     };
 
     home.packages = with pkgs; [
-      unstable.deltachat-desktop
+      deltachat-desktop
     ];
   };
 

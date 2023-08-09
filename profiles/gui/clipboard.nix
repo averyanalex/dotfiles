@@ -5,7 +5,7 @@
 }: {
   home-manager.users.alex = {
     home.packages = [
-      pkgs.unstable.cliphist
+      pkgs.cliphist
       pkgs.wl-clipboard
       (pkgs.rustPlatform.buildRustPackage
         rec {

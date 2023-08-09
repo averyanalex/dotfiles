@@ -53,7 +53,7 @@
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
 
-        "rust-analyzer.server.path" = "${pkgs.unstable.rust-analyzer}/bin/rust-analyzer";
+        "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         "rust-analyzer.check.command" = "clippy";
         # "platformio-ide.useBuiltinPIOCore" = false;
 

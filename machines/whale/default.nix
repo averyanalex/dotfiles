@@ -101,8 +101,6 @@ in {
     "diamond-ptero.averyan.ru" = makeAveryanHost "http://diamond:443";
   };
 
-  systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
-
   systemd.network.networks = {
     "40-${wan}" = {
       # gateway = ["95.165.96.1"];
@@ -155,38 +153,40 @@ in {
         IPv6AcceptRA = false;
         ConfigureWithoutCarrier = true;
       };
+      linkConfig.RequiredForOnline = false;
     };
 
     "40-wgav" = {
-      # routes = [
-      #   {
-      #     routeConfig = {
-      #       Destination = "::/0";
-      #       Type = "unreachable";
-      #       Table = 700;
-      #     };
-      #   }
-      # ];
-      # routingPolicyRules = [
-      # {
-      #   routingPolicyRuleConfig = {
-      #     FirewallMark = 700;
-      #     Table = 700;
-      #   };
-      # }
+      routes = [
+        {
+          routeConfig = {
+            Destination = "::/0";
+            Type = "unreachable";
+            Table = 700;
+          };
+        }
+      ];
+      routingPolicyRules = [
+      {
+        routingPolicyRuleConfig = {
+          FirewallMark = 700;
+          Table = 700;
+        };
+      }
       # {
       #   routingPolicyRuleConfig = {
       #     User = "alex";
       #     Table = 700;
       #   };
       # }
-      # ];
+      ];
     };
     "40-wgavbr" = {
       networkConfig = {
         IPv6AcceptRA = false;
         ConfigureWithoutCarrier = true;
       };
+      linkConfig.RequiredForOnline = false;
       routingPolicyRules = [
         {
           routingPolicyRuleConfig = {

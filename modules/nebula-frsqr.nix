@@ -54,7 +54,7 @@ in {
     age.secrets.nebula-crt.file = ../secrets/nebula-frsqr + "/${config.networking.hostName}-crt.age";
 
     services.nebula.networks.frsqr = {
-      package = pkgs.unstable.nebula;
+      package = pkgs.nebula;
 
       key = config.age.secrets.nebula-key.path;
       cert = config.age.secrets.nebula-crt.path;

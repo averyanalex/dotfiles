@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   home-manager.users.alex = {
-    home.packages = [pkgs.unstable.prismlauncher];
+    home.packages = [pkgs.prismlauncher];
   };
 
-  services.syncthing.folders."PrismLauncher" = {
+  services.syncthing.settings.folders."PrismLauncher" = {
     id = "prismlauncher";
     path = "/home/alex/.local/share/PrismLauncher";
     ignorePerms = false;

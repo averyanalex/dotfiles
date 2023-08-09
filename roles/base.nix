@@ -42,7 +42,7 @@
           timezone
           unfree
           unsecure
-          unstable
+          stable
           userdirs
           users
           vmvariant

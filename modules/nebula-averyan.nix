@@ -65,7 +65,7 @@ in {
     };
 
     services.nebula.networks.averyan = {
-      package = pkgs.unstable.nebula;
+      package = pkgs.nebula;
 
       key = config.age.secrets.nebula-averyan-key.path;
       cert = config.age.secrets.nebula-averyan-crt.path;

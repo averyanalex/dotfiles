@@ -20,10 +20,14 @@
   '';
 in {
   home-manager.users.alex = {
-    home.packages = [pkgs.unstable.swww set-random-wallpaper init-swww-with-wallpaper wallpaper-randomizer];
+    home.packages = [pkgs.swww set-random-wallpaper init-swww-with-wallpaper wallpaper-randomizer];
     wayland.windowManager.hyprland.extraConfig = ''
       exec-once=init-swww-with-wallpaper
       exec-once=wallpaper-randomizer
+    '';
+    wayland.windowManager.sway.extraConfig = ''
+      exec init-swww-with-wallpaper
+      exec wallpaper-randomizer
     '';
   };
 }

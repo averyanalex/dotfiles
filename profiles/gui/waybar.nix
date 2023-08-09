@@ -11,7 +11,7 @@
     ];
     programs.waybar = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.hostPlatform.system}.waybar-hyprland;
+      # package = inputs.hyprland.packages.${pkgs.hostPlatform.system}.waybar-hyprland;
       style = ''
         #waybar {
             font-family: "Fira Sans SemiBold";
@@ -141,7 +141,7 @@
           modules-left = [
             "tray"
             # "mpd"
-            "wlr/workspaces"
+            "sway/workspaces"
           ];
           modules-center = [
             "cpu"
@@ -230,6 +230,9 @@
     };
     wayland.windowManager.hyprland.extraConfig = ''
       exec-once=waybar
+    '';
+    wayland.windowManager.sway.extraConfig = ''
+      exec waybar
     '';
   };
 }

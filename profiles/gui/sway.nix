@@ -4,13 +4,6 @@
   config,
   ...
 }: {
-  imports = [
-    ./rofi.nix
-    ./swaylock.nix
-    ./waybar.nix
-    ./wm.nix
-  ];
-
   home-manager.users.alex = {
     programs.bash.enable = true;
     programs.bash.profileExtra = ''
@@ -19,11 +12,12 @@
       fi
     '';
 
+    home.packages = [pkgs.pulseaudio];
+
     wayland.windowManager.sway = {
-      # TODO: random wallpaper from ~/Pictures/Wallpapers/3440x1440
       enable = true;
-      systemdIntegration = true;
       wrapperFeatures.gtk = true;
+
       extraSessionCommands = ''
         export NIXOS_OZONE_WL=1
 
@@ -31,6 +25,7 @@
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         export QT_QPA_PLATFORM=wayland
       '';
+
       config = {
         input = {
           "*" = {
@@ -44,6 +39,19 @@
           };
         };
         bars = [];
+        focus = {
+          followMouse = "always";
+          mouseWarping = "container";
+        };
+        gaps = {
+          inner = 5;
+          outer = 5;
+          smartBorders = "on";
+          smartGaps = true;
+        };
+        workspaceAutoBackAndForth = true;
+
+        bindkeysToCode = true;
         keybindings = let
           cfg = config.home-manager.users.alex.wayland.windowManager.sway.config;
         in
@@ -76,7 +84,9 @@
         modifier = "Mod4"; # Super
       };
       extraConfig = ''
-        # polkit
+        exec sway-idlehandler
+        exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
 
         # STYLING
@@ -87,8 +97,6 @@
 
         for_window [shell="xdg_shell"] title_format "%title (%app_id)"
         for_window [shell="x_wayland"] title_format "%class - %title"
-
-        exec waybar
       '';
     };
   };

@@ -2,8 +2,8 @@
   description = "AveryanAlex's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -15,13 +15,13 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-ld = {
       url = "github:Mic92/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -31,33 +31,36 @@
     nur.url = "github:nix-community/NUR";
 
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
-      inputs.nixpkgs-23_05.follows = "nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs-23_05.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     averyanalex-blog = {
       url = "github:averyanalex/blog";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     cpmbot = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       url = "github:cpmbot/bot";
     };
     bvilovebot = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       url = "github:bvilove/bot/legacy";
     };
     infinitytgadminsbot = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       url = "github:averyanalex/infinity-tg-admins-bot/61cc721";
     };
@@ -72,7 +75,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
+    nixpkgs-stable,
     flake-utils,
     ragenix,
     deploy-rs,
@@ -173,7 +176,7 @@
                 config = {
                   sdImage.compressImage = false;
                   system.stateVersion = "23.05";
-                  boot.kernelPackages = nixpkgs-unstable.legacyPackages.aarch64-linux.linuxKernel.packages.linux_6_1;
+                  boot.kernelPackages = nixpkgs.legacyPackages.aarch64-linux.linuxKernel.packages.linux_6_1;
                 };
               })
             ];
