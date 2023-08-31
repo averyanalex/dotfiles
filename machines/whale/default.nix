@@ -59,6 +59,8 @@ in {
     ./pterodactyl.nix
     # ./tanksrv.nix
     ./yacy.nix
+    ./tor.nix
+    ./i2p.nix
   ];
 
   system.stateVersion = "22.05";
@@ -169,18 +171,18 @@ in {
         }
       ];
       routingPolicyRules = [
-      {
-        routingPolicyRuleConfig = {
-          FirewallMark = 700;
-          Table = 700;
-        };
-      }
-      # {
-      #   routingPolicyRuleConfig = {
-      #     User = "alex";
-      #     Table = 700;
-      #   };
-      # }
+        {
+          routingPolicyRuleConfig = {
+            FirewallMark = 700;
+            Table = 700;
+          };
+        }
+        # {
+        #   routingPolicyRuleConfig = {
+        #     User = "alex";
+        #     Table = 700;
+        #   };
+        # }
       ];
     };
     "40-wgavbr" = {
