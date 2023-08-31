@@ -36,4 +36,33 @@
   # boot.initrd.systemd.enable = true;
 
   system.stateVersion = "22.05";
+
+  services.klipper = {
+    enable = true;
+    configFile = ./4max.cfg;
+    firmwares = {
+      mcu = {
+        enable = true;
+        enableKlipperFlash = true;
+        configFile = ./mcu.cfg;
+        serial = "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0";
+      };
+    };
+  };
+
+  services.moonraker = {
+    user = "root";
+    enable = true;
+    address = "0.0.0.0";
+    settings = {
+      octoprint_compat = {};
+      history = {};
+      authorization = {
+        force_logins = true;
+        cors_domains = ["localhost" "*.local" "*.lan" "*://app.fluidd.xyz" "*://my.mainsail.xyz"];
+        trusted_clients = ["10.0.0.0/8" "127.0.0.0/8" "169.254.0.0/16" "172.16.0.0/12" "192.168.1.0/24" "FE80::/10" "::1/128"];
+      };
+    };
+  };
+  services.mainsail.enable = true;
 }
