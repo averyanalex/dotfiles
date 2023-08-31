@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  service = lib.importJSON ./service.json;
+  serviceConfig = lib.importJSON ./service.json;
 in {
   age.secrets.credentials-ipfs-cluster.file = ../../../secrets/creds/ipfs-cluster.age;
 
@@ -17,7 +17,7 @@ in {
       if [ ! -f "identity.json" ]; then
         ipfs-cluster-service --config . init -f
       fi
-      cp ${builtins.toFile "service.json" (builtins.toJSON service)} service.json
+      cp ${builtins.toFile "service.json" (builtins.toJSON serviceConfig)} service.json
       chmod 640 service.json
       sed -i "s/#SECRET#/$SECRET/g" service.json
       # sed -i "s/#BASIC_PASSWORD#/$BASIC_PASSWORD/g" service.json
@@ -40,7 +40,7 @@ in {
       directory = "/var/lib/ipfs-cluster";
       user = "ipfs-cluster";
       group = "ipfs-cluster";
-      mode = "u=rwx,g=rx,o=rx";
+      mode = "u=rwx,g=,o=";
     }
   ];
 

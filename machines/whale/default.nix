@@ -37,6 +37,8 @@ in {
     inputs.self.nixosModules.profiles.server.ntfy-sh
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.radicale
+    inputs.self.nixosModules.profiles.server.ipfs
+    inputs.self.nixosModules.profiles.server.ipfs-cluster
     inputs.self.nixosModules.profiles.server.searx
     inputs.self.nixosModules.profiles.server.vaultwarden
 
