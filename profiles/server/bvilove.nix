@@ -5,21 +5,12 @@
   ...
 }: let
   bvilovebot-pkg = inputs.bvilovebot.packages.${pkgs.hostPlatform.system}.default;
-in {
-  age.secrets.bvilove.file = ../../secrets/creds/bvilove.age;
+  bvilovebot-beta-pkg = inputs.bvilovebot-beta.packages.${pkgs.hostPlatform.system}.default;
 
-  systemd.services.bvilovebot = {
+  commonService = {
     after = ["network-online.target" "postgresql.service"];
     requires = ["postgresql.service"];
-    path = [bvilovebot-pkg];
-    environment = {
-      DATABASE_URL = "postgresql:///bvilove";
-    };
     serviceConfig = {
-      User = "bvilove";
-      Group = "bvilove";
-      EnvironmentFile = config.age.secrets.bvilove.path;
-      ExecStart = "${bvilovebot-pkg}/bin/bvilovebot";
       Restart = "always";
 
       # Capabilities
@@ -47,14 +38,53 @@ in {
     };
     wantedBy = ["multi-user.target"];
   };
+in {
+  age.secrets.bvilove.file = ../../secrets/creds/bvilove.age;
+  age.secrets.bvilove-beta.file = ../../secrets/creds/bvilove-beta.age;
+
+  systemd.services.bvilovebot =
+    commonService
+    // {
+      path = [bvilovebot-pkg];
+      environment = {
+        DATABASE_URL = "postgresql:///bvilove";
+      };
+      serviceConfig = {
+        User = "bvilove";
+        Group = "bvilove";
+        EnvironmentFile = config.age.secrets.bvilove.path;
+        ExecStart = "${bvilovebot-pkg}/bin/bvilovebot";
+      };
+    };
+
+  systemd.services.bvilovebot-beta =
+    commonService
+    // {
+      path = [bvilovebot-beta-pkg];
+      environment = {
+        DATABASE_URL = "postgresql:///bvilovebeta";
+      };
+      serviceConfig = {
+        User = "bvilovebeta";
+        Group = "bvilovebeta";
+        EnvironmentFile = config.age.secrets.bvilove-beta.path;
+        ExecStart = "${bvilovebot-beta-pkg}/bin/bvilovebot";
+      };
+    };
 
   services.postgresql = {
-    ensureDatabases = ["bvilove"];
+    ensureDatabases = ["bvilove" "bvilovebeta"];
     ensureUsers = [
       {
         name = "bvilove";
         ensurePermissions = {
           "DATABASE bvilove" = "ALL PRIVILEGES";
+        };
+      }
+      {
+        name = "bvilovebeta";
+        ensurePermissions = {
+          "DATABASE bvilovebeta" = "ALL PRIVILEGES";
         };
       }
     ];
@@ -67,5 +97,11 @@ in {
       group = "bvilove";
     };
     groups.bvilove = {};
+    users.bvilovebeta = {
+      isSystemUser = true;
+      description = "BVI Love Beta";
+      group = "bvilovebeta";
+    };
+    groups.bvilovebeta = {};
   };
 }

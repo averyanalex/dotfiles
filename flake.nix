@@ -57,7 +57,12 @@
     bvilovebot = {
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      url = "github:bvilove/bot/legacy";
+      url = "github:bvilove/bot/9fd96417da5fd60fb2dd6ad794086048a5621f18";
+    };
+    bvilovebot-beta = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:bvilove/bot";
     };
     infinitytgadminsbot = {
       inputs.nixpkgs.follows = "nixpkgs";

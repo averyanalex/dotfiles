@@ -72,16 +72,41 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1686749144,
-        "narHash": "sha256-Pd7n5qtauAqeRvLxyfpTXLqlHLkAzs3Vl3yxxAofKtI=",
+        "lastModified": 1692562548,
+        "narHash": "sha256-2OrWJj76XTHcIjiFp5z3v/WUMef2RJzTt7vht7k4v4U=",
         "owner": "bvilove",
         "repo": "bot",
-        "rev": "28f272f253fec99c640afbdb9211a883f999cc9a",
+        "rev": "9fd96417da5fd60fb2dd6ad794086048a5621f18",
         "type": "github"
       },
       "original": {
         "owner": "bvilove",
-        "ref": "legacy",
+        "repo": "bot",
+        "rev": "9fd96417da5fd60fb2dd6ad794086048a5621f18",
+        "type": "github"
+      }
+    },
+    "bvilovebot-beta": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "import-cargo": "import-cargo_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1689686081,
+        "narHash": "sha256-l0h1o6Hi7AVysNpRO8xge7OqEaEAoIod9HH6UJEWmnQ=",
+        "owner": "bvilove",
+        "repo": "bot",
+        "rev": "169979664e69d17a9078fdd49772e6aa810f1811",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bvilove",
         "repo": "bot",
         "type": "github"
       }
@@ -91,12 +116,12 @@
         "flake-utils": [
           "flake-utils"
         ],
-        "import-cargo": "import-cargo_2",
+        "import-cargo": "import-cargo_3",
         "matetech-engine": "matetech-engine",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_2"
+        "rust-overlay": "rust-overlay_3"
       },
       "locked": {
         "lastModified": 1683706747,
@@ -531,16 +556,31 @@
         "type": "github"
       }
     },
+    "import-cargo_5": {
+      "locked": {
+        "lastModified": 1594305518,
+        "narHash": "sha256-frtArgN42rSaEcEOYWg8sVPMUK+Zgch3c+wejcpX3DY=",
+        "owner": "edolstra",
+        "repo": "import-cargo",
+        "rev": "25d40be4a73d40a2572e0cc233b83253554f06c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "import-cargo",
+        "type": "github"
+      }
+    },
     "infinitytgadminsbot": {
       "inputs": {
         "flake-utils": [
           "flake-utils"
         ],
-        "import-cargo": "import-cargo_4",
+        "import-cargo": "import-cargo_5",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_3"
+        "rust-overlay": "rust-overlay_4"
       },
       "locked": {
         "lastModified": 1688403344,
@@ -603,7 +643,7 @@
     "mineflake": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "import-cargo": "import-cargo_3",
+        "import-cargo": "import-cargo_4",
         "nixpkgs": [
           "firesquare-servers",
           "nixpkgs"
@@ -796,7 +836,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_4"
+        "rust-overlay": "rust-overlay_5"
       },
       "locked": {
         "lastModified": 1682237245,
@@ -816,6 +856,7 @@
       "inputs": {
         "averyanalex-blog": "averyanalex-blog",
         "bvilovebot": "bvilovebot",
+        "bvilovebot-beta": "bvilovebot-beta",
         "cpmbot": "cpmbot",
         "deploy-rs": "deploy-rs",
         "firesquare-servers": "firesquare-servers",
@@ -862,6 +903,31 @@
     },
     "rust-overlay_2": {
       "inputs": {
+        "flake-utils": [
+          "bvilovebot-beta",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "bvilovebot-beta",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1686277999,
+        "narHash": "sha256-Lko8PiXN8ecQSlFsn/7V5fyoUtb1H5zyMpe73hLmSis=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "f46177d472fc5b754fd5ad382ae8a31a10979750",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_3": {
+      "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs"
       },
@@ -879,7 +945,7 @@
         "type": "github"
       }
     },
-    "rust-overlay_3": {
+    "rust-overlay_4": {
       "inputs": {
         "flake-utils": [
           "infinitytgadminsbot",
@@ -904,7 +970,7 @@
         "type": "github"
       }
     },
-    "rust-overlay_4": {
+    "rust-overlay_5": {
       "inputs": {
         "flake-utils": [
           "ragenix",
