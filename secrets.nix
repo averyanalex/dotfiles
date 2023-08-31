@@ -30,6 +30,7 @@ in {
 
   "secrets/mail/alex.age".publicKeys = users ++ [hawk];
   "secrets/mail/sonya8128.age".publicKeys = users ++ [hawk];
+  "secrets/mail/cofob.age".publicKeys = users ++ [hawk];
 
   "secrets/creds/bvilove.age".publicKeys = users ++ [whale];
   "secrets/creds/bvilove-beta.age".publicKeys = users ++ [whale];
