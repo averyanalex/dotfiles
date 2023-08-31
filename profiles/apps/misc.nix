@@ -45,6 +45,10 @@
       tor-browser-bundle-bin # anonymous browsing
       libreoffice-fresh # office
       octaveFull # math software
+      kgraphviewer # graphviz viewer
+      stellarium # planetarium
+      kleopatra # gpg gui
+      spek # audio file spectrogram
     ];
 
     xdg.mimeApps = {
@@ -60,6 +64,7 @@
     ".config/WebCord"
     ".local/share/TelegramDesktop"
 
+    "Monero"
     ".bitmonero"
     ".config/monero-project"
 

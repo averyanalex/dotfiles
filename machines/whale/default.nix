@@ -29,7 +29,7 @@ in {
     inputs.self.nixosModules.profiles.server.bvilove
     inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
-    inputs.self.nixosModules.profiles.server.hydra
+    # inputs.self.nixosModules.profiles.server.hydra
     inputs.self.nixosModules.profiles.server.kluckva
     inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
@@ -57,7 +57,7 @@ in {
     ./monitoring.nix
     ./photoprism.nix
     ./pterodactyl.nix
-    ./tanksrv.nix
+    # ./tanksrv.nix
     ./yacy.nix
   ];
 

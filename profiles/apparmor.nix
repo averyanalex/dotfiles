@@ -1,4 +1,4 @@
 {
-  # services.dbus.apparmor = "required";
+  services.dbus.apparmor = "enabled";
   security.apparmor.enable = true;
 }

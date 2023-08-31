@@ -20,6 +20,9 @@
       screen # run in background
       hashcat # password cracking
       micro # simple text editor
+      compsize # btrfs compression info
+      yt-dlp # video/audio downloader
+      wget # download file
     ];
 
     home.sessionVariables = {

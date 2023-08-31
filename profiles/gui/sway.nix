@@ -30,7 +30,7 @@
         input = {
           "*" = {
             xkb_layout = "us,ru";
-            xkb_options = "grp:alt_shift_toggle";
+            xkb_options = "grp:caps_toggle,grp_led:caps";
           };
           "type:touchpad" = {
             tap = "enabled";
@@ -41,7 +41,7 @@
         bars = [];
         focus = {
           followMouse = "always";
-          mouseWarping = "container";
+          # mouseWarping = "container";
         };
         gaps = {
           inner = 5;

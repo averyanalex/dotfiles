@@ -33,5 +33,7 @@
     SuspendEstimationSec=15m
   '';
 
+  # boot.initrd.systemd.enable = true;
+
   system.stateVersion = "22.05";
 }

@@ -1,12 +1,7 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   # overlay-hass = final: prev: {
   #   home-assistant = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.home-assistant;
   # };
-
   dockerImageAMD64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";

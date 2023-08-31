@@ -15,6 +15,7 @@
           fzf
           git
           zoxide
+          neovim
           misc
         ]
         ++ [

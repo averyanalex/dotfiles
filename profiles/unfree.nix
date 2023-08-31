@@ -3,5 +3,6 @@
     builtins.elem (lib.getName pkg) [
       "vscode-extension-ms-vscode-cpptools"
       "corefonts"
+      "hplip"
     ];
 }

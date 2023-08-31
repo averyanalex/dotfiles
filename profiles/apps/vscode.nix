@@ -30,6 +30,7 @@
         vscode-marketplace.ms-vscode.cpptools
         open-vsx.james-yu.latex-workshop
         open-vsx.jnoortheen.nix-ide
+        open-vsx.galarius.vscode-opencl
 
         # SQL
         open-vsx.mtxr.sqltools
