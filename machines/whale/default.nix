@@ -65,8 +65,8 @@ in {
   hardware.ksm.enable = true;
   persist.tmpfsSize = "16G";
 
-  services.kubo.dataDir = "/hdd/ipfs";
-  services.syncthing.dataDir = "/tank/sync";
+  services.kubo.dataDir = "/tank/ipfs";
+  services.syncthing.dataDir = "/home/alex/tank/sync";
 
   # Monitoring
   services.prometheus.exporters.node.enabledCollectors = ["zoneinfo"];

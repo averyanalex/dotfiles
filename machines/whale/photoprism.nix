@@ -27,8 +27,8 @@ in {
         image = "photoprism/photoprism";
         imageFile = dockerImage;
         volumes = [
-          "/tank/Галерея:/photoprism/originals"
-          "/tank/Импорт:/photoprism/import"
+          "/home/alex/tank/Галерея:/photoprism/originals"
+          "/home/alex/tank/Import/PhotoPrism:/photoprism/import"
           "/persist/var/lib/photoprism:/photoprism/storage"
         ];
         extraOptions = ["--network=host"];
