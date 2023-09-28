@@ -28,7 +28,7 @@ in {
         alligator = {
           addresses = [
             "tcp://192.168.3.60:22000"
-            "tcp://10.5.3.101:22000"
+            "tcp://10.57.1.40:22000"
           ];
           id = "XYYXB6U-Y24PGXJ-UEDYSHQ-HKYELXG-UF6I4S4-EKB3GB3-KU6DEUH-5JDCOAN";
         };
@@ -40,7 +40,7 @@ in {
         };
         hamster = {
           addresses = [
-            "tcp://10.5.3.100:22000"
+            "tcp://10.57.1.41:22000"
           ];
           id = "KF5NLPI-Z57MSPV-XZZXORA-QYVY5VR-GF2FHPW-EX3IUYS-MD5Z2S4-BMC6PAV";
         };

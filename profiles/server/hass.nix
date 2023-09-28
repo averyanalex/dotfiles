@@ -5,14 +5,14 @@
   dockerImageAMD64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";
-    imageDigest = "sha256:22faae0272e006ba9d8513f204e50a18b1f266cd0223fc62c33ceb8e32e1deaa";
-    sha256 = "Ule/u7S8N5ZUB4PthWEVKwMj4HtDoTT9rw8sGZLseO4=";
+    imageDigest = "sha256:3e8223aad830dffacf6cc1468dff19c045a871f5b6c16bf9ff5c0c3bbc843d2c";
+    sha256 = "ZKnohcPM+eei00roy24szmlhrdTpDQ8Joa1bqxPJNR8=";
   };
   dockerImageARM64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";
-    imageDigest = "sha256:cdf16d15cb7f2b3b7ab6294d548a0b57d3d5f3ffaedf0aa8480f88d1052f4836";
-    sha256 = "4aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
+    imageDigest = "sha256:f12e86649eaa9a6c4800448351f28c58284e63daf8dbc5c4e066610a84ff328f";
+    sha256 = "3aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
   };
   dockerImage =
     if pkgs.hostPlatform.system == "aarch64-linux"
@@ -52,7 +52,7 @@ in {
     config = {
       default_config = {};
       http = {
-        trusted_proxies = ["10.5.3.12" "10.5.3.20"];
+        trusted_proxies = ["10.57.1.10"];
         use_x_forwarded_for = true;
       };
       recorder.db_url = "postgresql://@/hass";

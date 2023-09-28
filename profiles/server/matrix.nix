@@ -1,0 +1,241 @@
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  clientConfig = {
+    "m.homeserver" = {
+      base_url = "https://matrix.neutrino.su";
+      server_name = "neutrino.su";
+    };
+    "m.identity_server".base_url = "https://vector.im";
+  };
+  serverConfig."m.server" = "matrix.neutrino.su:443";
+  mkWellKnown = data: ''
+    add_header Content-Type application/json;
+    add_header Access-Control-Allow-Origin *;
+    return 200 '${builtins.toJSON data}';
+  '';
+in {
+  services.nginx = {
+    virtualHosts = {
+      "neutrino.su" = {
+        useACMEHost = "neutrino.su";
+        forceSSL = true;
+        quic = true;
+        kTLS = true;
+        locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+      };
+      "matrix.neutrino.su" = {
+        useACMEHost = "neutrino.su";
+        forceSSL = true;
+        quic = true;
+        kTLS = true;
+        locations."/_matrix".proxyPass = "http://[::1]:8008";
+        locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+        locations."/telegram".proxyPass = "http://127.0.0.1:8194/public/";
+        locations."/".extraConfig = ''
+          return 404;
+        '';
+      };
+      "element.neutrino.su" = {
+        useACMEHost = "neutrino.su";
+        forceSSL = true;
+        quic = true;
+        kTLS = true;
+        root = pkgs.element-web.override {
+          conf = {
+            default_server_config = clientConfig;
+          };
+        };
+      };
+      "sc.neutrino.su" = {
+        useACMEHost = "neutrino.su";
+        forceSSL = true;
+        quic = true;
+        kTLS = true;
+        root = pkgs.schildichat-web.override {
+          conf = {
+            default_server_config = clientConfig;
+          };
+        };
+      };
+    };
+  };
+
+  age.secrets.matrix = {
+    file = ../../secrets/creds/matrix.age;
+    owner = "matrix-synapse";
+    group = "matrix-synapse";
+  };
+
+  services.matrix-synapse = {
+    enable = true;
+    extraConfigFiles = [
+      config.age.secrets.matrix.path
+    ];
+    settings = {
+      server_name = "neutrino.su";
+      public_baseurl = "https://matrix.neutrino.su";
+      report_stats = true;
+      enable_metrics = true;
+
+      enable_registration = true;
+      registration_requires_token = true;
+
+      dynamic_thumbnails = true;
+      app_service_config_files = [
+        "/var/lib/matrix-synapse/telegram-registration.yaml"
+      ];
+      listeners = [
+        {
+          port = 8008;
+          bind_addresses = ["::1"];
+          type = "http";
+          tls = false;
+          x_forwarded = true;
+          resources = [
+            {
+              names = ["client" "federation"];
+              compress = true;
+            }
+          ];
+        }
+      ];
+    };
+  };
+
+  systemd.services.matrix-synapse = {
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
+  };
+
+  age.secrets.mautrix-telegram = {
+    file = ../../secrets/creds/mautrix-telegram.age;
+    owner = "mautrix-telegram";
+    group = "mautrix-telegram";
+  };
+
+  services.mautrix-telegram = {
+    enable = true;
+    environmentFile = config.age.secrets.mautrix-telegram.path;
+    settings = {
+      homeserver = {
+        address = "http://[::1]:8008";
+        domain = "neutrino.su";
+      };
+      appservice = {
+        address = "http://127.0.0.1:8194";
+        hostname = "0.0.0.0";
+        port = 8194;
+
+        provisioning.enabled = false;
+
+        id = "telegram";
+        bot_username = "telegram";
+
+        public = {
+          enabled = true;
+          prefix = "/public";
+          external = "https://matrix.neutrino.su/telegram";
+        };
+
+        database = "postgresql:///mautrix-telegram?host=/run/postgresql";
+      };
+      bridge = {
+        username_template = "tg_{userid}";
+        alias_template = "tg_{groupname}";
+        displayname_template = "[TG] {displayname}";
+
+        allow_avatar_remove = false;
+        allow_contact_info = false;
+
+        startup_sync = true;
+
+        public_portals = true;
+
+        relaybot.authless_portals = false;
+        permissions = {
+          "neutrino.su" = "puppeting";
+          "@averyanalex:neutrino.su" = "admin";
+          "*" = "relaybot";
+        };
+
+        animated_sticker = {
+          target = "webp";
+          args = {
+            width = 256;
+            height = 256;
+            fps = 30;
+            background = "020202";
+          };
+        };
+        animated_emoji = {
+          target = "webp";
+          args = {
+            width = 64;
+            height = 64;
+            fps = 30;
+          };
+        };
+
+        encryption = {
+          allow = true;
+          allow_key_sharing = true;
+        };
+      };
+    };
+  };
+
+  users = {
+    users.mautrix-telegram = {
+      isSystemUser = true;
+      description = "Mautrix Telegram";
+      group = "mautrix-telegram";
+      uid = 641;
+    };
+    groups.mautrix-telegram.gid = 641;
+  };
+
+  systemd.services.mautrix-telegram = {
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
+    serviceConfig = {
+      DynamicUser = lib.mkForce false;
+      User = "mautrix-telegram";
+    };
+  };
+
+  systemd.services.mautrix-telegram.path = with pkgs; [
+    lottieconverter
+    ffmpeg
+  ];
+
+  persist.state.dirs = [
+    {
+      directory = "/var/lib/matrix-synapse";
+      mode = "u=rwx,g=rx,o=";
+      user = "matrix-synapse";
+      group = "matrix-synapse";
+    }
+    {
+      directory = "/var/lib/mautrix-telegram";
+      mode = "u=rwx,g=rx,o=";
+      user = "mautrix-telegram";
+      group = "mautrix-telegram";
+    }
+  ];
+
+  services.postgresql = {
+    ensureUsers = [
+      {
+        name = "matrix-synapse";
+      }
+      {
+        name = "mautrix-telegram";
+      }
+    ];
+  };
+}

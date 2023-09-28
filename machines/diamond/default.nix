@@ -63,7 +63,7 @@ in {
         ''iifname "${wan}" oifname { "vms" } ct state { established, related } counter accept comment "allow established back to LAN"''
       ];
       extraNatPreroutingRules = [
-        "ip daddr 10.5.3.80 tcp dport { 443, 2022 } dnat to 192.168.12.50"
+        "ip daddr 10.57.1.50 tcp dport { 443, 2022 } dnat to 192.168.12.50"
         "ip daddr 192.168.1.7 tcp dport 25565-25575 dnat to 192.168.12.50"
       ];
       extraNatPostroutingRules = [''oifname "${wan}" masquerade''];

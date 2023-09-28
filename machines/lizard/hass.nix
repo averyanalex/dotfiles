@@ -2,7 +2,7 @@
   services.home-assistant = {
     config = {
       http = {
-        server_host = "10.5.3.40";
+        server_host = "10.57.1.30";
       };
     };
   };

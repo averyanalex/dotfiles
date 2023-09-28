@@ -3,6 +3,7 @@
     home.packages = with pkgs; [
       # Communication
       schildichat-desktop # electron matrix client
+      # fractal-next # gtk matrix client
       webcord-vencord # discord client
       telegram-desktop # telegram client
 

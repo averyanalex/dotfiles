@@ -14,6 +14,7 @@
       rmlint # find dupes
       neofetch # I am hacker
       ripgrep # fast grep
+      stable.ripgrep-all # grep any file type
       iotop # disk usage monitor
       nmap # open ports analyzer
       stress # cpu stress test

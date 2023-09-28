@@ -88,6 +88,7 @@
         exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+        exec ${pkgs.xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk
 
         # STYLING
         gaps inner 5

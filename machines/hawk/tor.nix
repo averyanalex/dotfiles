@@ -23,6 +23,7 @@
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [9130];
 
   services.snowflake-proxy.enable = true;
+  systemd.services.snowflake-proxy.serviceConfig.MemoryMax = "256M";
 
   persist.state.dirs = [
     {

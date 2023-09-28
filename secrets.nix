@@ -40,12 +40,14 @@ in {
   "secrets/creds/firesquare.age".publicKeys = users ++ [whale];
   "secrets/creds/ipfs-cluster.age".publicKeys = users ++ [whale];
   "secrets/creds/searx.age".publicKeys = users ++ [hawk whale];
+  "secrets/creds/matrix.age".publicKeys = users ++ [whale];
+  "secrets/creds/mautrix-telegram.age".publicKeys = users ++ [whale];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [whale];
   "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [whale];
   "secrets/intpass/photoprism.age".publicKeys = users ++ [whale];
 
-  "secrets/wireguard/hawk.age".publicKeys = users ++ [hawk];
+  "secrets/wireguard/hawk.age".publicKeys = users ++ [hawk falcon];
   "secrets/wireguard/whale.age".publicKeys = users ++ [whale];
   "secrets/wireguard/alligator.age".publicKeys = users ++ [alligator];
   "secrets/wireguard/pterodactyl.age".publicKeys = users ++ [whale];

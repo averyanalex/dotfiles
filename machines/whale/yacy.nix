@@ -35,6 +35,9 @@ in {
 
   # networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8739 8627];
 
+  systemd.services."container@yacy-ygg".serviceConfig = {
+  };
+
   containers.yacy-ygg = {
     autoStart = true;
     ephemeral = true;

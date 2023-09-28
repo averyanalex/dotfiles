@@ -12,13 +12,13 @@ Main PC. 32 GB DDR4 3200 MHz, 2 channels; AMD Ryzen 7 5800X; Radeon RX 6800 XT; 
 
 # Nebula
 
-- Hawk 10.5.3.12
-- Falcon 10.5.3.15
-- Whale 10.5.3.20
-- Lizard 10.5.3.40
-- Diamond 10.5.3.80
-- Hamster 10.5.3.100
-- Alligator 10.5.3.101
+- Whale 10.57.1.10
+- Falcon 10.57.1.20
+- Hawk 10.57.1.21
+- Lizard 10.57.1.30
+- Alligator 10.57.1.40
+- Hamster 10.57.1.41
+- Diamond 10.57.1.50
 
 # Commands
 
@@ -28,7 +28,7 @@ nix flake update --commit-lock-file
 
 EDITOR=cat agenix -e secrets/nebula/ca-crt.age > ca.crt
 EDITOR=cat agenix -e secrets/nebula/ca-key.age > ca.key
-nebula-cert sign -name lizard -ip 10.5.3.40/24
+nebula-cert sign -name lizard -ip 10.57.1.40/16
 nix build .#nixosConfigurations.rpi-image.config.system.build.sdImage --builders ""
 ```
 

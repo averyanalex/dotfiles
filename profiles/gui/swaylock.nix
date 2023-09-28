@@ -23,7 +23,7 @@
   #     "$@"
   # '';
   idlehandler = pkgs.writeShellScriptBin "sway-idlehandler" ''
-    swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") "timeout 300 'swaylock --grace 70' before-sleep 'swaylock'"} timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+    swayidle -w ${lib.optionalString (config.networking.hostName != "alligator") "timeout 300 'swaylock --grace 70' before-sleep 'swaylock'"} timeout 360 'swaymsg "output * dpms off"' timeout 420 'systemctl suspend' resume 'swaymsg "output * dpms on"'
   '';
 in {
   home-manager.users.alex = {

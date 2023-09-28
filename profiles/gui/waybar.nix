@@ -144,6 +144,7 @@
             "sway/workspaces"
           ];
           modules-center = [
+            "idle_inhibitor"
             "cpu"
             "memory"
             "disk"
@@ -155,6 +156,13 @@
             "network"
             "clock"
           ];
+          idle_inhibitor = {
+            format = "{icon}";
+            format-icons = {
+              activated = "";
+              deactivated = "";
+            };
+          };
           clock = {
             format = "{:%H:%M}";
             format-alt = "{:%d.%m.%Y}";

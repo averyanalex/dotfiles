@@ -53,5 +53,6 @@
           sdr
           sync
           tank
+          jupyter
         ]);
 }

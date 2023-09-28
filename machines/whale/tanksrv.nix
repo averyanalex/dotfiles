@@ -2,8 +2,8 @@
   services.nfs.server = {
     enable = true;
     exports = ''
-      /tank 10.5.3.101(rw,sync,wdelay,no_root_squash)
-      /tank 10.5.3.100(rw,sync,wdelay,no_root_squash)
+      /home/alex/tank 10.57.1.40(rw,sync,wdelay,no_root_squash)
+      /home/alex/tank 10.57.1.41(rw,sync,wdelay,no_root_squash)
     '';
   };
 

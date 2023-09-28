@@ -30,6 +30,8 @@
 
     nur.url = "github:nix-community/NUR";
 
+    jupyenv.url = "github:tweag/jupyenv";
+
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs-23_05.follows = "nixpkgs-stable";
@@ -127,23 +129,23 @@
         magicRollback = false;
         nodes = {
           whale = {
-            hostname = "whale";
+            hostname = "whale.averyan.ru";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.whale;
           };
           hawk = {
-            hostname = "hawk";
+            hostname = "hawk.averyan.ru";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hawk;
           };
-          falcon = {
-            hostname = "falcon";
-            profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.falcon;
-          };
+          # falcon = {
+          # hostname = "falcon";
+          # profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.falcon;
+          # };
           # lizard = {
           # hostname = "lizard";
           # profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lizard;
           # };
           diamond = {
-            hostname = "diamond";
+            hostname = "diamond.averyan.ru";
             profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.diamond;
           };
           # ferret = {

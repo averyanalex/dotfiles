@@ -10,7 +10,7 @@
         host = "/run/postgresql";
       };
       server = {
-        http_addr = "10.5.3.20";
+        http_addr = "10.57.1.10";
         http_port = 3729;
         domain = "grafana.averyan.ru";
         rootUrl = "https://grafana.averyan.ru/";

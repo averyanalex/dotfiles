@@ -71,20 +71,20 @@ in {
       cert = config.age.secrets.nebula-averyan-crt.path;
       ca = config.age.secrets.nebula-averyan-ca.path;
 
-      listen.port = 4243;
+      listen.port = 4242;
       isLighthouse = cfg.isLighthouse;
 
-      lighthouses = mkIf (!cfg.isLighthouse) ["10.5.3.12"];
+      lighthouses = mkIf (!cfg.isLighthouse) ["10.57.1.10"];
       staticHostMap = {
-        "10.5.3.12" = [
-          "185.112.83.99:4243"
+        "10.57.1.10" = [
+          "95.165.105.90:4242"
         ];
       };
 
       settings = {
         lighthouse = {
           remote_allow_list = {
-            "10.3.7.0/24" = false;
+            # "10.3.7.0/24" = false;
           };
         };
         punchy = {
@@ -93,7 +93,7 @@ in {
         };
         relay = {
           am_relay = cfg.isLighthouse;
-          relays = mkIf (!cfg.isLighthouse) ["10.5.3.12"];
+          relays = mkIf (!cfg.isLighthouse) ["10.57.1.10"];
         };
       };
 

@@ -17,6 +17,9 @@
       "memefinder.ru" = {
         extraDomainNames = ["*.memefinder.ru"];
       };
+      "neutrino.su" = {
+        extraDomainNames = ["*.neutrino.su"];
+      };
     };
   };
 

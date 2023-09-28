@@ -2,7 +2,7 @@
   services.home-assistant = {
     config = {
       http = {
-        server_host = "10.5.3.20";
+        server_host = "10.57.1.10";
       };
       binary_sensor = [
         {
@@ -20,7 +20,7 @@
             unique_id = "pc";
             friendly_name = "PC";
             value_template = "{{ is_state('binary_sensor.pc_status', 'on') }}";
-            availability_template = "{{ not is_state('button.press_pc_power_button', 'unavailable') }}";
+            availability_template = "{{ not is_state('button.pc_switch_press_power_button', 'unavailable') }}";
             turn_on = [
               {
                 condition = "state";
@@ -29,7 +29,7 @@
               }
               {
                 service = "button.press";
-                target.entity_id = "button.press_pc_power_button";
+                target.entity_id = "button.pc_switch_press_power_button";
               }
             ];
             turn_off = [
@@ -40,7 +40,7 @@
               }
               {
                 service = "button.press";
-                target.entity_id = "button.press_pc_power_button";
+                target.entity_id = "button.pc_switch_press_power_button";
               }
             ];
           };

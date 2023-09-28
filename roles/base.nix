@@ -11,7 +11,7 @@
           zsh
 
           direnv
-          exa
+          eza
           fzf
           git
           zoxide

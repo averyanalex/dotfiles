@@ -250,7 +250,7 @@ in {
       };
     };
 
-    nebula-averyan.isLighthouse = true;
+    # nebula-averyan.isLighthouse = true;
 
     interfaces = {
       ens3 = {

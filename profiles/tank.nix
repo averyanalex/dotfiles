@@ -1,7 +1,7 @@
 {
   boot.supportedFilesystems = ["nfs"];
-  systemd.services.rpcbind.wants = ["systemd-tmpfiles-setup.service"];
-  systemd.services.rpcbind.after = ["systemd-tmpfiles-setup.service"];
+  # systemd.services.rpcbind.wants = ["systemd-tmpfiles-setup.service"];
+  # systemd.services.rpcbind.after = ["systemd-tmpfiles-setup.service"];
 
   systemd.mounts = [
     {
@@ -9,7 +9,7 @@
       mountConfig = {
         Options = "noatime";
       };
-      what = "10.5.3.20:/tank";
+      what = "10.57.1.10:/home/alex/tank";
       where = "/tank";
       after = ["nebula@averyan.service"];
       wants = ["nebula@averyan.service"];
