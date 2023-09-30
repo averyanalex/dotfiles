@@ -42,6 +42,7 @@ in {
   "secrets/creds/searx.age".publicKeys = users ++ [hawk whale];
   "secrets/creds/matrix.age".publicKeys = users ++ [whale];
   "secrets/creds/mautrix-telegram.age".publicKeys = users ++ [whale];
+  "secrets/creds/matrix-appservice-discord.age".publicKeys = users ++ [whale];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [whale];
   "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [whale];

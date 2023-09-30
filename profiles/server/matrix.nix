@@ -88,6 +88,7 @@ in {
       dynamic_thumbnails = true;
       app_service_config_files = [
         "/var/lib/matrix-synapse/telegram-registration.yaml"
+        "/var/lib/matrix-synapse/discord-registration.yaml"
       ];
       listeners = [
         {
@@ -112,6 +113,7 @@ in {
     after = ["postgresql.service"];
   };
 
+  # Telegram bridge
   age.secrets.mautrix-telegram = {
     file = ../../secrets/creds/mautrix-telegram.age;
     owner = "mautrix-telegram";
@@ -189,15 +191,13 @@ in {
     };
   };
 
-  users = {
-    users.mautrix-telegram = {
-      isSystemUser = true;
-      description = "Mautrix Telegram";
-      group = "mautrix-telegram";
-      uid = 641;
-    };
-    groups.mautrix-telegram.gid = 641;
+  users.users.mautrix-telegram = {
+    isSystemUser = true;
+    description = "Mautrix Telegram";
+    group = "mautrix-telegram";
+    uid = 641;
   };
+  users.groups.mautrix-telegram.gid = 641;
 
   systemd.services.mautrix-telegram = {
     requires = ["postgresql.service"];
@@ -213,6 +213,45 @@ in {
     ffmpeg
   ];
 
+  # Discord bridge
+  age.secrets.matrix-appservice-discord.file = ../../secrets/creds/matrix-appservice-discord.age;
+
+  services.matrix-appservice-discord = {
+    enable = true;
+    environmentFile = config.age.secrets.matrix-appservice-discord.path;
+    settings = {
+      bridge = {
+        domain = "neutrino.su";
+        homeserverUrl = "https://matrix.neutrino.su";
+        enableSelfServiceBridging = true;
+        adminMxid = "@averyanalex:neutrino.su";
+      };
+      auth.usePrivilegedIntents = true;
+      database = {
+        filename = "";
+        connString = "postgresql:///matrix-appservice-discord?host=/run/postgresql";
+      };
+      ghosts.usernamePattern = ":id";
+    };
+  };
+
+  users.users.matrix-appservice-discord = {
+    isSystemUser = true;
+    description = "Matrix Appservice Discord";
+    group = "matrix-appservice-discord";
+    uid = 678;
+  };
+  users.groups.matrix-appservice-discord.gid = 678;
+
+  systemd.services.matrix-appservice-discord = {
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
+    serviceConfig = {
+      DynamicUser = lib.mkForce false;
+      User = "matrix-appservice-discord";
+    };
+  };
+
   persist.state.dirs = [
     {
       directory = "/var/lib/matrix-synapse";
@@ -226,6 +265,12 @@ in {
       user = "mautrix-telegram";
       group = "mautrix-telegram";
     }
+    {
+      directory = "/var/lib/matrix-appservice-discord";
+      mode = "u=rwx,g=rx,o=";
+      user = "matrix-appservice-discord";
+      group = "matrix-appservice-discord";
+    }
   ];
 
   services.postgresql = {
@@ -235,6 +280,9 @@ in {
       }
       {
         name = "mautrix-telegram";
+      }
+      {
+        name = "matrix-appservice-discord";
       }
     ];
   };

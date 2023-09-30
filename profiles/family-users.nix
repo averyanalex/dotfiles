@@ -10,7 +10,7 @@
         description = "Alexander Averyanov";
         extraGroups = ["wheel"];
         uid = 1001;
-        passwordFile = config.age.secrets.password-alex.path;
+        hashedPasswordFile = config.age.secrets.password-alex.path;
         openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDP6BYhOQG5swda8e3YRo4LqhdNNAQd3NwkQME193izZ alex@averyan.ru"];
       };
       olga = {
@@ -18,7 +18,7 @@
         description = "Olga";
         extraGroups = ["wheel"];
         uid = 1000;
-        passwordFile = config.age.secrets.password-olga.path;
+        hashedPasswordFile = config.age.secrets.password-olga.path;
       };
     };
   };
