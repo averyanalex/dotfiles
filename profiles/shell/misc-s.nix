@@ -24,6 +24,8 @@
       compsize # btrfs compression info
       yt-dlp # video/audio downloader
       wget # download file
+      cloc # count lines of code
+      tesseract
     ];
 
     home.sessionVariables = {

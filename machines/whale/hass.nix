@@ -1,9 +1,9 @@
 {
   services.home-assistant = {
     config = {
-      http = {
-        server_host = "10.57.1.10";
-      };
+      # http = {
+      #   server_host = "10.57.1.10";
+      # };
       binary_sensor = [
         {
           platform = "ping";

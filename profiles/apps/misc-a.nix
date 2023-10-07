@@ -50,6 +50,7 @@
       stellarium # planetarium
       kleopatra # gpg gui
       spek # audio file spectrogram
+      kmplot
     ];
 
     xdg.mimeApps = {

@@ -8,7 +8,7 @@
   services.radicale = {
     enable = true;
     settings = {
-      server.hosts = ["10.57.1.10:5232"];
+      server.hosts = ["[::]:5232"];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets.radicale-password.path;

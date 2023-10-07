@@ -85,7 +85,9 @@ in {
       enable_registration = true;
       registration_requires_token = true;
 
+      media_store_path = "/tank/matrix-media";
       dynamic_thumbnails = true;
+
       app_service_config_files = [
         "/var/lib/matrix-synapse/telegram-registration.yaml"
         "/var/lib/matrix-synapse/discord-registration.yaml"
@@ -108,9 +110,12 @@ in {
     };
   };
 
+  systemd.tmpfiles.rules = ["d /tank/matrix-media 0750 matrix-synapse matrix-synapse - -"];
+
   systemd.services.matrix-synapse = {
     requires = ["postgresql.service"];
     after = ["postgresql.service"];
+    serviceConfig.ReadWritePaths = ["/tank/matrix-media"];
   };
 
   # Telegram bridge

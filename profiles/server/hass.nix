@@ -52,7 +52,7 @@ in {
     config = {
       default_config = {};
       http = {
-        trusted_proxies = ["10.57.1.10"];
+        trusted_proxies = ["10.57.1.10" "::1" "127.0.0.1"];
         use_x_forwarded_for = true;
       };
       recorder.db_url = "postgresql://@/hass";

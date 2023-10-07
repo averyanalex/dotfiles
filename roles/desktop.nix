@@ -13,7 +13,7 @@
           firefox
           mpv
           vscode
-          misc
+          misc-a
         ]
         ++ (with games; [
           minecraft

@@ -16,7 +16,7 @@
           git
           zoxide
           neovim
-          misc
+          misc-s
         ]
         ++ [
           agenix
@@ -28,6 +28,7 @@
           filesystems
           home
           hosts
+          misc-p
           locale
           logs
           monitoring

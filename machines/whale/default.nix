@@ -7,17 +7,18 @@
   physLan = "enp4s0"; # with gpu: enp5s0
   lan = "lan0";
 
-  makeAveryanHost = proxyPass: {
+  makeHost = proxyPass: {
     locations."/".proxyPass = proxyPass;
     locations."/".proxyWebsockets = true;
     extraConfig = ''
       proxy_buffering off;
     '';
-    useACMEHost = "averyan.ru";
     forceSSL = true;
     quic = true;
     kTLS = true;
   };
+
+  makeAveryanHost = proxyPass: makeHost proxyPass // {useACMEHost = "averyan.ru";};
 in {
   imports = [
     inputs.self.nixosModules.roles.server
@@ -39,6 +40,7 @@ in {
     inputs.self.nixosModules.profiles.server.radicale
     inputs.self.nixosModules.profiles.server.matrix
     inputs.self.nixosModules.profiles.server.ipfs
+    inputs.self.nixosModules.profiles.server.forgejo
     inputs.self.nixosModules.profiles.server.ipfs-cluster
     inputs.self.nixosModules.profiles.server.searx
     inputs.self.nixosModules.profiles.server.vaultwarden
@@ -102,6 +104,8 @@ in {
     "search.averyan.ru" = makeAveryanHost "http://127.0.0.1:8278";
     "lidarr.averyan.ru" = makeAveryanHost "http://127.0.0.1:8686";
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
+
+    "git.neutrino.su" = makeHost "http://whale:3826" // {useACMEHost = "neutrino.su";};
 
     "ptero.averyan.ru" = makeAveryanHost "http://192.168.12.50:80";
     "whale-ptero.averyan.ru" = makeAveryanHost "http://192.168.12.50:443";
