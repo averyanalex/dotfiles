@@ -6,8 +6,8 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "photoprism/photoprism";
     finalImageTag = "latest";
-    imageDigest = "sha256:523ead1dd226a2f30c8fc333aea553a18681f20ee20167e003de1151d0b82edf";
-    sha256 = "QrsDnVnF1FmMvREcw3RygWkVGsE6KKGz+vVceMdiExU=";
+    imageDigest = "sha256:edc512d1fe3d918a45cf5ecea5b433b8600fd9574cb40975ec266e151acb8e9a";
+    sha256 = "RK628as97VRqFmanZWcPCzsUzXP4idRyO23o9YX5Lok=";
   };
 in {
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;

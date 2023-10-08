@@ -1,30 +1,24 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = with inputs.self.nixosModules.modules;
-    [persist]
+    [persist nebula-averyan]
     ++ (with inputs.self.nixosModules.profiles; [
-      # home
-      # nebula-averyan
-      # persist
-      # qemu
-      # unsecure
-      # userdirs
-      # users
-      # vmvariant
-      # xdg
-      # yggdrasil
       agenix
       boot
       console
       dhcp
       dns
-      family-home
-      family-users
       filesystems
       gui.gnome
       hosts
-      locale
+      persist
       logs
       monitoring
+      mining
+      nebula-averyan
       nftables
       nix
       nur
@@ -35,5 +29,14 @@
       unfree
       stable
       zram
+
+      family.users
+      family.home
+      family.firefox
+      family.userdirs
+      family.misc-f
     ]);
+
+  i18n.defaultLocale = "ru_RU.UTF-8";
+  persist.username = lib.mkForce "olga";
 }

@@ -5,14 +5,14 @@
   dockerImageAMD64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";
-    imageDigest = "sha256:3e8223aad830dffacf6cc1468dff19c045a871f5b6c16bf9ff5c0c3bbc843d2c";
-    sha256 = "ZKnohcPM+eei00roy24szmlhrdTpDQ8Joa1bqxPJNR8=";
+    imageDigest = "sha256:ec193500f7380623c16fe38a928965bfe9dabede4c73f5127f3683092bbfca1a";
+    sha256 = "IXGexZOz3egbFt+0r64EC5F7HXfE8JDf6+iHoMTb11s=";
   };
   dockerImageARM64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";
-    imageDigest = "sha256:f12e86649eaa9a6c4800448351f28c58284e63daf8dbc5c4e066610a84ff328f";
-    sha256 = "3aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
+    imageDigest = "sha256:d472bd6253780a03abf02139409ff23182d030345d8fbc46a88df1e156c4bbe6";
+    sha256 = "2aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
   };
   dockerImage =
     if pkgs.hostPlatform.system == "aarch64-linux"
@@ -42,11 +42,12 @@ in {
     extraPackages = python3Packages:
       with python3Packages; [
         aiogithubapi
+        google-api-python-client
+        moonraker-api
+        protobuf
         psycopg2
         securetar
         ulid-transform
-        google-api-python-client
-        protobuf
         # getmac
       ];
     config = {
@@ -126,9 +127,7 @@ in {
     ensureUsers = [
       {
         name = "hass";
-        ensurePermissions = {
-          "DATABASE hass" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
   };

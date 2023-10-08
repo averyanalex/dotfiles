@@ -5,19 +5,18 @@
   ...
 }: let
   infinitytgadminsbot-pkg = inputs.infinitytgadminsbot.packages.${pkgs.hostPlatform.system}.default;
-in {
-  age.secrets.kluckva.file = ../../secrets/creds/kluckva.age;
 
-  systemd.services.kluckva = {
+  makeService = name: {
     after = ["network-online.target"];
     path = [infinitytgadminsbot-pkg];
     environment.RUST_LOG = "info";
     serviceConfig = {
+      EnvironmentFile = config.age.secrets."infinitytgadminsbot-${name}".path;
+      User = "infinitytgadminsbot-${name}";
+      Group = "infinitytgadminsbot-${name}";
+
       ExecStart = "${infinitytgadminsbot-pkg}/bin/infinitytgadminsbot";
-      EnvironmentFile = config.age.secrets.kluckva.path;
       DynamicUser = true;
-      User = "kluckva";
-      Group = "kluckva";
 
       # Hardening
       CapabilityBoundingSet = "";
@@ -53,4 +52,10 @@ in {
     };
     wantedBy = ["multi-user.target"];
   };
+in {
+  age.secrets.infinitytgadminsbot-kluckva.file = ../../secrets/creds/kluckva.age;
+  systemd.services.infinitytgadminsbot-kluckva = makeService "kluckva";
+
+  age.secrets.infinitytgadminsbot-eye210.file = ../../secrets/creds/infinitytgadminsbot-eye210.age;
+  systemd.services.infinitytgadminsbot-eye210 = makeService "eye210";
 }

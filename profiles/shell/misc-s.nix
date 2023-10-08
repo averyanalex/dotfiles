@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home-manager.users.alex = {
     home.packages = with pkgs; [
       xdg-ninja # clean home dir
@@ -25,11 +29,13 @@
       yt-dlp # video/audio downloader
       wget # download file
       cloc # count lines of code
-      tesseract
+      pv
     ];
 
     home.sessionVariables = {
       EDITOR = "micro";
     };
   };
+
+  environment.systemPackages = [config.boot.kernelPackages.perf];
 }

@@ -153,7 +153,10 @@
     };
   };
 
-  systemd.services.ipfs.serviceConfig.IOSchedulingPriority = 6;
+  systemd.services.ipfs.serviceConfig = {
+    IOSchedulingPriority = 6;
+    MemoryMax = "8G";
+  };
 
   networking.firewall = {
     allowedTCPPorts = [4001];

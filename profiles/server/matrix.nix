@@ -107,6 +107,21 @@ in {
           ];
         }
       ];
+
+      log_config = (pkgs.formats.yaml {}).generate "synapse-log.yaml" {
+        version = 1;
+        formatters.journal_fmt.format = "%(name)s: [%(request)s] %(message)s";
+        handlers.journal = {
+          class = "systemd.journal.JournalHandler";
+          formatter = "journal_fmt";
+          SYSLOG_IDENTIFIER = "synapse";
+        };
+        root = {
+          level = "WARN";
+          handlers = ["journal"];
+        };
+        disable_existing_loggers = true;
+      };
     };
   };
 

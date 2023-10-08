@@ -10,6 +10,7 @@
     inputs.self.nixosModules.profiles.remote-builder-client
 
     ./mounts.nix
+    ./tor.nix
   ];
 
   system.stateVersion = "23.05";
@@ -123,6 +124,16 @@
             # Alligator
             publicKey = "FtRuoT3cvVFGq4DGbBNMSEYDvhygFvMDAHWEnSUgfjo=";
             allowedIPs = ["10.8.7.250/32"];
+          }
+          {
+            # Semenkova
+            publicKey = "BFtu1jwSTG81fmVOfO8r46430bBfabPQfW30uovp0lw=";
+            allowedIPs = ["10.8.7.251/32"];
+          }
+          {
+            # Buzurtanova
+            publicKey = "F9IpR8uhuhvG798d6MeFgys7Ovjkr2EblitLUjrjS1I=";
+            allowedIPs = ["10.8.7.252/32"];
           }
         ];
       };

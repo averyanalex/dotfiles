@@ -77,15 +77,11 @@ in {
     ensureUsers = [
       {
         name = "bvilove";
-        ensurePermissions = {
-          "DATABASE bvilove" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
       {
         name = "bvilovebeta";
-        ensurePermissions = {
-          "DATABASE bvilovebeta" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
   };

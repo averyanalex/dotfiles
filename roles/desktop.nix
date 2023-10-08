@@ -54,5 +54,6 @@
           sync
           tank
           jupyter
+          waydroid
         ]);
 }

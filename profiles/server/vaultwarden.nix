@@ -3,7 +3,7 @@
     enable = true;
     dbBackend = "postgresql";
     config = {
-      DOMAIN = "https://bw.averyan.ru";
+      DOMAIN = "https://bw.neutrino.su";
       DATABASE_URL = "postgresql:///vaultwarden?host=/run/postgresql";
       ROCKET_ADDRESS = "::";
       ROCKET_PORT = 8222;
@@ -33,9 +33,7 @@
     ensureUsers = [
       {
         name = "vaultwarden";
-        ensurePermissions = {
-          "DATABASE vaultwarden" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
   };

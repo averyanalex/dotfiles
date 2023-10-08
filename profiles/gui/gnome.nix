@@ -18,29 +18,20 @@
 
   environment.gnome.excludePackages =
     (with pkgs; [
-      baobab
       gnome-connections
       gnome-photos
       gnome-tour
     ])
     ++ (with pkgs.gnome; [
       atomix # puzzle game
-      cheese # webcam tool
       epiphany # web browser
       geary # email reader
-      gedit # text editor
       gnome-characters
-      gnome-contacts
-      gnome-font-viewer
       gnome-logs
       gnome-maps
-      gnome-music
-      gnome-terminal
       hitori # sudoku game
       iagno # go game
-      simple-scan
       tali # poker game
-      totem # video player
     ]);
 
   programs.gnome-disks.enable = false;
@@ -64,6 +55,9 @@
       experimental-features = ["scale-monitor-framebuffer" "x11-randr-fractional-scaling"];
     };
 
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
+    };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";
     };
@@ -72,6 +66,13 @@
     };
     "org/gnome/shell" = {
       enabled-extensions = ["dash-to-dock@micxgx.gmail.com"];
+      favorite-apps = [
+        "org.gnome.Console.desktop"
+        "org.gnome.Calendar.desktop"
+        "thunderbird.desktop"
+        "org.gnome.Nautilus.desktop"
+        "firefox.desktop"
+      ];
     };
   };
 }

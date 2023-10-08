@@ -32,6 +32,7 @@
           locale
           logs
           monitoring
+          mining
           nebula-averyan
           nftables
           nix

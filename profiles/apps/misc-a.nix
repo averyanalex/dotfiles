@@ -36,11 +36,12 @@
 
       # 3D modeling
       openscad
-      freecad
+      # freecad
       blender
       gmsh
       calculix
       elmerfem
+      prusa-slicer
 
       # Etc
       tor-browser-bundle-bin # anonymous browsing
@@ -61,6 +62,10 @@
     };
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-22.3.27"
+  ];
+
   persist.state.homeDirs = [
     ".config/SchildiChat"
     ".config/WebCord"
@@ -75,5 +80,7 @@
     ".local/share/OpenBoard"
 
     ".local/share/tor-browser"
+
+    ".config/PrusaSlicer"
   ];
 }

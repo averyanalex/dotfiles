@@ -14,7 +14,8 @@ let
   whale = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtyxNV8IPSMHudJrMbemcK82LosU9tdNDV2rhf0Z9ps";
   lizard = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEkmHS0r9G9Qgsponr/XayqOXB28eR+eUiYtBA+x5vTK";
   diamond = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKI3lWpGU0TE74z0STnC1WuUAUNlMYipvUChSaJ/k0pw";
-  servers = [hawk falcon whale lizard diamond];
+  grizzly = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7uVSBbSkY2Dyv38TWzljK8eXH/K4q9CukqY8Aly3/I";
+  servers = [hawk falcon whale lizard diamond grizzly];
 
   systems = desktops ++ family ++ servers;
 in {
@@ -35,6 +36,7 @@ in {
   "secrets/creds/bvilove.age".publicKeys = users ++ [whale];
   "secrets/creds/bvilove-beta.age".publicKeys = users ++ [whale];
   "secrets/creds/kluckva.age".publicKeys = users ++ [whale];
+  "secrets/creds/infinitytgadminsbot-eye210.age".publicKeys = users ++ [whale];
   "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk whale];
   "secrets/creds/cpmbot.age".publicKeys = users ++ [whale];
   "secrets/creds/firesquare.age".publicKeys = users ++ [whale];
@@ -43,10 +45,14 @@ in {
   "secrets/creds/matrix.age".publicKeys = users ++ [whale];
   "secrets/creds/mautrix-telegram.age".publicKeys = users ++ [whale];
   "secrets/creds/matrix-appservice-discord.age".publicKeys = users ++ [whale];
+  "secrets/creds/forgejo-runner-token.age".publicKeys = users ++ [whale];
+  "secrets/creds/automm.age".publicKeys = users ++ [grizzly];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [whale];
   "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [whale];
   "secrets/intpass/photoprism.age".publicKeys = users ++ [whale];
+  "secrets/intpass/grizzly-influxdb-admin.age".publicKeys = users ++ [grizzly];
+  "secrets/intpass/grizzly-influxdb-admin-token.age".publicKeys = users ++ [grizzly];
 
   "secrets/wireguard/hawk.age".publicKeys = users ++ [hawk falcon];
   "secrets/wireguard/whale.age".publicKeys = users ++ [whale];
@@ -75,6 +81,10 @@ in {
   "secrets/nebula/diamond-key.age".publicKeys = users ++ [diamond];
   "secrets/nebula/falcon-crt.age".publicKeys = users ++ systems;
   "secrets/nebula/falcon-key.age".publicKeys = users ++ [falcon];
+  "secrets/nebula/grizzly-crt.age".publicKeys = users ++ systems;
+  "secrets/nebula/grizzly-key.age".publicKeys = users ++ [grizzly];
+  "secrets/nebula/ferret-crt.age".publicKeys = users ++ systems;
+  "secrets/nebula/ferret-key.age".publicKeys = users ++ [ferret];
 
   "secrets/nebula-frsqr/ca-crt.age".publicKeys = users ++ systems;
   "secrets/nebula-frsqr/whale-crt.age".publicKeys = users ++ systems;

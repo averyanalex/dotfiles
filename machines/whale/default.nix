@@ -23,7 +23,7 @@ in {
   imports = [
     inputs.self.nixosModules.roles.server
 
-    # inputs.self.nixosModules.profiles.server.qbit
+    inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.cpmbot
     inputs.self.nixosModules.profiles.server.acme
     inputs.self.nixosModules.profiles.server.blog
@@ -65,6 +65,7 @@ in {
     ./tor.nix
     ./i2p.nix
     ./lidarr.nix
+    ./ups.nix
   ];
 
   system.stateVersion = "22.05";
@@ -106,6 +107,7 @@ in {
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
 
     "git.neutrino.su" = makeHost "http://whale:3826" // {useACMEHost = "neutrino.su";};
+    "bw.neutrino.su" = makeHost "http://whale:8222" // {useACMEHost = "neutrino.su";};
 
     "ptero.averyan.ru" = makeAveryanHost "http://192.168.12.50:80";
     "whale-ptero.averyan.ru" = makeAveryanHost "http://192.168.12.50:443";
@@ -320,6 +322,7 @@ in {
         ''iifname "wgav" oifname "wgavbr" counter accept''
       ];
       # extraNatPreroutingRules = [''udp dport 51820 dnat to 10.57.1.20''];
+      extraNatPreroutingRules = ["tcp dport 25000-25010 dnat to 192.168.12.50" "udp dport 25000-25010 dnat to 192.168.12.50"];
       extraNatPostroutingRules = [''oifname "${wan}" masquerade'']; # ''ip daddr 10.57.1.20 masquerade''
       # extraMangleOutputRules = [''skuid 1000 counter mark set 701''];
     };

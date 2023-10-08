@@ -7,8 +7,8 @@
       role = "private-bridge";
     };
     settings = {
-      ContactInfo = "alex@averyan.ru";
-      Nickname = "AveryanalexHawk";
+      # ContactInfo = "alex@averyan.ru";
+      # Nickname = "AveryanalexHawk";
       ORPort = 9628;
       ServerTransportListenAddr = "obfs4 [::]:4372";
       ControlPort = 9051;

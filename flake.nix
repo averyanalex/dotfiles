@@ -71,6 +71,11 @@
       inputs.flake-utils.follows = "flake-utils";
       url = "github:averyanalex/infinity-tg-admins-bot/61cc721";
     };
+    automm = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "git+ssh://forgejo@git.neutrino.su/averyanalex/auto-market-maker.git";
+    };
     firesquare-servers = {
       url = "github:fire-square/servers";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -115,7 +120,7 @@
           ])
         (builtins.readDir dir)));
   in
-    {
+    rec {
       nixosModules.hardware = builtins.listToAttrs (findModules ./hardware);
       nixosModules.modules = builtins.listToAttrs (findModules ./modules);
       nixosModules.profiles = builtins.listToAttrs (findModules ./profiles);
@@ -188,7 +193,48 @@
               })
             ];
           };
+          orangepizero3-image = nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-new-kernel-no-zfs-installer.nix"
+              ({
+                pkgs,
+                lib,
+                ...
+              }: let
+                # pkgsCross = import nixpkgs {
+                #   system = "x86_64-linux";
+                #   # hostPlatform.system = "aarch64-linux";
+                #   # buildPlatform.system = "x86_64-linux";
+                #   crossSystem = "x86_64-linux";
+                # };
+              in {
+                config = {
+                  # nixpkgs.hostPlatform.system = "aarch64-linux";
+                  # nixpkgs.buildPlatform.system = "x86_64-linux";
+                  sdImage.compressImage = false;
+                  system.stateVersion = "23.05";
+                  boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.linux_6_1.override {
+                    argsOverride = {
+                      src = pkgs.fetchFromGitHub {
+                        owner = "orangepi-xunlong";
+                        repo = "linux-orangepi";
+                        rev = "3495b5ee0594566c9fed930b96b1cae90600412e";
+                        hash = "sha256-MKlhbqORiwzFe84VEbcHbz4ZfRwNYxK5bZD5AKyopGw=";
+                      };
+                      kernelPatches = [];
+                      version = "6.1.31";
+                      modDirVersion = "6.1.31";
+                    };
+                  }));
+                  # nixpkgs.config.allowBroken = true;
+                };
+              })
+            ];
+          };
         };
+
+      images.orangepizero3 = nixosConfigurations.orangepizero3-image.config.system.build.sdImage;
     }
     // flake-utils.lib.eachSystem (with flake-utils.lib.system; [x86_64-linux aarch64-linux])
     (system: let

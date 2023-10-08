@@ -1,14 +1,12 @@
-{
-  # inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   xdg.portal = {
-    enable = true;
-    extraPortals = [
-      # inputs.hyprland.packages.${pkgs.hostPlatform.system}.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    wlr.enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    xdgOpenUsePortal = true;
+    config."sway" = {
+      default = ["gtk"];
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+      "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    };
   };
 }

@@ -1,9 +1,6 @@
-{
-  config,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
+    # inputs.self.nixosModules.roles.desktop
     inputs.self.nixosModules.roles.family
 
     inputs.self.nixosModules.profiles.bluetooth
@@ -15,18 +12,23 @@
     ./mounts.nix
   ];
 
+  services.tlp = {
+    # enable = true;
+    settings = {
+      STOP_CHARGE_THRESH_BAT0 = 0;
+    };
+  };
+
   services.logind.extraConfig = ''
     HandlePowerKey=hibernate
-    HandleLidSwitch=suspend
+    HandleLidSwitch=suspend-then-hibernate
     HandleLidSwitchExternalPower=ignore
   '';
-  # TODO: setup suspend-then-hibernate after systemd regression will be fixed
-  # HandleLidSwitch=suspend-then-hibernate
 
-  # systemd.sleep.extraConfig = ''
-  #   HibernateDelaySec=120s
-  #   SuspendEstimationSec=60s
-  # '';
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m\
+    SuspendEstimationSec=15m
+  '';
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.05";
 }

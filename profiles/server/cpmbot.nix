@@ -53,9 +53,7 @@ in {
     ensureUsers = [
       {
         name = "cpmbot";
-        ensurePermissions = {
-          "DATABASE cpmbot" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
   };

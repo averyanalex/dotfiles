@@ -10,7 +10,7 @@
       {
         kernel.python.main = {
           enable = true;
-          extraPackages = ps: [ps.numpy ps.scipy ps.matplotlib ps.opencv4];
+          extraPackages = ps: [ps.numpy ps.scipy ps.matplotlib ps.opencv4 ps.tqdm ps.ipywidgets ps.widgetsnbextension];
         };
 
         kernel.rust.main = {

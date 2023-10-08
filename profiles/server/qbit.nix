@@ -10,8 +10,11 @@
       '';
       User = "alex";
       Group = "users";
+      MemoryMax = "8G";
     };
   };
+
+  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8173];
 
   persist.state.homeDirs = [".config/qBittorrent" ".local/share/qBittorrent"];
 }

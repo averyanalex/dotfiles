@@ -4,20 +4,20 @@
     driSupport = true;
 
     extraPackages = with pkgs; [
-      rocm-opencl-icd
-      rocm-opencl-runtime
-      rocm-runtime
-      amdvlk
+      rocmPackages.clr
+      rocmPackages.clr.icd
+      rocmPackages.rocm-runtime
+      # amdvlk
     ];
   };
 
   environment.systemPackages = with pkgs; [
-    rocm-smi
+    rocmPackages.rocm-smi
+    rocmPackages.rocminfo
     radeontop
-    rocminfo
   ];
 
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+  # ];
 }

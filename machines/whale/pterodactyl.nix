@@ -129,6 +129,7 @@ in {
               "/var/lib/docker/containers/:/var/lib/docker/containers/"
               "/etc/pterodactyl/:/etc/pterodactyl/"
               "/var/lib/pterodactyl/:/var/lib/pterodactyl/"
+              "/tmp/pterodactyl/:/tmp/pterodactyl/"
             ];
             extraOptions = ["--network=host"];
             environment = {
@@ -140,6 +141,10 @@ in {
           };
         };
       };
+
+      systemd.tmpfiles.rules = [
+        "d /tmp/pterodactyl/ 700 988 988 - -"
+      ];
 
       virtualisation.docker = {
         enable = true;

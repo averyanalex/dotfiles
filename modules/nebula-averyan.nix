@@ -84,7 +84,7 @@ in {
       settings = {
         lighthouse = {
           remote_allow_list = {
-            # "10.3.7.0/24" = false;
+            "0200::/7" = false;
           };
         };
         punchy = {

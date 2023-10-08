@@ -10,7 +10,7 @@
         host = "/run/postgresql";
       };
       server = {
-        http_addr = "10.57.1.10";
+        http_addr = "0.0.0.0";
         http_port = 3729;
         domain = "grafana.averyan.ru";
         rootUrl = "https://grafana.averyan.ru/";
@@ -46,10 +46,7 @@
     ensureUsers = [
       {
         name = "grafana";
-        ensurePermissions = {
-          "DATABASE grafana" = "ALL PRIVILEGES";
-          "DATABASE bvilove" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
   };
@@ -77,6 +74,9 @@
           {
             targets = [
               "alligator:9100"
+              "diamond:9100"
+              "falcon:9100"
+              "grizzly:9100"
               "hamster:9100"
               "hawk:9100"
               "whale:9100"
@@ -117,13 +117,47 @@
           }
         ];
       }
+      # {
+      #   job_name = "tor";
+      #   scrape_interval = "1m";
+      #   static_configs = [
+      #     {
+      #       targets = [
+      #         "hawk:9130"
+      #       ];
+      #     }
+      #   ];
+      # }
       {
-        job_name = "tor";
+        job_name = "influxdb";
         scrape_interval = "1m";
         static_configs = [
           {
             targets = [
-              "hawk:9130"
+              "grizzly:8086"
+            ];
+          }
+        ];
+      }
+      {
+        job_name = "nut";
+        scrape_interval = "1m";
+        metrics_path = "/ups_metrics";
+        static_configs = [
+          {
+            targets = [
+              "whale:9199"
+            ];
+          }
+        ];
+      }
+      {
+        job_name = "automm";
+        scrape_interval = "10s";
+        static_configs = [
+          {
+            targets = [
+              "grizzly:9521"
             ];
           }
         ];
