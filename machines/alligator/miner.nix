@@ -75,7 +75,12 @@ in {
     requiredBy = ["nbminer.service" "teamredminer.service" "srbminer.service"];
     partOf = ["nbminer.service" "teamredminer.service" "srbminer.service"];
     script = ''
-      echo 185000000 > /sys/class/drm/card0/device/hwmon/hwmon4/power1_cap
+      echo "manual" > /sys/class/drm/card0/device/power_dpm_force_performance_level
+      echo "150000000" > /sys/class/drm/card0/device/hwmon/hwmon4/power1_cap
+      echo "s 1 1250" > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo "vo -175" > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo "m 1 1055" > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo "c" > /sys/class/drm/card0/device/pp_od_clk_voltage
     '';
     postStop = ''
       echo 255000000 > /sys/class/drm/card0/device/hwmon/hwmon4/power1_cap

@@ -55,5 +55,6 @@
           tank
           jupyter
           waydroid
+          shell.rust
         ]);
 }

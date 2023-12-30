@@ -10,6 +10,7 @@
       server_name = "neutrino.su";
     };
     "m.identity_server".base_url = "https://vector.im";
+    "org.matrix.msc3575.proxy"."url" = "https://syncv3.neutrino.su";
   };
   serverConfig."m.server" = "matrix.neutrino.su:443";
   mkWellKnown = data: ''
@@ -40,6 +41,14 @@ in {
           return 404;
         '';
       };
+      "syncv3.neutrino.su" = {
+        useACMEHost = "neutrino.su";
+        forceSSL = true;
+        quic = true;
+        kTLS = true;
+        locations."/".proxyPass = "http://127.0.0.1:8009";
+        locations."/".proxyWebsockets = true;
+      };
       "element.neutrino.su" = {
         useACMEHost = "neutrino.su";
         forceSSL = true;
@@ -51,17 +60,17 @@ in {
           };
         };
       };
-      "sc.neutrino.su" = {
-        useACMEHost = "neutrino.su";
-        forceSSL = true;
-        quic = true;
-        kTLS = true;
-        root = pkgs.schildichat-web.override {
-          conf = {
-            default_server_config = clientConfig;
-          };
-        };
-      };
+      # "sc.neutrino.su" = {
+      #   useACMEHost = "neutrino.su";
+      #   forceSSL = true;
+      #   quic = true;
+      #   kTLS = true;
+      #   root = pkgs.schildichat-web.override {
+      #     conf = {
+      #       default_server_config = clientConfig;
+      #     };
+      #   };
+      # };
     };
   };
 
@@ -69,6 +78,15 @@ in {
     file = ../../secrets/creds/matrix.age;
     owner = "matrix-synapse";
     group = "matrix-synapse";
+  };
+
+  age.secrets.matrix-sliding-sync.file = ../../secrets/creds/matrix-sliding-sync.age;
+  services.matrix-sliding-sync = {
+    enable = true;
+    environmentFile = config.age.secrets.matrix-sliding-sync.path;
+    settings = {
+      SYNCV3_SERVER = "https://matrix.neutrino.su";
+    };
   };
 
   services.matrix-synapse = {

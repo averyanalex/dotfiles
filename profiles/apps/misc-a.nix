@@ -2,7 +2,8 @@
   home-manager.users.alex = {
     home.packages = with pkgs; [
       # Communication
-      schildichat-desktop # electron matrix client
+      element-desktop
+      # schildichat-desktop # electron matrix client
       # fractal-next # gtk matrix client
       webcord-vencord # discord client
       telegram-desktop # telegram client
@@ -21,6 +22,7 @@
       joplin-desktop # markdown notes
       openboard # qt whiteboard
       rnote # gtk whiteboard
+      xournalpp
 
       # LaTeX
       texstudio
@@ -32,11 +34,11 @@
       # File viewers
       gthumb # gtk image viewer
       evince # gnome document viewer
-      f3d # simple 3d viewer
+      # f3d # simple 3d viewer
 
       # 3D modeling
       openscad
-      # freecad
+      freecad
       blender
       gmsh
       calculix
@@ -52,12 +54,14 @@
       kleopatra # gpg gui
       spek # audio file spectrogram
       kmplot
+      helvum
     ];
 
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
         "application/pdf" = "org.gnome.Evince.desktop";
+        "image/jpeg" = "org.gnome.gThumb.desktop";
       };
     };
   };
@@ -67,7 +71,7 @@
   ];
 
   persist.state.homeDirs = [
-    ".config/SchildiChat"
+    ".config/Element"
     ".config/WebCord"
     ".local/share/TelegramDesktop"
 
@@ -78,6 +82,7 @@
     ".config/Joplin"
     ".config/joplin-desktop"
     ".local/share/OpenBoard"
+    ".config/xournalpp"
 
     ".local/share/tor-browser"
 

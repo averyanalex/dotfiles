@@ -3,7 +3,7 @@ let
   users = [alex];
 
   alligator = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE7y1Vw/aeF69RDccAB2BB1IATUvVEQ7sIgAO5fUZKyC";
-  hamster = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN/Mu9oGr3VFS+GMBNPASaoMyiMO1G8T4fUKjJJpy30";
+  hamster = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPeBh0G+g7lLFUupnW5Vdmo4p4lDkrb/rV+szfqMLHAr";
   desktops = [alligator hamster];
 
   ferret = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJCrSdgjm9hxyFMCVCW+SzgF7AThC+fZy8RBQoFqCWT2";
@@ -29,20 +29,24 @@ in {
   "secrets/passwords/alex.age".publicKeys = users ++ systems;
   "secrets/passwords/olga.age".publicKeys = users ++ systems;
 
-  "secrets/mail/alex.age".publicKeys = users ++ [hawk];
-  "secrets/mail/sonya8128.age".publicKeys = users ++ [hawk];
-  "secrets/mail/cofob.age".publicKeys = users ++ [hawk];
+  "secrets/mail/alex.age".publicKeys = users ++ [hawk whale];
+  "secrets/mail/sonya8128.age".publicKeys = users ++ [hawk whale];
+  "secrets/mail/cofob.age".publicKeys = users ++ [hawk whale];
 
   "secrets/creds/bvilove.age".publicKeys = users ++ [whale];
+  "secrets/creds/gayradar.age".publicKeys = users ++ [whale];
+  "secrets/creds/anoquebot.age".publicKeys = users ++ [whale];
+  "secrets/creds/picsavbot.age".publicKeys = users ++ [whale];
   "secrets/creds/bvilove-beta.age".publicKeys = users ++ [whale];
   "secrets/creds/kluckva.age".publicKeys = users ++ [whale];
   "secrets/creds/infinitytgadminsbot-eye210.age".publicKeys = users ++ [whale];
-  "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk whale];
+  "secrets/creds/cloudflare.age".publicKeys = users ++ [hawk whale grizzly];
   "secrets/creds/cpmbot.age".publicKeys = users ++ [whale];
   "secrets/creds/firesquare.age".publicKeys = users ++ [whale];
   "secrets/creds/ipfs-cluster.age".publicKeys = users ++ [whale];
   "secrets/creds/searx.age".publicKeys = users ++ [hawk whale];
   "secrets/creds/matrix.age".publicKeys = users ++ [whale];
+  "secrets/creds/matrix-sliding-sync.age".publicKeys = users ++ [whale];
   "secrets/creds/mautrix-telegram.age".publicKeys = users ++ [whale];
   "secrets/creds/matrix-appservice-discord.age".publicKeys = users ++ [whale];
   "secrets/creds/forgejo-runner-token.age".publicKeys = users ++ [whale];
@@ -53,6 +57,7 @@ in {
   "secrets/intpass/photoprism.age".publicKeys = users ++ [whale];
   "secrets/intpass/grizzly-influxdb-admin.age".publicKeys = users ++ [grizzly];
   "secrets/intpass/grizzly-influxdb-admin-token.age".publicKeys = users ++ [grizzly];
+  "secrets/intpass/upsmon-pass.age".publicKeys = users ++ [whale];
 
   "secrets/wireguard/hawk.age".publicKeys = users ++ [hawk falcon];
   "secrets/wireguard/whale.age".publicKeys = users ++ [whale];

@@ -1,19 +1,21 @@
 {
+  services.lvm.boot.thin.enable = true;
+
   fileSystems."/persist" = {
     device = "/dev/hamster/data";
-    fsType = "ext4";
-    options = ["discard"];
+    fsType = "btrfs";
+    options = ["discard=async" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/9C88-9063";
+    device = "/dev/disk/by-uuid/0B94-3F5F";
     fsType = "vfat";
   };
 
-  swapDevices = [
-    {
-      device = "/dev/hamster/swap";
-      discardPolicy = "both";
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     device = "/dev/hamster/swap";
+  #     discardPolicy = "both";
+  #   }
+  # ];
 }

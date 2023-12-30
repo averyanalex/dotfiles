@@ -2,6 +2,7 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_14;
+    extraPlugins = with pkgs.postgresql_14.pkgs; [pgvector];
   };
 
   services.prometheus.exporters.postgres = {

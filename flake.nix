@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -25,17 +25,14 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-
     impermanence.url = "github:nix-community/impermanence";
-
     nur.url = "github:nix-community/NUR";
-
     jupyenv.url = "github:tweag/jupyenv";
-
+    lanzaboote.url = "github:nix-community/lanzaboote";
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs-23_05.follows = "nixpkgs-stable";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs-23_11.follows = "nixpkgs-stable";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
@@ -56,6 +53,21 @@
       inputs.flake-utils.follows = "flake-utils";
       url = "github:cpmbot/bot";
     };
+    gayradarbot = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:averyanalex/gayradar";
+    };
+    anoquebot = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:averyanalex/anoquebot";
+    };
+    picsavbot = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:averyanalex/picsavbot";
+    };
     bvilovebot = {
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
@@ -74,7 +86,7 @@
     automm = {
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      url = "git+ssh://forgejo@git.neutrino.su/averyanalex/auto-market-maker.git";
+      url = "git+ssh://git@github.com/averyanalex/auto-market-maker.git";
     };
     firesquare-servers = {
       url = "github:fire-square/servers";

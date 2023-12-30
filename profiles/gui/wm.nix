@@ -15,7 +15,6 @@
       gcr
     ];
 
-    fonts.fontconfig.enable = true;
     services.gpg-agent.pinentryFlavor = "gnome3";
     services.gnome-keyring.enable = true;
   };

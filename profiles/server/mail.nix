@@ -16,6 +16,8 @@ in {
     inputs.mailserver.nixosModules.mailserver
   ];
 
+  services.dovecot2.sieve.extensions = ["fileinto"];
+
   mailserver = {
     enable = true;
     fqdn = "hawk.averyan.ru";
@@ -106,12 +108,6 @@ in {
       user = "root";
       group = "root";
       mode = "u=rwx,g=rx,o=rx";
-    }
-    {
-      directory = "/var/lib/opendkim";
-      user = "opendkim";
-      group = "opendkim";
-      mode = "u=rwx,g=,o=";
     }
     {
       directory = "/var/lib/postfix";

@@ -9,8 +9,11 @@
       noto-fonts-cjk
       noto-fonts-extra
     ];
-    fontconfig.defaultFonts = {
-      monospace = ["MesloLGS NF"];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = ["MesloLGS NF"];
+      };
     };
   };
 }

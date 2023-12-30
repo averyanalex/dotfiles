@@ -16,5 +16,8 @@
 
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8173];
 
+  networking.firewall.allowedTCPPorts = [12813];
+  networking.firewall.allowedUDPPorts = [12813];
+
   persist.state.homeDirs = [".config/qBittorrent" ".local/share/qBittorrent"];
 }

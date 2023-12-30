@@ -27,6 +27,10 @@ in {
   #   (inputs.nixpkgs-unstable + "/nixos/modules/services/home-automation/home-assistant.nix")
   # ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w"
+  ];
+
   services.home-assistant = {
     enable = true;
     extraComponents = [
@@ -109,7 +113,7 @@ in {
       };
     };
   };
-  systemd.services."podman-esphome".after = ["network-online.target"];
+  # systemd.services."podman-esphome".after = ["network-online.target"];
   # services.esphome = {
   #   enable = true;
   #   address = "0.0.0.0";

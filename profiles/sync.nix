@@ -42,19 +42,13 @@ in {
           addresses = [
             "tcp://10.57.1.41:22000"
           ];
-          id = "KF5NLPI-Z57MSPV-XZZXORA-QYVY5VR-GF2FHPW-EX3IUYS-MD5Z2S4-BMC6PAV";
-        };
-        grizzly = {
-          addresses = [
-            "tcp://10.57.1.60:22000"
-          ];
-          id = "INKDQLJ-APRGBRU-GB7FE4Z-3STOM5G-GHKK3UH-UKX2ZBT-4I7PWJB-BTYVAQD";
+          id = "5RVWUHC-DYOYNZV-P4AYHJ5-ZNRLCKV-UWS2B7C-BUYENMF-GXNXYSX-NIKAMAN";
         };
         swan.id = "J52C7WU-R6UNI52-HIB2HON-2J3PUKM-6H74ROT-PY5V6YB-WATVFQC-KC6NGAY";
       };
       folders = {
         "Documents" = commonFolder "Documents";
-        "projects" = commonFolder "projects" // {devices = allDevices ++ ["grizzly"];};
+        "projects" = commonFolder "projects";
         "Music" = commonFolder "Music" // {devices = allDevices ++ ["swan"];};
         "Notes" = commonFolder "Notes" // {devices = allDevices ++ ["swan"];};
         "Pictures" = commonFolder "Pictures" // {devices = allDevices ++ ["swan"];};

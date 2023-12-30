@@ -5,15 +5,16 @@
   ...
 }: let
   automm-pkg = inputs.automm.packages.${pkgs.hostPlatform.system}.default.overrideAttrs (final: prev: {
-    RUSTFLAGS = "-Ctarget-cpu=neoverse-v1";
+    RUSTFLAGS = "-Ctarget-cpu=neoverse-n1";
   });
 in {
   age.secrets.automm.file = ../../secrets/creds/automm.age;
   systemd.services.automm = {
-    after = ["network-online.target"];
+    after = ["network-online.target" "influxdb2.service"];
+    wants = ["network-online.target"];
+    requires = ["influxdb2.service"];
     path = [automm-pkg];
-    environment.RUST_LOG = "info";
-    environment.SYMBOLS_TABLE = "${automm-pkg}/share/symbols.csv";
+    # environment.RUST_LOG = "warn";
     serviceConfig = {
       EnvironmentFile = config.age.secrets.automm.path;
       User = "automm";
@@ -23,8 +24,9 @@ in {
       DynamicUser = true;
 
       CPUSchedulingPolicy = "rr";
-      CPUSchedulingPriority = 80;
+      CPUSchedulingPriority = 20;
       IOSchedulingPriority = 1;
+      # Nice = -10;
 
       Restart = "on-failure";
       RestartSec = "5s";
@@ -53,7 +55,7 @@ in {
         "AF_INET6"
       ];
       RestrictNamespaces = true;
-      RestrictRealtime = true;
+      RestrictRealtime = false;
       RestrictSUIDSGID = true; # Implied by DynamicUser
       SystemCallArchitectures = "native";
       SystemCallFilter = [

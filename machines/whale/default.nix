@@ -25,6 +25,9 @@ in {
 
     inputs.self.nixosModules.profiles.server.qbit
     inputs.self.nixosModules.profiles.server.cpmbot
+    inputs.self.nixosModules.profiles.server.gayradar
+    inputs.self.nixosModules.profiles.server.anoquebot
+    inputs.self.nixosModules.profiles.server.picsav
     inputs.self.nixosModules.profiles.server.acme
     inputs.self.nixosModules.profiles.server.blog
     inputs.self.nixosModules.profiles.server.bvilove
@@ -39,9 +42,7 @@ in {
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.radicale
     inputs.self.nixosModules.profiles.server.matrix
-    inputs.self.nixosModules.profiles.server.ipfs
     inputs.self.nixosModules.profiles.server.forgejo
-    inputs.self.nixosModules.profiles.server.ipfs-cluster
     inputs.self.nixosModules.profiles.server.searx
     inputs.self.nixosModules.profiles.server.vaultwarden
 
@@ -58,7 +59,7 @@ in {
     # ./firesquare.nix
     ./hass.nix
     ./monitoring.nix
-    ./photoprism.nix
+    # ./photoprism.nix
     ./pterodactyl.nix
     ./tanksrv.nix
     ./yacy.nix
@@ -66,6 +67,8 @@ in {
     ./i2p.nix
     ./lidarr.nix
     ./ups.nix
+    ./ipfs.nix
+    ./mail.nix
   ];
 
   system.stateVersion = "22.05";
@@ -74,8 +77,7 @@ in {
   hardware.ksm.enable = true;
   persist.tmpfsSize = "16G";
 
-  services.kubo.dataDir = "/tank/ipfs";
-  services.syncthing.dataDir = "/home/alex/tank/sync";
+  services.syncthing.dataDir = "/home/alex/tank/hot/sync";
 
   # Monitoring
   services.prometheus.exporters.node.enabledCollectors = ["zoneinfo"];

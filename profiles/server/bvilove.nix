@@ -9,6 +9,7 @@
 
   commonService = {
     after = ["network-online.target" "postgresql.service"];
+    wants = ["network-online.target"];
     requires = ["postgresql.service"];
     serviceConfig = {
       Restart = "always";

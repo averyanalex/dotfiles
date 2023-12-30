@@ -14,7 +14,7 @@
           normal.family = "MesloLGS NF";
           size = 12.0;
         };
-        key_bindings = [
+        keyboard.bindings = [
           {
             key = "Return";
             mods = "Control|Shift";

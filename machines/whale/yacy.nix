@@ -2,15 +2,21 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "yacy/yacy_search_server";
     finalImageTag = "latest";
-    imageDigest = "sha256:73519c8ac903129a6fb80b509df897b02bfdee0a5db1b178fde8729bf579b202";
-    sha256 = "eVi4JegDdnMcSws7hVRNOROlr4R/gQ7R7H0WYR7Pb9Y=";
+    imageDigest = "sha256:78dc1fd08f6ff0c4b994733e631c26716cdc20795df209b11fe54a13c97bf3da";
+    sha256 = "sha256-+KWkXBCfeodz3w1hSoy65+PFzFc5ejZKQPPR+wE4zR4=";
   };
 in {
-  systemd.tmpfiles.rules = [
-    "d /hdd/yacy-ygg 755 115 121 - -"
-    # "d /hdd/yacy-olymp 755 115 121 - -"
-    # "d /hdd/yacy-freeworld 755 115 121 - -"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "d /hdd/yacy-ygg 755 107 113 - -"
+  #   # "d /hdd/yacy-olymp 755 115 121 - -"
+  #   # "d /hdd/yacy-freeworld 755 115 121 - -"
+  # ];
+
+  fileSystems."/var/lib/yacy-ygg" = {
+    device = "UUID=bcfa404a-68de-4a25-9fb0-4e972c8f9423";
+    fsType = "btrfs";
+    options = ["autodefrag" "subvol=@yacy-ygg"];
+  };
 
   # virtualisation.oci-containers = {
   #   containers = {
@@ -36,6 +42,8 @@ in {
   # networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [8739 8627];
 
   systemd.services."container@yacy-ygg".serviceConfig = {
+    # IOSchedulingPriority = 6;
+    MemoryMax = "12G";
   };
 
   containers.yacy-ygg = {
@@ -49,7 +57,7 @@ in {
 
     bindMounts = {
       "/var/lib/yacy/" = {
-        hostPath = "/hdd/yacy-ygg";
+        hostPath = "/var/lib/yacy-ygg";
         isReadOnly = false;
       };
     };
@@ -59,7 +67,7 @@ in {
       pkgs,
       ...
     }: {
-      system.stateVersion = "23.05";
+      system.stateVersion = "23.11";
       networking = {
         firewall.enable = false;
         interfaces.eth0.ipv6 = {

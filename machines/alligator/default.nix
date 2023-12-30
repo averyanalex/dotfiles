@@ -9,6 +9,7 @@
     inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.openrgb
     inputs.self.nixosModules.profiles.networkd
+    inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.roles.desktop
 
@@ -19,11 +20,11 @@
   ];
 
   # nixpkgs.localSystem = {
-  #   gcc.arch = "znver3";
+  #   gcc.arch = "x86-64-v2";
   #   gcc.tune = "znver3";
   #   system = "x86_64-linux";
   # };
-  # nix.settings.system-features = [ "gccarch-znver3" ];
+  # nix.settings.system-features = [ "big-parallel" "gccarch-x86-64-v2" ];
 
   systemd.network.networks = {
     "40-wgav" = {

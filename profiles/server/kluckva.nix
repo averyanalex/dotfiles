@@ -8,6 +8,7 @@
 
   makeService = name: {
     after = ["network-online.target"];
+    wants = ["network-online.target"];
     path = [infinitytgadminsbot-pkg];
     environment.RUST_LOG = "info";
     serviceConfig = {

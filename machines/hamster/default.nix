@@ -1,13 +1,11 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.self.nixosModules.roles.desktop
 
     inputs.self.nixosModules.profiles.bluetooth
     inputs.self.nixosModules.profiles.netman
+    inputs.self.nixosModules.profiles.libvirt
+    inputs.self.nixosModules.profiles.secureboot
     # inputs.self.nixosModules.profiles.remote-builder-client
 
     inputs.self.nixosModules.hardware.thinkbook
@@ -18,13 +16,13 @@
   services.tlp = {
     enable = true;
     settings = {
-      STOP_CHARGE_THRESH_BAT0 = 1;
+      STOP_CHARGE_THRESH_BAT0 = 0;
     };
   };
 
   services.logind.extraConfig = ''
-    HandlePowerKey=hibernate
-    HandleLidSwitch=suspend-then-hibernate
+    # HandlePowerKey=hibernate
+    # HandleLidSwitch=suspend-then-hibernate
     HandleLidSwitchExternalPower=ignore
   '';
 
@@ -33,5 +31,5 @@
     SuspendEstimationSec=15m
   '';
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.11";
 }

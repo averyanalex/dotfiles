@@ -10,11 +10,12 @@
       {
         kernel.python.main = {
           enable = true;
-          extraPackages = ps: [ps.numpy ps.scipy ps.matplotlib ps.opencv4 ps.tqdm ps.ipywidgets ps.widgetsnbextension];
+          extraPackages = ps: [ps.pandas ps.numpy ps.scipy ps.matplotlib ps.seaborn ps.opencv4 ps.tqdm ps.ipywidgets ps.widgetsnbextension];
         };
 
         kernel.rust.main = {
           enable = true;
+          runtimePackages = with pkgs; [pkg-config fontconfig freetype expat];
         };
       }
     ];

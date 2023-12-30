@@ -29,7 +29,9 @@
       yt-dlp # video/audio downloader
       wget # download file
       cloc # count lines of code
-      pv
+      pv # stdout speed
+      fd # user-friendly find
+      websocat # websocket terminal client
     ];
 
     home.sessionVariables = {

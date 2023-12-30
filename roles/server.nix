@@ -16,4 +16,6 @@
       AllowHibernation=no
     '';
   };
+
+  home-manager.users.alex.services.gpg-agent.pinentryFlavor = "curses";
 }
