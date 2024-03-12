@@ -88,6 +88,11 @@
       inputs.flake-utils.follows = "flake-utils";
       url = "git+ssh://git@github.com/averyanalex/auto-market-maker.git";
     };
+    aplusmuz-music-scraper = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "git+ssh://git@github.com/averyanalex/aplusmuz-music-scraper.git";
+    };
     firesquare-servers = {
       url = "github:fire-square/servers";
       inputs.nixpkgs.follows = "nixpkgs";

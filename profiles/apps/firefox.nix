@@ -18,6 +18,7 @@
             # ipfs-companion
             # temporary-containers
             ublock-origin
+            metamask
           ];
           settings = {
             "media.ffmpeg.vaapi.enabled" = true;

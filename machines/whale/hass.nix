@@ -4,15 +4,6 @@
       # http = {
       #   server_host = "10.57.1.10";
       # };
-      binary_sensor = [
-        {
-          platform = "ping";
-          host = "192.168.3.60";
-          name = "PC Status";
-          count = 2;
-          scan_interval = 5;
-        }
-      ];
       switch = [
         {
           platform = "template";

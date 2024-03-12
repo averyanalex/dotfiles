@@ -19,11 +19,11 @@
       passwordCommand = "cat ${config.age.secrets.account-mail.path}";
 
       imap = {
-        host = "hawk.averyan.ru";
+        host = "whale.averyan.ru";
         port = 993;
       };
       smtp = {
-        host = "hawk.averyan.ru";
+        host = "whale.averyan.ru";
         port = 465;
       };
 

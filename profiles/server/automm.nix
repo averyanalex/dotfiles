@@ -23,21 +23,23 @@ in {
       ExecStart = "${automm-pkg}/bin/automm";
       DynamicUser = true;
 
-      CPUSchedulingPolicy = "rr";
-      CPUSchedulingPriority = 20;
-      IOSchedulingPriority = 1;
+      # CPUSchedulingPolicy = "rr";
+      # CPUSchedulingPriority = 20;
+      # IOSchedulingPriority = 1;
       # Nice = -10;
+      AmbientCapabilities = "CAP_SYS_NICE";
+      CapabilityBoundingSet = "CAP_SYS_NICE";
+      RestrictRealtime = false;
 
       Restart = "on-failure";
       RestartSec = "5s";
 
       # Hardening
-      CapabilityBoundingSet = "";
       LockPersonality = true;
       MemoryDenyWriteExecute = true;
       DevicePolicy = "closed";
       NoNewPrivileges = true; # Implied by DynamicUser
-      PrivateUsers = true;
+      # PrivateUsers = true;
       PrivateTmp = true; # Implied by DynamicUser
       ProtectClock = true;
       ProtectControlGroups = true;
@@ -55,12 +57,11 @@ in {
         "AF_INET6"
       ];
       RestrictNamespaces = true;
-      RestrictRealtime = false;
       RestrictSUIDSGID = true; # Implied by DynamicUser
       SystemCallArchitectures = "native";
-      SystemCallFilter = [
-        "@system-service"
-      ];
+      # SystemCallFilter = [
+      #   "@system-service"
+      # ];
       UMask = "0077";
     };
     wantedBy = ["multi-user.target"];

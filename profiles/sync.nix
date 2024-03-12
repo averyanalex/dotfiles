@@ -36,7 +36,7 @@ in {
           addresses = [
             "tcp://whale.averyan.ru:22000"
           ];
-          id = "CWES2IK-GJ5F2CI-4SXANKJ-5WOZKF7-5LBDF4U-2J7JSAJ-S3SSVN7-K5E3DAY";
+          id = "Q3SH2WU-IZ2DW2W-PGYCBXF-TR4LOSK-Z4C3TBU-PDMVA77-AJ3K55U-OODJKAG";
         };
         hamster = {
           addresses = [

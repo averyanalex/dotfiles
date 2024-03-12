@@ -21,8 +21,8 @@
   };
 
   services.logind.extraConfig = ''
-    # HandlePowerKey=hibernate
-    # HandleLidSwitch=suspend-then-hibernate
+    HandlePowerKey=hibernate
+    HandleLidSwitch=suspend-then-hibernate
     HandleLidSwitchExternalPower=ignore
   '';
 

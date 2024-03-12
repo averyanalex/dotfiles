@@ -31,7 +31,7 @@ in {
     inputs.self.nixosModules.profiles.server.acme
     inputs.self.nixosModules.profiles.server.blog
     inputs.self.nixosModules.profiles.server.bvilove
-    inputs.self.nixosModules.profiles.server.gitea
+    # inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
     # inputs.self.nixosModules.profiles.server.hydra
     inputs.self.nixosModules.profiles.server.kluckva
@@ -41,10 +41,10 @@ in {
     inputs.self.nixosModules.profiles.server.ntfy-sh
     inputs.self.nixosModules.profiles.server.pgsql
     inputs.self.nixosModules.profiles.server.radicale
-    inputs.self.nixosModules.profiles.server.matrix
     inputs.self.nixosModules.profiles.server.forgejo
     inputs.self.nixosModules.profiles.server.searx
     inputs.self.nixosModules.profiles.server.vaultwarden
+    inputs.self.nixosModules.profiles.server.aplusmuz
 
     # inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.networkd
@@ -59,7 +59,7 @@ in {
     # ./firesquare.nix
     ./hass.nix
     ./monitoring.nix
-    # ./photoprism.nix
+    ./photoprism.nix
     ./pterodactyl.nix
     ./tanksrv.nix
     ./yacy.nix
@@ -69,6 +69,7 @@ in {
     ./ups.nix
     ./ipfs.nix
     ./mail.nix
+    ./matrix.nix
   ];
 
   system.stateVersion = "22.05";
@@ -324,7 +325,7 @@ in {
         ''iifname "wgav" oifname "wgavbr" counter accept''
       ];
       # extraNatPreroutingRules = [''udp dport 51820 dnat to 10.57.1.20''];
-      extraNatPreroutingRules = ["tcp dport 25000-25010 dnat to 192.168.12.50" "udp dport 25000-25010 dnat to 192.168.12.50"];
+      extraNatPreroutingRules = ["ip daddr 95.165.105.90 tcp dport 25000-25010 dnat to 192.168.12.50" "ip daddr 95.165.105.90 udp dport 25000-25010 dnat to 192.168.12.50"];
       extraNatPostroutingRules = [''oifname "${wan}" masquerade'']; # ''ip daddr 10.57.1.20 masquerade''
       # extraMangleOutputRules = [''skuid 1000 counter mark set 701''];
     };

@@ -60,17 +60,6 @@ in {
           };
         };
       };
-      # "sc.neutrino.su" = {
-      #   useACMEHost = "neutrino.su";
-      #   forceSSL = true;
-      #   quic = true;
-      #   kTLS = true;
-      #   root = pkgs.schildichat-web.override {
-      #     conf = {
-      #       default_server_config = clientConfig;
-      #     };
-      #   };
-      # };
     };
   };
 
@@ -80,13 +69,10 @@ in {
     group = "matrix-synapse";
   };
 
-  age.secrets.matrix-sliding-sync.file = ../../secrets/creds/matrix-sliding-sync.age;
-  services.matrix-sliding-sync = {
-    enable = true;
-    environmentFile = config.age.secrets.matrix-sliding-sync.path;
-    settings = {
-      SYNCV3_SERVER = "https://matrix.neutrino.su";
-    };
+  fileSystems."/var/lib/matrix-synapse/media_store" = {
+    device = "UUID=bcfa404a-68de-4a25-9fb0-4e972c8f9423";
+    fsType = "btrfs";
+    options = ["compress=zstd:7" "noatime" "subvol=@matrix-media"];
   };
 
   services.matrix-synapse = {
@@ -103,7 +89,7 @@ in {
       enable_registration = true;
       registration_requires_token = true;
 
-      media_store_path = "/tank/matrix-media";
+      # media_store_path = "/tank/matrix-media";
       dynamic_thumbnails = true;
 
       app_service_config_files = [
@@ -143,12 +129,22 @@ in {
     };
   };
 
-  systemd.tmpfiles.rules = ["d /tank/matrix-media 0750 matrix-synapse matrix-synapse - -"];
+  # systemd.tmpfiles.rules = ["d /tank/matrix-media 0750 matrix-synapse matrix-synapse - -"];
 
   systemd.services.matrix-synapse = {
     requires = ["postgresql.service"];
     after = ["postgresql.service"];
-    serviceConfig.ReadWritePaths = ["/tank/matrix-media"];
+    # serviceConfig.ReadWritePaths = ["/tank/matrix-media"];
+  };
+
+  # Sliding sync
+  age.secrets.matrix-sliding-sync.file = ../../secrets/creds/matrix-sliding-sync.age;
+  services.matrix-sliding-sync = {
+    enable = true;
+    environmentFile = config.age.secrets.matrix-sliding-sync.path;
+    settings = {
+      SYNCV3_SERVER = "https://matrix.neutrino.su";
+    };
   };
 
   # Telegram bridge

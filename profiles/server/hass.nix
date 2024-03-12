@@ -5,14 +5,14 @@
   dockerImageAMD64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";
-    imageDigest = "sha256:ec193500f7380623c16fe38a928965bfe9dabede4c73f5127f3683092bbfca1a";
-    sha256 = "IXGexZOz3egbFt+0r64EC5F7HXfE8JDf6+iHoMTb11s=";
+    imageDigest = "sha256:40d3c269cafeebce030e64f58908bfe74cb4a1a81ccc2a23ff78a0a070fe63d7";
+    sha256 = "hLy531wi5zkIDqdNjHVEjjyBTeazQFolFVPezf4FohQ=";
   };
   dockerImageARM64 = pkgs.dockerTools.pullImage {
     imageName = "esphome/esphome";
     finalImageTag = "latest";
-    imageDigest = "sha256:d472bd6253780a03abf02139409ff23182d030345d8fbc46a88df1e156c4bbe6";
-    sha256 = "2aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
+    imageDigest = "sha256:39edbb81b0591d8293c80fa938d3543603f842af9a744a483af75dcde74fe7bf";
+    sha256 = "3aGEEeVaLU97PmmopqDzoDpJiATYg8xGD5TpGmGnfbU=";
   };
   dockerImage =
     if pkgs.hostPlatform.system == "aarch64-linux"
@@ -42,6 +42,7 @@ in {
       "samsungtv"
       "utility_meter"
       "zha"
+      "ping"
     ];
     extraPackages = python3Packages:
       with python3Packages; [

@@ -28,6 +28,8 @@
   ];
   boot.initrd.kernelModules = ["dm-snapshot"];
 
+  services.lvm.boot.thin.enable = true;
+
   # Screen
   environment.systemPackages = [pkgs.ddcutil];
   boot.extraModulePackages = [config.boot.kernelPackages.ddcci-driver];

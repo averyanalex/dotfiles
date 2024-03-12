@@ -6,8 +6,8 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "photoprism/photoprism";
     finalImageTag = "latest";
-    imageDigest = "sha256:edc512d1fe3d918a45cf5ecea5b433b8600fd9574cb40975ec266e151acb8e9a";
-    sha256 = "RK628as97VRqFmanZWcPCzsUzXP4idRyO23o9YX5Lok=";
+    imageDigest = "sha256:cbaf35b067efc179dee68ab703db8911c2ad306830831458abb369542ee4cf12";
+    sha256 = "3zJp1d/vFcBLjipOqtGlH+LKHlb1dCGLAA3w2OQbJpM=";
   };
 in {
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
@@ -17,7 +17,11 @@ in {
     after = ["mysql.service"];
   };
 
-  systemd.tmpfiles.rules = ["d /persist/var/lib/photoprism 700 1000 100 - -"];
+  fileSystems."/var/lib/photoprism" = {
+    device = "UUID=bcfa404a-68de-4a25-9fb0-4e972c8f9423";
+    fsType = "btrfs";
+    options = ["compress=zstd:7" "noatime" "subvol=@photoprism"];
+  };
 
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [2342];
 
@@ -29,7 +33,7 @@ in {
         volumes = [
           "/home/alex/tank/Галерея:/photoprism/originals"
           "/home/alex/tank/Import/PhotoPrism:/photoprism/import"
-          "/persist/var/lib/photoprism:/photoprism/storage"
+          "/var/lib/photoprism:/photoprism/storage"
         ];
         extraOptions = ["--network=host"];
         environment = {

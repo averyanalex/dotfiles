@@ -19,6 +19,21 @@
   #   };
   # };
 
+  services.snapper.configs = {
+    home = {
+      SUBVOLUME = "/home/alex/tank";
+      ALLOW_USERS = ["alex"];
+      TIMELINE_CREATE = true;
+      TIMELINE_CLEANUP = true;
+    };
+    home-hot = {
+      SUBVOLUME = "/home/alex/tank/hot";
+      ALLOW_USERS = ["alex"];
+      TIMELINE_CREATE = true;
+      TIMELINE_CLEANUP = true;
+    };
+  };
+
   fileSystems."/tank" = {
     device = "/dev/whale/tank";
     fsType = "btrfs";
