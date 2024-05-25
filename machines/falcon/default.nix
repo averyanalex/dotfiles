@@ -8,6 +8,7 @@
     inputs.self.nixosModules.hardware.aeza
 
     inputs.self.nixosModules.profiles.remote-builder-client
+    inputs.self.nixosModules.profiles.server.aplusmuz
 
     ./mounts.nix
     ./tor.nix

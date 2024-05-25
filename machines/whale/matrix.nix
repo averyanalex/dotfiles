@@ -23,17 +23,11 @@ in {
     virtualHosts = {
       "neutrino.su" = {
         useACMEHost = "neutrino.su";
-        forceSSL = true;
-        quic = true;
-        kTLS = true;
         locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
         locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
       };
       "matrix.neutrino.su" = {
         useACMEHost = "neutrino.su";
-        forceSSL = true;
-        quic = true;
-        kTLS = true;
         locations."/_matrix".proxyPass = "http://[::1]:8008";
         locations."/_synapse/client".proxyPass = "http://[::1]:8008";
         locations."/telegram".proxyPass = "http://127.0.0.1:8194/public/";
@@ -43,17 +37,11 @@ in {
       };
       "syncv3.neutrino.su" = {
         useACMEHost = "neutrino.su";
-        forceSSL = true;
-        quic = true;
-        kTLS = true;
         locations."/".proxyPass = "http://127.0.0.1:8009";
         locations."/".proxyWebsockets = true;
       };
       "element.neutrino.su" = {
         useACMEHost = "neutrino.su";
-        forceSSL = true;
-        quic = true;
-        kTLS = true;
         root = pkgs.element-web.override {
           conf = {
             default_server_config = clientConfig;

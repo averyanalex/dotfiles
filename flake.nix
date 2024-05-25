@@ -4,10 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-master.url = "github:nixos/nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
 
     ragenix = {
       url = "github:yaxitech/ragenix";
@@ -27,12 +29,18 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     impermanence.url = "github:nix-community/impermanence";
     nur.url = "github:nix-community/NUR";
-    jupyenv.url = "github:tweag/jupyenv";
+    # jupyenv = {
+    #   url = "github:averyanalex/jupyenv";
+    #   inputs = {
+    #     # nixpkgs.follows = "nixpkgs";
+    #     # nixpkgs-stable.follows = "nixpkgs-stable";
+    #     # rust-overlay.follows = "rust-overlay";
+    #   };
+    # };
     lanzaboote.url = "github:nix-community/lanzaboote";
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      # inputs.nixpkgs-23_11.follows = "nixpkgs-stable";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
@@ -48,10 +56,14 @@
       url = "github:averyanalex/blog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    memexpert = {
+      url = "github:averyanalex/memexpert";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     cpmbot = {
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      url = "github:cpmbot/bot";
+      url = "github:averyanalex/matetech-answers-bot";
     };
     gayradarbot = {
       inputs.nixpkgs.follows = "nixpkgs";

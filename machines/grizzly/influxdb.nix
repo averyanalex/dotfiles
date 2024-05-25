@@ -17,9 +17,6 @@
 
   services.nginx.virtualHosts."influxdb-grizzly.neutrino.su" = {
     useACMEHost = "neutrino.su";
-    forceSSL = true;
-    quic = true;
-    kTLS = true;
     locations."/".proxyPass = "http://127.0.0.1:8086";
     locations."/".proxyWebsockets = true;
   };

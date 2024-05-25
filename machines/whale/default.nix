@@ -10,12 +10,6 @@
   makeHost = proxyPass: {
     locations."/".proxyPass = proxyPass;
     locations."/".proxyWebsockets = true;
-    extraConfig = ''
-      proxy_buffering off;
-    '';
-    forceSSL = true;
-    quic = true;
-    kTLS = true;
   };
 
   makeAveryanHost = proxyPass: makeHost proxyPass // {useACMEHost = "averyan.ru";};
@@ -35,7 +29,7 @@ in {
     inputs.self.nixosModules.profiles.server.hass
     # inputs.self.nixosModules.profiles.server.hydra
     inputs.self.nixosModules.profiles.server.kluckva
-    inputs.self.nixosModules.profiles.server.mqtt
+    # inputs.self.nixosModules.profiles.server.mqtt
     inputs.self.nixosModules.profiles.server.mysql
     inputs.self.nixosModules.profiles.server.nginx
     inputs.self.nixosModules.profiles.server.ntfy-sh
@@ -44,7 +38,10 @@ in {
     inputs.self.nixosModules.profiles.server.forgejo
     inputs.self.nixosModules.profiles.server.searx
     inputs.self.nixosModules.profiles.server.vaultwarden
-    inputs.self.nixosModules.profiles.server.aplusmuz
+    inputs.self.nixosModules.profiles.server.matomo
+    inputs.self.nixosModules.profiles.server.qdrant
+    inputs.self.nixosModules.profiles.server.meilisearch
+    inputs.self.nixosModules.profiles.server.memexpert
 
     # inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.networkd
@@ -67,9 +64,13 @@ in {
     ./i2p.nix
     ./lidarr.nix
     ./ups.nix
-    ./ipfs.nix
+    # ./ipfs.nix
     ./mail.nix
     ./matrix.nix
+    ./cosmovert.nix
+    ./webtlo.nix
+    ./dns.nix
+    ./jupyter.nix
   ];
 
   system.stateVersion = "22.05";
@@ -108,6 +109,8 @@ in {
     "search.averyan.ru" = makeAveryanHost "http://127.0.0.1:8278";
     "lidarr.averyan.ru" = makeAveryanHost "http://127.0.0.1:8686";
     "yacy.averyan.ru" = makeAveryanHost "http://whale:8627";
+    "lab.averyan.ru" = makeAveryanHost "http://127.0.0.1:8874";
+    "memexpert.xyz" = makeHost "http://127.0.0.1:3000" // {useACMEHost = "memexpert.xyz";};
 
     "git.neutrino.su" = makeHost "http://whale:3826" // {useACMEHost = "neutrino.su";};
     "bw.neutrino.su" = makeHost "http://whale:8222" // {useACMEHost = "neutrino.su";};
@@ -162,7 +165,7 @@ in {
         PoolOffset = 100;
         PoolSize = 50;
         EmitDNS = true;
-        DNS = "9.9.9.9";
+        DNS = "192.168.3.1";
       };
     };
 
@@ -216,7 +219,10 @@ in {
     };
   };
 
-  networking.firewall.allowedUDPPorts = [67 546];
+  networking.firewall = {
+    interfaces.${lan}.allowedTCPPorts = [22];
+    allowedUDPPorts = [67 546]; # DHCP
+  };
 
   age.secrets.wg-key-averyan.file = ../../secrets/wireguard/whale.age;
   networking.wireguard.interfaces = {

@@ -44,6 +44,8 @@
       calculix
       elmerfem
       prusa-slicer
+      kicad-unstable
+      # python311Packages.kicad
 
       # Etc
       tor-browser-bundle-bin # anonymous browsing
@@ -55,6 +57,7 @@
       spek # audio file spectrogram
       kmplot
       helvum
+      betaflight-configurator
     ];
 
     xdg.mimeApps = {
@@ -87,5 +90,8 @@
     ".local/share/tor-browser"
 
     ".config/PrusaSlicer"
+
+    ".config/kicad"
+    ".local/share/kicad"
   ];
 }

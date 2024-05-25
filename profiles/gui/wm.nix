@@ -15,7 +15,7 @@
       gcr
     ];
 
-    services.gpg-agent.pinentryFlavor = "gnome3";
+    services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
     services.gnome-keyring.enable = true;
   };
 

@@ -11,6 +11,7 @@
       User = "alex";
       Group = "users";
       MemoryMax = "8G";
+      Restart = "always";
     };
   };
 

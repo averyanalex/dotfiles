@@ -6,8 +6,8 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "photoprism/photoprism";
     finalImageTag = "latest";
-    imageDigest = "sha256:cbaf35b067efc179dee68ab703db8911c2ad306830831458abb369542ee4cf12";
-    sha256 = "3zJp1d/vFcBLjipOqtGlH+LKHlb1dCGLAA3w2OQbJpM=";
+    imageDigest = "sha256:80b6bedef9dca00f4962c229cb7136df50d28d8ac51a4b7471fbde16b057ff8b";
+    sha256 = "nhMfI5jQjgYjZiadPbPSY4v6UhfbyKNTtoh2XfYNfok=";
   };
 in {
   age.secrets.photoprism.file = ../../secrets/intpass/photoprism.age;
@@ -40,19 +40,19 @@ in {
           PHOTOPRISM_ADMIN_USER = "admin";
           PHOTOPRISM_AUTH_MODE = "password";
           PHOTOPRISM_SITE_URL = "https://prism.averyan.ru/";
-          PHOTOPRISM_ORIGINALS_LIMIT = "5000";
+          PHOTOPRISM_ORIGINALS_LIMIT = "6000";
           PHOTOPRISM_HTTP_COMPRESSION = "none";
           PHOTOPRISM_LOG_LEVEL = "info";
           PHOTOPRISM_READONLY = "false";
           PHOTOPRISM_EXPERIMENTAL = "false";
-          PHOTOPRISM_DISABLE_CHOWN = "false";
+          PHOTOPRISM_DISABLE_CHOWN = "true";
           PHOTOPRISM_DISABLE_WEBDAV = "false";
           PHOTOPRISM_DISABLE_SETTINGS = "false";
           PHOTOPRISM_DISABLE_TENSORFLOW = "false";
           PHOTOPRISM_DISABLE_FACES = "false";
           PHOTOPRISM_DISABLE_CLASSIFICATION = "false";
           PHOTOPRISM_DISABLE_RAW = "false";
-          PHOTOPRISM_RAW_PRESETS = "false";
+          PHOTOPRISM_RAW_PRESETS = "true";
           PHOTOPRISM_JPEG_QUALITY = "85";
           PHOTOPRISM_DETECT_NSFW = "true";
           PHOTOPRISM_UPLOAD_NSFW = "true";

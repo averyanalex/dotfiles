@@ -1,3 +1,3 @@
 {
-  boot.supportedFilesystems = ["ntfs" "btrfs"];
+  boot.supportedFilesystems = ["ntfs" "btrfs" "exfat"];
 }

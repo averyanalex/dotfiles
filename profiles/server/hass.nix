@@ -106,7 +106,8 @@ in {
           "/etc/localtime:/etc/localtime:ro"
           "/var/lib/esphome:/config"
         ];
-        extraOptions = ["--network=host" "--privileged"];
+        ports = ["6052:6052"];
+        extraOptions = ["--network=slirp4netns" "--privileged"];
         environment = {
           ESPHOME_DASHBOARD_USE_PING = "true";
           TZ = "Europe/Moscow";

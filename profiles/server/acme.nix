@@ -14,11 +14,17 @@
       "averyan.ru" = {
         extraDomainNames = ["*.averyan.ru"];
       };
-      "memefinder.ru" = {
-        extraDomainNames = ["*.memefinder.ru"];
-      };
+      # "memefinder.ru" = {
+      #   extraDomainNames = ["*.memefinder.ru"];
+      # };
       "neutrino.su" = {
         extraDomainNames = ["*.neutrino.su"];
+      };
+      "cosmovert.ru" = {
+        extraDomainNames = ["*.cosmovert.ru"];
+      };
+      "memexpert.xyz" = {
+        extraDomainNames = ["*.memexpert.xyz"];
       };
     };
   };

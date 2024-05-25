@@ -19,13 +19,13 @@ in {
     "d /persist/mail/vmail 6760 5000 5000 - -"
     "d /persist/mail/dovecot 755 0 0 - -"
     "d /persist/mail/postfix 755 0 0 - -"
-    "d /persist/mail/redis-rspamd 700 994 992 - -"
+    "d /persist/mail/redis-rspamd 700 997 997 - -"
     "d /persist/mail/rspamd 700 225 225 - -"
     "d /persist/mail/spool 1777 0 0 - -"
   ];
 
   networking.nft-firewall.extraNatPreroutingRules = [
-    "ip daddr 95.165.105.90 tcp dport { 25, 465, 587, 110, 995, 143, 993 } dnat to 192.168.12.36"
+    "ip daddr 95.165.105.90 tcp dport { 25, 465, 587, 993 } dnat to 192.168.12.36"
   ];
 
   age.secrets.mail-alex = {
@@ -180,6 +180,14 @@ in {
           };
         };
       };
+
+      services.rspamd.extraConfig = ''
+        actions {
+          reject = null;
+          add_header = 6;
+          greylist = null;
+        }
+      '';
     };
   };
 }

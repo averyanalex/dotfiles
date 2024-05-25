@@ -85,12 +85,12 @@
         ];
       }
       {
-        job_name = "nginx";
+        job_name = "angie";
         scrape_interval = "1m";
         static_configs = [
           {
             targets = [
-              "hawk:9113"
+              "whale:9114"
             ];
           }
         ];
@@ -158,6 +158,17 @@
           {
             targets = [
               "grizzly:9521"
+            ];
+          }
+        ];
+      }
+      {
+        job_name = "coredns";
+        scrape_interval = "1m";
+        static_configs = [
+          {
+            targets = [
+              "127.0.0.1:9153"
             ];
           }
         ];

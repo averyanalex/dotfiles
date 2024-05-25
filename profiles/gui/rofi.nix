@@ -6,7 +6,7 @@
       plugins = [pkgs.rofi-emoji];
       terminal = "alacritty";
       extraConfig = {
-        modi = "drun,run,emoji,ssh,filebrowser";
+        modi = "drun,run,ssh,filebrowser";
         show-icons = true;
         sorting-method = "fzf";
       };

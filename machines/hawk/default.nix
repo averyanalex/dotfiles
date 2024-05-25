@@ -6,12 +6,7 @@
   makeAveryanHost = proxyPass: {
     locations."/".proxyPass = proxyPass;
     locations."/".proxyWebsockets = true;
-    extraConfig = ''
-      proxy_buffering off;
-    '';
     useACMEHost = "averyan.ru";
-    forceSSL = true;
-    kTLS = true;
   };
 in {
   imports = [

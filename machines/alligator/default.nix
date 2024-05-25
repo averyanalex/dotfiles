@@ -11,6 +11,7 @@
     inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.persist-yggdrasil
+    inputs.self.nixosModules.profiles.pmbootstrap
     inputs.self.nixosModules.roles.desktop
 
     ./miner.nix

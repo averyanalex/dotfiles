@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./base.nix
   ];
@@ -17,5 +17,5 @@
     '';
   };
 
-  home-manager.users.alex.services.gpg-agent.pinentryFlavor = "curses";
+  home-manager.users.alex.services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;
 }

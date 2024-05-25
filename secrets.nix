@@ -51,7 +51,9 @@ in {
   "secrets/creds/matrix-appservice-discord.age".publicKeys = users ++ [whale];
   "secrets/creds/forgejo-runner-token.age".publicKeys = users ++ [whale];
   "secrets/creds/automm.age".publicKeys = users ++ [grizzly];
-  "secrets/creds/aplusmuz-music-scraper.age".publicKeys = users ++ [whale];
+  "secrets/creds/aplusmuz-music-scraper.age".publicKeys = users ++ [falcon];
+  "secrets/creds/jupyter.age".publicKeys = users ++ [whale];
+  "secrets/creds/memexpert.age".publicKeys = users ++ [whale];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [whale];
   "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [whale];

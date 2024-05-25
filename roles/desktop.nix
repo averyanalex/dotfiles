@@ -53,7 +53,7 @@
           sdr
           sync
           tank
-          jupyter
+          # jupyter
           waydroid
           shell.rust
         ]);

@@ -27,16 +27,19 @@
         open-vsx.redhat.vscode-yaml
         open-vsx.tamasfe.even-better-toml
         vscode-marketplace.rust-lang.rust-analyzer
+        open-vsx.serayuzgur.crates
         vscode-marketplace.ms-vscode.cpptools
         open-vsx.james-yu.latex-workshop
         open-vsx.jnoortheen.nix-ide
-        open-vsx.galarius.vscode-opencl
+        # open-vsx.galarius.vscode-opencl
 
         # SQL
         open-vsx.mtxr.sqltools
         open-vsx.mtxr.sqltools-driver-mysql
         open-vsx.mtxr.sqltools-driver-pg
         open-vsx.mtxr.sqltools-driver-sqlite
+        vscode-marketplace.surendrajat.apklab
+        vscode-marketplace.loyieking.smalise
 
         # Tools
         open-vsx.editorconfig.editorconfig
