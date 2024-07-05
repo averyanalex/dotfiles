@@ -32,6 +32,7 @@
       pv # stdout speed
       fd # user-friendly find
       websocat # websocket terminal client
+      payload-dumper-go
     ];
 
     home.sessionVariables = {

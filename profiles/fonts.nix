@@ -5,6 +5,7 @@
       corefonts # Proprietary: Times New Roman, etc
       jetbrains-mono
       meslo-lgs-nf
+      monaspace
       noto-fonts
       noto-fonts-cjk
       noto-fonts-extra

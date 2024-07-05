@@ -24,7 +24,7 @@ in {
     inputs.self.nixosModules.profiles.server.picsav
     inputs.self.nixosModules.profiles.server.acme
     inputs.self.nixosModules.profiles.server.blog
-    inputs.self.nixosModules.profiles.server.bvilove
+    # inputs.self.nixosModules.profiles.server.bvilove
     # inputs.self.nixosModules.profiles.server.gitea
     inputs.self.nixosModules.profiles.server.hass
     # inputs.self.nixosModules.profiles.server.hydra
@@ -180,19 +180,15 @@ in {
     "40-wgav" = {
       routes = [
         {
-          routeConfig = {
-            Destination = "::/0";
-            Type = "unreachable";
-            Table = 700;
-          };
+          Destination = "::/0";
+          Type = "unreachable";
+          Table = 700;
         }
       ];
       routingPolicyRules = [
         {
-          routingPolicyRuleConfig = {
-            FirewallMark = 700;
-            Table = 700;
-          };
+          FirewallMark = 700;
+          Table = 700;
         }
         # {
         #   routingPolicyRuleConfig = {
@@ -210,10 +206,8 @@ in {
       linkConfig.RequiredForOnline = false;
       routingPolicyRules = [
         {
-          routingPolicyRuleConfig = {
-            IncomingInterface = "wgavbr";
-            Table = 700;
-          };
+          IncomingInterface = "wgavbr";
+          Table = 700;
         }
       ];
     };
@@ -233,7 +227,7 @@ in {
         {
           publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
           allowedIPs = ["0.0.0.0/0"];
-          endpoint = "hawk.averyan.ru:51820";
+          endpoint = "vpn.averyan.ru:51820";
           persistentKeepalive = 25;
         }
       ];

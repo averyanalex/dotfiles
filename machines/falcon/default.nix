@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.self.nixosModules.roles.server
+    inputs.self.nixosModules.roles.minimal
     inputs.self.nixosModules.hardware.aeza
 
     inputs.self.nixosModules.profiles.remote-builder-client
@@ -12,6 +12,7 @@
 
     ./mounts.nix
     ./tor.nix
+    ./proxy.nix
   ];
 
   system.stateVersion = "23.05";

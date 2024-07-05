@@ -2,8 +2,8 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "berkut174/webtlo";
     finalImageTag = "latest";
-    imageDigest = "sha256:85b3fb3927072249b81ce0690247d1db0b7e8975ab06e8a2122a554c55c0de87";
-    sha256 = "cVglaqNAsNRNOPrwMRjfLUc0D5Dtf5jw6KrDaEjSUcc=";
+    imageDigest = "sha256:522ceaa41c39ff46825d5fcab9908c8b806d4b7bf5ce70c2f2a61305d8cff440";
+    sha256 = "sha256-UioNfJ1YfQMb12mQ5sRACxcZoNQ0CyxYtVzoM77Ikug=";
   };
 in {
   virtualisation.oci-containers = {

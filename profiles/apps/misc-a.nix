@@ -58,6 +58,7 @@
       kmplot
       helvum
       betaflight-configurator
+      brave
     ];
 
     xdg.mimeApps = {
@@ -67,6 +68,8 @@
         "image/jpeg" = "org.gnome.gThumb.desktop";
       };
     };
+
+    services.kdeconnect.enable = true;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -93,5 +96,6 @@
 
     ".config/kicad"
     ".local/share/kicad"
+    ".config/BraveSoftware"
   ];
 }

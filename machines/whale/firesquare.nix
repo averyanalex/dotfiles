@@ -14,7 +14,7 @@ in {
         {
           publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
           allowedIPs = ["0.0.0.0/0"];
-          endpoint = "hawk.averyan.ru:51820";
+          endpoint = "vpn.averyan.ru:51820";
           persistentKeepalive = 25;
         }
       ];

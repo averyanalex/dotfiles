@@ -1,24 +1,21 @@
 {inputs, ...}: {
   imports =
-    (with inputs.self.nixosModules.modules; [
-      nebula-averyan
-      persist
-    ])
+    [./minimal.nix]
     ++ (with inputs.self.nixosModules.profiles;
       with shell;
         [
-          gpg
-          zsh
-
           direnv
           eza
           fzf
           git
-          zoxide
-          neovim
+          gpg
           misc-s
+          neovim
+          zoxide
         ]
         ++ [
+          # mining
+          # qemu
           agenix
           apparmor
           boot
@@ -28,24 +25,22 @@
           filesystems
           home
           hosts
-          misc-p
           locale
           logs
+          misc-p
           monitoring
-          mining
           nebula-averyan
           nftables
           nix
           nur
           persist
           polkit
-          qemu
           ssh-server
+          stable
           sudo
           timezone
           unfree
           unsecure
-          stable
           userdirs
           users
           vmvariant

@@ -31,19 +31,15 @@
     "40-wgav" = {
       routes = [
         {
-          routeConfig = {
-            Destination = "::/0";
-            Type = "unreachable";
-            Table = 700;
-          };
+          Destination = "::/0";
+          Type = "unreachable";
+          Table = 700;
         }
       ];
       routingPolicyRules = [
         {
-          routingPolicyRuleConfig = {
-            FirewallMark = 700;
-            Table = 700;
-          };
+          FirewallMark = 700;
+          Table = 700;
         }
         # {
         #   routingPolicyRuleConfig = {
@@ -64,7 +60,7 @@
         {
           publicKey = "h+76esMcmPLakUN/1vDlvGGf2Ovmw/IDKKxFtqXCdm8=";
           allowedIPs = ["0.0.0.0/0"];
-          endpoint = "hawk.averyan.ru:51820";
+          endpoint = "vpn.averyan.ru:51820";
           persistentKeepalive = 25;
         }
       ];

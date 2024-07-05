@@ -8,6 +8,8 @@
     };
   };
 
+  systemd.services.openssh.after = ["nebula@averyan.service"];
+
   environment.systemPackages = [pkgs.mosh];
   networking.firewall = {
     interfaces."nebula.averyan".allowedTCPPorts = [22];

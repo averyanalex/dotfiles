@@ -1,19 +1,16 @@
 {inputs, ...}: {
   imports =
     [
-      ./base.nix
+      ./full.nix
     ]
-    ++ (with inputs.self.nixosModules.modules; [
-      nebula-frsqr
-    ])
     ++ (with inputs.self.nixosModules.profiles;
       with apps;
         [
           alacritty
           firefox
+          misc-a
           mpv
           vscode
-          misc-a
         ]
         ++ (with games; [
           minecraft
@@ -25,9 +22,9 @@
           # sway
           clipboard
           eww
-          sway
           portals
           rofi
+          sway
           swaylock
           swaync
           swayosd
@@ -36,6 +33,7 @@
           wm
         ])
         ++ [
+          # jupyter
           adb
           autologin
           embedded
@@ -50,11 +48,12 @@
           pipewire
           podman
           printing
+          proxy
           sdr
+          shell.rust
           sync
           tank
-          # jupyter
           waydroid
-          shell.rust
+          wireshark
         ]);
 }

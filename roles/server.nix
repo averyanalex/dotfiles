@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./base.nix
+    ./full.nix
   ];
 
   systemd = {
