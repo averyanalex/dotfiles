@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-master.url = "github:nixos/nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -40,6 +40,7 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs-24_05.url = "nixpkgs-stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
