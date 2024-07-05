@@ -6,12 +6,12 @@
       slurp
 
       # icons
-      gnome3.adwaita-icon-theme
+      adwaita-icon-theme
       libsForQt5.breeze-icons
 
       # keyring
-      gnome.seahorse
-      gnome.gnome-keyring
+      seahorse
+      gnome-keyring
       gcr
     ];
 

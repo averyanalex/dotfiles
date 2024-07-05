@@ -6,6 +6,6 @@
   services.printing.drivers = with pkgs; [gutenprint hplipWithPlugin];
 
   environment.systemPackages = with pkgs; [
-    gnome.simple-scan
+    simple-scan
   ];
 }
