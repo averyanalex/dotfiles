@@ -3,7 +3,7 @@
   services.gnome.sushi.enable = true;
   home-manager.users.alex = {
     home.packages = with pkgs; [
-      gnome.nautilus
+      nautilus
     ];
   };
 }

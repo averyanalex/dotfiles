@@ -44,7 +44,7 @@
       calculix
       elmerfem
       prusa-slicer
-      kicad-unstable
+      # kicad-unstable
       # python311Packages.kicad
 
       # Etc
