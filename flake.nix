@@ -40,7 +40,7 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs-24_05.url = "nixpkgs-stable";
+      # inputs.nixpkgs-24_05.url = "nixpkgs-stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
