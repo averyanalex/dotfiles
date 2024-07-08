@@ -15,20 +15,21 @@
       jupyter-collaboration
       ipython
 
-      matplotlib
       ipympl
+      matplotlib
       seaborn
 
+      numba
       numpy
       pandas
+      pillow
       polars
       scipy
       sympy
       tqdm
-      pillow
 
-      requests
       aiohttp
+      requests
     ]);
 in {
   age.secrets.jupyterlab.file = ../../secrets/creds/jupyter.age;
