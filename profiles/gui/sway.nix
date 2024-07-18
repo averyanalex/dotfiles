@@ -65,13 +65,13 @@
 
             "Mod4+m" = "exec rofi -show emoji";
 
-            "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-            "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
-            "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+            # "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            # "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+            # "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+            # "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
 
-            "XF86MonBrightnessDown" = "exec brillo -u 10000 -U 10";
-            "XF86MonBrightnessUp" = "exec brillo -u 10000 -A 10";
+            # "XF86MonBrightnessDown" = "exec brillo -u 10000 -U 10";
+            # "XF86MonBrightnessUp" = "exec brillo -u 10000 -A 10";
 
             "Print" = ''exec grim -g "$(slurp -d)" - | tee "Pictures/Screenshots/$(date --rfc-3339=seconds).png" | wl-copy -t image/png'';
             "Shift+Print" = ''exec grim - | tee "Pictures/Screenshots/$(date --rfc-3339=seconds).png" | wl-copy -t image/png'';

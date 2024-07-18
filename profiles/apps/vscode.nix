@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: {
   age.secrets.account-wakatime = {
@@ -26,56 +27,89 @@
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
 
-      extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.hostPlatform.system};
-        [
-          # Python
-          open-vsx.njpwerner.autodocstring
+      extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.hostPlatform.system}; [
+        # Python
+        vscode-marketplace.ms-python.black-formatter
+        vscode-marketplace.ms-python.isort
+        vscode-marketplace.ms-python.mypy-type-checker
+        vscode-marketplace.ms-python.python
+        vscode-marketplace.ms-python.vscode-pylance
+        vscode-marketplace.njpwerner.autodocstring
+        pkgs.vscode-extensions.ms-toolsai.jupyter
+        pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+        vscode-marketplace.ms-toolsai.datawrangler
 
-          # Other langs
-          open-vsx.redhat.java
-          open-vsx.redhat.vscode-xml
-          open-vsx.redhat.vscode-yaml
-          open-vsx.tamasfe.even-better-toml
-          vscode-marketplace.rust-lang.rust-analyzer
-          open-vsx.serayuzgur.crates
-          vscode-marketplace.ms-vscode.cpptools
-          open-vsx.james-yu.latex-workshop
-          open-vsx.jnoortheen.nix-ide
-          vscode-marketplace.galarius.vscode-opencl
-          vscode-marketplace.mechatroner.rainbow-csv
-          vscode-marketplace.github.vscode-github-actions
+        # Other langs
+        open-vsx.james-yu.latex-workshop
+        pkgs.vscode-extensions.jnoortheen.nix-ide
+        open-vsx.redhat.java
+        open-vsx.redhat.vscode-xml
+        open-vsx.redhat.vscode-yaml
+        open-vsx.tamasfe.even-better-toml
+        vscode-marketplace.davidanson.vscode-markdownlint
+        vscode-marketplace.galarius.vscode-opencl
+        vscode-marketplace.github.vscode-github-actions
+        vscode-marketplace.mechatroner.rainbow-csv
+        vscode-marketplace.ms-vscode.cpptools
+        vscode-marketplace.rust-lang.rust-analyzer
+        vscode-marketplace.yzhang.markdown-all-in-one
+        # vscode-marketplace.ms-azuretools.vscode-docker
 
-          # SQL
-          open-vsx.mtxr.sqltools
-          open-vsx.mtxr.sqltools-driver-mysql
-          open-vsx.mtxr.sqltools-driver-pg
-          open-vsx.mtxr.sqltools-driver-sqlite
-          vscode-marketplace.surendrajat.apklab
-          vscode-marketplace.loyieking.smalise
+        # SQL
+        open-vsx.mtxr.sqltools
+        open-vsx.mtxr.sqltools-driver-mysql
+        open-vsx.mtxr.sqltools-driver-pg
+        open-vsx.mtxr.sqltools-driver-sqlite
+        vscode-marketplace.loyieking.smalise
+        vscode-marketplace.surendrajat.apklab
 
-          # Tools
-          open-vsx.editorconfig.editorconfig
-          vscode-marketplace.earshinov.sort-lines-by-selection
-          vscode-marketplace.gruntfuggly.todo-tree
-          vscode-marketplace.stkb.rewrap
-          vscode-marketplace.tyriar.sort-lines
+        # Tools
+        vscode-marketplace.editorconfig.editorconfig
+        vscode-marketplace.bierner.emojisense
+        vscode-marketplace.earshinov.sort-lines-by-selection
+        vscode-marketplace.fill-labs.dependi
+        vscode-marketplace.github.copilot
+        vscode-marketplace.github.copilot-chat
+        vscode-marketplace.github.vscode-pull-request-github
+        vscode-marketplace.gruntfuggly.todo-tree
+        vscode-marketplace.stkb.rewrap
+        vscode-marketplace.tyriar.sort-lines
 
-          # Misc
-          open-vsx.mkhl.direnv
-          open-vsx.gitlab.gitlab-workflow
-          open-vsx.wakatime.vscode-wakatime
-        ]
-        ++ (with pkgs.vscode-extensions; [
-          github.copilot
-          ms-python.python
-          ms-python.vscode-pylance
-          ms-python.black-formatter
-          ms-python.isort
-          ms-toolsai.jupyter
+        # Misc
+        open-vsx.gitlab.gitlab-workflow
+        open-vsx.mkhl.direnv
+        open-vsx.wakatime.vscode-wakatime
+        vscode-marketplace.donjayamanne.githistory
+        # vscode-marketplace.eamodio.gitlens
+      ];
+      userSettings = let
+        python = pkgs.python3.withPackages (ps: [
+          ps.jupyter
+          ps.ipython
+
+          ps.ipympl
+          ps.matplotlib
+          ps.seaborn
+
+          ps.numpy
+          ps.pandas
+          ps.tqdm
         ]);
-      userSettings = {
+      in {
         "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "${pkgs.nil}/bin/nil";
+        "nix.serverPath" = lib.getExe pkgs.nixd;
+        "nix.serverSettings" = {
+          nixd = {
+            formatting = {
+              command = ["${pkgs.alejandra}/bin/alejandra"];
+            };
+            options = {
+              nixos = {
+                expr = "(builtins.getFlake \"/home/alex/projects/averyanalex/nixcfg\").nixosConfigurations.alligator.options";
+              };
+            };
+          };
+        };
 
         "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         "rust-analyzer.check.command" = "clippy";
@@ -88,6 +122,8 @@
           "strings" = true;
         };
         "editor.tabCompletion" = "on";
+
+        "editor.formatOnSave" = true;
 
         # VCS
         "diffEditor.ignoreTrimWhitespace" = false;
@@ -110,7 +146,7 @@
         "C_Cpp.clang_format_path" = "${pkgs.clang-tools}/bin/clang-format";
         "OpenCL.formatting.name" = "${pkgs.clang-tools}/bin/clang-format";
 
-        "python.defaultInterpreterPath" = "${pkgs.python3}/bin/python";
+        "python.defaultInterpreterPath" = "${python}/bin/python";
         "python.linting.flake8Enabled" = false;
         "python.linting.flake8Path" = "${pkgs.python3Packages.flake8}/bin/flake8";
         "python.linting.mypyEnabled" = true;

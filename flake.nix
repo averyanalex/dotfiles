@@ -6,6 +6,13 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-master.url = "github:nixos/nixpkgs";
 
+    tmpfork.url = "github:nixos/nixpkgs/pull/326213/head";
+
+    nixpak = {
+      url = "github:nixpak/nixpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     flake-utils.url = "github:numtide/flake-utils";

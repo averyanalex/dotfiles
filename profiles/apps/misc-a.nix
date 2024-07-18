@@ -9,24 +9,24 @@
       telegram-desktop # telegram client
 
       # Creativity
-      libsForQt5.kdenlive # video editor
+      # libsForQt5.kdenlive # video editor
       mediainfo # idk but kdenlive depends on it
       obs-studio # recording and streaming
       gimp # image editor
-      krita # painting program
+      # krita # painting program
 
       # Finance
-      monero-gui # anonymous crypto
+      # monero-gui # anonymous crypto
 
       # Notes
       joplin-desktop # markdown notes
-      openboard # qt whiteboard
-      rnote # gtk whiteboard
-      xournalpp
+      # openboard # qt whiteboard
+      # rnote # gtk whiteboard
+      # xournalpp
 
       # LaTeX
-      texstudio
-      texlive.combined.scheme-full
+      # texstudio
+      # texlive.combined.scheme-full
       hunspell
       hunspellDicts.en-us
       hunspellDicts.ru-ru
@@ -37,12 +37,12 @@
       # f3d # simple 3d viewer
 
       # 3D modeling
-      openscad
-      freecad
+      # openscad
+      # freecad
       blender
-      gmsh
-      calculix
-      elmerfem
+      # gmsh
+      # calculix
+      # elmerfem
       prusa-slicer
       # kicad-unstable
       # python311Packages.kicad
@@ -50,15 +50,15 @@
       # Etc
       tor-browser-bundle-bin # anonymous browsing
       libreoffice-fresh # office
-      octaveFull # math software
+      # octaveFull # math software
       kgraphviewer # graphviz viewer
-      stellarium # planetarium
+      # stellarium # planetarium
       kleopatra # gpg gui
       spek # audio file spectrogram
-      kmplot
+      # kmplot
       helvum
-      betaflight-configurator
-      brave
+      # betaflight-configurator
+      # brave
     ];
 
     xdg.mimeApps = {
