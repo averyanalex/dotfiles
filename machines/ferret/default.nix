@@ -26,7 +26,7 @@
   '';
 
   systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m\
+    HibernateDelaySec=30m
     SuspendEstimationSec=15m
   '';
 

@@ -8,5 +8,6 @@
       "gh-copilot"
       "corefonts"
       "hplip"
+      "obsidian"
     ];
 }

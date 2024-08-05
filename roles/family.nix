@@ -27,7 +27,6 @@
       sudo
       timezone
       unfree
-      stable
       zram
 
       family.users

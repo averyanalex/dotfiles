@@ -5,6 +5,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-master.url = "github:nixos/nixpkgs";
+    # nixpkgs-fork.url = "git+file:///home/alex/projects/averyanalex/nixpkgs";
+
+    # nixcfg.url = "git+file:///home/alex/projects/averyanalex/nixcfg";
+    nixcfg.url = "github:averyanalex/nixcfg";
+
+    nixpak = {
+      url = "github:nixpak/nixpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -114,7 +123,7 @@
     deploy-rs.url = "github:serokell/deploy-rs";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
     nixpkgs-stable,
@@ -122,7 +131,7 @@
     ragenix,
     deploy-rs,
     ...
-  } @ inputs: let
+  }: let
     findModules = dir:
       builtins.concatLists (builtins.attrValues (builtins.mapAttrs
         (name: type:

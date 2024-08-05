@@ -34,7 +34,6 @@
         ])
         ++ [
           # jupyter
-          adb
           autologin
           embedded
           filemanager
@@ -44,16 +43,25 @@
           light
           mail
           music
-          nixld
-          pipewire
           podman
           printing
-          proxy
           sdr
           shell.rust
           sync
           tank
           waydroid
-          wireshark
+          opensnitch
         ]);
+
+  networking.proxy = {
+    httpProxy = "http://127.0.0.1:8118";
+    httpsProxy = "http://127.0.0.1:8118";
+  };
+
+  nixcfg.desktop = true;
+
+  hm.services.network-manager-applet.enable = true;
+  programs.adb.enable = true;
+  programs.wireshark.enable = true;
+  programs.nix-ld.enable = true;
 }

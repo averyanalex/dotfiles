@@ -5,16 +5,9 @@
       persist
     ])
     ++ (with inputs.self.nixosModules.profiles; [
-      # mining
-      # qemu
       agenix
-      apparmor
       boot
-      console
-      dhcp
-      dns
       filesystems
-      home
       hosts
       locale
       logs
@@ -22,15 +15,10 @@
       monitoring
       nebula-averyan
       nftables
-      nix
-      nur
       persist
-      polkit
       shell.zsh
       ssh-server
-      stable
       sudo
-      timezone
       unfree
       unsecure
       userdirs
@@ -38,6 +26,27 @@
       vmvariant
       xdg
       yggdrasil
-      zram
-    ]);
+    ])
+    ++ [
+      inputs.nixcfg.nixosModules.default
+      inputs.home-manager.nixosModule
+    ];
+
+  nixcfg.inputs = inputs;
+  nixcfg.username = "alex";
+
+  networking = {
+    nameservers = ["95.165.105.90#dns.neutrino.su"];
+    search = ["n.averyan.ru"];
+    useDHCP = false;
+  };
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 70;
+  };
+
+  time.timeZone = "Europe/Moscow";
+
+  security.polkit.enable = true;
 }

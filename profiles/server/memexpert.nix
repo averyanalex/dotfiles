@@ -15,6 +15,8 @@ in {
     path = [memexpert-pkg];
     environment = {
       DATABASE_URL = "postgresql:///memexpert";
+      HTTPS_PROXY = "http://127.0.0.1:8118";
+      HTTP_PROXY = "http://127.0.0.1:8118";
     };
     serviceConfig = {
       User = "memexpert";

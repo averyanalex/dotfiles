@@ -17,13 +17,8 @@
           # mining
           # qemu
           agenix
-          apparmor
           boot
-          console
-          dhcp
-          dns
           filesystems
-          home
           hosts
           locale
           logs
@@ -32,13 +27,10 @@
           nebula-averyan
           nftables
           nix
-          nur
           persist
-          polkit
+          proxy
           ssh-server
-          stable
           sudo
-          timezone
           unfree
           unsecure
           userdirs
@@ -46,6 +38,5 @@
           vmvariant
           xdg
           yggdrasil
-          zram
         ]);
 }

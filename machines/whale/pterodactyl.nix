@@ -6,8 +6,8 @@
   panelDockerImage = pkgs.dockerTools.pullImage {
     imageName = "ghcr.io/pterodactyl/panel";
     finalImageTag = "latest";
-    imageDigest = "sha256:5f5c5dc8f63da867b7d50ecf4a2d2124b979e93b5bd4be4b8558221d50f01419";
-    sha256 = "LFWKxI4B26FomRvVdW3pNFVPb7oeR9YlgCUS9rt4HpE=";
+    imageDigest = "sha256:bc685c5002b88e518d9382fb0a57af7b753a498bfc9099a70dff70724c154a06";
+    sha256 = "sha256-myQR452MQbrOQ3gjn7qesQSnZl5OQSL6TBpkgdqm3Qw=";
   };
 
   wingsDockerImage = pkgs.dockerTools.pullImage {

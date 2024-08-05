@@ -7,6 +7,7 @@
         "Downloads"
         "Music"
         "Notes"
+        "Share"
         "Pictures"
         "projects"
       ];

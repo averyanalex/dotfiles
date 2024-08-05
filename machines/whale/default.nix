@@ -42,6 +42,7 @@ in {
     inputs.self.nixosModules.profiles.server.qdrant
     inputs.self.nixosModules.profiles.server.meilisearch
     inputs.self.nixosModules.profiles.server.memexpert
+    inputs.self.nixosModules.profiles.server.aibox
 
     # inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.networkd

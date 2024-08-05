@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home-manager.users.alex = {
+  hm = {
     programs.mpv = {
       enable = true;
       package = pkgs.mpv;

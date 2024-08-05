@@ -137,6 +137,16 @@
             publicKey = "F9IpR8uhuhvG798d6MeFgys7Ovjkr2EblitLUjrjS1I=";
             allowedIPs = ["10.8.7.252/32"];
           }
+          {
+            # Kazakova Laptop
+            publicKey = "iJqSgxiEwYey2055X8Hp4TlYyG2oiX7LQU2e2A3jj3o=";
+            allowedIPs = ["10.8.7.253/32"];
+          }
+          {
+            # Hamster
+            publicKey = "tLUkMc4x9uZSSHl6AmjC+Ui2W9hbToVW0z1h027q828=";
+            allowedIPs = ["10.8.7.254/32"];
+          }
         ];
       };
     };

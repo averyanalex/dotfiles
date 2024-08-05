@@ -67,7 +67,7 @@
     };
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "24.05";
 
   persist.tmpfsSize = "10G";
 
