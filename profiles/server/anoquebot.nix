@@ -23,7 +23,9 @@ in {
       Group = "anoquebot";
       EnvironmentFile = config.age.secrets.anoquebot.path;
       ExecStart = "${anoquebot-pkg}/bin/anoquebot";
-      Restart = "always";
+
+      Restart = "on-failure";
+      RestartSec = "5s";
 
       # Capabilities
       CapabilityBoundingSet = "";

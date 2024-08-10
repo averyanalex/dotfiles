@@ -16,6 +16,9 @@
       User = "infinitytgadminsbot-${name}";
       Group = "infinitytgadminsbot-${name}";
 
+      Restart = "on-failure";
+      RestartSec = "5s";
+
       ExecStart = "${infinitytgadminsbot-pkg}/bin/infinitytgadminsbot";
       DynamicUser = true;
 

@@ -18,7 +18,7 @@ in {
     inputs.self.nixosModules.roles.server
 
     inputs.self.nixosModules.profiles.server.qbit
-    inputs.self.nixosModules.profiles.server.cpmbot
+    # inputs.self.nixosModules.profiles.server.cpmbot
     inputs.self.nixosModules.profiles.server.gayradar
     inputs.self.nixosModules.profiles.server.anoquebot
     inputs.self.nixosModules.profiles.server.picsav
@@ -42,7 +42,7 @@ in {
     inputs.self.nixosModules.profiles.server.qdrant
     inputs.self.nixosModules.profiles.server.meilisearch
     inputs.self.nixosModules.profiles.server.memexpert
-    inputs.self.nixosModules.profiles.server.aibox
+    # inputs.self.nixosModules.profiles.server.aibox
 
     # inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.networkd
@@ -71,7 +71,7 @@ in {
     ./cosmovert.nix
     ./webtlo.nix
     ./dns.nix
-    ./jupyter.nix
+    ./borgserve.nix
   ];
 
   system.stateVersion = "22.05";

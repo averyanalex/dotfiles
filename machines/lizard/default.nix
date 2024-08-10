@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    inputs.self.nixosModules.roles.server
+    inputs.self.nixosModules.roles.minimal
 
     inputs.self.nixosModules.profiles.server.hass
     inputs.self.nixosModules.profiles.server.pgsql
@@ -12,7 +12,7 @@
 
     ./mounts.nix
     ./hass.nix
-    ./frigate.nix
+    # ./frigate.nix
   ];
 
   system.stateVersion = "23.05";

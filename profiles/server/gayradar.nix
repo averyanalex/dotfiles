@@ -38,7 +38,9 @@ in {
       Group = "gayradar";
       EnvironmentFile = config.age.secrets.gayradar.path;
       ExecStart = "${gayradarbot-pkg}/bin/gayradarbot";
-      Restart = "always";
+
+      Restart = "on-failure";
+      RestartSec = "5s";
 
       # Capabilities
       CapabilityBoundingSet = "";

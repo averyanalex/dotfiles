@@ -38,7 +38,9 @@ in {
       Group = "picsav";
       EnvironmentFile = config.age.secrets.picsav.path;
       ExecStart = "${picsavbot-pkg}/bin/picsavbot";
-      Restart = "always";
+
+      Restart = "on-failure";
+      RestartSec = "5s";
 
       # Capabilities
       CapabilityBoundingSet = "";
