@@ -16,6 +16,7 @@
       nebula-averyan
       nftables
       persist
+      shell.eza
       shell.zsh
       ssh-server
       sudo

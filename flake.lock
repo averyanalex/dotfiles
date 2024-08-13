@@ -1611,11 +1611,11 @@
         "srvos": "srvos"
       },
       "locked": {
-        "lastModified": 1722684977,
-        "narHash": "sha256-od0Gz4D9AdHk2CrRpc+BjCT2zcQKARhG7cEXqkXuw6U=",
+        "lastModified": 1723555340,
+        "narHash": "sha256-gmQvNYTr+8t3ctFrNM7jKu1Hgc+QlUB66p4Rqutl5fA=",
         "owner": "averyanalex",
         "repo": "nixcfg",
-        "rev": "8449b280592af0d3385dd4913e669e71c5a5a689",
+        "rev": "48e9cb852c0feb99e4e0147ff16a9a8fbc42ea32",
         "type": "github"
       },
       "original": {

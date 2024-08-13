@@ -14,9 +14,8 @@
     "modesetting" # Prefer the modesetting driver in X11
     "fbdev" # Fallback to fbdev
   ];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
   };
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_1;

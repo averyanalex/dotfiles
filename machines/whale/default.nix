@@ -60,7 +60,7 @@ in {
     ./photoprism.nix
     ./pterodactyl.nix
     ./tanksrv.nix
-    ./yacy.nix
+    # ./yacy.nix
     ./tor.nix
     ./i2p.nix
     ./lidarr.nix

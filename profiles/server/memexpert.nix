@@ -23,7 +23,9 @@ in {
       Group = "memexpert";
       EnvironmentFile = config.age.secrets.memexpert.path;
       ExecStart = "${memexpert-pkg}/bin/memexpert";
+
       Restart = "on-failure";
+      RestartSec = "5s";
 
       # Capabilities
       CapabilityBoundingSet = "";

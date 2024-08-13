@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home-manager.users.alex = {
+  hm = {
     home.packages = with pkgs; [
       # Communication
       element-desktop
@@ -11,8 +11,8 @@
       # Creativity
       # libsForQt5.kdenlive # video editor
       mediainfo # idk but kdenlive depends on it
-      obs-studio # recording and streaming
-      gimp # image editor
+      # obs-studio # recording and streaming
+      # gimp # image editor
       # krita # painting program
 
       # Finance
@@ -40,7 +40,7 @@
       # 3D modeling
       # openscad
       # freecad
-      blender
+      # blender
       # gmsh
       # calculix
       # elmerfem
@@ -49,13 +49,13 @@
       # python311Packages.kicad
 
       # Etc
-      tor-browser-bundle-bin # anonymous browsing
+      # tor-browser-bundle-bin # anonymous browsing
       libreoffice-fresh # office
       # octaveFull # math software
-      kgraphviewer # graphviz viewer
+      # kgraphviewer # graphviz viewer
       # stellarium # planetarium
-      kleopatra # gpg gui
-      spek # audio file spectrogram
+      # kleopatra # gpg gui
+      # spek # audio file spectrogram
       # kmplot
       helvum
       # betaflight-configurator

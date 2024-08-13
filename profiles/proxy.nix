@@ -11,6 +11,7 @@
       forward-socks5 = [
         "api.github.com falcon:1080 ."
         "copilot-proxy.githubusercontent.com falcon:1080 ."
+        ".githubcopilot.com falcon:1080 ."
         ".rutracker.org falcon:1080 ."
         ".openai.com falcon:1080 ."
         ".chatgpt.com falcon:1080 ."

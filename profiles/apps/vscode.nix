@@ -69,7 +69,7 @@
         vscode-marketplace.earshinov.sort-lines-by-selection
         vscode-marketplace.fill-labs.dependi
         vscode-marketplace.github.copilot
-        vscode-marketplace.github.copilot-chat
+        pkgs.vscode-extensions.github.copilot-chat
         vscode-marketplace.github.vscode-pull-request-github
         vscode-marketplace.gruntfuggly.todo-tree
         vscode-marketplace.stkb.rewrap

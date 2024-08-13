@@ -10,14 +10,14 @@
     fsType = "vfat";
   };
 
-  services.beesd.filesystems = {
-    tank = {
-      spec = "UUID=7c1300ed-0fb0-419b-b98d-50de4c1a3d5a";
-      hashTableSizeMB = 512;
-      verbosity = "crit";
-      extraOptions = ["--loadavg-target" "5.0"];
-    };
-  };
+  # services.beesd.filesystems = {
+  #   tank = {
+  #     spec = "UUID=7c1300ed-0fb0-419b-b98d-50de4c1a3d5a";
+  #     hashTableSizeMB = 512;
+  #     verbosity = "crit";
+  #     extraOptions = ["--loadavg-target" "5.0"];
+  #   };
+  # };
 
   services.snapper.configs = {
     home = {

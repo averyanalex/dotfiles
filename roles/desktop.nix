@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports =
     [
       ./full.nix
@@ -63,5 +67,8 @@
   hm.services.network-manager-applet.enable = true;
   programs.adb.enable = true;
   programs.wireshark.enable = true;
+  environment.systemPackages = [pkgs.wireshark];
   programs.nix-ld.enable = true;
+
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 }

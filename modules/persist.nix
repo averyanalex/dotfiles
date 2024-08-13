@@ -101,5 +101,7 @@ in {
       mount --bind /mnt-root${cfg.persistRoot}/nix /mnt-root/nix
       chmod 755 /mnt-root
     '';
+
+    boot.initrd.systemd.enable = false;
   };
 }
