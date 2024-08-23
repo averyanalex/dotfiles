@@ -44,7 +44,7 @@
 
   zramSwap = {
     enable = true;
-    memoryPercent = 70;
+    memoryPercent = 40;
   };
 
   time.timeZone = "Europe/Moscow";

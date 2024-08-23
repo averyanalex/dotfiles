@@ -60,6 +60,7 @@
       helvum
       # betaflight-configurator
       # brave
+      # ocrmypdf
     ];
 
     xdg.mimeApps = {

@@ -14,6 +14,8 @@
     ./mounts.nix
   ];
 
+  persist.tmpfsSize = "6G";
+
   services.tlp = {
     enable = true;
     settings = {

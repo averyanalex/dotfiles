@@ -73,6 +73,16 @@
             allowedIPs = ["10.8.8.0/24"];
           }
           {
+            # Sergievsky
+            publicKey = "ZorGeiUIRES1FqTfuSEsbLsgt5h9+5B9sB/atwvxLnU=";
+            allowedIPs = ["10.8.7.230/32"];
+          }
+          {
+            # Ivanov Laptop
+            publicKey = "G5EktXDDcm/dUwqjTrZK/LWzKe7VA055k+LtwQpaACU=";
+            allowedIPs = ["10.8.7.231/32"];
+          }
+          {
             # Vsevolod
             publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
             allowedIPs = ["10.8.7.240/32"];

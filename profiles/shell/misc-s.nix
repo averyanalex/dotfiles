@@ -33,6 +33,7 @@
       fd # user-friendly find
       websocat # websocket terminal client
       payload-dumper-go
+      parallel
     ];
 
     home.sessionVariables = {

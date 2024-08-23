@@ -6,6 +6,7 @@
   imports =
     [
       ./full.nix
+      ../dev
     ]
     ++ (with inputs.self.nixosModules.profiles;
       with apps;
@@ -14,7 +15,6 @@
           firefox
           misc-a
           mpv
-          vscode
         ]
         ++ (with games; [
           minecraft
@@ -50,7 +50,6 @@
           podman
           printing
           sdr
-          shell.rust
           sync
           tank
           waydroid
@@ -66,9 +65,16 @@
 
   hm.services.network-manager-applet.enable = true;
   programs.adb.enable = true;
+
   programs.wireshark.enable = true;
   environment.systemPackages = [pkgs.wireshark];
+
   programs.nix-ld.enable = true;
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/alex/projects/averyanalex/dotfiles";
+  };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 }

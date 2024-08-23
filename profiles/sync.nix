@@ -44,15 +44,15 @@ in {
           ];
           id = "5RVWUHC-DYOYNZV-P4AYHJ5-ZNRLCKV-UWS2B7C-BUYENMF-GXNXYSX-NIKAMAN";
         };
-        swan.id = "J52C7WU-R6UNI52-HIB2HON-2J3PUKM-6H74ROT-PY5V6YB-WATVFQC-KC6NGAY";
+        swan.id = "W27UARY-LHBFRTY-HCGL557-NZ7POI5-2XW45NH-7DGKWWP-2D7V6ZS-4JM2VQE";
         pchel.id = "UCTK67O-NXE755G-GOOI32N-CJXY4NJ-OW7HWZ2-QGLZL2P-H5RE54F-WTUWKAX";
       };
       folders = {
         "Documents" = commonFolder "Documents";
         "projects" = commonFolder "projects";
-        "Music" = commonFolder "Music" // {devices = allDevices ++ ["swan"];};
-        "Notes" = commonFolder "Notes" // {devices = allDevices ++ ["swan"];};
-        "Pictures" = commonFolder "Pictures" // {devices = allDevices ++ ["swan"];};
+        "Music" = commonFolder "Music"; # // {devices = allDevices ++ ["swan"];};
+        "Notes" = commonFolder "Notes" // {devices = allDevices ++ lib.optional (config.networking.hostName == "whale") "swan";};
+        "Pictures" = commonFolder "Pictures"; # // {devices = allDevices ++ ["swan"];};
         "Share/Pchela" =
           commonFolder "Share/Pchela"
           // {
