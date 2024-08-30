@@ -24,8 +24,18 @@ in {
     "d /persist/mail/spool 1777 0 0 - -"
   ];
 
-  networking.nft-firewall.extraNatPreroutingRules = [
-    "ip daddr 95.165.105.90 tcp dport { 25, 465, 587, 993 } dnat to 192.168.12.36"
+  networking.nat.forwardPorts = let
+    mkRule = port: {
+      destination = "192.168.12.36:${builtins.toString port}";
+      sourcePort = port;
+      proto = "tcp";
+      loopbackIPs = ["95.165.105.90"];
+    };
+  in [
+    (mkRule 25)
+    (mkRule 465)
+    (mkRule 587)
+    (mkRule 993)
   ];
 
   age.secrets.mail-alex = {

@@ -45,7 +45,6 @@ in {
     # inputs.self.nixosModules.profiles.server.aibox
 
     # inputs.self.nixosModules.profiles.libvirt
-    inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.profiles.podman
     inputs.self.nixosModules.profiles.remote-builder-host
@@ -214,11 +213,6 @@ in {
     };
   };
 
-  networking.firewall = {
-    interfaces.${lan}.allowedTCPPorts = [22];
-    allowedUDPPorts = [67 546]; # DHCP
-  };
-
   age.secrets.wg-key-averyan.file = ../../secrets/wireguard/whale.age;
   networking.wireguard.interfaces = {
     wgav = {
@@ -316,19 +310,21 @@ in {
   };
 
   networking = {
-    nft-firewall = {
-      extraFilterForwardRules = [
-        ''iifname { "${lan}", "vms" } oifname "${wan}" counter accept comment "allow LAN to WAN"''
-        ''iifname "${wan}" oifname { "${lan}", "vms" } ct state { established, related } counter accept comment "allow established back to LAN"''
-        ''iifname "yggbr" oifname "ygg0" counter accept comment "allow YGGBR to YGG"''
-        ''iifname "ygg0" oifname "yggbr" counter accept''
-        ''iifname "wgavbr" oifname "wgav" counter accept''
-        ''iifname "wgav" oifname "wgavbr" counter accept''
-      ];
-      # extraNatPreroutingRules = [''udp dport 51820 dnat to 10.57.1.20''];
-      extraNatPreroutingRules = ["ip daddr 95.165.105.90 tcp dport 25000-25010 dnat to 192.168.12.50" "ip daddr 95.165.105.90 udp dport 25000-25010 dnat to 192.168.12.50"];
-      extraNatPostroutingRules = [''oifname "${wan}" masquerade'']; # ''ip daddr 10.57.1.20 masquerade''
-      # extraMangleOutputRules = [''skuid 1000 counter mark set 701''];
+    nat = {
+      externalInterface = wan;
+      internalInterfaces = [lan "vms"];
+    };
+
+    firewall = {
+      interfaces.${lan}.allowedTCPPorts = [22];
+      allowedUDPPorts = [67 546]; # DHCP
+
+      extraForwardRules = ''
+        iifname yggbr oifname ygg0 accept
+        iifname ygg0 oifname yggbr accept
+        iifname wgavbr oifname wgav accept
+        iifname wgav oifname wgavbr accept
+      '';
     };
 
     bridges = {

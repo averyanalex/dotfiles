@@ -1,4 +1,14 @@
 {inputs, ...}: {
-  imports = [inputs.self.nixosModules.modules.nftables];
-  networking.nft-firewall.enable = true;
+  networking.nftables = {
+    enable = true;
+    flushRuleset = true;
+  };
+
+  networking.firewall = {
+    filterForward = true;
+  };
+
+  networking.nat = {
+    enable = true;
+  };
 }

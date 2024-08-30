@@ -8,7 +8,6 @@
     inputs.self.nixosModules.profiles.corectrl
     inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.openrgb
-    inputs.self.nixosModules.profiles.networkd
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.persist-yggdrasil
     inputs.self.nixosModules.profiles.pmbootstrap

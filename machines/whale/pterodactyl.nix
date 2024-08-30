@@ -26,6 +26,17 @@ in {
     "d /persist/ptero/wings-configs 700 988 988 - -"
   ];
 
+  networking.nat.forwardPorts = let
+    common = {
+      destination = "192.168.12.50:25000-25010";
+      sourcePort = "25000:25010";
+      loopbackIPs = ["95.165.105.90"];
+    };
+  in [
+    (common // {proto = "tcp";})
+    (common // {proto = "udp";})
+  ];
+
   age.secrets.pterodactyl-panel-passwords.file = ../../secrets/intpass/pterodactyl-panel.age;
   age.secrets.pterodactyl-redis-password.file = ../../secrets/intpass/pterodactyl-redis.age;
 

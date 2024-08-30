@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    inputs.self.nixosModules.roles.minimal
     inputs.self.nixosModules.hardware.aeza
+    inputs.self.nixosModules.roles.minimal
 
     inputs.self.nixosModules.profiles.remote-builder-client
     inputs.self.nixosModules.profiles.server.aplusmuz
@@ -20,9 +20,6 @@
   age.secrets.wg-key.file = ../../secrets/wireguard/hawk.age;
 
   boot.kernel.sysctl = {
-    "net.ipv4.conf.all.forwarding" = true;
-    "net.ipv4.conf.default.forwarding" = true;
-
     "net.ipv6.conf.all.accept_ra" = 0;
     "net.ipv6.conf.default.accept_ra" = 0;
 
@@ -31,11 +28,6 @@
   };
 
   networking = {
-    defaultGateway = {
-      address = "10.0.0.1";
-      interface = "ens3";
-    };
-
     interfaces = {
       ens3 = {
         ipv4 = {
@@ -45,24 +37,28 @@
               prefixLength = 32;
             }
           ];
+          routes = [
+            {
+              address = "10.0.0.1";
+              prefixLength = 32;
+            }
+            {
+              address = "0.0.0.0";
+              prefixLength = 0;
+              via = "10.0.0.1";
+            }
+          ];
         };
       };
     };
 
-    nft-firewall = {
-      extraFilterForwardRules = [
-        "iifname wg0 oifname ens3 counter accept"
-        "iifname ens3 oifname wg0 ct state { established, related } counter accept"
-      ];
-      extraNatPostroutingRules = ["oifname ens3 masquerade"];
-    };
+    nat.externalInterface = "ens3";
+    nat.internalInterfaces = ["wgvpn"];
 
-    firewall = {
-      allowedUDPPorts = [51820];
-    };
+    firewall.allowedUDPPorts = [51820];
 
     wireguard.interfaces = {
-      wg0 = {
+      wgvpn = {
         ips = ["10.8.7.1/24"];
         listenPort = 51820;
         privateKeyFile = config.age.secrets.wg-key.path;

@@ -28,15 +28,7 @@
         ];
       };
     };
-    nft-firewall = {
-      extraFilterForwardRules = [
-        ''iifname "virbr0" counter accept''
-        ''oifname "virbr0" ct state { established, related } counter accept''
-      ];
-      extraNatPostroutingRules = [
-        ''iifname "virbr0" masquerade''
-      ];
-    };
+    nat.internalInterfaces = ["virbr0"];
   };
   systemd.network.networks."40-virbr0" = {
     networkConfig = {
@@ -44,11 +36,6 @@
       ConfigureWithoutCarrier = true;
     };
     linkConfig.RequiredForOnline = false;
-  };
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = true;
-    "net.ipv4.conf.all.forwarding" = true;
-    "net.ipv4.conf.default.forwarding" = true;
   };
 
   persist.state.dirs = ["/var/lib/libvirt"];
