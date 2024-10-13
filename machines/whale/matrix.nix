@@ -143,7 +143,7 @@ in {
   };
 
   services.mautrix-telegram = {
-    enable = true;
+    enable = false;
     environmentFile = config.age.secrets.mautrix-telegram.path;
     settings = {
       homeserver = {

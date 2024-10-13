@@ -2,7 +2,7 @@
   description = "AveryanAlex's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-master.url = "github:nixos/nixpkgs";
     # nixpkgs-fork.url = "git+file:///home/alex/projects/averyanalex/nixpkgs";
@@ -58,15 +58,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprwm-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     averyanalex-blog = {
       url = "github:averyanalex/blog";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -114,6 +105,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       url = "git+ssh://git@github.com/averyanalex/auto-market-maker.git";
+    };
+    gptoolsbot = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+ssh://git@github.com/averyanalex/gptoolsbot.git";
+    };
+    avtor24bot = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+ssh://git@github.com/averyanalex/avtor24bot.git";
     };
     aplusmuz-music-scraper = {
       inputs.nixpkgs.follows = "nixpkgs";

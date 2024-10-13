@@ -10,7 +10,7 @@
       directives = ["vendorid = 0925" "productid = 1234" "pollinterval = 1" "pollfreq = 5"];
     };
     users.upsmon = {
-      upsmon = "exegate";
+      upsmon = "primary";
       passwordFile = config.age.secrets.upsmon-pass.path;
     };
     upsmon.monitor.exegate = {

@@ -1,5 +1,5 @@
-{
-  home-manager.users.alex = {
+{config, ...}: {
+  hm = {
     services.gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -7,6 +7,7 @@
 
     programs.gpg = {
       enable = true;
+      homedir = "${config.home-manager.users.alex.xdg.dataHome}/gnupg";
       mutableKeys = false;
       mutableTrust = false;
       publicKeys = [
@@ -24,7 +25,7 @@
 
   persist.state.homeDirs = [
     {
-      directory = ".gnupg";
+      directory = ".local/share/gnupg";
       mode = "u=rwx,g=,o=";
     }
   ];

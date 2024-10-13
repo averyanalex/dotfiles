@@ -1,17 +1,12 @@
 {
-  inputs,
-  pkgs,
   lib,
   config,
   ...
 }: {
-  home-manager.users.alex = {
-    home.packages = [
-      inputs.hyprwm-contrib.packages.${pkgs.hostPlatform.system}.grimblast
-    ];
+  hm = {
     programs.waybar = {
       enable = true;
-      # package = inputs.hyprland.packages.${pkgs.hostPlatform.system}.waybar-hyprland;
+      systemd.enable = true;
       style = ''
         #waybar {
             font-family: "Fira Sans SemiBold";
@@ -136,12 +131,10 @@
         {
           height = 30;
           layer = "top";
-          # position = "bottom";
           tray = {spacing = 10;};
           modules-left = [
             "tray"
-            # "mpd"
-            "sway/workspaces"
+            "hyprland/workspaces"
           ];
           modules-center = [
             "idle_inhibitor"
@@ -156,6 +149,11 @@
             "network"
             "clock"
           ];
+          "hyprland/workspaces" = {
+            "format" = "{icon}";
+            "on-scroll-up" = "hyprctl dispatch workspace e+1";
+            "on-scroll-down" = "hyprctl dispatch workspace e-1";
+          };
           idle_inhibitor = {
             format = "{icon}";
             format-icons = {
@@ -173,10 +171,6 @@
             tooltip = false;
           };
           memory = {format = "{}% ";};
-          # disk = {
-          #   format = "{percentage_free}% 🖴";
-          #   path = "/persist";
-          # };
           network = {
             format-wifi = "{essid} ({signalStrength}%) ";
             format-ethernet = "{ipaddr}/{cidr} ";
@@ -216,31 +210,6 @@
           };
         }
       ];
-      # settings = [{
-      #   modules-left = [
-      #     "tray"
-      #     "mpd"
-      #     "wlr/workspaces"
-      #   ];
-      #   modules-center = [
-      #     "cpu"
-      #     "memory"
-      #     "disk"
-      #   ];
-      #   modules-right = [
-      #     "pulseaudio"
-      #     "backlight"
-      #     "upower"
-      #     "network"
-      #     "clock"
-      #   ];
-      # }];
     };
-    wayland.windowManager.hyprland.extraConfig = ''
-      exec-once=waybar
-    '';
-    wayland.windowManager.sway.extraConfig = ''
-      exec waybar
-    '';
   };
 }

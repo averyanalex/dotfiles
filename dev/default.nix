@@ -24,6 +24,7 @@
           tqdm
           numba
           sympy
+          olefile
         ]))
     # pkgs.fenix.complete
     pkgs.clang

@@ -17,5 +17,5 @@
     '';
   };
 
-  home-manager.users.alex.services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;
+  hm.services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;
 }

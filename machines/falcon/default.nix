@@ -79,6 +79,16 @@
             allowedIPs = ["10.8.7.231/32"];
           }
           {
+            # Snigir Laptop
+            publicKey = "N8bUSy8BnsjcIMWyOSRkQBuLhR4FbH1kDVSt0iTIVSA=";
+            allowedIPs = ["10.8.7.232/32"];
+          }
+          {
+            # Karaseva Laptop
+            publicKey = "EBGgkxELu7DZ/PqkfDEodvzjZFPULkGLQV4F7xXEp3k=";
+            allowedIPs = ["10.8.7.233/32"];
+          }
+          {
             # Vsevolod
             publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
             allowedIPs = ["10.8.7.240/32"];

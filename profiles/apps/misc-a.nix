@@ -11,7 +11,6 @@
       # Creativity
       # libsForQt5.kdenlive # video editor
       mediainfo # idk but kdenlive depends on it
-      # obs-studio # recording and streaming
       # gimp # image editor
       # krita # painting program
 
@@ -23,7 +22,7 @@
       obsidian
       # openboard # qt whiteboard
       # rnote # gtk whiteboard
-      # xournalpp
+      xournalpp
 
       # LaTeX
       # texstudio
@@ -71,17 +70,20 @@
       };
     };
 
-    services.kdeconnect.enable = true;
+    # services.kdeconnect.enable = true;
+
+    programs.obs-studio.enable = true;
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-22.3.27"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "electron-22.3.27"
+  # ];
 
   persist.state.homeDirs = [
     ".config/Element"
     ".config/WebCord"
     ".local/share/TelegramDesktop"
+    ".config/obs-studio"
 
     "Monero"
     ".bitmonero"

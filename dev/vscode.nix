@@ -32,6 +32,7 @@
       in [
         # Python
         vm.ms-python.black-formatter
+        vm.ms-python.debugpy
         vm.ms-python.isort
         vm.ms-python.mypy-type-checker
         vm.ms-python.python
@@ -50,7 +51,7 @@
         vm.github.vscode-github-actions
         vm.james-yu.latex-workshop
         vm.mechatroner.rainbow-csv
-        vm.ms-vscode.cpptools
+        # vm.ms-vscode.cpptools
         vm.redhat.java
         vm.redhat.vscode-xml
         vm.redhat.vscode-yaml

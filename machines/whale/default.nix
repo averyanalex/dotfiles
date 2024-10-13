@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }: let
   wan = "enp5s0"; # with gpu: enp6s0
@@ -42,6 +43,8 @@ in {
     inputs.self.nixosModules.profiles.server.qdrant
     inputs.self.nixosModules.profiles.server.meilisearch
     inputs.self.nixosModules.profiles.server.memexpert
+    inputs.self.nixosModules.profiles.server.gptoolsbot
+    inputs.self.nixosModules.profiles.server.avtor24bot
     # inputs.self.nixosModules.profiles.server.aibox
 
     # inputs.self.nixosModules.profiles.libvirt
@@ -83,6 +86,28 @@ in {
 
   # Monitoring
   services.prometheus.exporters.node.enabledCollectors = ["zoneinfo"];
+
+  systemd.services.tempalarm = {
+    description = "Temperature Alarm";
+    wantedBy = ["multi-user.target"];
+    script = ''
+      while :
+      do
+        if [ "$(${pkgs.hddtemp}/bin/hddtemp /dev/sdb 2>/dev/null | grep -oP '[0-9]+°C' | grep -oP '[0-9]+')" -gt "42" ]; then
+          delay=100
+          ${pkgs.beep}/bin/beep -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay
+          ${pkgs.beep}/bin/beep -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783
+          ${pkgs.beep}/bin/beep -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay -n -f 493 -l $delay -n -l $delay -f 622 -l $delay -n -f 493 -l $delay -n -l $delay -f 739 -l $delay
+          ${pkgs.beep}/bin/beep -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783 -l $delay -n -f 493 -l $delay -n -l $delay -f 659 -l $delay -n -f 493 -l $delay -n -l $delay -f 783
+          for i in 1 2 3 4; do
+              ${pkgs.beep}/bin/beep -f 493 -l $delay -n -l $delay -f 987 -l $delay -n -f 493 -l $delay -n -l $delay -f 880 -l $delay -n -f 493 -l $delay -n -l $delay -f 830 -l $delay -n -f 493 -l $delay -n -l $delay -f 880 -l $delay -n -f 493 -l $delay -n -l $delay -f 830 -l $delay -n -f 493 -l $delay -n -f 739 -l $delay -n -f 493 -l $delay -n -f 830 -l $delay -n -f 493 -l $delay -n -f 659 -l $delay -n -f 493 -l $delay -n -f 739 -l $delay -n -f 492 -l $delay -n -f 622 -l $delay -n -f 493 -l $delay -n -f 659 -l $delay -n -f 493 -l $delay -n -f 622 -l $delay -n -f 493 -l $delay -n -f 659 -l $delay -n -f 493 -l $delay -n -f 622 -l $delay -n -f 493 -l $delay -n -f 659 -l $delay -n -f 493 -l $delay -n -f 622 -l $delay
+          done
+        else
+          sleep 10
+        fi
+      done
+    '';
+  };
 
   # NETWORKING
 

@@ -54,6 +54,7 @@ in {
   "secrets/creds/aplusmuz-music-scraper.age".publicKeys = users ++ [falcon];
   "secrets/creds/jupyter.age".publicKeys = users ++ [whale];
   "secrets/creds/memexpert.age".publicKeys = users ++ [whale];
+  "secrets/creds/gptoolsbot.age".publicKeys = users ++ [whale];
 
   "secrets/intpass/pterodactyl-panel.age".publicKeys = users ++ [whale];
   "secrets/intpass/pterodactyl-redis.age".publicKeys = users ++ [whale];
