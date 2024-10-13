@@ -1,7 +1,8 @@
 {
-  home-manager.users.alex.programs.git = {
+  hm.programs.git = {
     enable = true;
     lfs.enable = true;
+    delta.enable = true;
 
     userName = "AveryanAlex";
     userEmail = "alex@averyan.ru";
@@ -16,7 +17,6 @@
       init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true;
-      tag.gpgsign = true;
     };
   };
 }

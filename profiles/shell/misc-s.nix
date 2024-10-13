@@ -25,7 +25,7 @@
       screen # run in background
       hashcat # password cracking
       micro # simple text editor
-      compsize # btrfs compression info
+      # compsize # btrfs compression info
       yt-dlp # video/audio downloader
       wget # download file
       cloc # count lines of code
@@ -34,6 +34,7 @@
       websocat # websocket terminal client
       payload-dumper-go
       parallel
+      beep
     ];
 
     home.sessionVariables = {

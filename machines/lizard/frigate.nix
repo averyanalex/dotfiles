@@ -19,6 +19,7 @@ in {
           "/var/lib/frigate/storage:/media/frigate"
         ];
         ports = [
+          "5000:5000"
           "8971:8971"
           "8554:8554"
           "8555:8555"

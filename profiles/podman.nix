@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   virtualisation.podman = {
     enable = true;
+    extraPackages = with pkgs; [
+      slirp4netns
+    ];
     defaultNetwork.settings.dns_enabled = true;
   };
 

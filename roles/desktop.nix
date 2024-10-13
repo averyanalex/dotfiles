@@ -7,6 +7,8 @@
     [
       ./full.nix
       ../dev
+      ../profiles/apps/wezterm.nix
+      inputs.adpi.nixosModules.default
     ]
     ++ (with inputs.self.nixosModules.profiles;
       with apps;
@@ -28,8 +30,9 @@
           eww
           portals
           rofi
-          sway
-          swaylock
+          # sway
+          hyprland
+          hyprlock
           swaync
           swayosd
           swww
@@ -61,6 +64,8 @@
     httpsProxy = "http://127.0.0.1:8118";
   };
 
+  programs.appimage.enable = true;
+
   nixcfg.desktop = true;
 
   hm.services.network-manager-applet.enable = true;
@@ -69,11 +74,16 @@
   programs.wireshark.enable = true;
   environment.systemPackages = [pkgs.wireshark];
 
-  programs.nix-ld.enable = true;
+  # programs.nix-ld.enable = true;
 
   programs.nh = {
     enable = true;
     flake = "/home/alex/projects/averyanalex/dotfiles";
+  };
+
+  boot = {
+    # plymouth.enable = true;
+    loader.timeout = 0;
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];

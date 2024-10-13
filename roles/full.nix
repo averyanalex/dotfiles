@@ -32,7 +32,6 @@
           ssh-server
           sudo
           unfree
-          unsecure
           userdirs
           users
           vmvariant

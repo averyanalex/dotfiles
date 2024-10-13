@@ -2,8 +2,8 @@
   dockerImage = pkgs.dockerTools.pullImage {
     imageName = "berkut174/webtlo";
     finalImageTag = "latest";
-    imageDigest = "sha256:522ceaa41c39ff46825d5fcab9908c8b806d4b7bf5ce70c2f2a61305d8cff440";
-    sha256 = "sha256-UioNfJ1YfQMb12mQ5sRACxcZoNQ0CyxYtVzoM77Ikug=";
+    imageDigest = "sha256:c6c4c7395dba1fba97381be484634b2aa37053c558a9ebb0e98558c65a26dda2";
+    sha256 = "sha256-TyChsTuR6JuRSeAJlER2zkvyOWLqB+zlz7FiVh0aPnI=";
   };
 in {
   virtualisation.oci-containers = {
@@ -20,7 +20,9 @@ in {
     };
   };
 
-  networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [1844];
+  networking.firewall.extraInputRules = ''
+    ip saddr { 10.57.1.40, 10.57.1.41 } tcp dport 1844 accept
+  '';
 
   persist.state.dirs = [
     {

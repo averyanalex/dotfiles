@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.self.nixosModules.roles.desktop
 
@@ -16,10 +20,12 @@
 
   persist.tmpfsSize = "6G";
 
+  # environment.systemPackages = [pkgs.fork.wireguard-tools pkgs.fork.amneziawg-tools];
+
   services.tlp = {
     enable = true;
     settings = {
-      STOP_CHARGE_THRESH_BAT0 = 1;
+      STOP_CHARGE_THRESH_BAT0 = 0;
     };
   };
 
