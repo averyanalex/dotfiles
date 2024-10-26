@@ -1271,11 +1271,11 @@
         "systems": "systems_16"
       },
       "locked": {
-        "lastModified": 1722454109,
-        "narHash": "sha256-ZN4icGiDtrI84MfqFSa1NTtkbjmVkTdLLzeLECMC+vg=",
+        "lastModified": 1729682504,
+        "narHash": "sha256-fLhgMr/W7j3EZ71o+yprTFtS5FUWJxKGOxZG1wvi/uk=",
         "owner": "averyanalex",
         "repo": "memexpert",
-        "rev": "794c3435f743f57d768b4edfcf5e1f1819ed299b",
+        "rev": "49266787675ecb88e8d1b1cce8c8573eac4511b1",
         "type": "github"
       },
       "original": {

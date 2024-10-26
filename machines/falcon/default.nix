@@ -89,6 +89,11 @@
             allowedIPs = ["10.8.7.233/32"];
           }
           {
+             # DmPop router
+             publicKey = "mrUbbvGn1cGOrWl0LnJyzIirUdwzoJRKH5grUhCxcxw=";
+             allowedIPs = ["10.8.7.234/32"];
+          }
+          {
             # Vsevolod
             publicKey = "oKrAQE4sX4YjNf13qJz9IjprAH6YFhmt7CDUzXJVXl8=";
             allowedIPs = ["10.8.7.240/32"];

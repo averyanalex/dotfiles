@@ -71,7 +71,7 @@
   programs.adb.enable = true;
 
   programs.wireshark.enable = true;
-  environment.systemPackages = [pkgs.wireshark];
+  environment.systemPackages = [pkgs.wireshark pkgs.openfortivpn];
 
   # programs.nix-ld.enable = true;
 
@@ -84,6 +84,8 @@
     # plymouth.enable = true;
     loader.timeout = 0;
   };
+
+  programs.gnome-disks.enable = true;
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 }

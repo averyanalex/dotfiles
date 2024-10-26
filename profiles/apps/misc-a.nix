@@ -60,6 +60,8 @@
       # betaflight-configurator
       # brave
       # ocrmypdf
+      remmina
+      openfortivpn
     ];
 
     xdg.mimeApps = {
