@@ -70,6 +70,9 @@ in {
   "secrets/wireguard/firesquare.age".publicKeys = users ++ [whale];
   "secrets/wireguard/whale-frsqr.age".publicKeys = users ++ [whale];
 
+  "secrets/xray/falcon.age".publicKeys = users ++ [falcon];
+  "secrets/xray/desktop.age".publicKeys = users ++ [hamster alligator];
+
   "secrets/yggdrasil/alligator.age".publicKeys = users ++ [alligator];
   "secrets/yggdrasil/whale.age".publicKeys = users ++ [whale];
   "secrets/yggdrasil/hawk.age".publicKeys = users ++ [hawk];

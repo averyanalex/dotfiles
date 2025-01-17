@@ -1,13 +1,10 @@
 {
-  config,
-  lib,
-  ...
-}: {
   services.privoxy = {
     enable = true;
     settings = {
       toggle = "0";
       enable-remote-toggle = "0";
+      max-client-connections = "1024";
       forward-socks5 = [
         "api.github.com falcon:1080 ."
         "copilot-proxy.githubusercontent.com falcon:1080 ."

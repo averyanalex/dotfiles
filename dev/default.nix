@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./vscode.nix
+    ./nbconvert.nix
   ];
 
   nixpkgs.overlays = [inputs.fenix.overlays.default];
@@ -20,6 +21,7 @@
           mypy
           numpy
           pandas
+          scipy
           seaborn
           tqdm
           numba
@@ -35,5 +37,6 @@
       "rustc"
       "rustfmt"
     ])
+    pkgs.gdb
   ];
 }

@@ -20,8 +20,6 @@
 
   persist.tmpfsSize = "6G";
 
-  # environment.systemPackages = [pkgs.fork.wireguard-tools pkgs.fork.amneziawg-tools];
-
   services.tlp = {
     enable = true;
     settings = {

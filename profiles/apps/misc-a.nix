@@ -2,11 +2,11 @@
   hm = {
     home.packages = with pkgs; [
       # Communication
-      element-desktop
+      # element-desktop
       # schildichat-desktop # electron matrix client
       # fractal-next # gtk matrix client
-      webcord-vencord # discord client
-      telegram-desktop # telegram client
+      # webcord-vencord # discord client
+      # telegram-desktop # telegram client
 
       # Creativity
       # libsForQt5.kdenlive # video editor
@@ -19,10 +19,10 @@
 
       # Notes
       # joplin-desktop # markdown notes
-      obsidian
+      # obsidian
       # openboard # qt whiteboard
       # rnote # gtk whiteboard
-      xournalpp
+      # xournalpp
 
       # LaTeX
       # texstudio
@@ -43,13 +43,14 @@
       # gmsh
       # calculix
       # elmerfem
-      prusa-slicer
+      # prusa-slicer
+      # stable.orca-slicer
       # kicad-unstable
       # python311Packages.kicad
 
       # Etc
       # tor-browser-bundle-bin # anonymous browsing
-      libreoffice-fresh # office
+      # libreoffice-fresh # office
       # octaveFull # math software
       # kgraphviewer # graphviz viewer
       # stellarium # planetarium
@@ -60,8 +61,8 @@
       # betaflight-configurator
       # brave
       # ocrmypdf
-      remmina
-      openfortivpn
+      # remmina
+      # openfortivpn
     ];
 
     xdg.mimeApps = {

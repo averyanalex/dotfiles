@@ -23,9 +23,9 @@
       enable = true;
 
       plugins = with pkgs.hyprlandPlugins; [
-        hyprspace
-        hyprexpo
-        hyprgrass
+        # hyprspace
+        # hyprexpo
+        # hyprgrass
       ];
 
       settings = {
@@ -63,8 +63,8 @@
             "SUPERSHIFT, up, movewindow, u"
             "SUPERSHIFT, down, movewindow, d"
             "$mod, F1, exec, ${hyprgamemode}"
-            "$mod, TAB, overview:toggle,"
-            "$mod, grave, hyprexpo:expo, toggle"
+            # "$mod, TAB, overview:toggle,"
+            # "$mod, grave, hyprexpo:expo, toggle"
           ]
           ++ (
             builtins.concatLists (builtins.genList (
@@ -80,7 +80,7 @@
               )
               10)
           );
-        bindm = ["ALT, mouse:272, movewindow"];
+        # bindm = ["ALT, mouse:272, movewindow"];
 
         monitor = ",preferred,auto,1";
 
@@ -118,14 +118,14 @@
           workspace_swipe_cancel_ratio = 0.15;
         };
 
-        "plugin:touch_gestures" = {
-          sensitivity = 2.0;
-          workspace_swipe_fingers = 3;
-          workspace_swipe_edge = "d";
-          long_press_delay = 400;
-          edge_margin = 10;
-          experimental.send_cancel = true;
-        };
+        # "plugin:touch_gestures" = {
+        #   sensitivity = 2.0;
+        #   workspace_swipe_fingers = 3;
+        #   workspace_swipe_edge = "d";
+        #   long_press_delay = 400;
+        #   edge_margin = 10;
+        #   experimental.send_cancel = true;
+        # };
 
         misc = {
           disable_hyprland_logo = true;

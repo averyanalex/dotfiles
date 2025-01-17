@@ -25,6 +25,12 @@
     denyDhcpcdInterfaces = ["ygg0"];
   };
 
+  systemd.services.yggdrasil = {
+    serviceConfig = {
+      MemoryMax = "1G";
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [8362 8363 8364 9217];
   networking.firewall.allowedUDPPorts = [8364];
 }

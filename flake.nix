@@ -2,10 +2,11 @@
   description = "AveryanAlex's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-master.url = "github:nixos/nixpkgs";
     # nixpkgs-fork.url = "git+file:///home/alex/projects/averyanalex/nixpkgs";
+    # nixpkgs-fork.url = "github:averyanalex/nixpkgs/test";
 
     # nixcfg.url = "git+file:///home/alex/projects/averyanalex/nixcfg";
     nixcfg.url = "github:averyanalex/nixcfg";
@@ -48,8 +49,8 @@
     # };
     lanzaboote.url = "github:nix-community/lanzaboote";
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      # inputs.nixpkgs-24_05.url = "nixpkgs-stable";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
+      inputs.nixpkgs-24_11.follows = "nixpkgs-stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,7 +61,7 @@
 
     averyanalex-blog = {
       url = "github:averyanalex/blog";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     memexpert = {
       url = "github:averyanalex/memexpert";

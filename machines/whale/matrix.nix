@@ -126,14 +126,14 @@ in {
   };
 
   # Sliding sync
-  age.secrets.matrix-sliding-sync.file = ../../secrets/creds/matrix-sliding-sync.age;
-  services.matrix-sliding-sync = {
-    enable = true;
-    environmentFile = config.age.secrets.matrix-sliding-sync.path;
-    settings = {
-      SYNCV3_SERVER = "https://matrix.neutrino.su";
-    };
-  };
+  # age.secrets.matrix-sliding-sync.file = ../../secrets/creds/matrix-sliding-sync.age;
+  # services.matrix-sliding-sync = {
+  #   enable = true;
+  #   environmentFile = config.age.secrets.matrix-sliding-sync.path;
+  #   settings = {
+  #     SYNCV3_SERVER = "https://matrix.neutrino.su";
+  #   };
+  # };
 
   # Telegram bridge
   age.secrets.mautrix-telegram = {

@@ -56,12 +56,30 @@
           tank
           waydroid
           opensnitch
+          xray
         ]);
 
-  networking.proxy = {
-    httpProxy = "http://127.0.0.1:8118";
-    httpsProxy = "http://127.0.0.1:8118";
-  };
+  # networking.nftables.tables.xray-nat = {
+  #   family = "inet";
+  #   content = let
+  #     skip = ''
+  #       ip daddr { 127.0.0.0/8, 224.0.0.0/4, 192.168.0.0/16, 255.255.255.255 } return
+  #       ip6 daddr { ::1, fe80::/10, fd00::/8 } return
+  #     '';
+  #   in ''
+  #     chain pre {
+  #       type nat hook prerouting priority dstnat; policy accept;
+  #       ${skip}
+  #       meta l4proto { tcp, udp } meta mark != 18298 redirect to :18298
+  #     }
+
+  #     chain out {
+  #       type nat hook output priority mangle - 10; policy accept;
+  #       ${skip}
+  #       meta l4proto { tcp, udp } meta mark != 18298 redirect to :18298
+  #     }
+  #   '';
+  # };
 
   programs.appimage.enable = true;
 
@@ -71,8 +89,8 @@
   programs.adb.enable = true;
 
   programs.wireshark.enable = true;
-  environment.systemPackages = [pkgs.wireshark pkgs.openfortivpn];
-
+  environment.systemPackages = [pkgs.wireshark pkgs.openfortivpn pkgs.fork.wireguard-tools pkgs.fork.amneziawg-tools];
+  systemd.packages = [pkgs.fork.amneziawg-tools];
   # programs.nix-ld.enable = true;
 
   programs.nh = {

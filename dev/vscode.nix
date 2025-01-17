@@ -47,11 +47,13 @@
         # Other langs
         pkgs.vscode-extensions.jnoortheen.nix-ide
         pkgs.vscode-extensions.rust-lang.rust-analyzer-nightly
-        vm.galarius.vscode-opencl
+        # vm.galarius.vscode-opencl
         vm.github.vscode-github-actions
         vm.james-yu.latex-workshop
         vm.mechatroner.rainbow-csv
         # vm.ms-vscode.cpptools
+        # pkgs.vscode-extensions.ms-vscode.cpptools
+        pkgs.vscode-extensions.llvm-vs-code-extensions.vscode-clangd
         vm.redhat.java
         vm.redhat.vscode-xml
         vm.redhat.vscode-yaml
@@ -70,13 +72,13 @@
         vm.surendrajat.apklab
 
         # Tools
-        pkgs.vscode-extensions.github.copilot-chat
+        # pkgs.vscode-extensions.github.copilot-chat
         vm.bierner.emojisense
-        vm.bito.bito
+        # vm.bito.bito
         vm.earshinov.sort-lines-by-selection
         vm.editorconfig.editorconfig
         vm.fill-labs.dependi
-        vm.github.copilot
+        # vm.github.copilot
         vm.github.vscode-pull-request-github
         vm.gruntfuggly.todo-tree
         vm.stkb.rewrap

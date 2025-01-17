@@ -21,6 +21,11 @@
     };
   };
 
+  users = {
+    users.forgejo.uid = 836;
+    groups.forgejo.gid = 836;
+  };
+
   persist.state.dirs = [
     {
       directory = "/var/lib/forgejo";
@@ -79,11 +84,7 @@
       };
     };
 
-    config = {
-      config,
-      pkgs,
-      ...
-    }: {
+    config = {pkgs, ...}: {
       system.stateVersion = "23.05";
 
       networking = {

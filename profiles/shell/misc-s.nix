@@ -15,7 +15,7 @@
       pciutils # lspci
       traceroute # show route trace to host
       unzip # unarchive zip
-      rmlint # find dupes
+      # rmlint # find dupes
       neofetch # I am hacker
       ripgrep # fast grep
       stable.ripgrep-all # grep any file type
@@ -35,6 +35,8 @@
       payload-dumper-go
       parallel
       beep
+      exiftool
+      lsof
     ];
 
     home.sessionVariables = {
