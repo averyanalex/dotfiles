@@ -44,6 +44,11 @@ in {
     persist = {
       enable = mkEnableOption "tmpfs root with opt-in state";
 
+      linkNix = mkOption {
+        type = bool;
+        default = true;
+      };
+
       hideMounts = mkOption {
         type = bool;
         default = false;
@@ -96,7 +101,7 @@ in {
       neededForBoot = true;
     };
 
-    boot.initrd.postMountCommands = ''
+    boot.initrd.postMountCommands = mkIf cfg.linkNix ''
       mkdir -p /mnt-root/nix
       mount --bind /mnt-root${cfg.persistRoot}/nix /mnt-root/nix
       chmod 755 /mnt-root

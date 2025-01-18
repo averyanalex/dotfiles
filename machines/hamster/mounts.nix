@@ -4,8 +4,22 @@
   fileSystems."/persist" = {
     device = "/dev/hamster/data";
     fsType = "btrfs";
-    options = ["discard=async" "compress=zstd"];
+    options = ["discard=async" "compress=zstd" "subvol=@"];
   };
+
+  fileSystems."/persist/home" = {
+    device = "/dev/hamster/data";
+    fsType = "btrfs";
+    options = ["discard=async" "compress=zstd" "subvol=@home"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/hamster/data";
+    fsType = "btrfs";
+    options = ["discard=async" "compress=zstd" "subvol=@nix"];
+  };
+
+  persist.linkNix = false;
 
   # services.beesd.filesystems = {
   #   tank = {
@@ -16,17 +30,17 @@
   #   };
   # };
 
-  services.snapper.configs = {
-    persist = {
-      SUBVOLUME = "/persist";
-      ALLOW_USERS = ["alex"];
-      TIMELINE_CREATE = true;
-      TIMELINE_CLEANUP = true;
-    };
-  };
+  # services.snapper.configs = {
+  #   persist = {
+  #     SUBVOLUME = "/persist";
+  #     ALLOW_USERS = ["alex"];
+  #     TIMELINE_CREATE = true;
+  #     TIMELINE_CLEANUP = true;
+  #   };
+  # };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/0B94-3F5F";
+    device = "/dev/nvme0n1p1";
     fsType = "vfat";
   };
 

@@ -83,27 +83,27 @@
   # ];
 
   persist.state.homeDirs = [
-    ".config/Element"
-    ".config/WebCord"
-    ".local/share/TelegramDesktop"
+    # ".config/Element"
+    # ".config/WebCord"
+    # ".local/share/TelegramDesktop"
     ".config/obs-studio"
 
-    "Monero"
-    ".bitmonero"
-    ".config/monero-project"
+    # "Monero"
+    # ".bitmonero"
+    # ".config/monero-project"
 
-    ".config/Joplin"
-    ".config/joplin-desktop"
-    ".local/share/OpenBoard"
-    ".config/xournalpp"
-    ".config/obsidian"
+    # ".config/Joplin"
+    # ".config/joplin-desktop"
+    # ".local/share/OpenBoard"
+    # ".config/xournalpp"
+    # ".config/obsidian"
 
-    ".local/share/tor-browser"
+    # ".local/share/tor-browser"
 
-    ".config/PrusaSlicer"
+    # ".config/PrusaSlicer"
 
-    ".config/kicad"
-    ".local/share/kicad"
-    ".config/BraveSoftware"
+    # ".config/kicad"
+    # ".local/share/kicad"
+    # ".config/BraveSoftware"
   ];
 }

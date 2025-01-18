@@ -46,10 +46,10 @@
       };
     };
 
-    home.packages = with pkgs; [
-      deltachat-desktop
-    ];
+    # home.packages = with pkgs; [
+    #   deltachat-desktop
+    # ];
   };
 
-  persist.state.homeDirs = [".thunderbird" ".config/DeltaChat"];
+  persist.state.homeDirs = [".thunderbird"]; # ".config/DeltaChat"
 }

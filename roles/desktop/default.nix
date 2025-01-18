@@ -5,9 +5,10 @@
 }: {
   imports =
     [
-      ./full.nix
-      ../dev
-      ../profiles/apps/wezterm.nix
+      ../full.nix
+      ../../dev
+      ../../profiles/apps/wezterm.nix
+      ./gnome.nix
     ]
     ++ (with inputs.self.nixosModules.profiles;
       with apps;
@@ -19,24 +20,24 @@
         ]
         ++ (with games; [
           minecraft
-          xonotic
+          # xonotic
         ])
         ++ (with gui; [
           # nix-colors
           # stylix
           # sway
-          clipboard
-          eww
-          portals
-          rofi
+          # clipboard
+          # eww
+          # portals
+          # rofi
           # sway
-          hyprland
-          hyprlock
-          swaync
-          swayosd
-          swww
-          waybar
-          wm
+          # hyprland
+          # hyprlock
+          # swaync
+          # swayosd
+          # swww
+          # waybar
+          # wm
         ])
         ++ [
           # jupyter
@@ -54,7 +55,7 @@
           sdr
           sync
           tank
-          waydroid
+          # waydroid
           opensnitch
           xray
         ]);
@@ -89,8 +90,8 @@
   programs.adb.enable = true;
 
   programs.wireshark.enable = true;
-  environment.systemPackages = [pkgs.wireshark pkgs.openfortivpn pkgs.fork.wireguard-tools pkgs.fork.amneziawg-tools];
-  systemd.packages = [pkgs.fork.amneziawg-tools];
+  environment.systemPackages = [pkgs.wireshark pkgs.openfortivpn];
+  # systemd.packages = [pkgs.fork.amneziawg-tools];
   # programs.nix-ld.enable = true;
 
   programs.nh = {

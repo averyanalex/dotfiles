@@ -10,7 +10,7 @@
     inputs.self.nixosModules.profiles.netman
     inputs.self.nixosModules.profiles.libvirt
     inputs.self.nixosModules.profiles.secureboot
-    inputs.self.nixosModules.profiles.pmbootstrap
+    # inputs.self.nixosModules.profiles.pmbootstrap
     # inputs.self.nixosModules.profiles.remote-builder-client
 
     inputs.self.nixosModules.hardware.thinkbook
@@ -21,7 +21,7 @@
   persist.tmpfsSize = "6G";
 
   services.tlp = {
-    enable = true;
+    # enable = true;
     settings = {
       STOP_CHARGE_THRESH_BAT0 = 0;
     };
@@ -38,5 +38,5 @@
     SuspendEstimationSec=15m
   '';
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }
