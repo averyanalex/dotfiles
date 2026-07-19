@@ -7,6 +7,8 @@ let
   mainImage = "ghcr.io/averyanalex/memexpert/main:main";
   workerImage = "ghcr.io/averyanalex/memexpert/worker:main";
   frontendImage = "ghcr.io/averyanalex/memexpert/frontend:main";
+  # Preserve application drain < Podman stop < systemd stop (210 < 240 < 270).
+  workerGracefulShutdownTimeoutSeconds = 210;
   workerStopTimeoutSeconds = 240;
 
   s3AccessKey = name;
@@ -24,6 +26,7 @@ let
     TimeoutStartSec = 900;
   };
 in
+assert workerGracefulShutdownTimeoutSeconds < workerStopTimeoutSeconds;
 {
   config,
   secrets,
@@ -152,6 +155,7 @@ let
   };
 
   workerEnvironment = commonAppEnvironment // {
+    PIPELINE_WORKER_GRACEFUL_SHUTDOWN_TIMEOUT_SECONDS = toString workerGracefulShutdownTimeoutSeconds;
     PIPELINE_TRANSCODE_TIMEOUT_SECONDS = "180.0";
     PIPELINE_OCR_PROVIDER_MODE = "live";
     PIPELINE_OCR_PRIMARY_ENGINE = "paddleocr";
@@ -328,7 +332,9 @@ in
             "${name}-migrate.service"
             "${name}-rabbitmq.service"
           ];
-          After = Requires;
+          # In a combined Reploy restart, drain workers before stopping the web
+          # tier; startup reverses this so API/frontend are ready before intake.
+          After = Requires ++ [ "${name}-frontend.service" ];
           Conflicts = [ "${name}-workers.service" ];
           StartLimitIntervalSec = "10min";
           StartLimitBurst = 6;
