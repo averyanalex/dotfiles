@@ -1,5 +1,16 @@
 let
   name = "navidrome";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
   instances = [
     "alex"
     # "ssk8q"
@@ -12,6 +23,8 @@ let
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "Navidrome application services";
+
   systemd.tmpfiles.rules = map (
     instance: "d /persist/${name}/${instance} 700 1000 100 - -"
   ) instances;
@@ -69,6 +82,8 @@ in
             "1001:101001:98999"
           ];
         };
+        unitConfig = appUnitConfig;
+        serviceConfig = appServiceConfig;
       };
       indexedInstances = builtins.genList (i: {
         index = i;
@@ -83,11 +98,12 @@ in
         }) indexedInstances
       );
 
-      networks = {
-        ${name}.networkConfig = {
+      networks.${name} = {
+        networkConfig = {
           subnets = [ "10.90.92.0/24" ];
           podmanArgs = [ "--interface-name=pme-${name}" ];
         };
+        serviceConfig.Slice = appServiceConfig.Slice;
       };
     };
 }

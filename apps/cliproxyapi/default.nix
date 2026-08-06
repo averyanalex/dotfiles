@@ -2,6 +2,17 @@ let
   name = "cliproxyapi";
   keeperName = "${name}-usage-keeper";
   keeperBasePath = "/usage";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 {
   config,
@@ -10,6 +21,8 @@ in
   ...
 }:
 {
+  systemd.slices.${sliceName}.description = "CLIProxyAPI application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name} 700 100000 100000 - -"
     "d /persist/${name}/auths 700 100000 100000 - -"
@@ -77,7 +90,8 @@ in
           gidMaps = [ "0:100000:100000" ];
           uidMaps = [ "0:100000:100000" ];
         };
-        serviceConfig = {
+        unitConfig = appUnitConfig;
+        serviceConfig = appServiceConfig // {
           EnvironmentFile = config.age.secrets.${name}.path;
         };
       };
@@ -103,15 +117,19 @@ in
           gidMaps = [ "0:100000:100000" ];
           uidMaps = [ "0:100000:100000" ];
         };
-        unitConfig = rec {
+        unitConfig = appUnitConfig // rec {
           Requires = [ "${name}.service" ];
           After = Requires;
         };
+        serviceConfig = appServiceConfig;
       };
 
-      networks.${name}.networkConfig = {
-        subnets = [ "10.90.96.0/24" ];
-        podmanArgs = [ "--interface-name=pme-${name}" ];
+      networks.${name} = {
+        networkConfig = {
+          subnets = [ "10.90.96.0/24" ];
+          podmanArgs = [ "--interface-name=pme-${name}" ];
+        };
+        serviceConfig.Slice = appServiceConfig.Slice;
       };
     };
 }

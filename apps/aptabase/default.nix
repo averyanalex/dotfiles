@@ -1,8 +1,21 @@
 let
   name = "aptabase";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "Aptabase application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/db 700 100999 100999 - -"
     "d /persist/${name}/clickhouse 700 100101 100101 - -"
@@ -18,6 +31,7 @@ in
 
   services.nginx.virtualHosts."stats.averylex.dev" = {
     enableACME = true;
+    acmeRoot = null;
     forceSSL = true;
     locations."/" = {
       proxyPass = "http://10.90.98.2:8080";
@@ -25,16 +39,17 @@ in
     };
   };
 
-  security.acme.certs."stats.averylex.dev".dnsProvider = null;
-
   virtualisation.quadlet =
     let
       inherit (config.virtualisation.quadlet) networks;
     in
     {
-      networks.${name}.networkConfig = {
-        subnets = [ "10.90.98.0/24" ];
-        podmanArgs = [ "--interface-name=pme-${name}" ];
+      networks.${name} = {
+        networkConfig = {
+          subnets = [ "10.90.98.0/24" ];
+          podmanArgs = [ "--interface-name=pme-${name}" ];
+        };
+        serviceConfig.Slice = appServiceConfig.Slice;
       };
 
       containers = {
@@ -54,6 +69,8 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-clickhouse" = {
@@ -75,6 +92,8 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-app" = {
@@ -93,13 +112,14 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [
               "${name}-clickhouse.service"
               "${name}-db.service"
             ];
             After = Requires;
           };
+          serviceConfig = appServiceConfig;
         };
       };
     };

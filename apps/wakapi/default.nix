@@ -1,8 +1,21 @@
 let
   name = "wakapi";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "Wakapi application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/data 700 101000 101000 - -"
     "d /persist/${name}/db 700 100999 100999 - -"
@@ -41,6 +54,8 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-server" = {
@@ -66,17 +81,21 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-db.service" ];
             After = Requires;
           };
+          serviceConfig = appServiceConfig;
         };
       };
 
       networks = {
-        ${name}.networkConfig = {
-          subnets = [ "10.90.86.0/24" ];
-          podmanArgs = [ "--interface-name=pme-${name}" ];
+        ${name} = {
+          networkConfig = {
+            subnets = [ "10.90.86.0/24" ];
+            podmanArgs = [ "--interface-name=pme-${name}" ];
+          };
+          serviceConfig.Slice = appServiceConfig.Slice;
         };
       };
     };

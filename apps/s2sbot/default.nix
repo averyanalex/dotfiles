@@ -1,8 +1,21 @@
 { config, ... }:
 let
   name = "s2sbot";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 {
+  systemd.slices.${sliceName}.description = "S2S bot application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/db 700 100999 100999 - -"
   ];
@@ -32,6 +45,8 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         ${name} = {
@@ -48,20 +63,23 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-db.service" ];
             After = Requires;
           };
-          serviceConfig = {
+          serviceConfig = appServiceConfig // {
             Environment = [ "REGISTRY_AUTH_FILE=${config.environment.sessionVariables.REGISTRY_AUTH_FILE}" ];
           };
         };
       };
 
       networks = {
-        ${name}.networkConfig = {
-          subnets = [ "10.90.85.0/24" ];
-          podmanArgs = [ "--interface-name=pme-${name}" ];
+        ${name} = {
+          networkConfig = {
+            subnets = [ "10.90.85.0/24" ];
+            podmanArgs = [ "--interface-name=pme-${name}" ];
+          };
+          serviceConfig.Slice = appServiceConfig.Slice;
         };
       };
     };

@@ -1,8 +1,21 @@
 let
   name = "lidarr";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "Lidarr application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/config 700 1000 100 - -"
   ];
@@ -53,13 +66,18 @@ in
               "1001:101001:98999"
             ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
       };
 
       networks = {
-        ${name}.networkConfig = {
-          subnets = [ "10.90.90.0/24" ];
-          podmanArgs = [ "--interface-name=pme-${name}" ];
+        ${name} = {
+          networkConfig = {
+            subnets = [ "10.90.90.0/24" ];
+            podmanArgs = [ "--interface-name=pme-${name}" ];
+          };
+          serviceConfig.Slice = appServiceConfig.Slice;
         };
       };
     };

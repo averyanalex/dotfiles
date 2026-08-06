@@ -1,5 +1,16 @@
 let
   name = "qbit";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 {
   config,
@@ -8,6 +19,8 @@ in
   ...
 }:
 {
+  systemd.slices.${sliceName}.description = "qBittorrent application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/config 700 1000 100 - -"
   ];
@@ -38,7 +51,8 @@ in
     {
       containers = {
         ${name} = {
-          serviceConfig = {
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig // {
             ExecStartPre = lib.mkBefore [
               (pkgs.writeShellScript "${name}-cleanup-locks" ''
                 set -eu
@@ -86,9 +100,12 @@ in
       };
 
       networks = {
-        ${name}.networkConfig = {
-          subnets = [ "10.90.84.0/24" ];
-          podmanArgs = [ "--interface-name=pme-${name}" ];
+        ${name} = {
+          networkConfig = {
+            subnets = [ "10.90.84.0/24" ];
+            podmanArgs = [ "--interface-name=pme-${name}" ];
+          };
+          serviceConfig.Slice = appServiceConfig.Slice;
         };
       };
     };

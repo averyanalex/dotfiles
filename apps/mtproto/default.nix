@@ -1,8 +1,21 @@
 let
   name = "mtproto";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "MTProto application services";
+
   age.secrets.${name}.file = ./secret.age;
 
   # MTProto proxy uses raw TCP protocol
@@ -13,9 +26,12 @@ in
       inherit (config.virtualisation.quadlet) networks;
     in
     {
-      networks.${name}.networkConfig = {
-        subnets = [ "10.90.94.0/24" ];
-        podmanArgs = [ "--interface-name=pme-${name}" ];
+      networks.${name} = {
+        networkConfig = {
+          subnets = [ "10.90.94.0/24" ];
+          podmanArgs = [ "--interface-name=pme-${name}" ];
+        };
+        serviceConfig.Slice = appServiceConfig.Slice;
       };
 
       containers.${name} = {
@@ -29,6 +45,8 @@ in
           memory = "256m";
           uidMaps = [ "0:100000:100000" ];
         };
+        unitConfig = appUnitConfig;
+        serviceConfig = appServiceConfig;
       };
     };
 }

@@ -1,8 +1,21 @@
 let
   name = "nextcloud";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "Nextcloud application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/db 700 100999 100999 - -"
     "d /persist/${name}/redis 700 100999 100999 - -"
@@ -55,6 +68,8 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-redis" = {
@@ -68,6 +83,8 @@ in
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-app" = {
@@ -104,20 +121,24 @@ in
               "1001:101001:98999"
             ];
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [
               "${name}-db.service"
               "${name}-redis.service"
             ];
             After = Requires;
           };
+          serviceConfig = appServiceConfig;
         };
       };
 
       networks = {
-        ${name}.networkConfig = {
-          subnets = [ "10.90.88.0/24" ];
-          podmanArgs = [ "--interface-name=pme-${name}" ];
+        ${name} = {
+          networkConfig = {
+            subnets = [ "10.90.88.0/24" ];
+            podmanArgs = [ "--interface-name=pme-${name}" ];
+          };
+          serviceConfig.Slice = appServiceConfig.Slice;
         };
       };
     };

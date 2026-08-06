@@ -1,6 +1,17 @@
 { config, ... }:
 let
   name = "reelsgen";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 
   generatedWorkers = builtins.listToAttrs (
     map
@@ -24,7 +35,8 @@ let
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
-          serviceConfig = {
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig // {
             Environment = [ "REGISTRY_AUTH_FILE=${config.environment.sessionVariables.REGISTRY_AUTH_FILE}" ];
           };
         };
@@ -37,6 +49,8 @@ let
   );
 in
 {
+  systemd.slices.${sliceName}.description = "Reelsgen application services";
+
   age.secrets."${name}-env" = {
     file = ./env.age;
   };
@@ -55,10 +69,11 @@ in
   virtualisation.quadlet = {
     containers = generatedWorkers;
 
-    networks = {
-      ${name}.networkConfig = {
+    networks.${name} = {
+      networkConfig = {
         podmanArgs = [ "--interface-name=pme-${name}" ];
       };
+      serviceConfig.Slice = appServiceConfig.Slice;
     };
   };
 }
