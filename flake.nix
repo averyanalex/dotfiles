@@ -61,11 +61,10 @@
     #     # rust-overlay.follows = "rust-overlay";
     #   };
     # };
+
     lanzaboote.url = "github:nix-community/lanzaboote";
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    niri-flake.url = "github:sodiboo/niri-flake";
+
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
