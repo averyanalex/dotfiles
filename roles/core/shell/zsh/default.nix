@@ -17,14 +17,13 @@
     programs.bash.enable = true;
     programs.bash.initExtra = ''
       source ${config.age.secrets.bash-init.path}
-      # Gas Town shell integration
-      # [[ -f "$HOME/.config/gastown/shell-hook.sh" ]] && source "$HOME/.config/gastown/shell-hook.sh"
       if [[ "$(tty)" != /dev/tty* && $(ps --no-header --pid=$PPID --format=comm) != "zsh" && -z $BASH_EXECUTION_STRING ]]; then
-        if [[ -z "$ZELLIJ" && -z "$SSH_CONNECTION" && ("$TERM" == "alacritty" || "$TERM_PROGRAM" == "WezTerm") ]]; then
-          exec zellij
-        else
-          exec zsh
-        fi
+        exec zsh
+        # if [[ -z "$ZELLIJ" && -z "$SSH_CONNECTION" && ("$TERM" == "alacritty" || "$TERM_PROGRAM" == "WezTerm") ]]; then
+        #   exec zellij
+        # else
+        #   exec zsh
+        # fi
       fi
     '';
 
