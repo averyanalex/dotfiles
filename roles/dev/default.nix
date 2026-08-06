@@ -22,6 +22,7 @@ in
     ./codex.nix
     ./claudecode.nix
     ./mcp.nix
+    ./omp.nix
   ];
 
   hm.home.packages = [
