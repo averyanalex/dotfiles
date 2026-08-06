@@ -98,16 +98,10 @@ in
 
     ../../apps/aptabase
     ../../apps/memexpert
-    # ../../apps/cinemabot
     ../../apps/wakapi
-    # ../../apps/s2sbot
-    # ../../apps/reelsgen
     ../../apps/nextcloud
-    ../../apps/newsrelay
     ../../apps/litellm
     ../../apps/cliproxyapi
-    # ../../apps/omniroute
-    # ../../apps/mtproto
     ../../apps/qbit
   ];
 
