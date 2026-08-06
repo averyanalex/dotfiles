@@ -4,7 +4,7 @@
   ...
 }:
 let
-  package = pkgs.angie;
+  package = pkgs.nginx;
 in
 {
   options = {
@@ -38,8 +38,6 @@ in
       # enableQuicBPF = true;
 
       appendHttpConfig = ''
-        include ${package}/conf/prometheus_all.conf;
-
         # HSTS
         map $scheme $hsts_header {
           https "max-age=31536000; includeSubdomains; preload";
@@ -51,21 +49,6 @@ in
 
         proxy_buffering off;
       '';
-
-      virtualHosts.prometheus = {
-        locations."/".extraConfig = ''
-          prometheus all;
-        '';
-        listen = [
-          {
-            addr = "0.0.0.0";
-            port = 9114;
-          }
-        ];
-        # quic = lib.mkForce false;
-        forceSSL = lib.mkForce false;
-        extraConfig = lib.mkForce "";
-      };
 
       virtualHosts."_" = {
         default = true;
