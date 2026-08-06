@@ -5,6 +5,16 @@
     options = [ "discard" ];
   };
 
+  fileSystems."/persist/memexpert/minio" = {
+    device = "UUID=7c1300ed-0fb0-419b-b98d-50de4c1a3d5a";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd:7"
+      "noatime"
+      "subvol=@memexpert-media"
+    ];
+  };
+
   fileSystems."/boot" = {
     device = "UUID=84E4-B57E";
     fsType = "vfat";

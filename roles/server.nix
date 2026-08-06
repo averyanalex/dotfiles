@@ -27,9 +27,9 @@
   boot.kernel.sysctl = {
     # CAP_SYS_PTRACE only: no debuggers on servers, block credential dumping
     "kernel.yama.ptrace_scope" = 2;
-    # VM tuning for server throughput
-    "vm.dirty_ratio" = 40;
-    "vm.dirty_background_ratio" = 10;
+    # Bound dirty writeback independently of RAM size to limit I/O stalls
+    "vm.dirty_bytes" = 2 * 1024 * 1024 * 1024;
+    "vm.dirty_background_bytes" = 512 * 1024 * 1024;
     "vm.min_free_kbytes" = 131072;
     "vm.watermark_boost_factor" = 0;
     "vm.watermark_scale_factor" = 125;

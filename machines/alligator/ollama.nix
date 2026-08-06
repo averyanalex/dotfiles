@@ -1,8 +1,21 @@
 let
   name = "ollama";
   port = 11434;
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 {
+  systemd.slices.${sliceName}.description = "Ollama application services";
+
   networking.firewall.interfaces."nebula.averyan".allowedTCPPorts = [ port ];
 
   systemd.tmpfiles.rules = [
@@ -23,7 +36,8 @@ in
         gidMaps = [ "0:100000:100000" ];
         uidMaps = [ "0:100000:100000" ];
       };
-      serviceConfig = {
+      unitConfig = appUnitConfig;
+      serviceConfig = appServiceConfig // {
         MemoryMax = "24G";
       };
     };

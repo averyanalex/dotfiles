@@ -88,9 +88,11 @@ in
     ./dns.nix
     ./borgserve.nix
     ./printing.nix
-    ./docker.nix
+    ../../apps/bambuddy
+    ../../apps/immich
+    ../../apps/open-webui
     # ./hermes.nix
-    ./hao-woodpecker.nix
+    # ./hao-woodpecker.nix
     ./xray.nix
     ./ardupilot-proxy.nix
 
@@ -199,7 +201,7 @@ in
       '';
     };
     "lab.averyan.ru" = makeAveryanHost "http://127.0.0.1:8874";
-    "memexpert.net" = makeHost "http://127.0.0.1:3000" // {
+    "memexpert.net" = makeHost "http://127.0.0.1:3010" // {
       useACMEHost = "memexpert.net";
     };
 
@@ -286,6 +288,11 @@ in
         {
           Address = "192.168.3.31";
           MACAddress = "90:8f:88:03:d7:a0";
+        }
+        # Bambu X2D
+        {
+          Address = "192.168.3.32";
+          MACAddress = "50:31:23:f0:a1:a2";
         }
         # ESPHome PC switch
         {

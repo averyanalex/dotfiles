@@ -5,6 +5,8 @@
   ...
 }:
 let
+  backupsHostPath = "/persist/ptero/wings/backups";
+
   panelDockerImage = pkgs.dockerTools.pullImage {
     imageName = "ghcr.io/pterodactyl/panel";
     finalImageTag = "latest";
@@ -20,12 +22,23 @@ let
   };
 in
 {
+  fileSystems.${backupsHostPath} = {
+    device = "UUID=247bdf56-e937-4f87-9666-6d14d1b9168e";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd:7"
+      "noatime"
+      "subvol=@ptero-backups"
+    ];
+  };
+
   systemd.tmpfiles.rules = [
     "d /persist/ptero/podman 700 0 0 - -"
     "d /persist/ptero/docker 710 0 0 - -"
     "d /persist/ptero/panel 700 0 0 - -"
     "d /persist/ptero/mysql 700 84 84 - -"
     "d /persist/ptero/wings 700 988 988 - -"
+    "d ${backupsHostPath} 700 0 0 - -"
     "d /persist/ptero/wings-configs 700 988 988 - -"
   ];
 
@@ -70,6 +83,10 @@ in
       };
       "/var/lib/pterodactyl/" = {
         hostPath = "/persist/ptero/wings";
+        isReadOnly = false;
+      };
+      "/var/lib/pterodactyl/backups/" = {
+        hostPath = backupsHostPath;
         isReadOnly = false;
       };
       "/etc/pterodactyl/" = {

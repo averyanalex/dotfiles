@@ -1,5 +1,24 @@
 { config, ... }:
+let
+  hassSliceName = "apps-hass";
+  esphomeSliceName = "apps-esphome";
+  mkAppServiceConfig = sliceName: {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
+in
 {
+  systemd.slices = {
+    ${hassSliceName}.description = "Home Assistant application services";
+    ${esphomeSliceName}.description = "ESPHome application services";
+  };
+
   systemd.tmpfiles.rules = [
     "d /persist/hass/config 700 100000 100000 - -"
     "d /persist/hass/db 700 100999 100999 - -"
@@ -36,10 +55,11 @@
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "hass-db.service" ];
             After = Requires;
           };
+          serviceConfig = mkAppServiceConfig hassSliceName;
         };
 
         hass-db = {
@@ -58,6 +78,8 @@
             gidMaps = [ "0:100000:100000" ];
             uidMaps = [ "0:100000:100000" ];
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = mkAppServiceConfig hassSliceName;
         };
 
         esphome = {
@@ -83,16 +105,24 @@
           #   Requires = [ "postgresql.service" ];
           #   After = Requires;
           # };
+          unitConfig = appUnitConfig;
+          serviceConfig = mkAppServiceConfig esphomeSliceName;
         };
       };
       networks = {
-        hass.networkConfig = {
-          subnets = [ "10.90.18.0/24" ];
-          podmanArgs = [ "--interface-name=pme-hass" ];
+        hass = {
+          networkConfig = {
+            subnets = [ "10.90.18.0/24" ];
+            podmanArgs = [ "--interface-name=pme-hass" ];
+          };
+          serviceConfig.Slice = "${hassSliceName}.slice";
         };
-        esphome.networkConfig = {
-          subnets = [ "10.90.19.0/24" ];
-          podmanArgs = [ "--interface-name=pme-esphome" ];
+        esphome = {
+          networkConfig = {
+            subnets = [ "10.90.19.0/24" ];
+            podmanArgs = [ "--interface-name=pme-esphome" ];
+          };
+          serviceConfig.Slice = "${esphomeSliceName}.slice";
         };
       };
     };

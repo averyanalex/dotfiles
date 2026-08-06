@@ -6,7 +6,15 @@
   ...
 }:
 let
-  memexpert-pkg = inputs.memexpert.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  # Keep Bambuddy's fixed Virtual Printer bind port (3000) available.
+  memexpert-pkg =
+    inputs.memexpert.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
+      (oldAttrs: {
+        postPatch = (oldAttrs.postPatch or "") + ''
+          substituteInPlace src/web.rs \
+            --replace-fail '"0.0.0.0:3000"' '"127.0.0.1:3010"'
+        '';
+      });
 in
 {
   age.secrets.memexpert.file = "${secrets}/creds/memexpert.age";

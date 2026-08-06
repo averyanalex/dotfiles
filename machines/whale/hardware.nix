@@ -49,5 +49,8 @@
     "raid1"
   ];
 
-  services.lvm.boot.thin.enable = true;
+  services.lvm = {
+    boot.thin.enable = true;
+    dmeventd.enable = true;
+  };
 }

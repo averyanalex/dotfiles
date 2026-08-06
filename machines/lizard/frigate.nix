@@ -1,8 +1,21 @@
 let
   name = "frigate";
+  sliceName = "apps-${name}";
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
 in
 { config, ... }:
 {
+  systemd.slices.${sliceName}.description = "Frigate application services";
+
   systemd.tmpfiles.rules = [
     "d /data/${name}/config 700 0 0 - -"
     "d /data/${name}/media 700 0 0 - -"
@@ -48,13 +61,18 @@ in
             ];
             shmSize = "512m";
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
       };
 
       networks = {
-        ${name}.networkConfig = {
-          subnets = [ "10.90.246.0/24" ];
-          podmanArgs = [ "--interface-name=pme-${name}" ];
+        ${name} = {
+          networkConfig = {
+            subnets = [ "10.90.246.0/24" ];
+            podmanArgs = [ "--interface-name=pme-${name}" ];
+          };
+          serviceConfig.Slice = appServiceConfig.Slice;
         };
       };
     };

@@ -33,6 +33,16 @@
     ];
   };
 
+  fileSystems."/home/alex/.var/app/cs2loadtest" = {
+    device = "/dev/alligator/secondary";
+    fsType = "btrfs";
+    options = [
+      "discard=async"
+      "compress=zstd"
+      "subvol=@cs2loadtest"
+    ];
+  };
+
   fileSystems."/home/alex/.var/app/com.usebottles.bottles" = {
     device = "/dev/alligator/secondary";
     fsType = "btrfs";
