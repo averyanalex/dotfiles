@@ -1,5 +1,6 @@
 let
   name = "memexpert";
+  sliceName = "apps-${name}";
   subnet = "10.90.99";
   publicHost = "beta.memexpert.net";
   s3Host = "beta-s3.memexpert.net";
@@ -18,12 +19,25 @@ let
   uidMaps = [ "0:100000:100000" ];
   gidMaps = [ "0:100000:100000" ];
 
-  oneShotServiceConfig = {
+  appServiceConfig = {
+    Slice = "${sliceName}.slice";
+    RestartMode = "direct";
+    RestartSec = "5s";
+    TimeoutStartSec = "4min";
+  };
+  healthServiceConfig = appServiceConfig // {
+    # OCR workers allow up to five minutes of startup health retries.
+    TimeoutStartSec = "6min";
+  };
+  appUnitConfig = {
+    StartLimitIntervalSec = "10min";
+    StartLimitBurst = 6;
+  };
+
+  oneShotServiceConfig = appServiceConfig // {
     Type = "oneshot";
     RemainAfterExit = true;
     Restart = "on-failure";
-    RestartSec = "5s";
-    TimeoutStartSec = 900;
   };
 in
 assert workerGracefulShutdownTimeoutSeconds < workerStopTimeoutSeconds;
@@ -59,6 +73,7 @@ let
     MEDIA_PUBLIC_BASE_URL = "https://${publicHost}/api/v1/media/files";
     PIPELINE_ALLOWED_MIME_TYPES = "image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm";
     PIPELINE_BROKER_CONNECTION_TIMEOUT_SECONDS = "10.0";
+    PIPELINE_BROKER_SOURCE_CHANNEL_AUDIENCE_CAPTURE_QUEUE = "pipeline.source_channel_audience_capture";
     PIPELINE_CAPACITY_CLOSE_PENDING_COUNT = "1000";
     PIPELINE_CAPACITY_REOPEN_PENDING_COUNT = "500";
     PIPELINE_CAPACITY_CLOSE_OLDEST_AGE_SECONDS = "3600";
@@ -118,15 +133,20 @@ let
     SECURITY_RATE_LIMIT_ADMIN_MAX_REQUESTS = "120";
     SECURITY_RATE_LIMIT_ADMIN_WINDOW_SECONDS = "60";
     SCHEDULER_MATERIALIZED_VIEW_REFRESH_ENABLED = "true";
-    SCHEDULER_MATERIALIZED_VIEW_REFRESH_INTERVAL_SECONDS = "300";
+    SCHEDULER_MATERIALIZED_VIEW_REFRESH_INTERVAL_SECONDS = "900";
     SCHEDULER_SOURCE_ENGAGEMENT_CAPTURE_ENABLED = "true";
     SCHEDULER_SOURCE_ENGAGEMENT_CAPTURE_INTERVAL_SECONDS = "21600";
     SCHEDULER_SOURCE_ENGAGEMENT_CAPTURE_BATCH_SIZE = "100";
     SCHEDULER_SOURCE_ENGAGEMENT_CAPTURE_PER_SESSION_BATCH_SIZE = "20";
     SCHEDULER_SOURCE_ENGAGEMENT_CAPTURE_LEASE_TIMEOUT_SECONDS = "1800";
+    SCHEDULER_SOURCE_CHANNEL_AUDIENCE_CAPTURE_ENABLED = "true";
+    SCHEDULER_SOURCE_CHANNEL_AUDIENCE_CAPTURE_INTERVAL_SECONDS = "3600";
+    SCHEDULER_SOURCE_CHANNEL_AUDIENCE_CAPTURE_BATCH_SIZE = "100";
+    SCHEDULER_SOURCE_CHANNEL_AUDIENCE_CAPTURE_PER_SESSION_BATCH_SIZE = "20";
+    SCHEDULER_SOURCE_CHANNEL_AUDIENCE_CAPTURE_LEASE_TIMEOUT_SECONDS = "1800";
     SCHEDULER_MOTD_ENABLED = "true";
     SCHEDULER_MOTD_INTERVAL_SECONDS = "86400";
-    MOTD_ALGORITHM_VERSION = "motd_v1";
+    MOTD_ALGORITHM_VERSION = "motd_v2";
     MOTD_CANDIDATE_LOOKBACK_DAYS = "30";
     MOTD_CANDIDATE_LIMIT = "50";
     MOTD_MIN_QUALITY_SCORE = "0.5";
@@ -174,6 +194,8 @@ let
       cpuQuota = "400%";
       pidsLimit = 256;
       startupRetries = 8;
+      healthTimeout = "10s";
+      healthStartupTimeout = "10s";
     };
     ocr = {
       ip = "${subnet}.17";
@@ -226,6 +248,8 @@ let
   };
 in
 {
+  systemd.slices.${sliceName}.description = "Memexpert Beta application services";
+
   systemd.tmpfiles.rules = [
     "d /persist/${name}/db 700 100999 100999 - -"
     "d /persist/${name}/redis 700 100999 100999 - -"
@@ -305,6 +329,8 @@ in
           autoUpdate = "registry";
           memory = roleConfig.memory;
           stopTimeout = workerStopTimeoutSeconds;
+          healthTimeout = roleConfig.healthTimeout or runtimeHealthConfig.healthTimeout;
+          healthStartupTimeout = roleConfig.healthStartupTimeout or runtimeHealthConfig.healthStartupTimeout;
           networks = [ network ];
           ip = roleConfig.ip;
           pidsLimit = roleConfig.pidsLimit;
@@ -339,7 +365,7 @@ in
           StartLimitIntervalSec = "10min";
           StartLimitBurst = 6;
         };
-        serviceConfig = {
+        serviceConfig = healthServiceConfig // {
           Environment = registryAuthEnvironment;
           RestartSec = "10s";
           TimeoutStopSec = "${toString (workerStopTimeoutSeconds + 30)}s";
@@ -355,9 +381,12 @@ in
       );
     in
     {
-      networks.${name}.networkConfig = {
-        subnets = [ "${subnet}.0/24" ];
-        podmanArgs = [ "--interface-name=pme-${name}" ];
+      networks.${name} = {
+        networkConfig = {
+          subnets = [ "${subnet}.0/24" ];
+          podmanArgs = [ "--interface-name=pme-${name}" ];
+        };
+        serviceConfig.Slice = appServiceConfig.Slice;
       };
 
       containers = {
@@ -369,13 +398,33 @@ in
             networks = [ network ];
             ip = "${subnet}.3";
             volumes = [ "/persist/${name}/db:/var/lib/postgresql/data" ];
+            exec = [
+              "postgres"
+              "-c"
+              "shared_preload_libraries=pg_stat_statements"
+              "-c"
+              "pg_stat_statements.track=all"
+              "-c"
+              "pg_stat_statements.track_planning=on"
+              "-c"
+              "track_io_timing=on"
+            ];
             environments = {
               POSTGRES_DB = name;
               POSTGRES_USER = name;
             };
             environmentFiles = [ secretFile ];
+            healthCmd = "pg_isready -U ${name} -d ${name}";
+            healthInterval = "10s";
+            healthTimeout = "10s";
+            healthRetries = 18;
+            healthStartPeriod = "15s";
+            healthOnFailure = "kill";
+            notify = "healthy";
             inherit uidMaps gidMaps;
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-redis" = {
@@ -391,8 +440,17 @@ in
               "--appendonly"
               "yes"
             ];
+            healthCmd = "redis-cli ping";
+            healthInterval = "10s";
+            healthTimeout = "10s";
+            healthRetries = 18;
+            healthStartPeriod = "15s";
+            healthOnFailure = "kill";
+            notify = "healthy";
             inherit uidMaps gidMaps;
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-rabbitmq" = {
@@ -405,20 +463,40 @@ in
             volumes = [ "/persist/${name}/rabbitmq:/var/lib/rabbitmq" ];
             environments.RABBITMQ_DEFAULT_USER = name;
             environmentFiles = [ secretFile ];
+            healthCmd = "rabbitmq-diagnostics -q ping";
+            healthInterval = "10s";
+            healthTimeout = "10s";
+            healthRetries = 18;
+            healthStartPeriod = "15s";
+            healthOnFailure = "kill";
+            notify = "healthy";
             inherit uidMaps gidMaps;
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-qdrant" = {
           containerConfig = {
-            image = "docker.io/qdrant/qdrant:latest";
-            autoUpdate = "registry";
+            # Qdrant is digest-pinned to the recommendation-index version
+            # validated by the application; omit autoUpdate so upgrades are
+            # explicit rollouts.
+            image = "docker.io/qdrant/qdrant@sha256:0bd98fa7977f1e75694779359ca4e212822e5a71334e28421182f72f209d5286";
             memory = "4g";
             networks = [ network ];
             ip = "${subnet}.6";
             volumes = [ "/persist/${name}/qdrant:/qdrant/storage" ];
+            healthCmd = "bash -c ': > /dev/tcp/127.0.0.1/6333'";
+            healthInterval = "10s";
+            healthTimeout = "10s";
+            healthRetries = 18;
+            healthStartPeriod = "15s";
+            healthOnFailure = "kill";
+            notify = "healthy";
             inherit uidMaps gidMaps;
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-meilisearch" = {
@@ -435,8 +513,17 @@ in
               MEILI_NO_ANALYTICS = "true";
             };
             environmentFiles = [ secretFile ];
+            healthCmd = "curl --fail --silent http://localhost:7700/health";
+            healthInterval = "10s";
+            healthTimeout = "10s";
+            healthRetries = 18;
+            healthStartPeriod = "15s";
+            healthOnFailure = "kill";
+            notify = "healthy";
             inherit uidMaps gidMaps;
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-minio" = {
@@ -460,6 +547,8 @@ in
             ];
             inherit uidMaps gidMaps;
           };
+          unitConfig = appUnitConfig;
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-minio-init" = {
@@ -477,11 +566,11 @@ in
             entrypoint = "/bin/sh";
             exec = [
               "-c"
-              ''mc alias set ${name} http://${name}-minio:9000 "$''${MINIO_ROOT_USER}" "$''${MINIO_ROOT_PASSWORD}" && mc mb --ignore-existing "${name}/$''${S3_BUCKET}"''
+              ''until mc alias set ${name} http://${name}-minio:9000 "$''${MINIO_ROOT_USER}" "$''${MINIO_ROOT_PASSWORD}"; do sleep 2; done; exec mc mb --ignore-existing "${name}/$''${S3_BUCKET}"''
             ];
             inherit uidMaps gidMaps;
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-minio.service" ];
             After = Requires;
           };
@@ -506,10 +595,11 @@ in
             environmentFiles = [ secretFile ];
             inherit uidMaps gidMaps;
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-minio.service" ];
             After = Requires;
           };
+          serviceConfig = appServiceConfig;
         };
 
         "${name}-migrate" = {
@@ -530,7 +620,7 @@ in
             ];
             inherit uidMaps gidMaps;
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [
               "${name}-db.service"
               "${name}-redis.service"
@@ -548,6 +638,9 @@ in
             # Requires= pulls a fresh migration run into every app restart
             # transaction before any new image starts.
             RemainAfterExit = false;
+            # Revision 0044 transactionally rebuilds the public trend and
+            # recommendation-feature materializations once to reclaim bloat.
+            TimeoutStartSec = "30min";
             Environment = registryAuthEnvironment;
           };
         };
@@ -565,11 +658,13 @@ in
             environmentFiles = [ secretFile ];
             inherit uidMaps gidMaps;
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-migrate.service" ];
             After = Requires;
           };
-          serviceConfig.Environment = registryAuthEnvironment;
+          serviceConfig = appServiceConfig // {
+            Environment = registryAuthEnvironment;
+          };
         };
 
         "${name}-telegram-crawler" = {
@@ -593,7 +688,7 @@ in
             StartLimitIntervalSec = "10min";
             StartLimitBurst = 6;
           };
-          serviceConfig = {
+          serviceConfig = healthServiceConfig // {
             Environment = registryAuthEnvironment;
             RestartSec = "10s";
           };
@@ -620,7 +715,7 @@ in
             StartLimitIntervalSec = "10min";
             StartLimitBurst = 6;
           };
-          serviceConfig = {
+          serviceConfig = healthServiceConfig // {
             Environment = registryAuthEnvironment;
             RestartSec = "10s";
           };
@@ -642,11 +737,13 @@ in
             };
             inherit uidMaps gidMaps;
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-api.service" ];
             After = Requires;
           };
-          serviceConfig.Environment = registryAuthEnvironment;
+          serviceConfig = appServiceConfig // {
+            Environment = registryAuthEnvironment;
+          };
         };
 
         "${name}-bot" = {
@@ -663,11 +760,13 @@ in
             exec = [ "memexpert-bot" ];
             inherit uidMaps gidMaps;
           };
-          unitConfig = rec {
+          unitConfig = appUnitConfig // rec {
             Requires = [ "${name}-migrate.service" ];
             After = Requires;
           };
-          serviceConfig.Environment = registryAuthEnvironment;
+          serviceConfig = appServiceConfig // {
+            Environment = registryAuthEnvironment;
+          };
         };
       }
       // workerContainers;
