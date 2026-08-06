@@ -1,10 +1,11 @@
 { ... }:
 let
-  mkProxy = upstreamHost: {
+  mkProxy = upstreamName: upstreamHost: {
     enableACME = true;
+    acmeRoot = null;
 
     locations."/" = {
-      proxyPass = "https://${upstreamHost}";
+      proxyPass = "https://${upstreamName}";
       proxyWebsockets = true;
       recommendedProxySettings = false;
 
@@ -29,13 +30,28 @@ let
   };
 in
 {
-  services.nginx.virtualHosts = {
-    "ardupilot-autotest.averylex.dev" = mkProxy "autotest.ardupilot.org";
-    "ardupilot-firmware.averylex.dev" = mkProxy "firmware.ardupilot.org";
+  services.nginx = {
+    resolver = {
+      addresses = [ "95.165.105.90" ];
+      valid = "5m";
+      ipv6 = false;
+    };
+
+    upstreams = {
+      "ardupilot-autotest" = {
+        servers."autotest.ardupilot.org:443".resolve = true;
+        extraConfig = "zone ardupilot-autotest 64k;";
+      };
+      "ardupilot-firmware" = {
+        servers."firmware.ardupilot.org:443".resolve = true;
+        extraConfig = "zone ardupilot-firmware 64k;";
+      };
+    };
+
+    virtualHosts = {
+      "ardupilot-autotest.averylex.dev" = mkProxy "ardupilot-autotest" "autotest.ardupilot.org";
+      "ardupilot-firmware.averylex.dev" = mkProxy "ardupilot-firmware" "firmware.ardupilot.org";
+    };
   };
 
-  security.acme.certs = {
-    "ardupilot-autotest.averylex.dev".dnsProvider = null;
-    "ardupilot-firmware.averylex.dev".dnsProvider = null;
-  };
 }
