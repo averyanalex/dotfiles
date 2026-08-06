@@ -9,6 +9,11 @@ let
     TimeoutStopSec = "1min";
   };
   appUnitConfig = {
+    # Bambuddy's Virtual Printer diagnostic probes un-proxied ports 21, 80,
+    # and 443 and may retain the probe sockets. Start it after nginx so nginx
+    # claims HTTP(S) first; systemd reverses this order during shutdown and
+    # stops Bambuddy before nginx.
+    After = [ "nginx.service" ];
     StartLimitIntervalSec = "10min";
     StartLimitBurst = 6;
   };
