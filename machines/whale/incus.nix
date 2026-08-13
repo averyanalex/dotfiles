@@ -10,6 +10,7 @@ in
     fsType = "btrfs";
     options = [
       "compress=zstd:3"
+      "discard=async"
       "noatime"
       "subvol=@incus"
     ];

@@ -10,6 +10,7 @@
     fsType = "btrfs";
     options = [
       "compress=zstd:7"
+      "discard=async"
       "noatime"
       "subvol=@memexpert-media"
     ];
@@ -46,6 +47,7 @@
     fsType = "btrfs";
     options = [
       "compress=zstd:7"
+      "discard=async"
       "subvol=@home"
     ];
   };
@@ -64,6 +66,7 @@
     fsType = "btrfs";
     options = [
       "compress=zstd:7"
+      "discard=async"
       "subvol=@home"
     ];
   };
@@ -73,6 +76,7 @@
     fsType = "btrfs";
     options = [
       "compress=zstd:7"
+      "discard=async"
       "subvol=@home"
     ];
   };

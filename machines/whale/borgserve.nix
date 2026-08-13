@@ -21,6 +21,7 @@
     fsType = "btrfs";
     options = [
       "compress=zstd:7"
+      "discard=async"
       "noatime"
       "subvol=@borgbackup"
     ];

@@ -3,6 +3,11 @@
   modulesPath,
   ...
 }:
+let
+  disableDiscardOnBrokenNvme = ''
+    ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="nvme*n1", ATTRS{serial}=="9I50412053641", ATTR{queue/discard_max_bytes}="0"
+  '';
+in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -34,6 +39,12 @@
     "dm-raid"
     "raid1"
   ];
+  boot.initrd.services.udev.rules = disableDiscardOnBrokenNvme;
+
+  boot.kernelParams = [
+    # Disable NVMe APST; the MAXIO MAP1202 controller does not recover from hangs.
+    "nvme_core.default_ps_max_latency_us=0"
+  ];
   boot.kernelModules = [
     "kvm-intel"
     "dm-cache"
@@ -48,6 +59,9 @@
     "dm-raid"
     "raid1"
   ];
+
+  # The NX-1TB/MAXIO MAP1202 controller hangs on DISCARD requests of any size.
+  services.udev.extraRules = disableDiscardOnBrokenNvme;
 
   services.lvm = {
     boot.thin.enable = true;

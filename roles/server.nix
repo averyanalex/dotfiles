@@ -25,6 +25,8 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
   boot.kernel.sysctl = {
+    # Reboot automatically after a kernel panic
+    "kernel.panic" = 15;
     # CAP_SYS_PTRACE only: no debuggers on servers, block credential dumping
     "kernel.yama.ptrace_scope" = 2;
     # Bound dirty writeback independently of RAM size to limit I/O stalls
