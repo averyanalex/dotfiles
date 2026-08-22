@@ -41,13 +41,11 @@ in
 
     (lib.mkIf config.services.mihomo-tproxy.enable {
       services.mihomo-tproxy.settings = {
-        # DNS config mirrors the upstream akenai yaml. `listen: ""` disables
-        # the external DNS listener entirely so apps on the host continue to
-        # use systemd-resolved -- this config only drives mihomo's own
-        # internal resolution (rule-sets, sniffed domains resolved for rule
-        # matching, proxy-server hostnames, DIRECT-routed domain lookups).
+        # systemd-resolved remains the host-facing stub on 127.0.0.53:53 and
+        # forwards unicast DNS to this loopback listener. Keep Mihomo's
+        # bootstrap resolvers independent from resolved to avoid a DNS loop.
         dns = {
-          listen = "";
+          listen = "127.0.0.1:1053";
           ipv6 = true;
           use-hosts = true;
           respect-rules = true;
@@ -187,7 +185,7 @@ in
         # else in the provider list shares those substrings.
         proxy-groups =
           let
-            best_filter = "Швеция|Германия|Финляндия|Австрия|Чехия|Нидерланды|al";
+            best_filter = "Швеция|Германия|Финляндия|Австрия|Чехия|Нидерланды|al|Европа";
           in
           [
             # Default is the MATCH-rule target. First member (Proxy) is the
@@ -302,7 +300,6 @@ in
               lazy = true;
               proxies = [
                 "DIRECT"
-                "Dima AMD"
                 "Proxy"
               ];
               use = [

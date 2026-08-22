@@ -27,6 +27,9 @@
 
   # hardware.bluetooth.enable = true;
 
+  boot.supportedFilesystems.zfs = lib.mkForce false;
+  boot.initrd.supportedFilesystems.zfs = lib.mkForce false;
+
   persist.enable = lib.mkForce false;
 
   system.stateVersion = "25.05";

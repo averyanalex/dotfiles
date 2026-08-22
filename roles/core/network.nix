@@ -15,11 +15,16 @@
     enable = true;
 
     settings.Resolve = {
+      # Keep resolved as the system stub and route all unicast DNS through
+      # mihomo's loopback listener.
+      DNS = [ "127.0.0.1:1053" ];
       # TODO: consider switching to strict DNSSEC validation
       DNSSEC = "allow-downgrade";
       FallbackDNS = [ ];
-      DNSOverTLS = true;
-      Domains = "~.";
+      # The local resolved -> mihomo hop is plain DNS. Upstream encryption,
+      # when desired, is configured in mihomo itself.
+      DNSOverTLS = false;
+      Domains = [ "~." ];
     };
   };
 
@@ -28,7 +33,13 @@
 
   systemd.services.systemd-resolved.stopIfChanged = false;
 
-  networking.nameservers = [ "95.165.105.90#dns.neutrino.su" ];
+  # NTP
+  networking.timeServers = [
+    "92.255.126.1"
+    "92.255.126.4"
+    "89.109.251.22"
+    "194.190.168.1"
+  ];
 
   # Firewall
   networking.nftables = {
