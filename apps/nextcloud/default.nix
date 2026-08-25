@@ -97,7 +97,8 @@ in
             volumes = [
               "/persist/${name}/config:/config"
               "/home/alex/tank/nextcloud:/data"
-              "/home/alex/tank:/tank"
+              "/home/alex/tank/hot/Downloads:/home/alex/tank/hot/Downloads"
+              "/home/alex/tank/Import:/home/alex/tank/Import"
             ];
             environments = {
               PUID = "1000";
