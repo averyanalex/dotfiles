@@ -9,6 +9,7 @@
     inputs.quadlet-nix.nixosModules.quadlet
     inputs.self.nixosModules.modules.nebula-averyan
     inputs.self.nixosModules.modules.persist
+    inputs.self.nixosModules.modules.port-forward
     inputs.self.nixosModules.modules.tproxy
     inputs.self.nixosModules.modules.xray
     inputs.self.nixosModules.modules.mihomo

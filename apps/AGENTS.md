@@ -22,7 +22,7 @@ Use this tree for containerized services; native NixOS services belong in `profi
 - One app directory = one `default.nix` entrypoint plus optional local `.age` files and config assets.
 - Most apps set `podmanArgs = [ "--interface-name=pme-${name}" ]`; keep existing local exceptions like `cinemabot` as-is.
 - Explicit subnets use `10.90.X.0/24`. Static IPs follow `.2` = app, `.3` = db, `.4` = cache/secondary.
-- `reelsgen` omits an explicit subnet because it relies on Podman's auto-assigned network. `bambuddy` uses host networking because its printer discovery, camera, and virtual-printer protocols require the host's LAN interfaces.
+- `reelsgen` omits an explicit subnet because it relies on Podman's auto-assigned network. `bambuddy` uses a dedicated network plus interface-scoped DNAT for its Virtual Printer protocols; physical-printer discovery in the container uses subnet scanning rather than host-network SSDP.
 - Use `autoUpdate = "registry"` on containers unless you are intentionally pinning or disabling updates, and explain the exception inline.
 - Set `containerConfig.memory` (Podman native `--memory`) for app containers. Avoid leaving large app containers unbounded.
 - Give every app an explicit `apps-<name>.slice`, and assign all of its Quadlet container and network services to that slice.
@@ -54,8 +54,9 @@ Use this tree for containerized services; native NixOS services belong in `profi
 | `10.90.99.0/24` | `memexpert` |
 | `10.90.100.0/24` | `immich` |
 | `10.90.101.0/24` | `open-webui` |
+| `10.90.102.0/24` | `bambuddy` |
 
-`reelsgen` currently omits an explicit subnet. If you need a new explicit app network, pick an unused `/24` after checking this table; `10.90.83.0/24` and `10.90.102.0/24+` are currently unused in `apps/`.
+`reelsgen` currently omits an explicit subnet. If you need a new explicit app network, pick an unused `/24` after checking this table; `10.90.83.0/24` and `10.90.103.0/24+` are currently unused in `apps/`.
 
 ## UID/GID MAPS
 
@@ -90,6 +91,7 @@ Matching tmpfiles ownership is usually `1000:100`.
 - `networking.tproxy.forward.interfaces = [ "pme-${name}" ]` for proxied outbound traffic (`lidarr`, `prowlarr`, `newsrelay`).
 - `networking.firewall.interfaces."pme-${name}".allowedTCPPorts` for exposing specific ports on the app network (`lidarr`, `prowlarr`, `reelsgen`).
 - `networking.nat.forwardPorts` for host-to-container external forwarding (`slskd`).
+- `networking.portForwards.<name>` for interface- and destination-address-scoped IPv4 DNAT (`bambuddy`).
 - `networking.firewall.extraForwardRules` for cross-app traffic (`lidarr` → `slskd`).
 
 ## PRIVATE REGISTRIES

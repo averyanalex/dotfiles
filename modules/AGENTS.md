@@ -3,13 +3,14 @@
 ## OVERVIEW
 
 `modules/` contains custom NixOS modules auto-exported by `flake.nix` as `inputs.self.nixosModules.modules.*`.
-Core currently imports `persist`, `nebula-averyan`, `tproxy`, and `xray`; `mihomo` exists as an alternative backend.
+Core currently imports `persist`, `nebula-averyan`, `port-forward`, `tproxy`, and `xray`; `mihomo` exists as an alternative backend.
 
 ## WHERE TO LOOK
 
 | Need | File |
 |------|------|
 | Impermanence wrapper and persistence tiers | `persist.nix` |
+| Interface-scoped IPv4 DNAT | `port-forward.nix` |
 | Transparent-proxy plumbing | `tproxy.nix` |
 | Xray backend | `xray.nix` |
 | Mihomo backend | `mihomo.nix` |
@@ -26,6 +27,7 @@ Core currently imports `persist`, `nebula-averyan`, `tproxy`, and `xray`; `mihom
 ## COUPLING
 
 - `networking.tproxy` provides nftables/TProxy plumbing.
+- `networking.portForwards.<name>` generates interface- and destination-address-scoped nftables DNAT rules.
 - `services.xray-tproxy` and `services.mihomo-tproxy` are backends that follow the tproxy port/mark defaults.
 - `roles/core/default.nix` imports `tproxy` and `xray` together; changes here often require reading `roles/core/AGENTS.md` too.
 - `persist.nix` is the repo-specific wrapper around impermanence; many profile and machine rules depend on its `state` / `derivative` / `cache` split.
