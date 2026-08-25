@@ -2414,11 +2414,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784493419,
-        "narHash": "sha256-7WFeG1RtVDB3m8b7Y2MH70Q2QhRb1T/U+Cwyw7aWhDE=",
+        "lastModified": 1787621310,
+        "narHash": "sha256-kR/rgDRzBAblgHsaXNG+Vd5XF0gi0T2uCJeVzvh1HRA=",
         "owner": "AveryanAlex",
         "repo": "reploy",
-        "rev": "155c0648539095ade553d5f9d984c5bc69a2174c",
+        "rev": "e0b048845becb681f99401c2a12101510decb5d1",
         "type": "github"
       },
       "original": {

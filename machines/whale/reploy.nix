@@ -41,10 +41,6 @@
     };
   };
 
-  # Reploy uses the unwrapped Podman package, so expose Podman's configured
-  # runtime binaries when it resolves the default OCI runtime.
-  systemd.services.reploy.path = config.virtualisation.podman.extraRuntimes;
-
   services.nginx.virtualHosts."whale.averyan.ru" = {
     useACMEHost = "averyan.ru";
     locations."/reploy/".proxyPass = "http://127.0.0.1:9080/";
