@@ -23,7 +23,10 @@ in
       picsavai = {
         image = "averyanalex/picsavai";
         imageFile = dockerImage;
-        extraOptions = [ "--network=host" ];
+        extraOptions = [
+          "--runtime=crun"
+          "--network=host"
+        ];
       };
     };
   };

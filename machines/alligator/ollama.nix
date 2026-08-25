@@ -28,6 +28,8 @@ in
         image = "docker.io/ollama/ollama:rocm";
         autoUpdate = "registry";
         networks = [ "host" ];
+        # gVisor's GPU proxy supports NVIDIA, not AMD ROCm devices.
+        podmanArgs = [ "--runtime=crun" ];
         devices = [
           "/dev/kfd"
           "/dev/dri"

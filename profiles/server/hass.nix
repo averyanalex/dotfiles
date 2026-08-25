@@ -33,6 +33,8 @@ in
         hass = {
           containerConfig = {
             image = "ghcr.io/home-assistant/home-assistant:stable";
+            # runsc cannot proxy the Zigbee adapter's generic serial device.
+            podmanArgs = [ "--runtime=crun" ];
             autoUpdate = "registry";
             memory = "4g";
             networks = [ networks.hass.ref ];

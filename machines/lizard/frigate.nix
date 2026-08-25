@@ -46,6 +46,8 @@ in
             networks = [ networks.${name}.ref ];
             ip = "10.90.246.2";
             podmanArgs = [
+              # runsc does not support generic V4L2 device passthrough.
+              "--runtime=crun"
               "--privileged"
             ];
             volumes = [

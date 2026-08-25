@@ -23,7 +23,10 @@ in
       gayradarai = {
         image = "averyanalex/gayradarai";
         imageFile = dockerImage;
-        extraOptions = [ "--network=host" ];
+        extraOptions = [
+          "--runtime=crun"
+          "--network=host"
+        ];
       };
     };
   };

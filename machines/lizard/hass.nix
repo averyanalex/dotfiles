@@ -28,7 +28,11 @@ in
           image = "ghcr.io/home-assistant/home-assistant:stable";
           autoUpdate = "registry";
           networks = [ "host" ];
-          podmanArgs = [ "--privileged" ];
+          # Home Assistant needs privileged host device and D-Bus access.
+          podmanArgs = [
+            "--runtime=crun"
+            "--privileged"
+          ];
           volumes = [
             "/data/${name}/config:/config"
             "/run/dbus:/run/dbus:ro"

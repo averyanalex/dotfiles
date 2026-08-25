@@ -2,6 +2,7 @@
   lib,
   config,
   inputs,
+  pkgs,
   secrets,
   ...
 }:
@@ -12,6 +13,11 @@
 
   # enable podman and use it as oci-containers backend
   virtualisation.podman.enable = true;
+  virtualisation.podman.extraRuntimes = with pkgs; [
+    runc
+    gvisor
+  ];
+  virtualisation.containers.containersConf.settings.engine.runtime = "runsc";
   virtualisation.oci-containers.backend = "podman"; # already default
 
   # daily images cleanup for system podman
