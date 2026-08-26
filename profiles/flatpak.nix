@@ -1,11 +1,14 @@
 {
   config,
   inputs,
+  pkgs,
   lib,
   ...
 }:
 {
   imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+
+  environment.systemPackages = with pkgs; [ ostree ];
 
   services.flatpak = {
     packages = [
