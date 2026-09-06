@@ -19,6 +19,7 @@ let
     beaver = 42031;
     alligator = 42040;
     hamster = 42041;
+    mole = 42042;
     diamond = 42050;
     grizzly = 42060;
     ferret = 42070;

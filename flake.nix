@@ -226,7 +226,7 @@
           mkHost =
             name:
             let
-              system = builtins.readFile (./machines + "/${name}/system.txt");
+              system = strings.trim (builtins.readFile (./machines + "/${name}/system.txt"));
             in
             nixosSystem {
               inherit system;

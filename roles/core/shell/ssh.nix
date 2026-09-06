@@ -21,12 +21,22 @@
     settings."serv1.asc.rssi.ru" = {
       ForwardAgent = true;
       User = "averyan";
-      HostName = "whale.averyan.ru";
+      HostName = "mole";
+      HostKeyAlias = "serv1.asc.rssi.ru";
       Port = 3122;
     };
 
+    settings."serv2.asc.rssi.ru" = {
+      ForwardAgent = true;
+      User = "averyan";
+      HostName = "mole";
+      HostKeyAlias = "serv2.asc.rssi.ru";
+      Port = 3124;
+    };
+
     settings."git.asc.rssi.ru" = {
-      HostName = "whale.averyan.ru";
+      HostName = "mole";
+      HostKeyAlias = "git.asc.rssi.ru";
       Port = 3123;
     };
 

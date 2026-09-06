@@ -1,22 +1,34 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./niri.nix
     ./dms.nix
   ];
 
-  # Display manager: greetd + tuigreet with auto-login
+  # Display manager: greetd + tuigreet
+  services.displayManager.autoLogin = {
+    enable = lib.mkDefault true;
+    user = lib.mkDefault "alex";
+  };
+
   services.greetd = {
     enable = true;
-    restart = false; # prevent auto-login re-triggering on greetd restart
+    restart = !config.services.displayManager.autoLogin.enable;
     settings = {
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
         user = "greeter";
       };
+    }
+    // lib.optionalAttrs config.services.displayManager.autoLogin.enable {
       initial_session = {
         command = "niri-session";
-        user = "alex";
+        user = config.services.displayManager.autoLogin.user;
       };
     };
   };

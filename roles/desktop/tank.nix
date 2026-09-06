@@ -1,29 +1,41 @@
+{ config, lib, ... }:
+let
+  cfg = config.services.tankMount;
+in
 {
-  boot.supportedFilesystems = [ "nfs" ];
+  options.services.tankMount.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "Whether to automount whale:/home/alex/tank over NFS";
+  };
 
-  systemd.mounts = [
-    {
-      type = "nfs";
-      mountConfig = {
-        Options = "rw,noatime,soft,timeo=30,retrans=3";
-        TimeoutSec = 15;
-      };
-      what = "whale:/home/alex/tank";
-      where = "/tank";
-      after = [ "nebula@averyan.service" ];
-      bindsTo = [ "nebula@averyan.service" ];
-    }
-  ];
+  config = lib.mkIf cfg.enable {
+    boot.supportedFilesystems = [ "nfs" ];
 
-  systemd.automounts = [
-    {
-      wantedBy = [ "multi-user.target" ];
-      automountConfig = {
-        TimeoutIdleSec = "300";
-      };
-      where = "/tank";
-    }
-  ];
+    systemd.mounts = [
+      {
+        type = "nfs";
+        mountConfig = {
+          Options = "rw,noatime,soft,timeo=30,retrans=3";
+          TimeoutSec = 15;
+        };
+        what = "whale:/home/alex/tank";
+        where = "/tank";
+        after = [ "nebula@averyan.service" ];
+        bindsTo = [ "nebula@averyan.service" ];
+      }
+    ];
+
+    systemd.automounts = [
+      {
+        wantedBy = [ "multi-user.target" ];
+        automountConfig = {
+          TimeoutIdleSec = "300";
+        };
+        where = "/tank";
+      }
+    ];
+  };
 
   # age.secrets.smb-tank.file = ../secrets/intpass/smb-tank.age;
   # boot.supportedFilesystems = ["cifs"];
