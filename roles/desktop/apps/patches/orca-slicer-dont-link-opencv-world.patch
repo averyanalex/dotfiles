@@ -1,0 +1,15 @@
+diff --git a/src/libslic3r/CMakeLists.txt b/src/libslic3r/CMakeLists.txt
+index 1658fab24..4086e502e 100644
+--- a/src/libslic3r/CMakeLists.txt
++++ b/src/libslic3r/CMakeLists.txt
+@@ -611,7 +611,9 @@ target_link_libraries(libslic3r
+         libigl
+         libnest2d
+         miniz
+-        opencv_world
++        opencv_core
++        opencv_imgproc
++        opencv_imgcodecs
+         assimp::assimp
+     PRIVATE
+         ${CMAKE_DL_LIBS}

@@ -13,8 +13,10 @@
     ./apps/firefox.nix
     ./apps/misc-a.nix
     ./apps/mpv.nix
+    ./apps/orca-slicer.nix
     ./shell
     ./compat.nix
+    ./bambu-certs
     ./deployapp.nix
     ./tuning.nix
     ./tank.nix
